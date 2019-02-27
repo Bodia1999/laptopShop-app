@@ -26,7 +26,7 @@ public class Laptop {
 
     private String model;
 
-    //private Double price;
+    private Double price;
 
     @OneToOne
     private Screen screen;
