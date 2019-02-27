@@ -1,0 +1,39 @@
+package bohdan.papizhanskiy.laptops.controller;
+
+import bohdan.papizhanskiy.laptops.dto.request.CorpsRequest;
+import bohdan.papizhanskiy.laptops.dto.response.CorpsResponse;
+import bohdan.papizhanskiy.laptops.exception.WrongInputException;
+import bohdan.papizhanskiy.laptops.service.CorpsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/corps")
+public class CorpsController {
+
+    @Autowired
+    private CorpsService corpsService;
+
+    @GetMapping
+    public List<CorpsResponse> findAll() {
+        return corpsService.findAll();
+    }
+
+    @PostMapping
+    public CorpsResponse save(CorpsRequest corpsRequest) throws Exception {
+        return corpsService.save(corpsRequest);
+    }
+
+    @DeleteMapping
+    public void delete(Long id) throws WrongInputException {
+        corpsService.delete(id);
+    }
+
+    @PutMapping
+    public CorpsResponse update(CorpsRequest corpsRequest, Long id) throws Exception {
+        return corpsService.update(corpsRequest, id);
+    }
+
+}
