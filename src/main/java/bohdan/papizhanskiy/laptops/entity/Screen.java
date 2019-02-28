@@ -20,7 +20,7 @@ public class Screen {
 
     private String resolution;
 
-    private String size;
+    private Integer size;
 
     @OneToOne(mappedBy = "screen")
     private Laptop laptops;

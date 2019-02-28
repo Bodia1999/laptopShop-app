@@ -15,7 +15,7 @@ public class ScreenResponse {
 
     private String resolution;
 
-    private String size;
+    private Integer size;
 
     public ScreenResponse(Screen screen){
         id = screen.getId();
