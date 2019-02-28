@@ -29,6 +29,8 @@ public class ProcessorSpecification implements Specification<Processor> {
         if (byWorkingFrequency != null) predicates.add(byWorkingFrequency);
         Predicate byQuantityOfCores = findByQuantityOfCores(root, criteriaBuilder);
         if (byQuantityOfCores != null) predicates.add(byQuantityOfCores);
+        Predicate byModel = findByModel(root, criteriaBuilder);
+        if (byModel != null) predicates.add(byModel);
 
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }
@@ -39,6 +41,14 @@ public class ProcessorSpecification implements Specification<Processor> {
             return null;
         }
         return criteriaBuilder.like(root.get("name"), processor);
+    }
+
+    private Predicate findByModel(Root<Processor> root, CriteriaBuilder criteriaBuilder) {
+        String model = processorFilterRequest.getModel();
+        if (model == null || model.trim().isEmpty()) {
+            return null;
+        }
+        return criteriaBuilder.like(root.get("model"), model);
     }
 
     private Predicate findByWorkingFrequency(Root<Processor> root, CriteriaBuilder criteriaBuilder) {
