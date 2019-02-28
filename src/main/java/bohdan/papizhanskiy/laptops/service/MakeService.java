@@ -22,7 +22,6 @@ public class MakeService {
     private MakeRepository makeRepository;
 
 
-
     public MakeResponse save(MakeRequest makeRequest) throws Exception {
         return new MakeResponse(makeRequestToMake(makeRequest, null));
     }
@@ -66,5 +65,12 @@ public class MakeService {
         Page<Make> all = makeRepository.findAll(paginationRequest.mapToPageRequest());
         return new DataResponse<>(all.get().map(MakeResponse::new).collect(Collectors.toList()), all.getTotalPages(), all.getTotalElements());
     }
+
+//    public DataResponse<MakeResponse> findAllByName(PaginationRequest paginationRequest, MakeRequest makeRequest) {
+//
+//        Page<Make> byName = makeRepository.findAllByNameLike('%'+makeRequest.getName()+'%', paginationRequest.mapToPageRequest());
+//        return new DataResponse<>(byName.get().map(MakeResponse::new).collect(Collectors.toList()),
+//                byName.getTotalPages(), byName.getTotalElements());
+//    }
 
 }

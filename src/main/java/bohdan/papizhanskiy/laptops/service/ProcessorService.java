@@ -1,6 +1,7 @@
 package bohdan.papizhanskiy.laptops.service;
 
 import bohdan.papizhanskiy.laptops.dto.request.PaginationRequest;
+import bohdan.papizhanskiy.laptops.dto.request.ProcessorFilterRequest;
 import bohdan.papizhanskiy.laptops.dto.request.ProcessorRequest;
 import bohdan.papizhanskiy.laptops.dto.response.DataResponse;
 import bohdan.papizhanskiy.laptops.dto.response.MakeResponse;
@@ -9,6 +10,7 @@ import bohdan.papizhanskiy.laptops.entity.Make;
 import bohdan.papizhanskiy.laptops.entity.Processor;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.repository.ProcessorRepository;
+import bohdan.papizhanskiy.laptops.specification.ProcessorSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -58,5 +60,12 @@ public class ProcessorService {
     public DataResponse<ProcessorResponse> findAll(PaginationRequest paginationRequest) {
         Page<Processor> all = processorRepository.findAll(paginationRequest.mapToPageRequest());
         return new DataResponse<>(all.get().map(ProcessorResponse::new).collect(Collectors.toList()), all.getTotalPages(), all.getTotalElements());
+    }
+
+    public DataResponse<ProcessorResponse> findByFilter(ProcessorFilterRequest processorFilterRequest){
+        Page<Processor> page = processorRepository.findAll( new ProcessorSpecification(processorFilterRequest),processorFilterRequest.getPagination().mapToPageRequest());
+
+        return new DataResponse<>(page.get().map(ProcessorResponse::new ).collect(Collectors.toList()), page.getTotalPages(),page.getTotalElements());
+
     }
 }

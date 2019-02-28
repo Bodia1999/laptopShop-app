@@ -1,6 +1,8 @@
 package bohdan.papizhanskiy.laptops.controller;
 
+import bohdan.papizhanskiy.laptops.dto.request.RamFilterRequest;
 import bohdan.papizhanskiy.laptops.dto.request.RamRequest;
+import bohdan.papizhanskiy.laptops.dto.response.DataResponse;
 import bohdan.papizhanskiy.laptops.dto.response.RamResponse;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.service.RamService;
@@ -35,5 +37,10 @@ public class RamController {
     @PutMapping
     public RamResponse update(RamRequest ramRequest, Long id) throws Exception {
         return ramService.update(ramRequest, id);
+    }
+
+    @PostMapping("/filter")
+    public DataResponse<RamResponse> findAllByFilter(@RequestBody RamFilterRequest ramFilterRequest){
+        return ramService.findByFilter(ramFilterRequest);
     }
 }

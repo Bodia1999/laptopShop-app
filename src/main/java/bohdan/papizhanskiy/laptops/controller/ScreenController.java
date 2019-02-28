@@ -1,7 +1,9 @@
 package bohdan.papizhanskiy.laptops.controller;
 
 
+import bohdan.papizhanskiy.laptops.dto.request.ScreenFilterRequest;
 import bohdan.papizhanskiy.laptops.dto.request.ScreenRequest;
+import bohdan.papizhanskiy.laptops.dto.response.DataResponse;
 import bohdan.papizhanskiy.laptops.dto.response.ScreenResponse;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.service.ScreenService;
@@ -36,5 +38,10 @@ public class ScreenController {
     @PutMapping
     public ScreenResponse update(ScreenRequest screenRequest, Long id) throws Exception {
         return screenService.update(screenRequest, id);
+    }
+
+    @PostMapping("/filter")
+    public DataResponse<ScreenResponse> findAllByFilter(@RequestBody ScreenFilterRequest screenFilterRequest){
+        return screenService.findByFilter(screenFilterRequest);
     }
 }

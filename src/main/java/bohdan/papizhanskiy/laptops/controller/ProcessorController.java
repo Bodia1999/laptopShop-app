@@ -1,7 +1,9 @@
 package bohdan.papizhanskiy.laptops.controller;
 
 
+import bohdan.papizhanskiy.laptops.dto.request.ProcessorFilterRequest;
 import bohdan.papizhanskiy.laptops.dto.request.ProcessorRequest;
+import bohdan.papizhanskiy.laptops.dto.response.DataResponse;
 import bohdan.papizhanskiy.laptops.dto.response.ProcessorResponse;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.service.ProcessorService;
@@ -39,4 +41,8 @@ public class ProcessorController {
         return processorService.update(processorRequest, id);
     }
 
+    @PostMapping("/filter")
+    public DataResponse<ProcessorResponse> findAllByFilter(@RequestBody ProcessorFilterRequest processorFilterRequest){
+        return processorService.findByFilter(processorFilterRequest);
+    }
 }

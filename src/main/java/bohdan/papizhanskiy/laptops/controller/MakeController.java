@@ -30,7 +30,7 @@ public class MakeController {
     }
 
     @PostMapping("/findOne")
-    public MakeResponse findOne(@RequestParam Long id) throws WrongInputException{
+    public MakeResponse findOne(@RequestParam Long id) throws WrongInputException {
         return new MakeResponse(makeService.findOne(id));
     }
 
@@ -48,4 +48,9 @@ public class MakeController {
     public void delete(@RequestParam Long id) throws WrongInputException {
         makeService.delete(id);
     }
+
+//    @PostMapping("/filter")
+//    public DataResponse<MakeResponse> findAllByName(@RequestBody MakeRequest makeRequest,@RequestBody PaginationRequest paginationRequest) {
+//        return makeService.findAllByName(paginationRequest, makeRequest);
+//    }
 }
