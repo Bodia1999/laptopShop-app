@@ -2,7 +2,6 @@ package bohdan.papizhanskiy.laptops.specification;
 
 import bohdan.papizhanskiy.laptops.dto.request.ProcessorFilterRequest;
 import bohdan.papizhanskiy.laptops.entity.Processor;
-import bohdan.papizhanskiy.laptops.entity.Screen;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;
