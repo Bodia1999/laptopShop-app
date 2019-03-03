@@ -1,7 +1,9 @@
 package bohdan.papizhanskiy.laptops.controller;
 
 import bohdan.papizhanskiy.laptops.dto.request.CustomerRequest;
+import bohdan.papizhanskiy.laptops.dto.request.PaginationRequest;
 import bohdan.papizhanskiy.laptops.dto.response.CustomerResponse;
+import bohdan.papizhanskiy.laptops.dto.response.DataResponse;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,4 +38,9 @@ public class CustomerController {
     public CustomerResponse update(@RequestBody CustomerRequest customerRequest, @RequestParam Long id) throws WrongInputException {
         return customerService.update(customerRequest, id);
     }
+
+//    @PostMapping("/page")
+//    public DataResponse<CustomerResponse> findAll(@RequestBody PaginationRequest paginationRequest){
+//        return customerService.findAll(paginationRequest);
+//    }
 }

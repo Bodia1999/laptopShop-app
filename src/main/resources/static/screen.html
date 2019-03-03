@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bear(Admin-Screen)</title>
+    <link rel="stylesheet" href="css/screen.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<div>
+ <header>
+   <div class="logo">
+    <a href="main.html"><img class="logotype" src="img/images_for_main_page/FINAL_VERSION.png" alt="logo"></a>
+
+   </div>
+ </header>
+  
+</div>
+<div class="createScreenButton">
+<button id="openModal">Create make</button>
+  
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Create screen</h2>
+        </div>
+        <div class="modal-body">
+            <div>
+                <form>
+                    <label for="type">Screen type</label><br>
+                    <input type="text" id="type" name="type" placeholder="Your screen type.."><br>
+                    <label for="resolution">Resolution</label><br>
+                    <input type="text" id="resolution" name="resolution" placeholder="Your resolution.."><br>
+                    <label for="size">Screen size</label><br>
+                    <input min="0" type="number" id="size" name="size" placeholder="Your screen size.."><br>
+                    <input type="button" id="btnCreateScreen" value="Create">
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <h3>Form for new screen</h3>
+        </div>
+    </div>
+
+</div>
+    
+<!--
+    <div id="myModalUpdate" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Update make</h2>
+            </div>
+        <div class="modal-body">
+            <div>
+                <form>
+                    <label for="fname">Name</label><br>
+                    <input type="text" id="nameUpdate" name="name" placeholder="Your make name.." ><br>
+                    <input type="button" id="btnUpdateMake" value="Update">
+                    </form>
+                </div>
+            </div>
+        <div class="modal-footer">
+            <h3>Form for updating make</h3>
+            </div>
+        </div>
+
+    </div>
+-->
+
+
+<table id="screens">
+    <tr>
+        <th>ID</th>
+        <th>Type</th>
+        <th>Resolution</th>
+        <th>Screen size</th>
+        <th>Delete Button</th>
+        <th>Update Button</th>
+    </tr>
+</table>
+
+<script>
+    var mainUrl = "http://localhost:8000";
+
+    getAllScreens();
+    setModalConfiguration();
+    setActionOnCreateBtn();
+
+
+    //start when load page PS reload page for triggered http request
+    function getAllScreens() {
+        $.ajax({
+            url: mainUrl + "/screen",
+            type: "GET",
+            contentType: "application/json",
+            success: function (dataResponse) {
+                setScreensToTable(dataResponse.data);
+                setActionOnDeleteButtons();
+              setActionOnUpdateButtons();
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+    }
+
+    function setScreensToTable(makes) {
+        for (var i = 0; i < persons.length; i++) {
+            setPersonToTable(persons[i]);
+        }
+    }
+
+    function setScreenToTable(screen) {
+        var tableOfScreens = $("#screens");
+        tableOfScreens.append('<tr>' +
+                '<td>' + screen.id + '</td>' +
+                '<td>' + screen.type + '</td>' +
+                '<td>' + screen.resolution + '</td>' +
+                '<td>' + screen.size + '</td>' +
+                '<td><button class="button" value="' + screen.id + '">Delete</button></td>' +
+                '<td><button class="buttonToUpdate" value="' + screen.id +'">Update</button></td>' +
+                '</tr>');
+    }
+
+
+    function setActionOnCreateBtn() {
+        $("#btnCreateScreen").click(function () {
+
+            var type = $("#type").val();
+            var resolution = $("#resolution").val();
+            var size = $("#size").val();
+//            if (firstName != null && lastName != null && age != null) {
+
+                var newScreen = {
+                    "type": type,
+                    "resolution": resolution,
+                    "size": size,
+                };
+
+                $.ajax({
+                    url: mainUrl + "/screen",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(newScreen),
+                    success: function (data) {
+                        location.reload();
+                    },
+                    error: function (error) {
+                        alert(error.message);
+                    }
+                });
+//            } else {
+//                alert("Всі поля повинні бути заповнені")
+//            }
+        });
+    }
+  
+    //delete process
+    function setActionOnDeleteButtons() {
+        $(".button").each(function (index) {
+            $(this).click(function () {
+                $.ajax({
+                    url: mainUrl + "/screen?id=" + $(this).val(),
+                    type: "DELETE",
+                    success: function (data) {
+                        location.reload();
+                    },
+                    error: function (error) {
+                        alert(error.message);
+                    }
+                });
+              
+            })
+        })
+
+    }
+  
+  
+  
+          
+//      var returnedvalue;
+//    function setActionOnUpdateButtons() {
+//        $(".buttonUpdate").each(function (index) {
+//            $(this).click(function () {
+//                $.ajax({
+//                    url: mainUrl + "/person/findOne?id=" + $(this).val(),
+//                    type: "POST",
+//                    success: function (dataResponse) {
+//
+//                        returnedvalue = dataResponse.data.firstName;
+//
+//                    },
+//
+//                error: function (error) {
+//                    alert(error.message);
+//                }
+//            });
+//
+//        })
+//    })
+//    }
+        
+  
+
+
+    function setModalConfiguration() {
+        // Get the modal
+        var modal = document.getElementById('myModal');
+        //var modalUpdate = document.getElementById('myModalUpdate');
+      
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("openModal");
+        //var btnUpdate = document.getElementsByClassName("buttonToUpdate");
+        
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+//    
+//        btnUpdate.onclick = function(){
+//            document.getElementById("fname").setAttribute('value', returnedvalue);
+//            modalUpdate.style.display = "block";
+//        }
+
+      
+        btn.onclick = function(){
+           modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+//        span.onclick = function () {
+//
+//            modalUpdate.style.display = "none";
+//        };
+        span.onclick = function () {
+            modal.style.display = "none";
+        };
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+              
+            }
+        };
+//      window.onclick = function (event) {
+//            if (event.target == modal) {
+//                modalUpdate.style.display = "none";
+//              
+//            }
+//        };
+    }
+
+
+</script>
+</body>
+</html>

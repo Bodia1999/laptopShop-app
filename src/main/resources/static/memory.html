@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bear(Admin-Make)</title>
+    <link rel="stylesheet" href="css/memory.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<div>
+ <header>
+   <div class="logo">
+    <a href="main.html"><img class="logotype" src="img/images_for_main_page/FINAL_VERSION.png" alt="logo"></a>
+
+   </div>
+ </header>
+  
+</div>
+<div class="createMemoryButton">
+  
+<button id="openModal">Create make</button>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Create memory</h2>
+        </div>
+        <div class="modal-body">
+            <div>
+                <form>
+                    <label for="name">Name</label><br>
+                    <input type="text" id="name" name="name" placeholder="Your memory name.."><br>
+                    <label for="typeOfMemory">Type of memory</label><br>
+                    <input type="text" id="typeOfMemory" name="typeOfMemory" placeholder="Your type of memory.."><br>
+                    <label for="volumeOfMemory">Volume of memory</label><br>
+                    <input min="0" type="number" id="volumeOfMemory" name="volumeOfMemory" placeholder="Your volume of memory.."><br>
+                    <input type="button" id="btnCreateMemory" value="Create">
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <h3>Form for new memory</h3>
+        </div>
+    </div>
+
+</div>
+    
+<!--
+    <div id="myModalUpdate" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Update make</h2>
+            </div>
+        <div class="modal-body">
+            <div>
+                <form>
+                    <label for="fname">Name</label><br>
+                    <input type="text" id="nameUpdate" name="name" placeholder="Your make name.." ><br>
+                    <input type="button" id="btnUpdateMake" value="Update">
+                    </form>
+                </div>
+            </div>
+        <div class="modal-footer">
+            <h3>Form for updating make</h3>
+            </div>
+        </div>
+
+    </div>
+-->
+
+
+<table id="memories">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Type of memory</th>
+        <th>Volume of memory</th>
+        <th>Delete Button</th>
+        <th>Update Button</th>
+    </tr>
+</table>
+
+<script>
+    var mainUrl = "http://localhost:8000";
+
+    getAllMemories();
+    setModalConfiguration();
+    setActionOnCreateBtn();
+
+
+    //start when load page PS reload page for triggered http request
+    function getAllMemories() {
+        $.ajax({
+            url: mainUrl + "/memory",
+            type: "GET",
+            contentType: "application/json",
+            success: function (dataResponse) {
+                setPersonsToTable(dataResponse.data);
+                setActionOnDeleteButtons();
+              setActionOnUpdateButtons();
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+    }
+
+    function setMemoriesToTable(memories) {
+        for (var i = 0; i < memories.length; i++) {
+            setPersonToTable(memories[i]);
+        }
+    }
+
+    function setMemoryToTable(memory) {
+        var tableOfMemories = $("#memories");
+        tableOfMemories.append('<tr>' +
+                '<td>' + memory.id + '</td>' +
+                '<td>' + memory.name + '</td>' +
+                '<td>' + memory.typeOfMemory + '</td>' +
+                '<td>' + memory.volumeOfMemory + '</td>' +
+                '<td><button class="button" value="' + memory.id + '">Delete</button></td>' +
+                '<td><button class="buttonToUpdate" value="' + memory.id +'">Update</button></td>' +
+                '</tr>');
+    }
+
+
+    function setActionOnCreateBtn() {
+        $("#btnCreateMemory").click(function () {
+
+            var name = $("#name").val();
+            var typeOfMemory = $("#typeOfMemory").val();
+            var volumeOfMemory = $("#volumeOfMemory").val();
+//            if (firstName != null && lastName != null && age != null) {
+
+                var newMemory = {
+                    "name": name,
+                  "typeOfMemory":typeOfMemory,
+                  "volumeOfMemory":volumeOfMemory
+                };
+
+                $.ajax({
+                    url: mainUrl + "/memory",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(newMemory),
+                    success: function (data) {
+                        location.reload();
+                    },
+                    error: function (error) {
+                        alert(error.message);
+                    }
+                });
+//            } else {
+//                alert("Всі поля повинні бути заповнені")
+//            }
+        });
+    }
+  
+    //delete process
+    function setActionOnDeleteButtons() {
+        $(".button").each(function (index) {
+            $(this).click(function () {
+                $.ajax({
+                    url: mainUrl + "/memory?id=" + $(this).val(),
+                    type: "DELETE",
+                    success: function (data) {
+                        location.reload();
+                    },
+                    error: function (error) {
+                        alert(error.message);
+                    }
+                });
+              
+            })
+        })
+
+    }
+  
+  
+  
+          
+//      var returnedvalue;
+//    function setActionOnUpdateButtons() {
+//        $(".buttonUpdate").each(function (index) {
+//            $(this).click(function () {
+//                $.ajax({
+//                    url: mainUrl + "/person/findOne?id=" + $(this).val(),
+//                    type: "POST",
+//                    success: function (dataResponse) {
+//
+//                        returnedvalue = dataResponse.data.firstName;
+//
+//                    },
+//
+//                error: function (error) {
+//                    alert(error.message);
+//                }
+//            });
+//
+//        })
+//    })
+//    }
+//        
+  
+
+
+    function setModalConfiguration() {
+        // Get the modal
+        var modal = document.getElementById('myModal');
+       // var modalUpdate = document.getElementById('myModalUpdate');
+      
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("openModal");
+        //var btnUpdate = document.getElementsByClassName("buttonToUpdate");
+        
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+    
+//        btnUpdate.onclick = function(){
+//            document.getElementById("fname").setAttribute('value', returnedvalue);
+//            modalUpdate.style.display = "block";
+//        }
+
+      
+        btn.onclick = function(){
+           modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+//        span.onclick = function () {
+//
+//            modalUpdate.style.display = "none";
+//        };
+        span.onclick = function () {
+            modal.style.display = "none";
+        };
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+              
+            }
+        };
+//      window.onclick = function (event) {
+//            if (event.target == modal) {
+//                modalUpdate.style.display = "none";
+//              
+//            }
+//        };
+    }
+
+
+</script>
+</body>
+</html>

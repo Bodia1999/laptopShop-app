@@ -11,6 +11,8 @@ import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,8 +62,6 @@ public class CustomerService {
         customerRepository.delete(findOne(id));
     }
 
-    public DataResponse<CustomerResponse> findAll(PaginationRequest paginationRequest) {
-        Page<Customer> all = customerRepository.findAll(paginationRequest.mapToPageRequest());
-        return new DataResponse<>(all.get().map(CustomerResponse::new).collect(Collectors.toList()), all.getTotalPages(), all.getTotalElements());
-    }
+
+
 }

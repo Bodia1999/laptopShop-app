@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bear(Admin-Laptop)</title>
+    <link rel="stylesheet" href="css/laptop.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<div>
+ <header>
+   <div class="logo">
+    <a href="main.html"><img class="logotype" src="img/images_for_main_page/FINAL_VERSION.png" alt="logo"></a>
+
+   </div>
+ </header>
+  
+</div>
+<div class="createLaptopButton">
+<button id="openModal">Create Laptop</button>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Create Laptop</h2>
+        </div>
+        <div class="modal-body">
+                <form>
+            <div class="contentOfForm">
+                   <div class="first-content">
+                    <label for="model">Model</label><br>
+                    <input type="text" id="model" name="model" placeholder="Your model name.."><br>
+                    <label for="model">Make ID</label><br>
+                    <input type="number" min="0" id="makeId" name="makeId" placeholder="Your make ID.."><br>
+                    <label for="makeId">Graphic card ID</label><br>
+                    <input type="number" min="0" id="graphicCardId" name="graphicCardId" placeholder="Your graphic Card ID.."><br>
+                    <label for="model">Ram ID</label><br>
+                    <input type="number" min="0" id="ramId" name="ramId" placeholder="Your ram ID.."><br>
+                    <label for="corpsId">Corps ID</label><br>
+                    <input type="number" min="0" id="corpsId" name="corpsId" placeholder="Your corps ID.."><br>
+                    <label for="memoryId">Memory ID</label><br>
+                    <input type="number" min="0" id="memoryId" name="memoryId" placeholder="Your Memory ID.."><br>
+                    <label for="processorId">Processor ID</label><br>
+                    <input type="number" min="0" id="processorId" name="processorId" placeholder="Your Processor ID.."><br>
+                    <label for="screenId">Screen ID</label><br>
+                    <input type="number" min="0" id="screenId" name="screenId" placeholder="Your Screen ID.."><br></div>
+                    
+                    <div class="second-content">
+                      <form>
+                        <label for="availabilityOfWIFI">WI-FI</label><br>
+                          <input type="radio" name="availabilityOfWIFI" value="true" >Available<br>
+                          <input type="radio" name="availabilityOfWIFI" value="false"checked>Not available<br>
+                      </form>
+                       <form>
+                        <label for="availabilityOfBluetooth">Bluetooth</label><br>
+                          <input type="radio" name="availabilityOfWIFI" value="true" >Available<br>
+                          <input type="radio" name="availabilityOfWIFI" value="false"checked>Not available<br>
+                      </form>
+                       <form>
+                        <label for="availabilityOfUSBTypeC">USB Type-C</label><br>
+                          <input type="radio" name="availabilityOfWIFI" value="true" >Available<br>
+                          <input type="radio" name="availabilityOfWIFI" value="false"checked>Not available<br>
+                      </form>
+                       <form>
+                        <label for="availabilityOfUSBSecondGeneration">USB 2.0</label><br>
+                          <input type="radio" name="availabilityOfWIFI" value="true" >Available<br>
+                          <input type="radio" name="availabilityOfWIFI" value="false"checked>Not available<br>
+                      </form>
+                       <form>
+                        <label for="availabilityOfUSBThirdGeneration">USB 3.0</label><br>
+                          <input type="radio" name="availabilityOfWIFI" value="true" >Available<br>
+                          <input type="radio" name="availabilityOfWIFI" value="false"checked>Not available<br>
+                      </form>
+                       <form>
+                        <label for="availabilityOfHDMI">HDMI</label><br>
+                          <input type="radio" name="availabilityOfWIFI" value="true" >Available<br>
+                          <input type="radio" name="availabilityOfWIFI" value="false"checked>Not available<br>
+                      </form>
+                       <form>
+                        <label for="availabilityOfLAN">LAN</label><br>
+                          <input type="radio" name="availabilityOfWIFI" value="true" >Available<br>
+                          <input type="radio" name="availabilityOfWIFI" value="false"checked>Not available<br>
+                      </form>
+                       <form>
+                        <label for="availabilityOfAUX">AUX</label><br>
+                          <input type="radio" name="availabilityOfWIFI" value="true" >Available<br>
+                          <input type="radio" name="availabilityOfWIFI" value="false"checked>Not available<br>
+                      </form>
+
+
+                    </div>
+
+            </div>
+                    <input type="button" id="btnCreateLaptop" value="Create">
+                </form>
+        </div>
+        <div class="modal-footer">
+            <h3>Form for new Laptop</h3>
+        </div>
+    </div>
+
+</div>
+    
+<!--
+    <div id="myModalUpdate" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Update make</h2>
+            </div>
+        <div class="modal-body">
+            <div>
+                <form>
+                    <label for="fname">Name</label><br>
+                    <input type="text" id="nameUpdate" name="name" placeholder="Your make name.." ><br>
+                    <input type="button" id="btnUpdateMake" value="Update">
+                    </form>
+                </div>
+            </div>
+        <div class="modal-footer">
+            <h3>Form for updating make</h3>
+            </div>
+        </div>
+
+    </div>
+-->
+
+
+<table id="laptops">
+    <tr>
+        <th>ID</th>
+        <th>Model</th>
+        <th>Make ID</th>
+        <th>Graphic card ID</th>
+        <th>Ram ID</th>
+        <th>Corps ID</th>
+        <th>Memory ID</th>
+        <th>Processor ID</th>
+        <th>Screen ID</th>
+        <th>WI-FI</th>
+        <th>Bluetooth</th>
+        <th>USB Type-C</th>
+        <th>USB 2.0</th>
+        <th>USB 3.0</th>
+        <th>HDMI</th>
+        <th>LAN</th>
+        <th>AUX</th>
+        <th>Delete Button</th>
+        <th>Update Button</th>
+    </tr>
+</table>
+
+<script>
+    var mainUrl = "http://localhost:8000";
+
+    getAllLaptops();
+    setModalConfiguration();
+    setActionOnCreateBtn();
+
+
+    //start when load page PS reload page for triggered http request
+    function getAllLaptops() {
+        $.ajax({
+            url: mainUrl + "/laptop",
+            type: "GET",
+            contentType: "application/json",
+            success: function (dataResponse) {
+                setLaptopsToTable(dataResponse.data);
+                setActionOnDeleteButtons();
+              setActionOnUpdateButtons();
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+    }
+
+    function setLaptopsToTable(makes) {
+        for (var i = 0; i < persons.length; i++) {
+            setPersonToTable(persons[i]);
+        }
+    }
+
+    function setLaptopToTable(laptop) {
+        var tableOfLaptops = $("#laptops");
+        tableOfLaptops.append('<tr>' +
+                '<td>' + laptop.id + '</td>' +
+                '<td>' + laptop.model + '</td>' +
+                '<td>' + laptop.makeId + '</td>' +
+                '<td>' + laptop.graphicCardId + '</td>' +
+                '<td>' + laptop.ramId + '</td>' +
+                '<td>' + laptop.corpsId + '</td>' +
+                '<td>' + laptop.memoryId + '</td>' +
+                '<td>' + laptop.processorId + '</td>' +
+                '<td>' + laptop.screenId + '</td>' +
+                '<td>' + laptop.availabilityOfWIFI + '</td>' +
+                '<td>' + laptop.availabilityOfBluetooth + '</td>' +
+                '<td>' + laptop.availabilityOfUSBTypeC + '</td>' +
+                '<td>' + laptop.availabilityOfUSBSecondGeneration + '</td>' +
+                '<td>' + laptop.availabilityOfUSBThirdGeneration + '</td>' +
+                '<td>' + laptop.availabilityOfHDMI + '</td>' +
+                '<td>' + laptop.availabilityOfLAN + '</td>' +
+                '<td>' + laptop.availabilityOfAUX + '</td>' +
+                '<td><button class="button" value="' + laptop.id + '">Delete</button></td>' +
+                '<td><button class="buttonToUpdate" value="' + laptop.id +'">Update</button></td>' +
+                '</tr>');
+    }
+
+
+    function setActionOnCreateBtn() {
+        $("#btnCreateLaptop").click(function () {
+
+            var model = $("#model").val();
+            var makeId = $("#makeId").val();
+            var graphicCardId = $("#graphicCardId").val();
+            var ramId = $("#ramId").val();
+            var corpsId = $("#corpsId").val();
+            var memoryId = $("#memoryId").val();
+            var processorId = $("#processorId").val();
+            var screenId = $("#screenId").val();
+            var availabilityOfWIFI = $("#availabilityOfWIFI").val();
+            var availabilityOfBluetooth = $("#availabilityOfBluetooth").val();
+            var availabilityOfUSBTypeC = $("#availabilityOfUSBTypeC").val();
+            var availabilityOfUSBSecondGeneration = $("#availabilityOfUSBSecondGeneration").val();
+            var availabilityOfUSBThirdGeneration = $("#availabilityOfUSBThirdGeneration").val();
+            var availabilityOfHDMI = $("#availabilityOfHDMI").val();
+            var availabilityOfLAN = $("#availabilityOfLAN").val();
+            var availabilityOfAUX = $("#availabilityOfAUX").val();
+//            if (firstName != null && lastName != null && age != null) {
+
+                var newLaptop = {
+                    "model": model,
+                  "makeId":makeId,
+                  "graphicCardId":graphicCardId,
+                  "ramId":ramId,
+                  "corpsId":corpsId,
+                  "memoryId":memoryId,
+                  "processorId":processorId,
+                  "screenId":screenId,
+                  "availabilityOfWIFI":availabilityOfWIFI,
+                  "availabilityOfBluetooth":availabilityOfBluetooth,
+                  "availabilityOfUSBTypeC":availabilityOfUSBTypeC,
+                "availabilityOfUSBSecondGeneration":availabilityOfUSBSecondGeneration,
+                  "availabilityOfUSBThirdGeneration":availabilityOfUSBThirdGeneration,
+                  "availabilityOfHDMI":availabilityOfHDMI,
+                  "availabilityOfLAN":availabilityOfLAN,
+                  "availabilityOfAUX":availabilityOfAUX
+                  
+                };
+
+                $.ajax({
+                    url: mainUrl + "/laptop",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(newMake),
+                    success: function (data) {
+                        location.reload();
+                    },
+                    error: function (error) {
+                        alert(error.message);
+                    }
+                });
+//            } else {
+//                alert("Всі поля повинні бути заповнені")
+//            }
+        });
+    }
+  
+    //delete process
+    function setActionOnDeleteButtons() {
+        $(".button").each(function (index) {
+            $(this).click(function () {
+                $.ajax({
+                    url: mainUrl + "/laptop?id=" + $(this).val(),
+                    type: "DELETE",
+                    success: function (data) {
+                        location.reload();
+                    },
+                    error: function (error) {
+                        alert(error.message);
+                    }
+                });
+              
+            })
+        })
+
+    }
+  
+  
+  
+          
+//      var returnedvalue;
+//    function setActionOnUpdateButtons() {
+//        $(".buttonUpdate").each(function (index) {
+//            $(this).click(function () {
+//                $.ajax({
+//                    url: mainUrl + "/person/findOne?id=" + $(this).val(),
+//                    type: "POST",
+//                    success: function (dataResponse) {
+//
+//                        returnedvalue = dataResponse.data.firstName;
+//
+//                    },
+//
+//                error: function (error) {
+//                    alert(error.message);
+//                }
+//            });
+//
+//        })
+//    })
+//    }
+        
+  
+
+
+    function setModalConfiguration() {
+        // Get the modal
+        var modal = document.getElementById('myModal');
+        //var modalUpdate = document.getElementById('myModalUpdate');
+      
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("openModal");
+        //var btnUpdate = document.getElementsByClassName("buttonToUpdate");
+        
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+    
+//        btnUpdate.onclick = function(){
+//            document.getElementById("fname").setAttribute('value', returnedvalue);
+//            modalUpdate.style.display = "block";
+//        }
+
+      
+        btn.onclick = function(){
+           modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+//        span.onclick = function () {
+//
+//            modalUpdate.style.display = "none";
+//        };
+        span.onclick = function () {
+            modal.style.display = "none";
+        };
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+              
+            }
+        };
+//      window.onclick = function (event) {
+//            if (event.target == modal) {
+//                modalUpdate.style.display = "none";
+//              
+//            }
+//        };
+    }
+
+
+</script>
+</body>
+</html>
