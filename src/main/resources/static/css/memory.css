@@ -52,22 +52,22 @@ div {
 */
 
 
-#corps {
+#memories {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-#corps td, #corps th {
+#memories td, #memories th {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-#corps tr:nth-child(even){background-color: #f2f2f2;}
+#memories tr:nth-child(even){background-color: #f2f2f2;}
 
-#corps tr:hover {background-color: #ddd;}
+#memories tr:hover {background-color: #ddd;}
 
-#corps th {
+#memories th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;

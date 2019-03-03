@@ -160,38 +160,38 @@
         });
     }
   
-  function setActionOnUpdateButtons() {
-            $(".buttonUpdate").each(function(index){
-                $(this).click(function(){
-                var firstName = $("#fname").val();
-                var lastName = $("#lname").val();
-                var age = $("#age").val();
-                var email =$("#email").val();
-
-                    var newPerson = {
-                        "firstName": firstName,
-                        "lastName": lastName,
-                        "age": age,
-                        "email": email
-                    };
-                    $.ajax({
-                        url: mainUrl +"/customer?id=" + $(this).val(),
-                        type: "PUT",
-                        contentType: "application/json",
-                        data: JSON.stringify(newPerson),
-                        success: function (data) {
-                            location.reload();
-                        },
-                        error: function (error) {
-                            alert(error.message);
-                        }
-
-                    });
-
-            })
-            })
-
-        }
+  // function setActionOnUpdateButtons() {
+  //           $(".buttonUpdate").each(function(index){
+  //               $(this).click(function(){
+  //               var firstName = $("#fname").val();
+  //               var lastName = $("#lname").val();
+  //               var age = $("#age").val();
+  //               var email =$("#email").val();
+  //
+  //                   var newPerson = {
+  //                       "name": firstName,
+  //                       "surname": lastName,
+  //                       "age": age,
+  //                       "email": email
+  //                   };
+  //                   $.ajax({
+  //                       url: mainUrl +"/customer?id=" + $(this).val(),
+  //                       type: "PUT",
+  //                       contentType: "application/json",
+  //                       data: JSON.stringify(newPerson),
+  //                       success: function (data) {
+  //                           location.reload();
+  //                       },
+  //                       error: function (error) {
+  //                           alert(error.message);
+  //                       }
+  //
+  //                   });
+  //
+  //           })
+  //           })
+  //
+  //       }
 
     function setModalConfiguration() {
         // Get the modal
