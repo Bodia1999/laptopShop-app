@@ -28,6 +28,8 @@ public class Laptop {
 
     private String description;
 
+    private String imageDirection;
+
     @OneToOne
     private Screen screen;
 
