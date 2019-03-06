@@ -34,13 +34,18 @@ public class LaptopController {
 
 
 
-    @PutMapping
-    public LaptopResponse update(@RequestParam Long id, @RequestBody LaptopRequest laptopRequest) throws WrongInputException {
+    @PutMapping("/{id}")
+    public LaptopResponse update(@PathVariable Long id, @RequestBody LaptopRequest laptopRequest) throws WrongInputException {
         return laptopService.update(id, laptopRequest);
     }
 
     @DeleteMapping
     public void delete (@RequestParam Long id ) throws WrongInputException{
         laptopService.delete(id);
+    }
+
+    @PostMapping("/findOne")
+    public LaptopResponse findOne (@RequestParam Long id) throws WrongInputException {
+        return new LaptopResponse(laptopService.findOne(id));
     }
 }

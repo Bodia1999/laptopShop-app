@@ -32,9 +32,14 @@ public class ShippingInfoController {
         shippingInfoService.delete(id);
     }
 
-    @PutMapping
-    public ShippingInfoResponse update(@RequestParam Long id, @RequestBody ShippingInfoRequest shippingInfoRequest)throws Exception{
+    @PutMapping("/{id}")
+    public ShippingInfoResponse update(@PathVariable Long id, @RequestBody ShippingInfoRequest shippingInfoRequest)throws Exception{
         return shippingInfoService.update(shippingInfoRequest, id);
+    }
+
+    @PostMapping("/findOne")
+    public ShippingInfoResponse findOne(@RequestParam Long id) throws WrongInputException{
+        return new ShippingInfoResponse(shippingInfoService.findOne(id));
     }
 
 

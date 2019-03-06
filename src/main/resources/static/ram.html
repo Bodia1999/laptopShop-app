@@ -42,6 +42,7 @@
                     <label for="workingFrequency">Working frequency</label><br>
                     <input min="0" type="number" id="workingFrequency" name="workingFrequency" placeholder="Your working frequency.."><br>
                     <input type="button" id="btnCreateRam" value="Create">
+                    <input type="button" id="btnUpdateRam" value="Update">
                 </form>
             </div>
         </div>
@@ -104,9 +105,9 @@
             type: "GET",
             contentType: "application/json",
             success: function (dataResponse) {
-                setRamsToTable(dataResponse.data);
+                setRamsToTable(dataResponse);
                 setActionOnDeleteButtons();
-              setActionOnUpdateButtons();
+              setActionOnUpdateButton();
             },
             error: function (error) {
                 alert(error.message);
@@ -116,7 +117,7 @@
 
     function setRamsToTable(rams) {
         for (var i = 0; i < rams.length; i++) {
-            setPersonToTable(rams[i]);
+            setRamToTable(rams[i]);
         }
     }
 
@@ -139,8 +140,8 @@
 
             var name = $("#name").val();
             var typeOfMemory = $("#typeOfMemory").val();
-            var name = $("#name").val();
-            var name = $("#name").val();
+            var volumeOfMemory = $("#volumeOfMemory").val();
+            var workingFrequency = $("#workingFrequency").val();
 //            if (firstName != null && lastName != null && age != null) {
 
                 var newRam = {
@@ -151,7 +152,7 @@
                 };
 
                 $.ajax({
-                    url: mainUrl + "/",
+                    url: mainUrl + "/ram",
                     type: "POST",
                     contentType: "application/json",
                     data: JSON.stringify(newRam),
@@ -166,6 +167,63 @@
 //                alert("Всі поля повинні бути заповнені")
 //            }
         });
+    }
+
+    function setActionOnUpdateButton() {
+
+        $(".buttonToUpdate").each(function (index) {
+            var identifier;
+            identifier = $(this).val();
+            $(this).click(function () {
+                $.ajax({
+                    url: mainUrl + "/ram/findOne?id=" + $(this).val(),
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function (dataResponse) {
+                        // var parse = JSON.parse(dataResponse);
+                        $("#name").val(dataResponse.name);
+                        $("#typeOfMemory").val(dataResponse.typeOfMemory);
+                        $("#volumeOfMemory").val(dataResponse.volumeOfMemory);
+                        $("#workingFrequency").val(dataResponse.workingFrequency);
+
+                        var elementById = document.getElementById("myModal");
+                        elementById.style.display="block";
+                        $("#btnUpdateRam").click(function () {
+
+                            var name = $("#name").val();
+                            var typeOfMemory = $("#typeOfMemory").val();
+                            var volumeOfMemory = $("#volumeOfMemory").val();
+                            var workingFrequency = $("#workingFrequency").val();
+//            if (firstName != null && lastName != null && age != null) {
+
+                            var newRam = {
+                                "name": name,
+                                "typeOfMemory": typeOfMemory,
+                                "volumeOfMemory": volumeOfMemory,
+                                "workingFrequency": workingFrequency
+                            };
+
+                            $.ajax({
+                                url: mainUrl + "/ram/" + identifier,
+                                type: "PUT",
+                                contentType: "application/json",
+                                data: JSON.stringify(newRam),
+                                success: function (data) {
+                                    location.reload();
+                                },
+                                error: function (error) {
+                                    alert("Something went wrong");
+                                }
+                            });
+//            } else {
+//                alert("Всі поля повинні бути заповнені")
+//            }
+                        });
+                    }
+                });
+            })
+        });
+
     }
   
     //delete process

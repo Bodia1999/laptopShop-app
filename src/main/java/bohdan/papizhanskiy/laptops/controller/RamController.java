@@ -34,13 +34,18 @@ public class RamController {
         ramService.delete(id);
     }
 
-    @PutMapping
-    public RamResponse update(RamRequest ramRequest, Long id) throws Exception {
+    @PutMapping("/{id}")
+    public RamResponse update(@RequestBody RamRequest ramRequest,@PathVariable Long id) throws Exception {
         return ramService.update(ramRequest, id);
     }
 
     @PostMapping("/filter")
     public DataResponse<RamResponse> findAllByFilter(@RequestBody RamFilterRequest ramFilterRequest){
         return ramService.findByFilter(ramFilterRequest);
+    }
+
+    @PostMapping("/findOne")
+    public RamResponse findOne(@RequestParam Long id) throws WrongInputException{
+        return new RamResponse(ramService.findOne(id));
     }
 }

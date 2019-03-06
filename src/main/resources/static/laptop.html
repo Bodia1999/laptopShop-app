@@ -53,42 +53,42 @@
                     <div class="second-content">
                       <form>
                         <label for="availabilityOfWIFI">WI-FI</label><br>
-                          <input type="radio" name="availabilityOfWIFI" value="true" >Available<br>
+                          <input type="radio" id="availabilityOfWIFI" name="availabilityOfWIFI" value="true" >Available<br>
                           <input type="radio" name="availabilityOfWIFI" value="false"checked>Not available<br>
                       </form>
                        <form>
                         <label for="availabilityOfBluetooth">Bluetooth</label><br>
-                          <input type="radio" name="availabilityOfWIFI" value="true" >Available<br>
+                          <input type="radio" id="availabilityOfBluetooth" name="availabilityOfWIFI" value="true" >Available<br>
                           <input type="radio" name="availabilityOfWIFI" value="false"checked>Not available<br>
                       </form>
                        <form>
                         <label for="availabilityOfUSBTypeC">USB Type-C</label><br>
-                          <input type="radio" name="availabilityOfWIFI" value="true" >Available<br>
+                          <input type="radio" id="availabilityOfUSBTypeC" name="availabilityOfWIFI" value="true" >Available<br>
                           <input type="radio" name="availabilityOfWIFI" value="false"checked>Not available<br>
                       </form>
                        <form>
                         <label for="availabilityOfUSBSecondGeneration">USB 2.0</label><br>
-                          <input type="radio" name="availabilityOfWIFI" value="true" >Available<br>
+                          <input type="radio" id="availabilityOfUSBSecondGeneration" name="availabilityOfWIFI" value="true" >Available<br>
                           <input type="radio" name="availabilityOfWIFI" value="false"checked>Not available<br>
                       </form>
                        <form>
                         <label for="availabilityOfUSBThirdGeneration">USB 3.0</label><br>
-                          <input type="radio" name="availabilityOfWIFI" value="true" >Available<br>
-                          <input type="radio" name="availabilityOfWIFI" value="false"checked>Not available<br>
+                          <input type="radio" id="availabilityOfUSBThirdGeneration" name="availabilityOfWIFI" value="true" >Available<br>
+                          <input type="radio"  name="availabilityOfWIFI" value="false"checked>Not available<br>
                       </form>
                        <form>
                         <label for="availabilityOfHDMI">HDMI</label><br>
-                          <input type="radio" name="availabilityOfWIFI" value="true" >Available<br>
+                          <input type="radio" id="availabilityOfHDMI" name="availabilityOfWIFI" value="true" >Available<br>
                           <input type="radio" name="availabilityOfWIFI" value="false"checked>Not available<br>
                       </form>
                        <form>
                         <label for="availabilityOfLAN">LAN</label><br>
-                          <input type="radio" name="availabilityOfWIFI" value="true" >Available<br>
+                          <input type="radio" id="availabilityOfLAN" name="availabilityOfWIFI" value="true" >Available<br>
                           <input type="radio" name="availabilityOfWIFI" value="false"checked>Not available<br>
                       </form>
                        <form>
                         <label for="availabilityOfAUX">AUX</label><br>
-                          <input type="radio" name="availabilityOfWIFI" value="true" >Available<br>
+                          <input type="radio" id="availabilityOfAUX" name="availabilityOfWIFI" value="true" >Available<br>
                           <input type="radio" name="availabilityOfWIFI" value="false"checked>Not available<br>
                       </form>
 
@@ -97,6 +97,7 @@
 
             </div>
                     <input type="button" id="btnCreateLaptop" value="Create">
+                    <input type="button" id="btnUpdateLaptop" value="Update">
                 </form>
         </div>
         <div class="modal-footer">
@@ -166,23 +167,24 @@
     //start when load page PS reload page for triggered http request
     function getAllLaptops() {
         $.ajax({
-            url: mainUrl + "/laptop",
+            url: mainUrl + "/laptops",
             type: "GET",
             contentType: "application/json",
             success: function (dataResponse) {
-                setLaptopsToTable(dataResponse.data);
+                console.log(dataResponse);
+                setLaptopsToTable(dataResponse);
                 setActionOnDeleteButtons();
-              setActionOnUpdateButtons();
+              setActionOnUpdateButton();
             },
             error: function (error) {
-                alert(error.message);
+                alert("Something went wrong");
             }
         });
     }
 
-    function setLaptopsToTable(makes) {
-        for (var i = 0; i < persons.length; i++) {
-            setPersonToTable(persons[i]);
+    function setLaptopsToTable(laptops) {
+        for (var i = 0; i < laptops.length; i++) {
+            setLaptopToTable(laptops[i]);
         }
     }
 
@@ -207,7 +209,7 @@
                 '<td>' + laptop.availabilityOfLAN + '</td>' +
                 '<td>' + laptop.availabilityOfAUX + '</td>' +
                 '<td><button class="button" value="' + laptop.id + '">Delete</button></td>' +
-                '<td><button class="buttonToUpdate" value="' + laptop.id +'">Update</button></td>' +
+                '<td><button class="buttonToUpdate" id="buttonToUpdateToClose" value="' + laptop.id +'">Update</button></td>' +
                 '</tr>');
     }
 
@@ -235,29 +237,29 @@
 
                 var newLaptop = {
                     "model": model,
-                  "makeId":makeId,
-                  "graphicCardId":graphicCardId,
-                  "ramId":ramId,
-                  "corpsId":corpsId,
-                  "memoryId":memoryId,
-                  "processorId":processorId,
-                  "screenId":screenId,
-                  "availabilityOfWIFI":availabilityOfWIFI,
-                  "availabilityOfBluetooth":availabilityOfBluetooth,
-                  "availabilityOfUSBTypeC":availabilityOfUSBTypeC,
-                "availabilityOfUSBSecondGeneration":availabilityOfUSBSecondGeneration,
-                  "availabilityOfUSBThirdGeneration":availabilityOfUSBThirdGeneration,
-                  "availabilityOfHDMI":availabilityOfHDMI,
-                  "availabilityOfLAN":availabilityOfLAN,
-                  "availabilityOfAUX":availabilityOfAUX
+                    "makeId":makeId,
+                    "graphicCardId":graphicCardId,
+                    "ramId":ramId,
+                    "corpsId":corpsId,
+                    "memoryId":memoryId,
+                    "processorId":processorId,
+                    "screenId":screenId,
+                    "availabilityOfWIFI":availabilityOfWIFI,
+                    "availabilityOfBluetooth":availabilityOfBluetooth,
+                    "availabilityOfUSBTypeC":availabilityOfUSBTypeC,
+                    "availabilityOfUSBSecondGeneration":availabilityOfUSBSecondGeneration,
+                    "availabilityOfUSBThirdGeneration":availabilityOfUSBThirdGeneration,
+                    "availabilityOfHDMI":availabilityOfHDMI,
+                    "availabilityOfLAN":availabilityOfLAN,
+                    "availabilityOfAUX":availabilityOfAUX
                   
                 };
 
                 $.ajax({
-                    url: mainUrl + "/laptop",
+                    url: mainUrl + "/laptops",
                     type: "POST",
                     contentType: "application/json",
-                    data: JSON.stringify(newMake),
+                    data: JSON.stringify(newLaptop),
                     success: function (data) {
                         location.reload();
                     },
@@ -270,7 +272,100 @@
 //            }
         });
     }
-  
+
+    function setActionOnUpdateButton() {
+
+        $(".buttonToUpdate").each(function (index) {
+            var identifier;
+            identifier = $(this).val();
+            $(this).click(function () {
+                $.ajax({
+                    url: mainUrl + "/laptop/findOne?id=" + $(this).val(),
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function (dataResponse) {
+                        // var parse = JSON.parse(dataResponse);
+                        $("#name").val(dataResponse.name);
+                        $("#makeId").val(dataResponse.makeId);
+                        $("#graphicCardId").val(dataResponse.graphicCardId);
+                        $("#ramId").val(dataResponse.ramId);
+                        $("#corpsId").val(dataResponse.corpsId);
+                        $("#memoryId").val(dataResponse.memoryId);
+                        $("#processorId").val(dataResponse.processorId);
+                        $("#screenId").val(dataResponse.screenId);
+                        $("#availabilityOfWIFI").val(dataResponse.availabilityOfWIFI);
+                        $("#availabilityOfBluetooth").val(dataResponse.availabilityOfBluetooth);
+                        $("#availabilityOfUSBTypeC").val(dataResponse.availabilityOfUSBTypeC);
+                        $("#availabilityOfUSBSecondGeneration").val(dataResponse.availabilityOfUSBSecondGeneration);
+                        $("#availabilityOfUSBThirdGeneration").val(dataResponse.availabilityOfUSBThirdGeneration);
+                        $("#availabilityOfHDMI").val(dataResponse.availabilityOfHDMI);
+                        $("#availabilityOfLAN").val(dataResponse.availabilityOfLAN);
+                        $("#availabilityOfAUX").val(dataResponse.availabilityOfAUX);
+                        var elementById = document.getElementById("myModal");
+                        elementById.style.display="block";
+                        $("#btnUpdateLaptop").click(function () {
+
+                            var model = $("#model").val();
+                            var makeId = $("#makeId").val();
+                            var graphicCardId = $("#graphicCardId").val();
+                            var ramId = $("#ramId").val();
+                            var corpsId = $("#corpsId").val();
+                            var memoryId = $("#memoryId").val();
+                            var processorId = $("#processorId").val();
+                            var screenId = $("#screenId").val();
+                            var availabilityOfWIFI = $("#availabilityOfWIFI").val();
+                            var availabilityOfBluetooth = $("#availabilityOfBluetooth").val();
+                            var availabilityOfUSBTypeC = $("#availabilityOfUSBTypeC").val();
+                            var availabilityOfUSBSecondGeneration = $("#availabilityOfUSBSecondGeneration").val();
+                            var availabilityOfUSBThirdGeneration = $("#availabilityOfUSBThirdGeneration").val();
+                            var availabilityOfHDMI = $("#availabilityOfHDMI").val();
+                            var availabilityOfLAN = $("#availabilityOfLAN").val();
+                            var availabilityOfAUX = $("#availabilityOfAUX").val();
+//            if (firstName != null && lastName != null && age != null) {
+
+                            var newLaptop = {
+                                "model": model,
+                                "makeId":makeId,
+                                "graphicCardId":graphicCardId,
+                                "ramId":ramId,
+                                "corpsId":corpsId,
+                                "memoryId":memoryId,
+                                "processorId":processorId,
+                                "screenId":screenId,
+                                "availabilityOfWIFI":availabilityOfWIFI,
+                                "availabilityOfBluetooth":availabilityOfBluetooth,
+                                "availabilityOfUSBTypeC":availabilityOfUSBTypeC,
+                                "availabilityOfUSBSecondGeneration":availabilityOfUSBSecondGeneration,
+                                "availabilityOfUSBThirdGeneration":availabilityOfUSBThirdGeneration,
+                                "availabilityOfHDMI":availabilityOfHDMI,
+                                "availabilityOfLAN":availabilityOfLAN,
+                                "availabilityOfAUX":availabilityOfAUX
+
+                            };
+
+                            $.ajax({
+                                url: mainUrl + "/laptop/" + identifier,
+                                type: "PUT",
+                                contentType: "application/json",
+                                data: JSON.stringify(newLaptop),
+                                success: function (data) {
+                                    location.reload();
+                                },
+                                error: function (error) {
+                                    alert("Something went wrong");
+                                }
+                            });
+//            } else {
+//                alert("Всі поля повинні бути заповнені")
+//            }
+                        });
+                    }
+                });
+            })
+        });
+
+    }
+
     //delete process
     function setActionOnDeleteButtons() {
         $(".button").each(function (index) {
@@ -285,12 +380,12 @@
                         alert(error.message);
                     }
                 });
-              
+
             })
         })
 
     }
-  
+
   
   
           
@@ -327,6 +422,7 @@
 
         // Get the button that opens the modal
         var btn = document.getElementById("openModal");
+        var elementById = document.getElementById('buttonToUpdateToClose');
         //var btnUpdate = document.getElementsByClassName("buttonToUpdate");
         
 
@@ -343,6 +439,7 @@
       
         btn.onclick = function(){
            modal.style.display = "block";
+           elementById.style.visibility="hidden";
         }
 
         // When the user clicks on <span> (x), close the modal

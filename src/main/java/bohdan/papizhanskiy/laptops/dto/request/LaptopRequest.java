@@ -21,6 +21,11 @@ public class LaptopRequest {
     private String model;
 
     @NotNull
+    @NotEmpty
+    private String price;
+
+
+    @NotNull
     private Boolean availabilityOfWIFI;
 
     @NotNull

@@ -54,11 +54,12 @@
 </div>
 
 
-<table id="persons">
+<table id="customers">
     <tr>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Age</th>
+        <th>Email</th>
         <th>Delete Button</th>
         <th>Update Button</th>
     </tr>
@@ -67,21 +68,21 @@
 <script>
     var mainUrl = "http://localhost:8000";
 
-    getAllPersons();
+    getAllCustomers();
     setModalConfiguration();
     setActionOnCreateBtn();
 
 
     //start when load page PS reload page for triggered http request
-    function getAllPersons() {
+    function getAllCustomers() {
         $.ajax({
             url: mainUrl + "/customer",
             type: "GET",
             contentType: "application/json",
             success: function (dataResponse) {
-                setPersonsToTable(dataResponse.data);
+                setCustomersToTable(dataResponse);
                 setActionOnDeleteButtons();
-              setActionOnUpdateButtons();
+              setActionOnUpdateButton();
             },
             error: function (error) {
                 alert(error.message);
@@ -89,21 +90,21 @@
         });
     }
 
-    function setPersonsToTable(persons) {
-        for (var i = 0; i < persons.length; i++) {
-            setPersonToTable(persons[i]);
+    function setCustomersToTable(customers) {
+        for (var i = 0; i < customers.length; i++) {
+            setCustomerToTable(customers[i]);
         }
     }
 
-    function setPersonToTable(person) {
-        var tableOfPersons = $("#persons");
-        tableOfPersons.append('<tr>' +
-                '<td>' + person.name + '</td>' +
-                '<td>' + person.surname + '</td>' +
-                '<td>' + person.age + '</td>' +
-                '<td>' + person.email + '</td>' +
-                '<td><button class="button" value="' + person.id + '">Delete</button></td>' +
-                '<td><button class="buttonToUpdate" value="' + person.id +'">Update</button></td>' +
+    function setCustomerToTable(customer) {
+        var tableOfCustomers= $("#customers");
+        tableOfCustomers.append('<tr>' +
+                '<td>' + customer.name + '</td>' +
+                '<td>' + customer.surname + '</td>' +
+                '<td>' + customer.age + '</td>' +
+                '<td>' + customer.email + '</td>' +
+                '<td><button class="button" value="' + customer.id + '">Delete</button></td>' +
+                '<td><button class="buttonToUpdate" value="' + customer.id +'">Update</button></td>' +
                 '</tr>');
     }
 
@@ -158,6 +159,24 @@
 //                alert("Всі поля повинні бути заповнені")
 //            }
         });
+    }
+
+    function setActionOnUpdateButton() {
+        $(".buttonToUpdate").each(function (index) {
+            $(this).click(function () {
+                $.ajax({
+                    url: mainUrl + "/customer/findOne?id=" + $(this).val(),
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function (dataResponse) {
+                        var parse = JSON.parse(dataResponse);
+                        $("#name").val(parse.name);
+                        document.getElementById("myModal").style.display= "block";
+                    }
+                })
+            })
+        })
+
     }
   
   // function setActionOnUpdateButtons() {

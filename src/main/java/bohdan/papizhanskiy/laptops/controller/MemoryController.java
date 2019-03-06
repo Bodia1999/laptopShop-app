@@ -36,13 +36,18 @@ public class MemoryController {
         return memoryService.save(memoryRequest);
     }
 
-    @PutMapping
-    public MemoryResponse update(@RequestBody MemoryRequest memoryRequest, @RequestParam Long id) throws WrongInputException {
+    @PutMapping("/{id}")
+    public MemoryResponse update(@RequestBody MemoryRequest memoryRequest, @PathVariable Long id) throws WrongInputException {
         return memoryService.update(memoryRequest, id);
     }
 
     @DeleteMapping
     public void delete(@RequestParam Long id) throws WrongInputException {
         memoryService.delete(id);
+    }
+
+    @PostMapping("/findOne")
+    public MemoryResponse findOne (@RequestParam Long id) throws WrongInputException {
+        return new MemoryResponse(memoryService.findOne(id));
     }
 }

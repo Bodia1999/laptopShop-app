@@ -24,7 +24,7 @@ public class CorpsController {
     }
 
     @PostMapping
-    public CorpsResponse save(CorpsRequest corpsRequest) throws Exception {
+    public CorpsResponse save(@RequestBody CorpsRequest corpsRequest) throws Exception {
         return corpsService.save(corpsRequest);
     }
 
@@ -33,8 +33,8 @@ public class CorpsController {
         corpsService.delete(id);
     }
 
-    @PutMapping
-    public CorpsResponse update(CorpsRequest corpsRequest, Long id) throws Exception {
+    @PutMapping("/{id}")
+    public CorpsResponse update(@RequestBody CorpsRequest corpsRequest,@PathVariable Long id) throws Exception {
         return corpsService.update(corpsRequest, id);
     }
 
@@ -42,5 +42,12 @@ public class CorpsController {
     public DataResponse<CorpsResponse> findAllByFilter(@RequestBody CorpsFilterRequest corpsFilterRequest){
         return corpsService.findByFilter(corpsFilterRequest);
     }
+
+    @PostMapping("/findOne")
+    public CorpsResponse findOne (@RequestParam Long id) throws WrongInputException {
+        return new CorpsResponse(corpsService.findOne(id));
+    }
+
+
 
 }

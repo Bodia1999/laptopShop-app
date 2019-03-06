@@ -42,6 +42,7 @@
                     <label for="quantityOfCores">Quantity of cores</label><br>
                     <input min="0" type="number" id="quantityOfCores" name="quantityOfCores" placeholder="Your quantity of cores.."><br>
                     <input type="button" id="btnCreateProcessor" value="Create">
+                    <input type="button" id="btnUpdateProcessor" value="Update">
                 </form>
             </div>
         </div>
@@ -104,9 +105,9 @@
             type: "GET",
             contentType: "application/json",
             success: function (dataResponse) {
-                setProcessorsToTable(dataResponse.data);
+                setProcessorsToTable(dataResponse);
                 setActionOnDeleteButtons();
-              //setActionOnUpdateButtons();
+              setActionOnUpdateButton();
             },
             error: function (error) {
                 alert(error.message);
@@ -116,7 +117,7 @@
 
     function setProcessorsToTable(processors) {
         for (var i = 0; i < processors.length; i++) {
-            setPersonToTable(processors[i]);
+            setProcessorToTable(processors[i]);
         }
     }
 
@@ -124,6 +125,7 @@
         var tableOfProcessors = $("#processors");
         tableOfProcessors.append('<tr>' +
                 '<td>' + processor.id + '</td>' +
+                '<td>' + processor.name + '</td>' +
                 '<td>' + processor.model + '</td>' +
                 '<td>' + processor.workingFrequency + '</td>' +
                 '<td>' + processor.quantityOfCores + '</td>' +
@@ -166,6 +168,63 @@
 //            }
         });
     }
+    function setActionOnUpdateButton() {
+
+        $(".buttonToUpdate").each(function (index) {
+            var identifier;
+            identifier = $(this).val();
+            $(this).click(function () {
+                $.ajax({
+                    url: mainUrl + "/processor/findOne?id=" + $(this).val(),
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function (dataResponse) {
+                        // var parse = JSON.parse(dataResponse);
+                        $("#name").val(dataResponse.name);
+                        $("#model").val(dataResponse.model);
+                        $("#workingFrequency").val(dataResponse.workingFrequency);
+                        $("#quantityOfCores").val(dataResponse.quantityOfCores);
+
+                        var elementById = document.getElementById("myModal");
+                        elementById.style.display="block";
+                        $("#btnUpdateProcessor").click(function () {
+
+                            var name = $("#name").val();
+                            var model = $("#model").val();
+                            var workingFrequency = $("#workingFrequency").val();
+                            var quantityOfCores = $("#quantityOfCores").val();
+//            if (firstName != null && lastName != null && age != null) {
+
+                            var newProcessor = {
+                                "name": name,
+                                "model": model,
+                                "workingFrequency": workingFrequency,
+                                "quantityOfCores": quantityOfCores
+                            };
+
+                            $.ajax({
+                                url: mainUrl + "/processor/" + identifier,
+                                type: "PUT",
+                                contentType: "application/json",
+                                data: JSON.stringify(newProcessor),
+                                success: function (data) {
+                                    location.reload();
+                                },
+                                error: function (error) {
+                                    alert("Something went wrong");
+                                }
+                            });
+//            } else {
+//                alert("Всі поля повинні бути заповнені")
+//            }
+                        });
+                    }
+                });
+            })
+        });
+
+    }
+
   
     //delete process
     function setActionOnDeleteButtons() {

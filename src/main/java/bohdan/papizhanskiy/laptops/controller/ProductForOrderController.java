@@ -31,8 +31,13 @@ public class ProductForOrderController {
         productForOrderService.delete(id);
     }
 
-    @PutMapping
-    public ProductForOrderResponse update(ProductForOrderRequest productForOrderRequest, Long id) throws Exception {
+    @PutMapping("/{id}")
+    public ProductForOrderResponse update(@RequestBody ProductForOrderRequest productForOrderRequest,@PathVariable Long id) throws Exception {
         return productForOrderService.update(productForOrderRequest, id);
+    }
+
+    @PostMapping("/findOne")
+    public ProductForOrderResponse findOne(@RequestParam Long id) throws WrongInputException{
+        return new ProductForOrderResponse(productForOrderService.findOne(id));
     }
 }

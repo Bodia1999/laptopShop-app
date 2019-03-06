@@ -40,6 +40,7 @@
                     <label for="volumeOfMemory">Volume of memory</label><br>
                     <input min="0" type="number" id="volumeOfMemory" name="volumeOfMemory" placeholder="Your volume of memory.."><br>
                     <input type="button" id="btnCreateMemory" value="Create">
+                    <input type="button" id="btnUpdateMemory" value="Update">
                 </form>
             </div>
         </div>
@@ -101,9 +102,9 @@
             type: "GET",
             contentType: "application/json",
             success: function (dataResponse) {
-                setPersonsToTable(dataResponse.data);
+                setMemoriesToTable(dataResponse);
                 setActionOnDeleteButtons();
-              setActionOnUpdateButtons();
+              setActionOnUpdateButton();
             },
             error: function (error) {
                 alert(error.message);
@@ -113,7 +114,7 @@
 
     function setMemoriesToTable(memories) {
         for (var i = 0; i < memories.length; i++) {
-            setPersonToTable(memories[i]);
+            setMemoryToTable(memories[i]);
         }
     }
 
@@ -140,8 +141,8 @@
 
                 var newMemory = {
                     "name": name,
-                  "typeOfMemory":typeOfMemory,
-                  "volumeOfMemory":volumeOfMemory
+                  "typeOfMemory": typeOfMemory,
+                  "volumeOfMemory": volumeOfMemory
                 };
 
                 $.ajax({
@@ -161,7 +162,60 @@
 //            }
         });
     }
-  
+
+
+    function setActionOnUpdateButton() {
+
+        $(".buttonToUpdate").each(function (index) {
+            var identifier;
+            identifier = $(this).val();
+            $(this).click(function () {
+                $.ajax({
+                    url: mainUrl + "/memory/findOne?id=" + $(this).val(),
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function (dataResponse) {
+                        // var parse = JSON.parse(dataResponse);
+                        $("#name").val(dataResponse.name);
+                        $("#typeOfMemory").val(dataResponse.typeOfMemory);
+                        $("#volumeOfMemory").val(dataResponse.volumeOfMemory);
+                        var elementById = document.getElementById("myModal");
+                        elementById.style.display="block";
+                        $("#btnUpdateMemory").click(function () {
+
+                            var name = $("#name").val();
+                            var typeOfMemory = $("#typeOfMemory").val();
+                            var volumeOfMemory = $("#volumeOfMemory").val();
+//            if (firstName != null && lastName != null && age != null) {
+
+                            var newMemory = {
+                                "name": name,
+                                "typeOfMemory":typeOfMemory,
+                                "volumeOfMemory":volumeOfMemory
+                            };
+
+                            $.ajax({
+                                url: mainUrl + "/memory/" + identifier,
+                                type: "PUT",
+                                contentType: "application/json",
+                                data: JSON.stringify(newMemory),
+                                success: function (data) {
+                                    location.reload();
+                                },
+                                error: function (error) {
+                                    alert("Something went wrong");
+                                }
+                            });
+//            } else {
+//                alert("Всі поля повинні бути заповнені")
+//            }
+                        });
+                    }
+                });
+            })
+        });
+
+    }
     //delete process
     function setActionOnDeleteButtons() {
         $(".button").each(function (index) {

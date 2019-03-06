@@ -28,20 +28,21 @@
     <div class="modal-content">
         <div class="modal-header">
             <span class="close">&times;</span>
-            <h2>Create make</h2>
+            <h2>Create corps</h2>
         </div>
         <div class="modal-body">
             <div>
                 <form>
-                    <label for="name">Material</label><br>
-                    <input type="text" id="name" name="name" placeholder="Your material .."><br>
-                    <label for="color">Color</label><br>
-                    <input type="text" id="color" name="color" placeholder="Your color .."><br>
+                    <label for="materialOfCorps">Material</label><br>
+                    <input type="text" id="materialOfCorps" name="materialOfCorps" placeholder="Your material .."><br>
+                    <label for="colorOfCorps">Color</label><br>
+                    <input type="text" id="colorOfCorps" name="colorOfCorps" placeholder="Your color .."><br>
                     <label for="dimensions">Dimensions</label><br>
                     <input type="text" id="dimensions" name="dimensions" placeholder="Your dimensions .."><br>
                     <label for="weight">Weight</label><br>
                     <input type="text" id="weight" name="weight" placeholder="Your weight .."><br>
                     <input type="button" id="btnCreateCorps" value="Create">
+                    <input type="button" id="btnUpdateCorps" value="Update">
                 </form>
             </div>
         </div>
@@ -104,9 +105,9 @@
             type: "GET",
             contentType: "application/json",
             success: function (dataResponse) {
-                setCorpsToTable(dataResponse.data);
+                setCorpsToTable(dataResponse);
                 setActionOnDeleteButtons();
-              setActionOnUpdateButtons();
+              setActionOnUpdateButton();
             },
             error: function (error) {
                 alert(error.message);
@@ -122,32 +123,32 @@
 
     function setCorpToTable(corp) {
         var tableOfCorps = $("#corps");
-        tableOfCorps.append('<tr>' +
-                '<td>' + corp.id + '</td>' +
-                '<td>' + corp.color+ '</td>' +
-                '<td>' + corp.material+ '</td>' +
-                '<td>' + corp.dimensions+ '</td>' +
-                '<td>' + corp.weight+ '</td>' +
-                '<td><button class="button" value="' + corp.id + '">Delete</button></td>' +
-                '<td><button class="buttonToUpdate" value="' + corp.id +'">Update</button></td>' +
-                '</tr>');
-    }
+
+    tableOfCorps.append('<tr>' +
+        '<td>' + corp.id + '</td>' +
+        '<td>' + corp.colorOfCorps+ '</td>' +
+        '<td>' + corp.materialOfCorps+ '</td>' +
+        '<td>' + corp.dimensions+ '</td>' +
+        '<td>' + corp.weight+ '</td>' +
+        '<td><button class="button" value="' + corp.id + '">Delete</button></td>' +
+        '<td><button class="buttonToUpdate" value="' + corp.id +'">Update</button></td>' +
+        '</tr>');}
 
 
     function setActionOnCreateBtn() {
         $("#btnCreateCorps").click(function () {
 
-            var color = $("#color").val();
-            var material = $("#material").val();
+            var colorOfCorps = $("#colorOfCorps").val();
+            var materialOfCorps = $("#materialOfCorps").val();
             var dimensions = $("#dimensions").val();
             var weight = $("#weight").val();
 //            if (firstName != null && lastName != null && age != null) {
 
                 var newCorps = {
-                    "color": color,
-                  "material":material,
-                  "dimensions":dimensions,
-                  "weight":weight
+                    "weight":weight,
+                    "dimensions":dimensions,
+                    "colorOfCorps": colorOfCorps,
+                    "materialOfCorps":materialOfCorps
                 };
 
                 $.ajax({
@@ -167,13 +168,69 @@
 //            }
         });
     }
+
+    function setActionOnUpdateButton() {
+
+        $(".buttonToUpdate").each(function (index) {
+            var identifier;
+            identifier = $(this).val();
+            $(this).click(function () {
+                $.ajax({
+                    url: mainUrl + "/corps/findOne?id=" + $(this).val(),
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function (dataResponse) {
+                        // var parse = JSON.parse(dataResponse);
+                        $("#colorOfCorps").val(dataResponse.colorOfCorps);
+                        $("#materialOfCorps").val(dataResponse.materialOfCorps);
+                        $("#dimensions").val(dataResponse.dimensions);
+                        $("#weight").val(dataResponse.weight);
+                        var elementById = document.getElementById("myModal");
+                        elementById.style.display="block";
+                        $("#btnUpdateCorps").click(function () {
+
+                            var colorOfCorps = $("#colorOfCorps").val();
+                            var materialOfCorps = $("#materialOfCorps").val();
+                            var dimensions = $("#dimensions").val();
+                            var weight = $("#weight").val();
+//            if (firstName != null && lastName != null && age != null) {
+
+                            var newCorps = {
+                                "colorOfCorps": colorOfCorps,
+                                "materialOfCorps":materialOfCorps,
+                                "dimensions":dimensions,
+                                "weight":weight
+                            };
+
+                            $.ajax({
+                                url: mainUrl + "/corps/" + identifier,
+                                type: "PUT",
+                                contentType: "application/json",
+                                data: JSON.stringify(newCorps),
+                                success: function (data) {
+                                    location.reload();
+                                },
+                                error: function (error) {
+                                    alert("Something went wrong");
+                                }
+                            });
+//            } else {
+//                alert("Всі поля повинні бути заповнені")
+//            }
+                        });
+                    }
+                });
+            })
+        });
+
+    }
   
     //delete process
     function setActionOnDeleteButtons() {
         $(".button").each(function (index) {
             $(this).click(function () {
                 $.ajax({
-                    url: mainUrl + "/coprs?id=" + $(this).val(),
+                    url: mainUrl + "/corps?id=" + $(this).val(),
                     type: "DELETE",
                     success: function (data) {
                         location.reload();

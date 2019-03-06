@@ -37,13 +37,18 @@ public class ProcessorController {
         processorService.delete(id);
     }
 
-    @PutMapping
-    public ProcessorResponse update(ProcessorRequest processorRequest, Long id) throws WrongInputException {
+    @PutMapping("/{id}")
+    public ProcessorResponse update(@RequestBody ProcessorRequest processorRequest, @PathVariable Long id) throws WrongInputException {
         return processorService.update(processorRequest, id);
     }
 
     @PostMapping("/filter")
     public DataResponse<ProcessorResponse> findAllByFilter(@RequestBody ProcessorFilterRequest processorFilterRequest){
         return processorService.findByFilter(processorFilterRequest);
+    }
+
+    @PostMapping("/findOne")
+    public ProcessorResponse findOne(@RequestParam Long id) throws WrongInputException{
+        return new ProcessorResponse(processorService.findOne(id));
     }
 }

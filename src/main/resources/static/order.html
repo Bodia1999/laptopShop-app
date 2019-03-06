@@ -36,6 +36,7 @@
                     <label for="customerId">Customer ID</label><br>
                     <input min="0" type="number" id="customerId" name="customerId" placeholder="Your Customer ID.."><br>
                     <input type="button" id="btnCreateOrder" value="Create">
+                    <input type="button" id="btnUpdateOrder" value="Update">
                 </form>
             </div>
         </div>
@@ -95,9 +96,9 @@
             type: "GET",
             contentType: "application/json",
             success: function (dataResponse) {
-                setPersonsToTable(dataResponse.data);
+                setOrdersToTable(dataResponse);
                 setActionOnDeleteButtons();
-              setActionOnUpdateButtons();
+              setActionOnUpdateButton();
             },
             error: function (error) {
                 alert(error.message);
@@ -107,7 +108,7 @@
 
     function setOrdersToTable(orders) {
         for (var i = 0; i < orders.length; i++) {
-            setPersonToTable(orders[i]);
+            setOrderToTable(orders[i]);
         }
     }
 
@@ -148,6 +149,54 @@
 //                alert("Всі поля повинні бути заповнені")
 //            }
         });
+    }
+
+    function setActionOnUpdateButton() {
+
+        $(".buttonToUpdate").each(function (index) {
+            var identifier;
+            identifier = $(this).val();
+            $(this).click(function () {
+                $.ajax({
+                    url: mainUrl + "/order/findOne?id=" + $(this).val(),
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function (dataResponse) {
+                        // var parse = JSON.parse(dataResponse);
+                        $("#customerId").val(dataResponse.customerId);
+
+                        var elementById = document.getElementById("myModal");
+                        elementById.style.display="block";
+                        $("#btnUpdateOrder").click(function () {
+
+                            var customerId = $("#customerId").val();
+//            if (firstName != null && lastName != null && age != null) {
+
+                            var newOrder = {
+                                "customerId": customerId
+                            };
+
+                            $.ajax({
+                                url: mainUrl + "/order/" + identifier,
+                                type: "PUT",
+                                contentType: "application/json",
+                                data: JSON.stringify(newOrder),
+                                success: function (data) {
+                                    location.reload();
+                                },
+                                error: function (error) {
+                                    alert("Something went wrong");
+                                }
+                            });
+//            } else {
+//                alert("Всі поля повинні бути заповнені")
+//            }
+                        });
+                    }
+                });
+            })
+        });
+
     }
   
     //delete process

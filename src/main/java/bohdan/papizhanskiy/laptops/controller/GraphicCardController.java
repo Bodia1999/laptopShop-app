@@ -33,13 +33,18 @@ public class GraphicCardController {
         return graphicCardService.findByFilter(graphicCardFilterRequest);
     }
 
-    @PutMapping
-    public GraphicCardResponse update(GraphicCardRequest graphicCardRequest, Long id) throws WrongInputException {
+    @PutMapping("/{id}")
+    public GraphicCardResponse update(@RequestBody GraphicCardRequest graphicCardRequest,@PathVariable Long id) throws WrongInputException {
         return graphicCardService.update(graphicCardRequest, id);
     }
 
     @DeleteMapping
     public void delete(Long id) throws WrongInputException {
         graphicCardService.delete(id);
+    }
+
+    @PostMapping("/findOne")
+    public GraphicCardResponse findOne(@RequestParam Long id)throws WrongInputException{
+        return new GraphicCardResponse(graphicCardService.findOne(id));
     }
 }

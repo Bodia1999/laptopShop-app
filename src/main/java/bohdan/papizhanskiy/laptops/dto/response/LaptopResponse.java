@@ -15,6 +15,8 @@ public class LaptopResponse {
 
     private String model;
 
+    private String price;
+
     public GraphicCardResponse graphicCard;
 
     private RamResponse ram;
@@ -47,7 +49,8 @@ public class LaptopResponse {
     public LaptopResponse(Laptop laptop) {
         id = laptop.getId();
         model = laptop.getModel();
-        //makeName = laptop.getMake().getName();
+        makeName = laptop.getMake().getName();
+        price = laptop.getPrice();
         graphicCard = new GraphicCardResponse(laptop.getGraphicCard());
         screen = new ScreenResponse(laptop.getScreen());
         ram = new RamResponse(laptop.getRam());

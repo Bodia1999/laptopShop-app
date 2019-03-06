@@ -38,8 +38,9 @@
                     <label for="resolution">Resolution</label><br>
                     <input type="text" id="resolution" name="resolution" placeholder="Your resolution.."><br>
                     <label for="size">Screen size</label><br>
-                    <input min="0" type="number" id="size" name="size" placeholder="Your screen size.."><br>
+                    <input type="text" id="size" name="size" placeholder="Your screen size.."><br>
                     <input type="button" id="btnCreateScreen" value="Create">
+                    <input type="button" id="btnUpdateScreen" value="Update">
                 </form>
             </div>
         </div>
@@ -101,9 +102,9 @@
             type: "GET",
             contentType: "application/json",
             success: function (dataResponse) {
-                setScreensToTable(dataResponse.data);
+                setScreensToTable(dataResponse);
                 setActionOnDeleteButtons();
-              setActionOnUpdateButtons();
+              setActionOnUpdateButton();
             },
             error: function (error) {
                 alert(error.message);
@@ -111,9 +112,9 @@
         });
     }
 
-    function setScreensToTable(makes) {
-        for (var i = 0; i < persons.length; i++) {
-            setPersonToTable(persons[i]);
+    function setScreensToTable(screens) {
+        for (var i = 0; i < screens.length; i++) {
+            setScreenToTable(screens[i]);
         }
     }
 
@@ -141,7 +142,7 @@
                 var newScreen = {
                     "type": type,
                     "resolution": resolution,
-                    "size": size,
+                    "size": size
                 };
 
                 $.ajax({
@@ -160,6 +161,60 @@
 //                alert("Всі поля повинні бути заповнені")
 //            }
         });
+    }
+
+    function setActionOnUpdateButton() {
+
+        $(".buttonToUpdate").each(function (index) {
+            var identifier;
+            identifier = $(this).val();
+            $(this).click(function () {
+                $.ajax({
+                    url: mainUrl + "/screen/findOne?id=" + $(this).val(),
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function (dataResponse) {
+                        // var parse = JSON.parse(dataResponse);
+                        $("#type").val(dataResponse.type);
+                        $("#resolution").val(dataResponse.resolution);
+                        $("#size").val(dataResponse.size);
+
+                        var elementById = document.getElementById("myModal");
+                        elementById.style.display="block";
+                        $("#btnUpdateScreen").click(function () {
+
+                            var type = $("#type").val();
+                            var resolution = $("#resolution").val();
+                            var size = $("#size").val();
+//            if (firstName != null && lastName != null && age != null) {
+
+                            var newScreen = {
+                                "type": type,
+                                "resolution": resolution,
+                                "size": size
+                            };
+
+                            $.ajax({
+                                url: mainUrl + "/screen/" + identifier,
+                                type: "PUT",
+                                contentType: "application/json",
+                                data: JSON.stringify(newScreen),
+                                success: function (data) {
+                                    location.reload();
+                                },
+                                error: function (error) {
+                                    alert("Something went wrong");
+                                }
+                            });
+//            } else {
+//                alert("Всі поля повинні бути заповнені")
+//            }
+                        });
+                    }
+                });
+            })
+        });
+
     }
   
     //delete process

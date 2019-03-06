@@ -41,7 +41,7 @@ public class MemoryService {
             memory = new Memory();
         }
         memory.setName(memoryRequest.getName());
-        memory.setTypeOfMemory(memory.getTypeOfMemory());
+        memory.setTypeOfMemory(memoryRequest.getTypeOfMemory());
         memory.setVolumeOfMemory(memoryRequest.getVolumeOfMemory());
         return memoryRepository.save(memory);
     }

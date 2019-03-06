@@ -35,13 +35,18 @@ public class ScreenController {
         screenService.delete(id);
     }
 
-    @PutMapping
-    public ScreenResponse update(ScreenRequest screenRequest, Long id) throws Exception {
+    @PutMapping("/{id}")
+    public ScreenResponse update(@RequestBody ScreenRequest screenRequest,@PathVariable Long id) throws Exception {
         return screenService.update(screenRequest, id);
     }
 
     @PostMapping("/filter")
     public DataResponse<ScreenResponse> findAllByFilter(@RequestBody ScreenFilterRequest screenFilterRequest){
         return screenService.findByFilter(screenFilterRequest);
+    }
+
+    @PostMapping("/findOne")
+    public ScreenResponse findOne(@RequestParam Long id) throws WrongInputException{
+        return new ScreenResponse(screenService.findOne(id));
     }
 }

@@ -27,14 +27,19 @@ public class OrderController {
         return orderService.findAll();
     }
 
-    @PutMapping
-    public OrderResponse update(@RequestParam Long id, @RequestBody OrderRequest orderRequest) throws WrongInputException {
+    @PutMapping("/{id}")
+    public OrderResponse update(@PathVariable Long id, @RequestBody OrderRequest orderRequest) throws WrongInputException {
         return orderService.update(id, orderRequest);
     }
 
     @DeleteMapping
     public void delete(@RequestParam Long id) throws WrongInputException {
         orderService.delete(id);
+    }
+
+    @PostMapping("/findOne")
+    public OrderResponse findOne(@RequestParam Long id) throws WrongInputException{
+        return new OrderResponse(orderService.findOne(id));
     }
 }
 

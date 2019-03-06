@@ -39,13 +39,13 @@ public class MakeController {
         return makeService.findAll(paginationRequest);
     }
 
-    @PutMapping
-    public MakeResponse update(@RequestBody MakeRequest makeRequest, @RequestParam Long id) throws Exception {
+    @PutMapping("/{id}")
+    public MakeResponse update(@RequestBody MakeRequest makeRequest, @PathVariable Long id) throws Exception {
         return makeService.update(makeRequest, id);
     }
 
-    @DeleteMapping
-    public void delete(@RequestParam Long id) throws WrongInputException {
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) throws WrongInputException {
         makeService.delete(id);
     }
 

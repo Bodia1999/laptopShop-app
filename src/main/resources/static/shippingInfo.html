@@ -42,28 +42,28 @@
     </div>
 
 </div>
-    
-    <div id="myModalUpdate" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close">&times;</span>
-            <h2>Update make</h2>
-            </div>
-        <div class="modal-body">
-            <div>
-                <form>
-                    <label for="fname">Name</label><br>
-                    <input type="text" id="nameUpdate" name="name" placeholder="Your make name.." ><br>
-                    <input type="button" id="btnUpdateMake" value="Update">
-                    </form>
-                </div>
-            </div>
-        <div class="modal-footer">
-            <h3>Form for updating make</h3>
-            </div>
-        </div>
+    <!---->
+    <!--<div id="myModalUpdate" class="modal">-->
+    <!--<div class="modal-content">-->
+        <!--<div class="modal-header">-->
+            <!--<span class="close">&times;</span>-->
+            <!--<h2>Update make</h2>-->
+            <!--</div>-->
+        <!--<div class="modal-body">-->
+            <!--<div>-->
+                <!--<form>-->
+                    <!--<label for="nameUpdate">Name</label><br>-->
+                    <!--<input type="text" id="nameUpdate" name="name" placeholder="Your make name.." ><br>-->
+                    <!--<input type="button" id="btnUpdateMake" value="Update">-->
+                    <!--</form>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--<div class="modal-footer">-->
+            <!--<h3>Form for updating make</h3>-->
+            <!--</div>-->
+        <!--</div>-->
 
-    </div>
+    <!--</div>-->
 
 
 <table id="makes">
@@ -90,7 +90,7 @@
             type: "GET",
             contentType: "application/json",
             success: function (dataResponse) {
-                setPersonsToTable(dataResponse.data);
+                setPersonsToTable(dataResponse);
                 setActionOnDeleteButtons();
               setActionOnUpdateButtons();
             },

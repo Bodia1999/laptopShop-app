@@ -39,6 +39,11 @@ public class CustomerController {
         return customerService.update(customerRequest, id);
     }
 
+    @PostMapping("/findOne")
+    public CustomerResponse findOne(@RequestParam Long id) throws WrongInputException{
+        return new CustomerResponse(customerService.findOne(id));
+    }
+
 //    @PostMapping("/page")
 //    public DataResponse<CustomerResponse> findAll(@RequestBody PaginationRequest paginationRequest){
 //        return customerService.findAll(paginationRequest);

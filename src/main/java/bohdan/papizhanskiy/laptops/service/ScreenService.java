@@ -50,7 +50,7 @@ public class ScreenService {
         }
         screen.setType(screenRequest.getType());
         screen.setResolution(screenRequest.getResolution());
-        screen.setType(screenRequest.getType());
+        screen.setSize(screenRequest.getSize());
         return screenRepository.save(screen);
     }
 

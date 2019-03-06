@@ -22,5 +22,5 @@ public class ScreenRequest {
 
     @NotNull
     @NotEmpty
-    private Integer size;
+    private String size;
 }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bear(Admin-Make)</title>
+    <title>Bear(Admin-Graphic Card)</title>
     <link rel="stylesheet" href="css/graphicCard.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -35,11 +35,16 @@
                 <form>
                     <label for="name">Name</label><br>
                     <input type="text" id="name" name="name" placeholder="Your Graphic Card name.."><br>
+                    <label for="model">Model</label><br>
                     <input type="text" id="model" name="model" placeholder="Your model.."><br>
+                    <label for="typeOfGraphicCard">Type of graphic card</label><br>
                     <input type="text" id="typeOfGraphicCard" name="typeOfGraphicCard" placeholder="Your type of Graphic Card.."><br>
+                    <label for="volumeOfMemory">Volume of memory</label><br>
                     <input min="0" type="number" id="volumeOfMemory" name="volumeOfMemory" placeholder="Your volume Of Memory.."><br>
+                    <label for="typeOfMemory">Type of memory</label><br>
                     <input type="text" id="typeOfMemory" name="typeOfMemory" placeholder="Your type Of Memory.."><br>
                     <input type="button" id="btnCreateGraphicCard" value="Create">
+                    <input type="button" id="btnUpdateGraphicCard" value="Update">
                 </form>
             </div>
         </div>
@@ -75,7 +80,7 @@
 -->
 
 
-<table id="graphicCard">
+<table id="graphicCards">
     <tr>
         <th>ID</th>
         <th>Name</th>
@@ -103,9 +108,9 @@
             type: "GET",
             contentType: "application/json",
             success: function (dataResponse) {
-                setGraphicCardsToTable(dataResponse.data);
+                setGraphicCardsToTable(dataResponse);
                 setActionOnDeleteButtons();
-              setActionOnUpdateButtons();
+                setActionOnUpdateButton();
             },
             error: function (error) {
                 alert(error.message);
@@ -113,17 +118,18 @@
         });
     }
 
-    function setGraphicCardsToTable(makes) {
-        for (var i = 0; i < persons.length; i++) {
-            setPersonToTable(persons[i]);
+    function setGraphicCardsToTable(graphicCard) {
+        for (var i = 0; i < graphicCard.length; i++) {
+            setGraphicCardToTable(graphicCard[i]);
         }
     }
 
     function setGraphicCardToTable(graphicCard) {
-        var tableOfGraphicCards = $("#graphicCard");
+        var tableOfGraphicCards = $("#graphicCards");
         tableOfGraphicCards.append('<tr>' +
                 '<td>' + graphicCard.id + '</td>' +
                 '<td>' + graphicCard.name + '</td>' +
+                '<td>' + graphicCard.model + '</td>' +
                 '<td>' + graphicCard.typeOfGraphicCard + '</td>' +
                 '<td>' + graphicCard.volumeOfMemory + '</td>' +
                 '<td>' + graphicCard.typeOfMemory + '</td>' +
@@ -186,6 +192,65 @@
               
             })
         })
+
+    }
+
+    function setActionOnUpdateButton() {
+
+        $(".buttonToUpdate").each(function (index) {
+            var identifier;
+            identifier = $(this).val();
+            $(this).click(function () {
+                $.ajax({
+                    url: mainUrl + "/graphiccard/findOne?id=" + $(this).val(),
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function (dataResponse) {
+                        // var parse = JSON.parse(dataResponse);
+                        $("#name").val(dataResponse.name);
+                        $("#model").val(dataResponse.model);
+                        $("#typeOfGraphicCard").val(dataResponse.typeOfGraphicCard);
+                        $("#volumeOfMemory").val(dataResponse.volumeOfMemory);
+                        $("#typeOfMemory").val(dataResponse.typeOfMemory);
+                        var elementById = document.getElementById("myModal");
+                        elementById.style.display="block";
+                        $("#btnUpdateGraphicCard").click(function () {
+
+                            var name = $("#name").val();
+                            var model = $("#model").val();
+                            var typeOfGraphicCard = $("#typeOfGraphicCard").val();
+                            var volumeOfMemory = $("#volumeOfMemory").val();
+                            var typeOfMemory = $("#typeOfMemory").val();
+//            if (firstName != null && lastName != null && age != null) {
+
+                            var newGraphicCard = {
+                                "name": name,
+                                "model":model,
+                                "typeOfGraphicCard":typeOfGraphicCard,
+                                "volumeOfMemory":volumeOfMemory,
+                                "typeOfMemory":typeOfMemory
+                            };
+
+                            $.ajax({
+                                url: mainUrl + "/graphiccard/" + identifier,
+                                type: "PUT",
+                                contentType: "application/json",
+                                data: JSON.stringify(newGraphicCard),
+                                success: function (data) {
+                                    location.reload();
+                                },
+                                error: function (error) {
+                                    alert("Something went wrong");
+                                }
+                            });
+//            } else {
+//                alert("Всі поля повинні бути заповнені")
+//            }
+                        });
+                    }
+                });
+            })
+        });
 
     }
   

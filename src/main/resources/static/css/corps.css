@@ -75,7 +75,7 @@ div {
     color: white;
 }
 
-.button , #openModal{
+.button, .buttonToUpdate , #openModal{
     background-color: black; /* Green */
     border: none;
     color: white;

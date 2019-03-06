@@ -52,22 +52,22 @@ div {
 */
 
 
-#corps {
+#rams {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-#corps td, #corps th {
+#rams td, #rams th {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-#corps tr:nth-child(even){background-color: #f2f2f2;}
+#rams tr:nth-child(even){background-color: #f2f2f2;}
 
-#corps tr:hover {background-color: #ddd;}
+#rams tr:hover {background-color: #ddd;}
 
-#corps th {
+#rams th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -75,7 +75,7 @@ div {
     color: white;
 }
 
-.button , #openModal{
+.button, .buttonToUpdate , #openModal{
     background-color: black; /* Green */
     border: none;
     color: white;

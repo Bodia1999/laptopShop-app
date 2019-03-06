@@ -52,22 +52,22 @@ div {
 */
 
 
-#graphicCard {
+#graphicCards {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-#graphicCard td, #graphicCard th {
+#graphicCards td, #graphicCards th {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-#graphicCard tr:nth-child(even){background-color: #f2f2f2;}
+#graphicCards tr:nth-child(even){background-color: #f2f2f2;}
 
-#graphicCard tr:hover {background-color: #ddd;}
+#graphicCards tr:hover {background-color: #ddd;}
 
-#graphicCard th {
+#graphicCards th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -75,7 +75,19 @@ div {
     color: white;
 }
 
-.button , #openModal{
+.button, #openModal{
+    background-color: black; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.buttonToUpdate{
     background-color: black; /* Green */
     border: none;
     color: white;
