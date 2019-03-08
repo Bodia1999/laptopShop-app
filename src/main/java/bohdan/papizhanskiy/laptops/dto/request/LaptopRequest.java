@@ -9,6 +9,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.sql.Clob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,72 +17,74 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class LaptopRequest {
-    @NotNull
-    @NotEmpty
+//    @NotNull
+//    @NotEmpty
     private String model;
 
-    @NotNull
-    @NotEmpty
-    private String price;
+//    @NotNull
+//    @NotEmpty
+    private Double price;
+
+    private Clob description;
 
 
-    @NotNull
+    //@NotNull
     private Boolean availabilityOfWIFI;
 
-    @NotNull
-    @NotEmpty
-    @Min(1)
+//    @NotNull
+//    @NotEmpty
+//    @Min(1)
     private Long makeId;
 
-    @NotNull
-    @NotEmpty
-    @Min(1)
+//    @NotNull
+//    @NotEmpty
+//    @Min(1)
     private Long graphicCardId;
 
-    @NotNull
-    @NotEmpty
-    @Min(1)
+//    @NotNull
+//    @NotEmpty
+//    @Min(1)
     private Long ramId;
 
-    @NotNull
-    @NotEmpty
-    @Min(1)
+//    @NotNull
+//    @NotEmpty
+//    @Min(1)
     private Long corpsId;
 
-    @NotNull
-    @NotEmpty
-    @Min(1)
+//    @NotNull
+//    @NotEmpty
+//    @Min(1)
     private Long memoryId;
 
-    @NotNull
-    @NotEmpty
-    @Min(1)
+//    @NotNull
+//    @NotEmpty
+//    @Min(1)
     private Long processorId;
 
-    @NotNull
-    @NotEmpty
-    @Min(1)
+//    @NotNull
+//    @NotEmpty
+//    @Min(1)
     private Long screenId;
 
-    @NotNull
+    //@NotNull
     private Boolean availabilityOfBluetooth;
 
-    @NotNull
+    //@NotNull
     private Boolean availabilityOfUSBTypeC;
 
-    @NotNull
+   // @NotNull
     private Boolean availabilityOfUSBSecondGeneration;
 
-    @NotNull
+   // @NotNull
     private Boolean availabilityOfUSBThirdGeneration;
-
-    @NotNull
+//
+   // @NotNull
     private Boolean availabilityOfHDMI;
 
-    @NotNull
+   // @NotNull
     private Boolean availabilityOfLAN;
 
-    @NotNull
+    //@NotNull
     private Boolean availabilityOfAUX;
 
 

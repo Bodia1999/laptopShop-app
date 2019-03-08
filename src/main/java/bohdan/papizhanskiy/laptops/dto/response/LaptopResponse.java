@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Clob;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,7 +17,9 @@ public class LaptopResponse {
 
     private String model;
 
-    private String price;
+    private Double price;
+
+    private Clob description;
 
     public GraphicCardResponse graphicCard;
 
@@ -51,6 +55,7 @@ public class LaptopResponse {
         model = laptop.getModel();
         makeName = laptop.getMake().getName();
         price = laptop.getPrice();
+        description = laptop.getDescription();
         graphicCard = new GraphicCardResponse(laptop.getGraphicCard());
         screen = new ScreenResponse(laptop.getScreen());
         ram = new RamResponse(laptop.getRam());

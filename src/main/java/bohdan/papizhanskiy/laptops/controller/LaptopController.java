@@ -1,6 +1,8 @@
 package bohdan.papizhanskiy.laptops.controller;
 
+import bohdan.papizhanskiy.laptops.dto.request.LaptopFilterRequest;
 import bohdan.papizhanskiy.laptops.dto.request.LaptopRequest;
+import bohdan.papizhanskiy.laptops.dto.response.DataResponse;
 import bohdan.papizhanskiy.laptops.dto.response.LaptopResponse;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.service.LaptopService;
@@ -47,5 +49,10 @@ public class LaptopController {
     @PostMapping("/findOne")
     public LaptopResponse findOne (@RequestParam Long id) throws WrongInputException {
         return new LaptopResponse(laptopService.findOne(id));
+    }
+
+    @PostMapping("/filter")
+    public DataResponse<LaptopResponse> findByFilter (@RequestBody LaptopFilterRequest laptopFilterRequest){
+        return laptopService.findByFilter(laptopFilterRequest);
     }
 }

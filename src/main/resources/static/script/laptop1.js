@@ -8,11 +8,11 @@ setActionOnCreateBtn();
 //start when load page PS reload page for triggered http request
 function getAllLaptops() {
     $.ajax({
-        url: mainUrl + "/laptops",
+        url: mainUrl + "/laptop",
         type: "GET",
         contentType: "application/json",
         success: function (dataResponse) {
-            //console.log(dataResponse);
+            console.log(dataResponse);
             setLaptopsToTable(dataResponse);
             setActionOnDeleteButtons();
             setActionOnUpdateButton();
@@ -49,19 +49,12 @@ function setLaptopToTable(laptop) {
         '<td>' + laptop.availabilityOfHDMI + '</td>' +
         '<td>' + laptop.availabilityOfLAN + '</td>' +
         '<td>' + laptop.availabilityOfAUX + '</td>' +
-        // '<td>' + createImagePath(laptop.imageDirection) + '</td>' +
+        '<td>' + createImagePath(laptop.imageDirection) + '</td>' +
         '<td><button class="button" value="' + laptop.id + '">Delete</button></td>' +
         '<td><button class="buttonToUpdate" value="' + laptop.id +'">Update</button></td>' +
-        // '<td><button class="buttonToUpdate" value="' + laptop.id +'">Update</button></td>' +
+        '<td><button class="buttonToUpdate" value="' + laptop.id +'">Update</button></td>' +
         '</tr>');
 }
-
-// function addImgToContainer(fileName) {
-//     var img = document.createElement('img');
-//     img.setAttribute('src', '/img/' + fileName);
-//     document.getElementsByClassName('photo').appendChild(img);
-// }
-
 
 function setActionOnCreateBtn() {
     $("#btnCreateLaptop").click(function () {
@@ -105,12 +98,12 @@ function setActionOnCreateBtn() {
             "availabilityOfHDMI":availabilityOfHDMI,
             "availabilityOfLAN":availabilityOfLAN,
             "availabilityOfAUX":availabilityOfAUX
-            // "imageDirection":createImagePath(file)
+           // "imageDirection":createImagePath(file)
 
         };
 
         $.ajax({
-            url: mainUrl + "/laptops",
+            url: mainUrl + "/laptop",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(newLaptop),
@@ -125,6 +118,26 @@ function setActionOnCreateBtn() {
 //                alert("Всі поля повинні бути заповнені")
 //            }
     });
+}
+
+//delete process
+function setActionOnDeleteButtons() {
+    $(".button").each(function (index) {
+        $(this).click(function () {
+            $.ajax({
+                url: mainUrl + "/laptop?id=" + $(this).val(),
+                type: "DELETE",
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+        })
+    })
+
 }
 
 function setActionOnUpdateButton() {
@@ -175,7 +188,7 @@ function setActionOnUpdateButton() {
                         var availabilityOfHDMI = $("#availabilityOfHDMI").val();
                         var availabilityOfLAN = $("#availabilityOfLAN").val();
                         var availabilityOfAUX = $("#availabilityOfAUX").val();
-                       // var file = document.getElementsByClassName("getFile").files[0];
+                        // var file = document.getElementsByClassName("getFile").files[0];
                         // getBase64(file).then(data => {
                         //
                         //     //work with data as src of file
@@ -230,31 +243,10 @@ function setActionOnUpdateButton() {
 
 }
 
-//delete process
-function setActionOnDeleteButtons() {
-    $(".button").each(function (index) {
-        $(this).click(function () {
-            $.ajax({
-                url: mainUrl + "/laptop?id=" + $(this).val(),
-                type: "DELETE",
-                success: function (data) {
-                    location.reload();
-                },
-                error: function (error) {
-                    alert(error.message);
-                }
-            });
-
-        })
-    })
-
+function createImagePath(fileName){
+    return '/img/' + fileName;
 }
 
-
-// function createImagePath(fileName){
-//     return '/img/' + fileName;
-// }
-//
 // function getBase64(file) {
 //     return new Promise((resolve, reject) => {
 //         const reader = new FileReader();
@@ -263,11 +255,6 @@ function setActionOnDeleteButtons() {
 //     reader.onerror = error => reject(error);
 // });
 // }
-
-
-
-
-
 
 function setModalConfiguration() {
     // Get the modal
