@@ -1,25 +1,18 @@
 package bohdan.papizhanskiy.laptops.service;
 
-import bohdan.papizhanskiy.laptops.dto.request.LaptopFilterRequest;
 import bohdan.papizhanskiy.laptops.dto.request.LaptopRequest;
 import bohdan.papizhanskiy.laptops.dto.request.PaginationRequest;
-import bohdan.papizhanskiy.laptops.dto.request.ScreenFilterRequest;
 import bohdan.papizhanskiy.laptops.dto.response.DataResponse;
 import bohdan.papizhanskiy.laptops.dto.response.LaptopResponse;
-import bohdan.papizhanskiy.laptops.dto.response.MakeResponse;
-import bohdan.papizhanskiy.laptops.entity.GraphicCard;
 import bohdan.papizhanskiy.laptops.entity.Laptop;
-import bohdan.papizhanskiy.laptops.entity.Make;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.repository.GraphicCardRepository;
 import bohdan.papizhanskiy.laptops.repository.LaptopRepository;
-import bohdan.papizhanskiy.laptops.specification.GraphicCardSpecification;
 import bohdan.papizhanskiy.laptops.specification.LaptopSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

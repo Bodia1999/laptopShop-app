@@ -52,7 +52,6 @@ function setLaptopToTable(laptop) {
         '<td>' + createImagePath(laptop.imageDirection) + '</td>' +
         '<td><button class="button" value="' + laptop.id + '">Delete</button></td>' +
         '<td><button class="buttonToUpdate" value="' + laptop.id +'">Update</button></td>' +
-        '<td><button class="buttonToUpdate" value="' + laptop.id +'">Update</button></td>' +
         '</tr>');
 }
 

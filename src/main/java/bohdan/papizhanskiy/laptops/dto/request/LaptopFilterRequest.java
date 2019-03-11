@@ -1,6 +1,5 @@
 package bohdan.papizhanskiy.laptops.dto.request;
 
-import bohdan.papizhanskiy.laptops.entity.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,14 +7,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+
 public class LaptopFilterRequest {
-
-
     private String model;
 
     private Double priceFrom;
 
     private Double priceTo;
+
+
 
     private ScreenFilterRequest screenFilterRequest;
 
