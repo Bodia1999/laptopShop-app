@@ -1,5 +1,6 @@
 package bohdan.papizhanskiy.laptops.service;
 
+import bohdan.papizhanskiy.laptops.dto.request.LaptopFilterRequest;
 import bohdan.papizhanskiy.laptops.dto.request.LaptopRequest;
 import bohdan.papizhanskiy.laptops.dto.request.PaginationRequest;
 import bohdan.papizhanskiy.laptops.dto.response.DataResponse;

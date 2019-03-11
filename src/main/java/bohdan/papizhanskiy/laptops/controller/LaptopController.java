@@ -1,5 +1,6 @@
 package bohdan.papizhanskiy.laptops.controller;
 
+import bohdan.papizhanskiy.laptops.dto.request.LaptopFilterRequest;
 import bohdan.papizhanskiy.laptops.dto.request.LaptopRequest;
 import bohdan.papizhanskiy.laptops.dto.response.DataResponse;
 import bohdan.papizhanskiy.laptops.dto.response.LaptopResponse;

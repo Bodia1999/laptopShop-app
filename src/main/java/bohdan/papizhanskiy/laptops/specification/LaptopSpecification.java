@@ -2,7 +2,6 @@ package bohdan.papizhanskiy.laptops.specification;
 
 import bohdan.papizhanskiy.laptops.dto.request.LaptopFilterRequest;
 import bohdan.papizhanskiy.laptops.entity.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.*;
