@@ -5,11 +5,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
+@Table(name = "screen")
 public class Screen {
 
     @Id
@@ -22,8 +24,9 @@ public class Screen {
 
     private String size;
 
-    @OneToOne(mappedBy = "screen")
-    private Laptop laptops;
+    @OneToMany(mappedBy = "screen")
+
+    private List<Laptop> laptops;
 
 
 }

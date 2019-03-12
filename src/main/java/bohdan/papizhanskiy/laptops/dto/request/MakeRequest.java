@@ -12,12 +12,12 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 public class MakeRequest {
-    @NotNull
-    @NotEmpty
+//    @NotNull
+//    @NotEmpty
     private String name;
-    @NotNull
-    @NotEmpty
-    @Min(1)
+//    @NotNull
+//    @NotEmpty
+//    @Min(1)
     private Long laptopId;
 
 }

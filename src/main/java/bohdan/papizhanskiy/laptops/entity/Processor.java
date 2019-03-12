@@ -6,11 +6,13 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
+@Table(name = "processor")
 public class Processor {
 
     @Id
@@ -25,9 +27,9 @@ public class Processor {
 
     private Integer quantityOfCores;
 
-    @OneToOne(mappedBy = "processor")
+    @OneToMany(mappedBy = "processor")
 
-    private Laptop laptop;
+    private List<Laptop> laptop;
 
 
 }

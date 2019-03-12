@@ -5,11 +5,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
+@Table(name = "graphicCard")
 public class GraphicCard {
 
     @Id
@@ -26,6 +28,6 @@ public class GraphicCard {
 
     private String typeOfMemory;
 
-    @OneToOne(mappedBy = "graphicCard")
-    private Laptop laptop;
+    @OneToMany(mappedBy = "graphicCard")
+    private List<Laptop> laptop;
 }

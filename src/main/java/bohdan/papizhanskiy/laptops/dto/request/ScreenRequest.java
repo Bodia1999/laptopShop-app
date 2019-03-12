@@ -12,15 +12,15 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 public class ScreenRequest {
-    @NotNull
-    @NotEmpty
+//    @NotNull
+//    @NotEmpty
     private String type;
 
-    @NotNull
-    @NotEmpty
+//    @NotNull
+//    @NotEmpty
     private String resolution;
 
-    @NotNull
-    @NotEmpty
+//    @NotNull
+//    @NotEmpty
     private String size;
 }

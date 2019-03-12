@@ -6,11 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
+@Table(name = "memory")
 public class Memory {
 
     @Id
@@ -23,8 +25,8 @@ public class Memory {
 
     private Integer volumeOfMemory;
 
-    @OneToOne(mappedBy = "memory")
-    private Laptop laptop;
+    @OneToMany(mappedBy = "memory")
+    private List<Laptop> laptop;
 
 
 }

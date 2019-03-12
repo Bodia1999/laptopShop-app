@@ -11,7 +11,7 @@ import java.util.List;
 public class LaptopSpecification implements Specification<Laptop> {
 
 
-private LaptopFilterRequest laptopFilterRequest;
+    private LaptopFilterRequest laptopFilterRequest;
 
 
     public LaptopSpecification(LaptopFilterRequest laptopFilterRequest) {
@@ -26,7 +26,9 @@ private LaptopFilterRequest laptopFilterRequest;
         Predicate byPrice = findByPrice(root, criteriaBuilder);
         if (byPrice != null) predicates.add(byPrice);
         Predicate byRamName = findByRamName(root, criteriaBuilder);
-        if (byRamName != null) predicates.add(byRamName);
+        if (byRamName != null){
+            predicates.add(byRamName);
+        }
         Predicate byRamVolumeOfMemory = findByRamVolumeOfMemory(root, criteriaBuilder);
         if (byRamVolumeOfMemory != null) predicates.add(byRamVolumeOfMemory);
         Predicate byWorkingFrequency = findByRamWorkingFrequency(root, criteriaBuilder);
@@ -103,10 +105,11 @@ private LaptopFilterRequest laptopFilterRequest;
             return null;
         }
         Join<Laptop, Ram> ramJoin = root.join("ram");
-        return ramJoin.get("name").in(laptopFilterRequest.getRamFilterRequest().getName());
+        return criteriaBuilder.like(ramJoin.get("name"),'%' + name + '%');
 
     }
 
+    //
     private Predicate findByRamVolumeOfMemory(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
         Integer volumeOfMemoryFrom = laptopFilterRequest.getRamFilterRequest().getVolumeOfMemoryFrom();
         Integer volumeOfMemoryTo = laptopFilterRequest.getRamFilterRequest().getVolumeOfMemoryTo();
@@ -120,9 +123,10 @@ private LaptopFilterRequest laptopFilterRequest;
             laptopFilterRequest.getRamFilterRequest().setVolumeOfMemoryTo(Integer.MAX_VALUE);
         }
         Join<Laptop, Ram> ramJoin = root.join("ram");
-        return ramJoin.get("volumeOfMemory").in(laptopFilterRequest.getRamFilterRequest().getVolumeOfMemoryFrom(), laptopFilterRequest.getRamFilterRequest().getVolumeOfMemoryTo());
+        return criteriaBuilder.between(ramJoin.get("volumeOfMemory"), laptopFilterRequest.getRamFilterRequest().getVolumeOfMemoryFrom(), laptopFilterRequest.getRamFilterRequest().getVolumeOfMemoryTo());
     }
 
+    //
     private Predicate findByRamWorkingFrequency(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
         Integer workingFrequencyFrom = laptopFilterRequest.getRamFilterRequest().getWorkingFrequencyFrom();
         Integer workingFrequencyTo = laptopFilterRequest.getRamFilterRequest().getWorkingFrequencyTo();
@@ -139,7 +143,8 @@ private LaptopFilterRequest laptopFilterRequest;
         return criteriaBuilder.between(ramJoin.get("workingFrequency"), laptopFilterRequest.getRamFilterRequest().getVolumeOfMemoryFrom(), laptopFilterRequest.getRamFilterRequest().getWorkingFrequencyTo());
     }
 
-
+    //
+//
     private Predicate findByGraphicCardNameLike(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
         String name = laptopFilterRequest.getGraphicCardFilterRequest().getName();
         if (name == null || name.trim().isEmpty()) {
@@ -248,7 +253,7 @@ private LaptopFilterRequest laptopFilterRequest;
             return null;
         }
         Join<Laptop, Memory> memoryJoin = root.join("memory");
-        return criteriaBuilder.like(memoryJoin.get("typeOfMemory"), typeOfMemory);
+        return criteriaBuilder.like(memoryJoin.get("typeOfMemory"), '%' + typeOfMemory + '%');
     }
 
 

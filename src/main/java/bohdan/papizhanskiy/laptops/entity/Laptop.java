@@ -32,22 +32,22 @@ public class Laptop {
 
     private String imageDirection;
 
-    @OneToOne
+    @ManyToOne
     private Screen screen;
 
-    @OneToOne//(mappedBy = "laptop")
+    @ManyToOne//(mappedBy = "laptop")
     private Ram ram;
 
-    @OneToOne//(mappedBy = "laptop")
+    @ManyToOne//(mappedBy = "laptop")
     private Processor processor;
 
-    @OneToOne//(mappedBy = "laptop")
+    @ManyToOne//(mappedBy = "laptop")
     private Memory memory;
 
-    @OneToOne
+    @ManyToOne
     private GraphicCard graphicCard;
 
-    @OneToOne
+    @ManyToOne
     private Corps corps;
 
 
