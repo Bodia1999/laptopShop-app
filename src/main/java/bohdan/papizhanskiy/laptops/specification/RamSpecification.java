@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-public class giRamSpecification implements Specification<Ram> {
+public class RamSpecification implements Specification<Ram> {
     private RamFilterRequest ramFilterRequest;
 
     public RamSpecification(RamFilterRequest ramFilterRequest) {

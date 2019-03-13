@@ -4,6 +4,7 @@ import bohdan.papizhanskiy.laptops.entity.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
@@ -25,7 +26,8 @@ public class LaptopRequest {
 //    @NotEmpty
     private Double price;
 
-    private Clob description;
+    @Type(type = "text")
+    private String description;
 
 
     //@NotNull

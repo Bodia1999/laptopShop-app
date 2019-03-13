@@ -69,14 +69,16 @@ function setActionOnCreateBtn() {
         var memoryId = $("#memoryId").val();
         var processorId = $("#processorId").val();
         var screenId = $("#screenId").val();
-        var availabilityOfWIFI = $("#availabilityOfWIFI").val();
-        var availabilityOfBluetooth = $("#availabilityOfBluetooth").val();
-        var availabilityOfUSBTypeC = $("#availabilityOfUSBTypeC").val();
-        var availabilityOfUSBSecondGeneration = $("#availabilityOfUSBSecondGeneration").val();
-        var availabilityOfUSBThirdGeneration = $("#availabilityOfUSBThirdGeneration").val();
-        var availabilityOfHDMI = $("#availabilityOfHDMI").val();
-        var availabilityOfLAN = $("#availabilityOfLAN").val();
-        var availabilityOfAUX = $("#availabilityOfAUX").val();
+        var availabilityOfWIFI = $("input[name='availabilityOfWIFI']:checked").val();
+
+        var availabilityOfBluetooth = $("input[name='availabilityOfBluetooth']:checked").val();
+
+        var availabilityOfUSBTypeC = $("input[name='availabilityOfTypeC']:checked").val();
+        var availabilityOfUSBSecondGeneration = $("input[name='availabilityOfUSBSecondGeneration']:checked").val();
+        var availabilityOfUSBThirdGeneration = $("input[name='availabilityOfUSBThirdGeneration']:checked").val();
+        var availabilityOfHDMI = $("input[name='availabilityOfHDMI']:checked").val();
+        var availabilityOfLAN = $("input[name='availabilityOfLAN']:checked").val();
+        var availabilityOfAUX = $("input[name='availabilityOfAUX']:checked").val();
 
 //            if (firstName != null && lastName != null && age != null) {
 
@@ -96,8 +98,8 @@ function setActionOnCreateBtn() {
             "availabilityOfUSBThirdGeneration":availabilityOfUSBThirdGeneration,
             "availabilityOfHDMI":availabilityOfHDMI,
             "availabilityOfLAN":availabilityOfLAN,
-            "availabilityOfAUX":availabilityOfAUX
-           // "imageDirection":createImagePath(file)
+            "availabilityOfAUX":availabilityOfAUX,
+           "imageDirection":createImagePath(file)
 
         };
 
@@ -152,6 +154,7 @@ function setActionOnUpdateButton() {
                 success: function (dataResponse) {
                     // var parse = JSON.parse(dataResponse);
                     $("#name").val(dataResponse.name);
+                    $("#model").val(dataResponse.model);
                     $("#makeId").val(dataResponse.makeId);
                     $("#graphicCardId").val(dataResponse.graphicCardId);
                     $("#ramId").val(dataResponse.ramId);
@@ -159,14 +162,14 @@ function setActionOnUpdateButton() {
                     $("#memoryId").val(dataResponse.memoryId);
                     $("#processorId").val(dataResponse.processorId);
                     $("#screenId").val(dataResponse.screenId);
-                    $("#availabilityOfWIFI").val(dataResponse.availabilityOfWIFI);
-                    $("#availabilityOfBluetooth").val(dataResponse.availabilityOfBluetooth);
-                    $("#availabilityOfUSBTypeC").val(dataResponse.availabilityOfUSBTypeC);
-                    $("#availabilityOfUSBSecondGeneration").val(dataResponse.availabilityOfUSBSecondGeneration);
-                    $("#availabilityOfUSBThirdGeneration").val(dataResponse.availabilityOfUSBThirdGeneration);
-                    $("#availabilityOfHDMI").val(dataResponse.availabilityOfHDMI);
-                    $("#availabilityOfLAN").val(dataResponse.availabilityOfLAN);
-                    $("#availabilityOfAUX").val(dataResponse.availabilityOfAUX);
+                    // $("#availabilityOfWIFI").val(dataResponse.availabilityOfWIFI);
+                    // $("#availabilityOfBluetooth").val(dataResponse.availabilityOfBluetooth);
+                    // $("#availabilityOfUSBTypeC").val(dataResponse.availabilityOfUSBTypeC);
+                    // $("#availabilityOfUSBSecondGeneration").val(dataResponse.availabilityOfUSBSecondGeneration);
+                    // $("#availabilityOfUSBThirdGeneration").val(dataResponse.availabilityOfUSBThirdGeneration);
+                    // $("#availabilityOfHDMI").val(dataResponse.availabilityOfHDMI);
+                    // $("#availabilityOfLAN").val(dataResponse.availabilityOfLAN);
+                    // $("#availabilityOfAUX").val(dataResponse.availabilityOfAUX);
                     var elementById = document.getElementById("myModal");
                     elementById.style.display="block";
                     $("#btnUpdateLaptop").click(function () {
@@ -179,23 +182,25 @@ function setActionOnUpdateButton() {
                         var memoryId = $("#memoryId").val();
                         var processorId = $("#processorId").val();
                         var screenId = $("#screenId").val();
-                        var availabilityOfWIFI = $("#availabilityOfWIFI").val();
-                        var availabilityOfBluetooth = $("#availabilityOfBluetooth").val();
-                        var availabilityOfUSBTypeC = $("#availabilityOfUSBTypeC").val();
-                        var availabilityOfUSBSecondGeneration = $("#availabilityOfUSBSecondGeneration").val();
-                        var availabilityOfUSBThirdGeneration = $("#availabilityOfUSBThirdGeneration").val();
-                        var availabilityOfHDMI = $("#availabilityOfHDMI").val();
-                        var availabilityOfLAN = $("#availabilityOfLAN").val();
-                        var availabilityOfAUX = $("#availabilityOfAUX").val();
-                        // var file = document.getElementsByClassName("getFile").files[0];
-                        // getBase64(file).then(data => {
-                        //
-                        //     //work with data as src of file
-                        //     let request = {
-                        //         //fileName: "someCustomFileName",
-                        //         data: data
-                        //     }
-                        // }
+                        var availabilityOfWIFI = $("input[name='availabilityOfWIFI']:checked").val();
+
+                        var availabilityOfBluetooth = $("input[name='availabilityOfBluetooth']:checked").val();
+
+                        var availabilityOfUSBTypeC = $("input[name='availabilityOfTypeC']:checked").val();
+                        var availabilityOfUSBSecondGeneration = $("input[name='availabilityOfUSBSecondGeneration']:checked").val();
+                        var availabilityOfUSBThirdGeneration = $("input[name='availabilityOfUSBThirdGeneration']:checked").val();
+                        var availabilityOfHDMI = $("input[name='availabilityOfHDMI']:checked").val();
+                        var availabilityOfLAN = $("input[name='availabilityOfLAN']:checked").val();
+                        var availabilityOfAUX = $("input[name='availabilityOfAUX']:checked").val();
+                        var file = document.getElementsByClassName("getFile").files[0];
+                        getBase64(file).then(data => {
+
+                            //work with data as src of file
+                            let request = {
+                                //fileName: "someCustomFileName",
+                                data: data
+                            }
+                        });
 //            if (firstName != null && lastName != null && age != null) {
 
                         var newLaptop = {
@@ -214,8 +219,8 @@ function setActionOnUpdateButton() {
                             "availabilityOfUSBThirdGeneration":availabilityOfUSBThirdGeneration,
                             "availabilityOfHDMI":availabilityOfHDMI,
                             "availabilityOfLAN":availabilityOfLAN,
-                            "availabilityOfAUX":availabilityOfAUX
-                            // "imageDirection":createImagePath(file)
+                            "availabilityOfAUX":availabilityOfAUX,
+                            "imageDirection":createImagePath(file)
 
                         };
 
@@ -246,14 +251,14 @@ function createImagePath(fileName){
     return '/img/' + fileName;
 }
 
-// function getBase64(file) {
-//     return new Promise((resolve, reject) => {
-//         const reader = new FileReader();
-//     reader.readAsDataURL(file);
-//     reader.onload = () => resolve(reader.result);
-//     reader.onerror = error => reject(error);
-// });
-// }
+function getBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+}
 
 function setModalConfiguration() {
     // Get the modal

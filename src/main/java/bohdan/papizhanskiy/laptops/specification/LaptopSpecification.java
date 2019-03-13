@@ -1,6 +1,6 @@
 package bohdan.papizhanskiy.laptops.specification;
 
-import bohdan.papizhanskiy.laptops.dto.request.LaptopFilterRequest;
+import bohdan.papizhanskiy.laptops.dto.request.*;
 import bohdan.papizhanskiy.laptops.entity.*;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -26,7 +26,7 @@ public class LaptopSpecification implements Specification<Laptop> {
         Predicate byPrice = findByPrice(root, criteriaBuilder);
         if (byPrice != null) predicates.add(byPrice);
         Predicate byRamName = findByRamName(root, criteriaBuilder);
-        if (byRamName != null){
+        if (byRamName != null) {
             predicates.add(byRamName);
         }
         Predicate byRamVolumeOfMemory = findByRamVolumeOfMemory(root, criteriaBuilder);
@@ -100,19 +100,23 @@ public class LaptopSpecification implements Specification<Laptop> {
 
 
     private Predicate findByRamName(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        String name = laptopFilterRequest.getRamFilterRequest().getName();
+        RamFilterRequest filter = laptopFilterRequest.getRamFilterRequest();
+        if (filter == null) return null;
+        String name = filter.getName();
         if (name == null || name.trim().isEmpty()) {
             return null;
         }
         Join<Laptop, Ram> ramJoin = root.join("ram");
-        return criteriaBuilder.like(ramJoin.get("name"),'%' + name + '%');
+        return criteriaBuilder.like(ramJoin.get("name"), '%' + name + '%');
 
     }
 
     //
     private Predicate findByRamVolumeOfMemory(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        Integer volumeOfMemoryFrom = laptopFilterRequest.getRamFilterRequest().getVolumeOfMemoryFrom();
-        Integer volumeOfMemoryTo = laptopFilterRequest.getRamFilterRequest().getVolumeOfMemoryTo();
+        RamFilterRequest filter = laptopFilterRequest.getRamFilterRequest();
+        if (filter == null) return null;
+        Integer volumeOfMemoryFrom = filter.getVolumeOfMemoryFrom();
+        Integer volumeOfMemoryTo = filter.getVolumeOfMemoryTo();
         if (volumeOfMemoryFrom == null && volumeOfMemoryTo == null) {
             return null;
         }
@@ -128,8 +132,10 @@ public class LaptopSpecification implements Specification<Laptop> {
 
     //
     private Predicate findByRamWorkingFrequency(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        Integer workingFrequencyFrom = laptopFilterRequest.getRamFilterRequest().getWorkingFrequencyFrom();
-        Integer workingFrequencyTo = laptopFilterRequest.getRamFilterRequest().getWorkingFrequencyTo();
+        RamFilterRequest filter = laptopFilterRequest.getRamFilterRequest();
+        if (filter == null) return null;
+        Integer workingFrequencyFrom = filter.getWorkingFrequencyFrom();
+        Integer workingFrequencyTo = filter.getWorkingFrequencyTo();
         if (workingFrequencyFrom == null && workingFrequencyTo == null) {
             return null;
         }
@@ -146,7 +152,9 @@ public class LaptopSpecification implements Specification<Laptop> {
     //
 //
     private Predicate findByGraphicCardNameLike(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        String name = laptopFilterRequest.getGraphicCardFilterRequest().getName();
+        GraphicCardFilterRequest filter = laptopFilterRequest.getGraphicCardFilterRequest();
+        if (filter == null) return null;
+        String name = filter.getName();
         if (name == null || name.trim().isEmpty()) {
             return null;
         }
@@ -155,7 +163,9 @@ public class LaptopSpecification implements Specification<Laptop> {
     }
 
     private Predicate findByGraphicCardModelLike(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        String model = laptopFilterRequest.getGraphicCardFilterRequest().getModel();
+        GraphicCardFilterRequest filter = laptopFilterRequest.getGraphicCardFilterRequest();
+        if (filter == null) return null;
+        String model = filter.getModel();
         if (model == null || model.trim().isEmpty()) {
             return null;
         }
@@ -164,8 +174,10 @@ public class LaptopSpecification implements Specification<Laptop> {
     }
 
     private Predicate findByGraphicCardVolumeOfMemory(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        Integer volumeOfMemoryFrom = laptopFilterRequest.getGraphicCardFilterRequest().getVolumeOfMemoryFrom();
-        Integer volumeOfMemoryTo = laptopFilterRequest.getGraphicCardFilterRequest().getVolumeOfMemoryTo();
+        GraphicCardFilterRequest filter = laptopFilterRequest.getGraphicCardFilterRequest();
+        if (filter == null) return null;
+        Integer volumeOfMemoryFrom = filter.getVolumeOfMemoryFrom();
+        Integer volumeOfMemoryTo = filter.getVolumeOfMemoryTo();
 
         if (volumeOfMemoryFrom == null && volumeOfMemoryTo == null) {
             return null;
@@ -185,8 +197,10 @@ public class LaptopSpecification implements Specification<Laptop> {
 
 
     private Predicate findByCorpsWeight(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        Double weightFrom = laptopFilterRequest.getCorpsFilterRequest().getWeightFrom();
-        Double weightTo = laptopFilterRequest.getCorpsFilterRequest().getWeightTo();
+        CorpsFilterRequest filter = laptopFilterRequest.getCorpsFilterRequest();
+        if (filter == null) return null;
+        Double weightFrom = filter.getWeightFrom();
+        Double weightTo = filter.getWeightTo();
         if (weightFrom == null && weightTo == null) {
             return null;
         }
@@ -202,7 +216,9 @@ public class LaptopSpecification implements Specification<Laptop> {
     }
 
     private Predicate findByColorOfCorps(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        String colorOfCorps = laptopFilterRequest.getCorpsFilterRequest().getColorOfCorps();
+        CorpsFilterRequest filter = laptopFilterRequest.getCorpsFilterRequest();
+        if (filter == null) return null;
+        String colorOfCorps = filter.getColorOfCorps();
         if (colorOfCorps == null || colorOfCorps.trim().isEmpty()) {
             return null;
         }
@@ -211,7 +227,9 @@ public class LaptopSpecification implements Specification<Laptop> {
     }
 
     private Predicate findByMaterialOfCorps(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        String materialOfCorps = laptopFilterRequest.getCorpsFilterRequest().getMaterialOfCorps();
+        CorpsFilterRequest filter = laptopFilterRequest.getCorpsFilterRequest();
+        if (filter == null) return null;
+        String materialOfCorps = filter.getMaterialOfCorps();
         if (materialOfCorps == null || materialOfCorps.trim().isEmpty()) {
             return null;
         }
@@ -222,7 +240,9 @@ public class LaptopSpecification implements Specification<Laptop> {
 
 
     private Predicate findByMemoryName(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        String memoryName = laptopFilterRequest.getMemoryFilterRequest().getName();
+        MemoryFilterRequest filter = laptopFilterRequest.getMemoryFilterRequest();
+        if (filter == null) return null;
+        String memoryName = filter.getName();
         if (memoryName == null || memoryName.trim().isEmpty()) {
             return null;
         }
@@ -231,8 +251,10 @@ public class LaptopSpecification implements Specification<Laptop> {
     }
 
     private Predicate findByMemoryVolume(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        Integer volumeOfMemoryFrom = laptopFilterRequest.getMemoryFilterRequest().getVolumeOfMemoryFrom();
-        Integer volumeOfMemoryTo = laptopFilterRequest.getMemoryFilterRequest().getVolumeOfMemoryTo();
+        MemoryFilterRequest filter = laptopFilterRequest.getMemoryFilterRequest();
+        if (filter == null) return null;
+        Integer volumeOfMemoryFrom = filter.getVolumeOfMemoryFrom();
+        Integer volumeOfMemoryTo = filter.getVolumeOfMemoryTo();
         if (volumeOfMemoryFrom == null && volumeOfMemoryTo == null) {
             return null;
         }
@@ -248,7 +270,9 @@ public class LaptopSpecification implements Specification<Laptop> {
     }
 
     private Predicate findByMemoryTypeOfMemory(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        String typeOfMemory = laptopFilterRequest.getMemoryFilterRequest().getTypeOfMemory();
+        MemoryFilterRequest filter = laptopFilterRequest.getMemoryFilterRequest();
+        if (filter == null) return null;
+        String typeOfMemory = filter.getTypeOfMemory();
         if (typeOfMemory == null || typeOfMemory.trim().isEmpty()) {
             return null;
         }
@@ -258,7 +282,9 @@ public class LaptopSpecification implements Specification<Laptop> {
 
 
     private Predicate findByProcessorName(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        String processor = laptopFilterRequest.getProcessorFilterRequest().getName();
+        ProcessorFilterRequest filter = laptopFilterRequest.getProcessorFilterRequest();
+        if (filter == null) return null;
+        String processor = filter.getName();
         if (processor == null || processor.trim().isEmpty()) {
             return null;
         }
@@ -267,7 +293,9 @@ public class LaptopSpecification implements Specification<Laptop> {
     }
 
     private Predicate findByProcessorModel(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        String model = laptopFilterRequest.getProcessorFilterRequest().getModel();
+        ProcessorFilterRequest filter = laptopFilterRequest.getProcessorFilterRequest();
+        if (filter == null) return null;
+        String model = filter.getModel();
         if (model == null || model.trim().isEmpty()) {
             return null;
         }
@@ -276,8 +304,10 @@ public class LaptopSpecification implements Specification<Laptop> {
     }
 
     private Predicate findByProcessorWorkingFrequency(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        Integer workingFrequencyFrom = laptopFilterRequest.getProcessorFilterRequest().getWorkingFrequencyFrom();
-        Integer workingFrequencyTo = laptopFilterRequest.getProcessorFilterRequest().getWorkingFrequencyTo();
+        ProcessorFilterRequest filter = laptopFilterRequest.getProcessorFilterRequest();
+        if (filter == null) return null;
+        Integer workingFrequencyFrom = filter.getWorkingFrequencyFrom();
+        Integer workingFrequencyTo = filter.getWorkingFrequencyTo();
         if (workingFrequencyFrom == null && workingFrequencyTo == null) {
             return null;
         }
@@ -293,8 +323,10 @@ public class LaptopSpecification implements Specification<Laptop> {
     }
 
     private Predicate findByProcessorQuantityOfCores(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        Integer quantityOfCoresFrom = laptopFilterRequest.getProcessorFilterRequest().getQuantityOfCoresFrom();
-        Integer quantityOfCoresTo = laptopFilterRequest.getProcessorFilterRequest().getQuantityOfCoresTo();
+        ProcessorFilterRequest filter = laptopFilterRequest.getProcessorFilterRequest();
+        if (filter == null) return null;
+        Integer quantityOfCoresFrom = filter.getQuantityOfCoresFrom();
+        Integer quantityOfCoresTo = filter.getQuantityOfCoresTo();
         if (quantityOfCoresFrom == null && quantityOfCoresTo == null) {
             return null;
         }
@@ -311,7 +343,9 @@ public class LaptopSpecification implements Specification<Laptop> {
 
 
     private Predicate findByTypeOfScreen(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        String type = laptopFilterRequest.getScreenFilterRequest().getType();
+        ScreenFilterRequest filter = laptopFilterRequest.getScreenFilterRequest();
+        if (filter == null) return null;
+        String type = filter.getType();
         if (type == null || type.trim().isEmpty()) {
             return null;
         }
@@ -320,8 +354,10 @@ public class LaptopSpecification implements Specification<Laptop> {
     }
 
     private Predicate findByScreenSize(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        Integer sizeFrom = laptopFilterRequest.getScreenFilterRequest().getSizeFrom();
-        Integer sizeTo = laptopFilterRequest.getScreenFilterRequest().getSizeTo();
+        ScreenFilterRequest filter = laptopFilterRequest.getScreenFilterRequest();
+        if (filter == null) return null;
+        Integer sizeFrom = filter.getSizeFrom();
+        Integer sizeTo = filter.getSizeTo();
         if (sizeFrom == null && sizeTo == null) {
             return null;
         }
@@ -338,7 +374,9 @@ public class LaptopSpecification implements Specification<Laptop> {
 
 
     private Predicate findByScreenResolution(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        String resolution = laptopFilterRequest.getScreenFilterRequest().getResolution();
+        ScreenFilterRequest filter = laptopFilterRequest.getScreenFilterRequest();
+        if (filter == null) return null;
+        String resolution = filter.getResolution();
 
         if (resolution == null || resolution.trim().isEmpty()) {
             return null;

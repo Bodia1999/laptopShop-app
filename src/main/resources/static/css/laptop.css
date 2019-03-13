@@ -86,7 +86,7 @@ div {
     color: white;
 }
 
-.button, .buttonToUpdate , #openModal{
+.button, .buttonToUpdate , #openModal {
     background-color: black; /* Green */
     border: none;
     color: white;
@@ -97,6 +97,11 @@ div {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+}
+
+.modal-body #sendFile{
+    width: 100px;
+    height: 40px;
 }
 #openModal {
     background-color: black;

@@ -4,6 +4,7 @@ package bohdan.papizhanskiy.laptops.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.sql.Blob;
@@ -28,7 +29,8 @@ public class Laptop {
 
     private Double price;
 
-    private Clob description;
+    @Type(type = "text")
+    private String description;
 
     private String imageDirection;
 
