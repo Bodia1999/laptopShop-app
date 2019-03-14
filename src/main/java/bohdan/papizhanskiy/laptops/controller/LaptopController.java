@@ -2,6 +2,7 @@ package bohdan.papizhanskiy.laptops.controller;
 
 import bohdan.papizhanskiy.laptops.dto.request.LaptopFilterRequest;
 import bohdan.papizhanskiy.laptops.dto.request.LaptopRequest;
+import bohdan.papizhanskiy.laptops.dto.request.PaginationRequest;
 import bohdan.papizhanskiy.laptops.dto.response.DataResponse;
 import bohdan.papizhanskiy.laptops.dto.response.LaptopResponse;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
@@ -54,5 +55,10 @@ public class LaptopController {
     @PostMapping("/filter")
     public DataResponse<LaptopResponse> findByFilter (@RequestBody LaptopFilterRequest laptopFilterRequest){
         return laptopService.findByFilter(laptopFilterRequest);
+    }
+
+    @PostMapping("/page")
+    public DataResponse<LaptopResponse> getPage(@RequestBody PaginationRequest request){
+        return laptopService.findAll(request);
     }
 }

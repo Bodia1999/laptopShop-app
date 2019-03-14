@@ -9,6 +9,6 @@ public class HtmlPageController {
 
     @RequestMapping("/")
     public String mainPage(){
-        return "main.page/index.html";
+        return "main.html";
     }
 }

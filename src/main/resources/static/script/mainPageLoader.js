@@ -1,7 +1,18 @@
+
+
+    let pageRequest = {
+        page: 0,
+        size: 15,
+        sort: {
+            direction: 'ASC',
+            fieldName: 'name'
+        }};
+
 $.ajax({
-    url: 'http://localhost:8000/laptop',
-    type: 'GET',
+    url: 'http://localhost:8000/laptop/page',
+    type: 'POST',
     contentType: 'application/json',
+    data: JSON.stringify(pageRequest),
     success: (page) => {
         $('.container').html('');
         for (let laptop of page.content) {
