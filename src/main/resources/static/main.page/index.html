@@ -46,194 +46,493 @@
   
 <div class="page">
     <div class="main-all-page">
-    
-    <div class="filter">
-     <div class="price-filter">
+
+        <div class="filter">
+            <div class="price-filter">
       <span>
         <p><span class="price-title">Price $</span></p>
        <input min="0" type="number" class="priceFrom">
        <span>-</span>
        <input type="number" class="priceTo">
-       <button class="submit-button">OK</button>
+       <button class="submit-button" id="price-submit-button">OK</button>
       </span>
-     </div><br>
-     <div class="make-filter">
-      
-         <p><span class="make-title span">Make</span></p>
-         <label class="checkbox-container">Asus
-         <input type="checkbox" value="asusx">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">Apple
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">Acer
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">Lenovo
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">HP
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">Xiaomi
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         
-         
-         <p><span class="make-title span">Screen size</span></p>
-         <label class="checkbox-container">10.1"-12.5"
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">13"-13.3"
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">14"
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">15-15.6"
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">15.7"-17"
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         
-         
-         <p><span class="make-title span">Screen type</span></p>
-         <label class="checkbox-container">IPS
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">Retina
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">TN+film
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">OLED
-         <input type="checkbox">
-         <span class="checkmark"></span>
-       </label>
-         
-         
-         <p><span class="make-title span">Resolution</span></p>
-         <div id="resolution-checkbox">
-         <label class="checkbox-container">1366x768
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">1400x900
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">1920x1080
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">2304x1440
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">2560x1600
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">2560x1440
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">2880x1800
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-           
-         </div>
-         
-         <button class="filter-buttons" id="resolution-button" value="More">More</button><br>
-         <button class="filter-buttons" id="resolution-button-close" value="Close">Close</button>
-         <script src="../script/filterOpener.js">
-           </script>
-         
-         
-         
-         
-         <p><span class="make-title span">Processor</span></p>
-         <label class="checkbox-container">Intel
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">AMD
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         
-         
-         
-         <p><span class="make-title span">Quantity</span></p>
-         <label class="checkbox-container">2 cores
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">4 cores
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-         <label class="checkbox-container">6 cores
-         <input type="checkbox">
-         <span class="checkmark"></span>
-         </label>
-         
-<!--
-         <span class="apple-span span"><input type="checkbox" value="Apple">Apple</span><br>
-         
-         <span class="acer-span span"><input type="checkbox" value="Acer">Acer</span><br>
-         
-         <span class="lenovo-span span"><input type="checkbox" value="Lenovo">Lenovo</span><br>
-         
-         <span class="hp-span span"><input type="checkbox" value="HP">HP</span><br>
-         
-         <span class="xiaomi-span span"><input type="checkbox" value="Xiaomi">Xiaomi</span><br>
--->
-         
-         </div><br>
-      
-      </div>
+            </div><br>
+            <div class="make-filter">
+
+                <p><span class="make-title span">Make</span></p>
+                <label class="checkbox-container">Asus
+                    <input type="checkbox" value="asusx">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="checkbox-container">Apple
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="checkbox-container">Acer
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="checkbox-container">Lenovo
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="checkbox-container">HP
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="checkbox-container">Xiaomi
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+
+
+                <p><span class="make-title span">Processor</span></p>
+                <label class="checkbox-container">Intel
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="checkbox-container">AMD
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+
+
+
+                <p><span class="make-title span">Quantity</span></p>
+                <label class="checkbox-container">2 cores
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="checkbox-container">4 cores
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="checkbox-container">6 cores
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+
+
+
+
+
+                <p><span class="make-title span">Ram volume</span></p>
+                <div id="ram-checkbox">
+                    <label class="checkbox-container">4GB
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="checkbox-container">8GB
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="checkbox-container">12GB
+                        <input type="checkbox">
+                        <span class="checkmark"></span></label>
+
+                    <label class="checkbox-container">16GB
+                        <input type="checkbox">
+                        <span class="checkmark"></span></label>
+
+                    <label class="checkbox-container">20GB
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+
+
+
+                <p><span class="make-title span">Graphic Card</span></p>
+                <div >
+                    <label class="checkbox-container">NVIDIA
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="checkbox-container">AMD
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="checkbox-container">Intel
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+
+
+
+
+                <p><span class="make-title span">GPU Model</span></p>
+
+                <label class="checkbox-container">GeForce 930MX
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="checkbox-container">GeForce 940MX
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="checkbox-container">GeForce GTX1050
+                    <input type="checkbox">
+                    <span class="checkmark"></span></label>
+
+                <label class="checkbox-container">GeForce GTX1050TI
+                    <input type="checkbox">
+                    <span class="checkmark"></span></label>
+
+
+
+
+
+                <div id="graphic-card-checkbox">
+                    <label class="checkbox-container">GeForce GTX1060
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+
+                    <label class="checkbox-container">GeForce GTX1070
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="checkbox-container">HD Graphics 630
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="checkbox-container">Iris Plus Graphics 640
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="checkbox-container">Iris Plus Graphics 650
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="checkbox-container">UHD Graphics 620
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="checkbox-container">Radeon 520
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+
+                    <label class="checkbox-container">Radeon Vega 8 Graphics
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+
+                <button class="filter-buttons" id="graphic-card-button" value="More">More</button><br>
+                <button class="filter-buttons" id="graphic-card-button-close" value="Close">Close</button>
+                <script>
+                    $("#graphic-card-checkbox").hide();
+                    $("#graphic-card-button-close").hide();
+                    $("#graphic-card-button").click(function(){
+                        $("#graphic-card-checkbox").slideDown();
+                        $("#graphic-card-button").hide();
+                        $("#graphic-card-button-close").show();
+                        $("#graphic-card-button-close").click(function(){
+                            $("#graphic-card-checkbox").slideUp();
+                            $("#graphic-card-button-close").hide();
+                            $("#graphic-card-button").show();
+                        })
+
+
+                    });</script>
+
+
+
+
+
+
+
+                <p><span class="make-title span">Drive Type</span></p>
+                <label class="checkbox-container">SSD
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="checkbox-container">HDD
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+
+
+
+
+                <p><span class="make-title span">Drive memory</span>
+
+
+                </p>
+                <label class="checkbox-container">128GB
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="checkbox-container">256GB
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+
+                <div id="drive-memory-checkbox">
+
+                    <label class="checkbox-container">512GB
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="checkbox-container">1024GB
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="checkbox-container">2048GB
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <button class="filter-buttons" id="drive-memory-button" value="More">More</button><br>
+                <button class="filter-buttons" id="drive-memory-button-close" value="Close">Close</button>
+                <script>
+                    $("#drive-memory-checkbox").hide();
+                    $("#drive-memory-button-close").hide();
+                    $("#drive-memory-button").click(function(){
+                        $("#drive-memory-checkbox").slideDown();
+                        $("#drive-memory-button").hide();
+                        $("#drive-memory-button-close").show();
+                        $("#drive-memory-button-close").click(function(){
+                            $("#drive-memory-checkbox").slideUp();
+                            $("#drive-memory-button-close").hide();
+                            $("#drive-memory-button").show();
+                        })
+
+
+                    });</script>
+
+
+
+                <p><span class="make-title span">Screen size</span></p>
+                <label class="checkbox-container">10.1"-12.5"
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="checkbox-container">13"-13.3"
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+
+
+                <div id="screen-size-checkbox">
+                    <label class="checkbox-container">14"
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="checkbox-container">15-15.6"
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="checkbox-container">15.7"-17"
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+
+                </div>
+
+                <button class="filter-buttons" id="screen-size-button" value="More">More</button><br>
+                <button class="filter-buttons" id="screen-size-button-close" value="Close">Close</button>
+                <script>
+                    $("#screen-size-checkbox").hide();
+                    $("#screen-size-button-close").hide();
+                    $("#screen-size-button").click(function(){
+                        $("#screen-size-checkbox").slideDown();
+                        $("#screen-size-button").hide();
+                        $("#screen-size-button-close").show();
+                        $("#screen-size-button-close").click(function(){
+                            $("#screen-size-checkbox").slideUp();
+                            $("#screen-size-button-close").hide();
+                            $("#screen-size-button").show();
+                        })
+
+
+                    });</script>
+
+
+
+                <p><span class="make-title span">Screen type</span></p>
+                <label class="checkbox-container">IPS
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="checkbox-container">Retina
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+
+                <div id="screen-type-checkbox">
+
+                    <label class="checkbox-container">TN+film
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="checkbox-container">OLED
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+
+                <button class="filter-buttons" id="screen-type-button" value="More">More</button><br>
+                <button class="filter-buttons" id="screen-type-button-close" value="Close">Close</button>
+                <script>
+                    $("#screen-type-checkbox").hide();
+                    $("#screen-type-button-close").hide();
+                    $("#screen-type-button").click(function(){
+                        $("#screen-type-checkbox").slideDown();
+                        $("#screen-type-button").hide();
+                        $("#screen-type-button-close").show();
+                        $("#screen-type-button-close").click(function(){
+                            $("#screen-type-checkbox").slideUp();
+                            $("#screen-type-button-close").hide();
+                            $("#screen-type-button").show();
+                        })
+
+
+                    });</script>
+
+
+
+
+
+                <p><span class="make-title span">Resolution</span></p>
+                <label class="checkbox-container">1366x768
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="checkbox-container">1400x900
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <div id="resolution-checkbox">
+                    <label class="checkbox-container">1920x1080
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="checkbox-container">2304x1440
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="checkbox-container">2560x1600
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="checkbox-container">2560x1440
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="checkbox-container">2880x1800
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+
+                </div>
+
+                <button class="filter-buttons" id="resolution-button" value="More">More</button><br>
+                <button class="filter-buttons" id="resolution-button-close" value="Close">Close</button>
+                <script>
+                    $("#resolution-checkbox").hide();
+                    $("#resolution-button-close").hide();
+                    $("#resolution-button").click(function(){
+                        $("#resolution-checkbox").slideDown();
+                        $("#resolution-button").hide();
+                        $("#resolution-button-close").show();
+                        $("#resolution-button-close").click(function(){
+                            $("#resolution-checkbox").slideUp();
+                            $("#resolution-button-close").hide();
+                            $("#resolution-button").show();
+                        })
+
+
+                    });</script>
+
+
+
+
+                <p><span class="make-title span">Corps Material</span></p>
+                <label class="checkbox-container">Plastic
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="checkbox-container">Metal
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!--
+                         <span class="apple-span span"><input type="checkbox" value="Apple">Apple</span><br>
+
+                         <span class="acer-span span"><input type="checkbox" value="Acer">Acer</span><br>
+
+                         <span class="lenovo-span span"><input type="checkbox" value="Lenovo">Lenovo</span><br>
+
+                         <span class="hp-span span"><input type="checkbox" value="HP">HP</span><br>
+
+                         <span class="xiaomi-span span"><input type="checkbox" value="Xiaomi">Xiaomi</span><br>
+                -->
+
+            </div><br>
+
+        </div>
      
     
     <div class="container">
@@ -244,7 +543,7 @@
     <script>
         let pageRequest = {
             page: 0,
-            size: 15,
+            size: 12,
             sort: {
                 direction: 'ASC',
                 fieldName: 'name'
@@ -281,29 +580,29 @@
                 </div>
                 <p class="product-name">
                 <a href="/uk/shop/noutbuki_asus_f540ma-gq061t.html" class="listing-link">
-                <p class="info">${prod.makeName} ${prod.model} </p>
+                ${prod.makeName} ${prod.model}
                 </a>
                 </p>
                 <div>
 
-                <ul>
+                <ul class="list-short-description">
 
                 <li>
-                <span class="processor-name">Processor</span>: <span class="">Intel</span>
-
-                </li>
-                <li>
-                <span class="processor-name">Ram</span>: <span class="">16GB</span>
+                <span class="processor-name">Processor</span>: <span class="">${prod.processor.name} ${prod.processor.model}</span>
 
                 </li>
                 <li>
-                <span class="processor-name">Graphic Card</span>: <span>Nvidia GTX1050TI</span>
+                <span class="processor-name">Ram</span>: <span class="">${prod.ram.volumeOfMemory}GB</span>
+
+                </li>
+                <li>
+                <span class="processor-name">Graphic Card</span>: <span>${prod.graphicCard.name} ${prod.graphicCard.model}</span>
                 </li>
                 </ul>
                 </div>
                 <div class="product-description">
                 <div class="product-price"><div class="price__relevant">
-                <span class="numb">8499</span><span class="currency">$</span>
+                <span class="numb">${prod.price}</span><span class="currency">$</span>
                 </div></div>
 
                 </div>`)};

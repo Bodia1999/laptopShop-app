@@ -1,4 +1,4 @@
-/body {
+body {
 
   font-family: 'Raleway', 'Arial', sans-serif;
   margin: 0;
@@ -74,7 +74,7 @@ nav{
     display: none;
   }
   .topnav a.icon {
-    float: :right;
+    float: right;
     margin: -17px;
     display: block;
     color: black;
@@ -253,8 +253,6 @@ ul{
   position: relative;
   height: 200px;
   max-width: 290px;
-
-  /*  background-image: url(../img/macbook.jpg);*/
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -269,7 +267,8 @@ ul{
 
 .product {
 
-  width: 32%;
+  width: 33%;
+  max-height: 400px;
 }
 .product li{
   color: black;
@@ -278,9 +277,11 @@ ul{
 .container{
   min-width: 35%;
   max-width: 45%;
+  height: 1800px;
 }
 
 .filter{
+  height: 2280px;
   padding: 0 20px 0 0;
   width: 22%;
 
@@ -442,6 +443,9 @@ input::-webkit-inner-spin-button {
     width: 49%;
   }
 }
+
+
+
 @media screen and (max-width: 850px){
   .product {
 
@@ -470,4 +474,10 @@ input::-webkit-inner-spin-button {
   }
 
 }
+
+
+.list-short-description{
+  padding: 0;
+}
+
 

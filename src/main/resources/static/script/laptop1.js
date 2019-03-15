@@ -49,7 +49,7 @@ function setLaptopToTable(laptop) {
         '<td>' + laptop.availabilityOfHDMI + '</td>' +
         '<td>' + laptop.availabilityOfLAN + '</td>' +
         '<td>' + laptop.availabilityOfAUX + '</td>' +
-        '<td>' + createImagePath(laptop.imageDirection) + '</td>' +
+        //'<td>' + createImagePath(laptop.imageDirection) + '</td>' +
         '<td><button class="button" value="' + laptop.id + '">Delete</button></td>' +
         '<td><button class="buttonToUpdate" value="' + laptop.id +'">Update</button></td>' +
         '</tr>');
@@ -98,8 +98,8 @@ function setActionOnCreateBtn() {
             "availabilityOfUSBThirdGeneration":availabilityOfUSBThirdGeneration,
             "availabilityOfHDMI":availabilityOfHDMI,
             "availabilityOfLAN":availabilityOfLAN,
-            "availabilityOfAUX":availabilityOfAUX,
-           "imageDirection":createImagePath(file)
+            "availabilityOfAUX":availabilityOfAUX
+           // "imageDirection":createImagePath(file)
 
         };
 
@@ -192,15 +192,15 @@ function setActionOnUpdateButton() {
                         var availabilityOfHDMI = $("input[name='availabilityOfHDMI']:checked").val();
                         var availabilityOfLAN = $("input[name='availabilityOfLAN']:checked").val();
                         var availabilityOfAUX = $("input[name='availabilityOfAUX']:checked").val();
-                        var file = document.getElementsByClassName("getFile").files[0];
-                        getBase64(file).then(data => {
-
-                            //work with data as src of file
-                            let request = {
-                                //fileName: "someCustomFileName",
-                                data: data
-                            }
-                        });
+                        // var file = document.getElementsByClassName("getFile").files[0];
+                        // getBase64(file).then(data => {
+                        //
+                        //     //work with data as src of file
+                        //     let request = {
+                        //         //fileName: "someCustomFileName",
+                        //         data: data
+                        //     }
+                        // });
 //            if (firstName != null && lastName != null && age != null) {
 
                         var newLaptop = {
@@ -219,8 +219,8 @@ function setActionOnUpdateButton() {
                             "availabilityOfUSBThirdGeneration":availabilityOfUSBThirdGeneration,
                             "availabilityOfHDMI":availabilityOfHDMI,
                             "availabilityOfLAN":availabilityOfLAN,
-                            "availabilityOfAUX":availabilityOfAUX,
-                            "imageDirection":createImagePath(file)
+                            "availabilityOfAUX":availabilityOfAUX
+                            //"imageDirection":createImagePath(file)
 
                         };
 
@@ -247,18 +247,18 @@ function setActionOnUpdateButton() {
 
 }
 
-function createImagePath(fileName){
-    return '/img/' + fileName;
-}
-
-function getBase64(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-});
-}
+// function createImagePath(fileName){
+//     return '/img/' + fileName;
+// }
+//
+// function getBase64(file) {
+//     return new Promise((resolve, reject) => {
+//         const reader = new FileReader();
+//     reader.readAsDataURL(file);
+//     reader.onload = () => resolve(reader.result);
+//     reader.onerror = error => reject(error);
+// });
+// }
 
 function setModalConfiguration() {
     // Get the modal
