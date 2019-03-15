@@ -19,6 +19,8 @@ public class LaptopResponse {
 
     private String model;
 
+    private String imageDirection;
+
     private Double price;
     @Type(type = "text")
     private String description;
@@ -63,6 +65,7 @@ public class LaptopResponse {
         model = laptop.getModel();
         makeId = laptop.getMake().getId();
         makeName = laptop.getMake().getName();
+        imageDirection = laptop.getImageDirection();
         price = laptop.getPrice();
         description = laptop.getDescription();
         graphicCardId = laptop.getGraphicCard().getId();

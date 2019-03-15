@@ -16,10 +16,10 @@ public class FileService {
 
     public static final String IMG_DIR =
             System.getProperty("user.home") + File.separator +
-                    "laptop-images" + File.separator;
+                    "laptopImages" + File.separator;
 
     public String saveFile(FileRequest request) throws IOException {
-        createDir(IMG_DIR);
+        createDirs(IMG_DIR);
 
         String[] data = request.getData().split(",");
         String metaInfo = data[0];
@@ -46,7 +46,7 @@ public class FileService {
         return metaInfo.split("/")[1].split(";")[0];
     }
 
-    private void createDir(String dir) {
+    private void createDirs(String dir) {
         File file = new File(dir);
         if (!file.exists()) {
             file.mkdirs();

@@ -29,7 +29,7 @@ public class LaptopRequest {
     @Type(type = "text")
     private String description;
 
-
+    private String iamgeDirection;
     //@NotNull
     private Boolean availabilityOfWIFI;
 

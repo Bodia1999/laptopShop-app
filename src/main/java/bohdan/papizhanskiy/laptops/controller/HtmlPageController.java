@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HtmlPageController {
 
     @RequestMapping("/")
-    public String mainPage(){
+    public String productPage(){
         return "main.page/index.html";
     }
+//    @RequestMapping("/")
 //    public String mainPage(){
 //        return "main.html";
 //    }

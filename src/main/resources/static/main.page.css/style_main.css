@@ -252,7 +252,7 @@ ul{
 .product-image{
   position: relative;
   height: 200px;
-  max-width: 290px;
+  max-width: 344px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -473,6 +473,15 @@ input::-webkit-inner-spin-button {
     max-width: 90%;
   }
 
+  .product-image{
+    position: relative;
+    height: 300px;
+    max-width: 435px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    overflow: hidden;
+}
 }
 
 

@@ -49,7 +49,7 @@ function setLaptopToTable(laptop) {
         '<td>' + laptop.availabilityOfHDMI + '</td>' +
         '<td>' + laptop.availabilityOfLAN + '</td>' +
         '<td>' + laptop.availabilityOfAUX + '</td>' +
-        //'<td>' + createImagePath(laptop.imageDirection) + '</td>' +
+        '<td>' + '<span>/img/</span>'+laptop.imageDirection + '</td>' +
         '<td><button class="button" value="' + laptop.id + '">Delete</button></td>' +
         '<td><button class="buttonToUpdate" value="' + laptop.id +'">Update</button></td>' +
         '</tr>');
@@ -60,8 +60,9 @@ function setActionOnCreateBtn() {
         //console.log("I am here");
 
 
-
+        var file = document.getElementById("imageDirection").files[0];
         var model = $("#model").val();
+
         var makeId = $("#makeId").val();
         var graphicCardId = $("#graphicCardId").val();
         var ramId = $("#ramId").val();
@@ -70,17 +71,19 @@ function setActionOnCreateBtn() {
         var processorId = $("#processorId").val();
         var screenId = $("#screenId").val();
         var availabilityOfWIFI = $("input[name='availabilityOfWIFI']:checked").val();
-
         var availabilityOfBluetooth = $("input[name='availabilityOfBluetooth']:checked").val();
-
         var availabilityOfUSBTypeC = $("input[name='availabilityOfTypeC']:checked").val();
+
         var availabilityOfUSBSecondGeneration = $("input[name='availabilityOfUSBSecondGeneration']:checked").val();
+
         var availabilityOfUSBThirdGeneration = $("input[name='availabilityOfUSBThirdGeneration']:checked").val();
         var availabilityOfHDMI = $("input[name='availabilityOfHDMI']:checked").val();
         var availabilityOfLAN = $("input[name='availabilityOfLAN']:checked").val();
         var availabilityOfAUX = $("input[name='availabilityOfAUX']:checked").val();
-
 //            if (firstName != null && lastName != null && age != null) {
+
+
+
 
         var newLaptop = {
             "model": model,
@@ -98,8 +101,8 @@ function setActionOnCreateBtn() {
             "availabilityOfUSBThirdGeneration":availabilityOfUSBThirdGeneration,
             "availabilityOfHDMI":availabilityOfHDMI,
             "availabilityOfLAN":availabilityOfLAN,
-            "availabilityOfAUX":availabilityOfAUX
-           // "imageDirection":createImagePath(file)
+            "availabilityOfAUX":availabilityOfAUX,
+           "imageDirection":gettingFile(file)
 
         };
 
@@ -118,6 +121,30 @@ function setActionOnCreateBtn() {
 //            } else {
 //                alert("Всі поля повинні бути заповнені")
 //            }
+    });
+}
+function gettingFile(file) {
+    getBase64(file).then(data => {
+
+        //work with data as src of file
+        let request = {
+            //fileName: "someCustomFileName",
+            data: data
+        };
+
+        $.ajax({
+            url: "http://localhost:8000/photo/upload",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(request),
+            success: function (dataResponse) {
+                return dataResponse;
+
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
     });
 }
 
@@ -192,15 +219,15 @@ function setActionOnUpdateButton() {
                         var availabilityOfHDMI = $("input[name='availabilityOfHDMI']:checked").val();
                         var availabilityOfLAN = $("input[name='availabilityOfLAN']:checked").val();
                         var availabilityOfAUX = $("input[name='availabilityOfAUX']:checked").val();
-                        // var file = document.getElementsByClassName("getFile").files[0];
-                        // getBase64(file).then(data => {
-                        //
-                        //     //work with data as src of file
-                        //     let request = {
-                        //         //fileName: "someCustomFileName",
-                        //         data: data
-                        //     }
-                        // });
+                        var file = document.getElementsByClassName("getFile").files[0];
+                        getBase64(file).then(data => {
+
+                            //work with data as src of file
+                            let request = {
+                                //fileName: "someCustomFileName",
+                                data: data
+                            }
+                        });
 //            if (firstName != null && lastName != null && age != null) {
 
                         var newLaptop = {
@@ -219,8 +246,8 @@ function setActionOnUpdateButton() {
                             "availabilityOfUSBThirdGeneration":availabilityOfUSBThirdGeneration,
                             "availabilityOfHDMI":availabilityOfHDMI,
                             "availabilityOfLAN":availabilityOfLAN,
-                            "availabilityOfAUX":availabilityOfAUX
-                            //"imageDirection":createImagePath(file)
+                            "availabilityOfAUX":availabilityOfAUX,
+                            "imageDirection":createImagePath(file)
 
                         };
 
@@ -247,18 +274,20 @@ function setActionOnUpdateButton() {
 
 }
 
+
+
 // function createImagePath(fileName){
 //     return '/img/' + fileName;
 // }
-//
-// function getBase64(file) {
-//     return new Promise((resolve, reject) => {
-//         const reader = new FileReader();
-//     reader.readAsDataURL(file);
-//     reader.onload = () => resolve(reader.result);
-//     reader.onerror = error => reject(error);
-// });
-// }
+
+function getBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+}
 
 function setModalConfiguration() {
     // Get the modal
