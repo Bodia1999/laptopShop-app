@@ -506,8 +506,8 @@
                 <div class="selector-sorting">
                     <span>Sort by:</span><select class="soflow">
                     <!--  <option>Select</option>-->
-                    <option value="model/ASC" checked>Name &#8593;</option>
-                    <option value="model/DESC">Name &#8595;</option>
+                    <option value="model/ASC" checked>Model &#8593;</option>
+                    <option value="model/DESC">Model &#8595;</option>
                     <option value="price/ASC">Price: low to high</option>
                     <option value="price/DESC">Price: high to low</option>
 
@@ -518,6 +518,15 @@
 
                     </div>
                 </div>
+                <div class="new-pagination-more">
+                    <div class="pagination-div" id="download-more"><i
+                            class="icon-circle-arrow new-pagination-more-icon"></i>
+                        <strong class="download-text-pagination">Show </strong>
+                        <span class="new-pagination-more-count">12</span>
+                        <strong class="download-text-pagination">more</strong>
+                        <button id="button-to-download-more-products" style="display: none;" value="0"></button>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -525,22 +534,35 @@
 </div>
 
 <script>
-separatingString();
+    separatingString();
+    $("#download-more").click(function gettingPage() {
+        var page = $("#button-to-download-more-products").val();
+        console.log(page);
+        page++;
+        $("#button-to-download-more-products").val(page);
+        separatingString(page);
+    });
+
     $('.soflow').change(function () {
         separatingString();
-        });
+    });
 
-    function separatingString() {
+    function separatingString(page) {
         var select = $('.soflow').val().toString();
         var strings = select.split("/");
         var sortByField = strings[0];
         var sortDirection = strings[1];
-        changingSortingWay(sortDirection,sortByField);
-        console.log(sortByField+'     '+sortDirection);
+        changingSortingWay(sortDirection, sortByField, page);
+        console.log(sortByField + '     ' + sortDirection);
     }
-    function changingSortingWay(sortDirection,sortByField) {
+
+    function changingSortingWay(sortDirection, sortByField, page) {
+        if (page == null) {
+            page = 0;
+        }
+
         let pageRequest = {
-            page: 0,
+            page: page,
             size: 12,
             sortRequest: {
                 direction: sortDirection,
@@ -551,7 +573,15 @@ separatingString();
         gettingAllElementsInNewWay(pageRequest);
 
     }
-function gettingAllElementsInNewWay(pageRequest){
+
+    function checkingElements(totalElements) {
+
+        if (12 * page >totalElements ){
+            var value = totalElements-((page-1)*12);
+        }
+            }
+
+    function gettingAllElementsInNewWay(pageRequest) {
         $.ajax({
             url: 'http://localhost:8000/laptop/page',
             type: 'POST',
@@ -615,7 +645,7 @@ function gettingAllElementsInNewWay(pageRequest){
 
 
             </div>`)
-            };
+    };
 
 </script>
 
