@@ -29,7 +29,10 @@ public class LaptopRequest {
     @Type(type = "text")
     private String description;
 
-    private String iamgeDirection;
+    private String imageDirection;
+    private String descriptionImagePath1;
+    private String descriptionImagePath2;
+    private String descriptionImagePath3;
     //@NotNull
     private Boolean availabilityOfWIFI;
 
@@ -89,6 +92,8 @@ public class LaptopRequest {
     //@NotNull
     private Boolean availabilityOfAUX;
 
+
+    private PaginationRequest pagination;
 
 
 //    private Screen screen;

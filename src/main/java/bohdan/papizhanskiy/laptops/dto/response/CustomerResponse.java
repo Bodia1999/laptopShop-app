@@ -38,8 +38,7 @@ public class CustomerResponse {
         id = customer.getId();
         name = customer.getName();
         age = customer.getAge();
-        email = customer.getEmail();
-        password = customer.getPassword();
+
 //        orders = customer.getOrders().stream().map(OrderResponse::new).collect(Collectors.toList());
 //        shippingInfos = customer.getShippingInfos().stream().map(ShippingInfoResponse::new).collect(Collectors.toList());
     }

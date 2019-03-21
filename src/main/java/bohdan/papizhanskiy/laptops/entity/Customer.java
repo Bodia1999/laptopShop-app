@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+//@ToString
 @Entity
 public class Customer {
 
@@ -28,15 +28,15 @@ public class Customer {
     private String surname;
 
     private Integer age;
-    @Column(unique = true)
-    private String email;
-@ToString.Exclude
-    private String password;
-    @ToString.Exclude
+
+//    @ToString.Exclude
     @OneToMany(mappedBy = "customer")
     private List<Order> orders = new ArrayList<>();
-    @ToString.Exclude
+//    @ToString.Exclude
     @OneToMany(mappedBy = "customer")
     private List<ShippingInfo> shippingInfos = new ArrayList<>();
+
+    @OneToOne(mappedBy = "customer")
+    private User user;
 
 }

@@ -20,6 +20,9 @@ public class LaptopResponse {
     private String model;
 
     private String imageDirection;
+    private String descriptionImagePath1;
+    private String descriptionImagePath2;
+    private String descriptionImagePath3;
 
     private Double price;
     @Type(type = "text")
@@ -66,6 +69,9 @@ public class LaptopResponse {
         makeId = laptop.getMake().getId();
         makeName = laptop.getMake().getName();
         imageDirection = laptop.getImageDirection();
+        descriptionImagePath1 = laptop.getDescriptionImagePath1();
+        descriptionImagePath1 = laptop.getDescriptionImagePath2();
+        descriptionImagePath1 = laptop.getDescriptionImagePath3();
         price = laptop.getPrice();
         description = laptop.getDescription();
         graphicCardId = laptop.getGraphicCard().getId();

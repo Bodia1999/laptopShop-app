@@ -42,8 +42,7 @@ public class CustomerService {
         customer.setName(customerRequest.getName());
         customer.setSurname(customerRequest.getSurname());
         customer.setAge(customerRequest.getAge());
-        customer.setEmail(customerRequest.getEmail());
-        customer.setPassword(customerRequest.getPassword());
+
 
 
         return customerRepository.save(customer);

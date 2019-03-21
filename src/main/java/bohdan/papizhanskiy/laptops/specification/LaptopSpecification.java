@@ -21,6 +21,8 @@ public class LaptopSpecification implements Specification<Laptop> {
     @Override
     public Predicate toPredicate(Root<Laptop> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
         List<Predicate> predicates = new ArrayList<>();
+        Predicate byMake = findByMake(root, criteriaBuilder);
+        if (byMake!=null)predicates.add(byMake);
         Predicate byModel = findByModel(root, criteriaBuilder);
         if (byModel != null) predicates.add(byModel);
         Predicate byPrice = findByPrice(root, criteriaBuilder);
@@ -69,8 +71,19 @@ public class LaptopSpecification implements Specification<Laptop> {
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }
 
+    private Predicate findByMake(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
+        MakeFilterRequest filter = laptopFilterRequest.getMakeFilterRequest();
+        if (filter == null) return null;
+        String makeName = filter.getName();
+        if (makeName == null || makeName.trim().isEmpty()) {
+            return null;
+        }
+        Join<Laptop, Make> makeJoin = root.join("make");
+        return criteriaBuilder.like(makeJoin.get("name"), '%' + makeName + '%');
+    }
 
     private Predicate findByPrice(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
+
         Double priceFrom = laptopFilterRequest.getPriceFrom();
         Double priceTo = laptopFilterRequest.getPriceTo();
 
@@ -90,12 +103,13 @@ public class LaptopSpecification implements Specification<Laptop> {
     }
 
     private Predicate findByModel(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        String model = laptopFilterRequest.getModel();
-        if (model == null || model.trim().isEmpty()) {
+        String filter = laptopFilterRequest.getModel();
+
+        if (filter == null || filter.trim().isEmpty()) {
             return null;
         }
 
-        return criteriaBuilder.like(root.get("model"), '%' + model + '%');
+        return criteriaBuilder.like(root.get("model"), '%' + filter + '%');
     }
 
 

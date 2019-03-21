@@ -31,20 +31,11 @@ public class CustomerRequest {
     @Min(14)
     private Integer age;
 
-    @Email
-    private String email;
-
-    @NotNull
-    @NotEmpty
-    @Min(6)
-    @Max(16)
-    private String password;
-
-    @NotNull
-    @NotEmpty
-    @Min(1)
 
 
+//    @NotNull
+//    @NotEmpty
+//    @Min(1)
     private List<OrderResponse> orders = new ArrayList<>();
 
     private List<ShippingInfo> shippingInfos = new ArrayList<>();

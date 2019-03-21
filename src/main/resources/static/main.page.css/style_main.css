@@ -69,13 +69,13 @@ nav{
   display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 850px) {
   .topnav a:not(:first-child){
     display: none;
   }
   .topnav a.icon {
     float: right;
-    margin: -17px;
+    /*    margin-top: -27px;*/
     display: block;
     color: black;
     display: flex;
@@ -83,6 +83,7 @@ nav{
     margin-right: 30px;
   }
   nav{
+    margin-left: 5%;
     width: 100%;
     height: 100px;
 
@@ -93,17 +94,32 @@ nav{
 
   .topnav.responsive a.icon{
     position: absolute;
-    right: 0;
-    top: 0;
+    left: 0;
+    /*    height: 150px;*/
+    margin-top: -20px;
+    /*    margin-top: -27px;*/
+    margin-left: 11%;
+    border-bottom: none;
+    /*    top: 0;*/
 
+
+  }
+
+  .topnav.responsive {
+    height: 75px;
   }
   .topnav.responsive a {
     float: none;
-    display: block;
+    /*
+        display: block;
+        text-align: left;
+    */
+    display: grid;
+    align-content: center;
     text-align: left;
+
   }
 }
-
 .container-footer{
   padding: 0 10px 0 0;
   margin: 50px 0 0 0;
@@ -160,7 +176,7 @@ nav{
   }
 }
 
-@media screen and (min-width:75%){
+@media screen and (min-width: 75%){
   .container-footer{
     padding: 8px 300px 8px 300px;
   }
@@ -252,8 +268,8 @@ ul{
 */
 .product-image{
   position: relative;
-  height: 200px;
-  max-width: 344px;
+  height: 260px;
+  max-width: 260px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -264,31 +280,33 @@ ul{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  min-width: 35%;
+  min-height: 1800px;
 }
 
 .product {
 
-  width: 33%;
+  width: 32%;
   max-height: 400px;
 }
 .product li{
   color: black;
 }
 
-.container{
-  min-width: 35%;
-  max-width: 45%;
-  min-height: 1800px;
-}
+/*.container{*/
+  /*min-width: 35%;*/
+  /*max-width: 45%;*/
+  /*min-height: 1800px;*/
+/*}*/
 
 .filter{
   height: 2280px;
   padding: 0 20px 0 0;
-  width: 22%;
+  width: 25%;
 
 }
 .main-all-page{
-  max-width: 68%;
+  max-width: 50%;
   display: flex;
   justify-content: center;
 }
@@ -453,29 +471,29 @@ input::-webkit-inner-spin-button {
     display: none;
   }
   .container{
-    max-width: 80%;
+    max-width: 90%;
   }
 }
 
-@media screen and (max-width: 750px){
+@media screen and (max-width: 785px){
 
-  /*
+
     .filter{
       display: none;
     }
-  */
+
 
   .product {
 
     min-width: 180px;
-    width: 55%;
+    width: 78%;
   }
 
-  /*
+
     .container{
-      max-width: 45%;
+      max-width: 78%;
     }
-  */
+
 
 }
 
@@ -485,4 +503,51 @@ input::-webkit-inner-spin-button {
   padding: 0;
 }
 
+
+.selector-sorting select{
+  -webkit-appearance: button;
+  -webkit-border-radius: 2px;
+  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  -webkit-padding-end: 20px;
+  -webkit-padding-start: 2px;
+  -webkit-user-select: none;
+  background-image: url(../photo/arrow.png);
+  /*  , -webkit-linear-gradient(#FAFAFA, #F4F4F4 30%, #E5E5E5)*/
+  background-position: 97% center;
+  background-repeat: no-repeat;
+  /*   border: 1px solid #AAA;*/
+  color: #555;
+  font-size: inherit;
+  margin: 20px;
+  overflow: hidden;
+  padding: 5px 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 200px;
+}
+
+
+.selector-sorting select{
+  min-width: 20%;
+  max-width: 45%
+
+}
+
+.main-container{
+  min-width: 35%;
+  max-width: 75%;
+
+}
+
+.prod-container{
+  display: flex;
+  justify-content: center;
+}
+
+
+/*.sub-container{*/
+  /*max-width: 68%;*/
+  /*display: flex;*/
+  /*justify-content: center;*/
+/*}*/
 

@@ -9,6 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class LaptopFilterRequest {
+    private MakeFilterRequest makeFilterRequest;
     private String model;
 
     private Double priceFrom;

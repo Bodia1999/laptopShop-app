@@ -58,7 +58,10 @@ public class LaptopService {
         }
         laptop.setModel(laptopRequest.getModel());
         laptop.setMake(makeService.findOne(laptopRequest.getMakeId()));
-        laptop.setImageDirection(laptopRequest.getIamgeDirection());
+        laptop.setImageDirection(laptopRequest.getImageDirection());
+        laptop.setDescriptionImagePath1(laptopRequest.getDescriptionImagePath1());
+        laptop.setDescriptionImagePath2(laptopRequest.getDescriptionImagePath2());
+        laptop.setDescriptionImagePath3(laptopRequest.getDescriptionImagePath3());
         laptop.setPrice(laptopRequest.getPrice());
         laptop.setDescription(laptopRequest.getDescription());
         laptop.setGraphicCard(graphicCardService.findOne(laptopRequest.getGraphicCardId()));
