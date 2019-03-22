@@ -38,7 +38,7 @@
               contentType: 'application/json',
               success: (page) => {
                   $('.container').html('');
-console.log(page);
+            console.log(page);
                       appendProduct(page);
 
                   // location.reload;
@@ -49,7 +49,7 @@ console.log(page);
           });
       }
       function appendProduct(prod) {
-          var container = $(".container");
+          let container = $(".container");
           container.append(`<div>
       <!--       <div class="photo-panel" style="background-image: url(https://o.aolcdn.com/images/dims?quality=85&image_uri=https%3A%2F%2Fo.aolcdn.com%2Fimages%2Fdims%3Fcrop%3D1600%252C1055%252C0%252C0%26quality%3D85%26format%3Djpg%26resize%3D1600%252C1055%26image_uri%3Dhttp%253A%252F%252Fo.aolcdn.com%252Fhss%252Fstorage%252Fmidas%252Fe0fb2686cb35c31aa63009beb4d9a13b%252F206546644%252FMacBook%252BPro%252Bgallery%252B10.jpg%26client%3Da1acac3e1b3290917d92%26signature%3D4b7c6d9fec6ec988dc7ec49c9784a44159151922&client=amp-blogside-v2&signature=06f5074db4472d25216f41202b87f989cf4c3c9c)">-->
           <div class="main-panel">
@@ -68,7 +68,7 @@ console.log(page);
       <div class="price"><span>Price:</span><span class="downloaded-price">${prod.price}$</span></div><br>
       <div class="button-to-buy">
 
-          <button id="buy-button" value="More">Add to Cart</button><br>
+          <button id="buy-button" value="More"><span>Add to Cart</span></button><br>
       </div><br>
       <div>
       <h1 class="selection-title">Qty:</h1>
@@ -109,7 +109,7 @@ console.log(page);
           <ul class="points-list">
           <li class="point">
           <p class="point__left-text">Screen size</p>
-      <p class="point__right-text">${prod.screen.size}</p>
+      <p class="point__right-text">${prod.screen.size}\"</p>
           </li>
           <li class="point">
           <p class="point__left-text">Screen resolution</p>
@@ -129,7 +129,7 @@ console.log(page);
           </li>
           <li class="point">
           <p class="point__left-text">Working frequency of processor</p>
-      <p class="point__right-text">${prod.processor.workingFrequency}</p>
+      <p class="point__right-text">${prod.processor.workingFrequency} HZ</p>
           </li>
           <li class="point">
           <p class="point__left-text">Ram name</p>
@@ -138,7 +138,7 @@ console.log(page);
 
           <li class="point">
           <p class="point__left-text">Ram volume</p>
-      <p class="point__right-text">${prod.ram.volumeOfMemory}</p>
+      <p class="point__right-text">${prod.ram.volumeOfMemory} GB</p>
           </li>
 
           <li class="point">
@@ -164,7 +164,7 @@ console.log(page);
 
           <li class="point">
           <p class="point__left-text">Volume of drive</p>
-      <p class="point__right-text">${prod.memory.volumeOfMemory}</p>
+      <p class="point__right-text">${prod.memory.volumeOfMemory} GB</p>
           </li>
           <li class="point">
           <p class="point__left-text">Producer of graphic card</p>
@@ -183,15 +183,15 @@ console.log(page);
           <ul class="points-list">
           <li class="point">
           <p class="point__left-text">Graphic card volume</p>
-      <p class="point__right-text">${prod.graphicCard.volumeOfMemory}</p>
+      <p class="point__right-text">${prod.graphicCard.volumeOfMemory} GB</p>
           </li>
           <li class="point">
           <p class="point__left-text">Weight</p>
-          <p class="point__right-text">${prod.corps.weight}</p>
+          <p class="point__right-text">${prod.corps.weight} Kg</p>
           </li>
           <li class="point">
           <p class="point__left-text">Dimensions</p>
-          <p class="point__right-text">${prod.corps.dimensions}</p>
+          <p class="point__right-text">${prod.corps.dimensions} mm.</p>
           </li>
           <li class="point">
           <p class="point__left-text">Color of corps</p>

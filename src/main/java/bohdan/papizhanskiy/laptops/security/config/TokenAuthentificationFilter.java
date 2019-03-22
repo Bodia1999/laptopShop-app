@@ -32,8 +32,15 @@ public class TokenAuthentificationFilter extends GenericFilterBean {
     @Value("${external.static.images.pattern}")
     private String imagesUrlPattern;
 
+
+    @Value("${external.static.css.pattern}")
+    private String cssUrlPattern;
+
     @Value("${external.url.pattern.home}")
-    private String patternAdditional;
+    private String homePattern;
+
+    @Value("${external.url.pattern.sign}")
+    private String signPattern;
 
     @Value("${token.header}")
     private String tokenHeader;
@@ -53,7 +60,7 @@ public class TokenAuthentificationFilter extends GenericFilterBean {
         System.out.println("error in if where external - start of all");
 
         List<String> urlPatterns = Arrays.asList(externalUrlPattern,
-                patternAdditional, imagesUrlPattern);
+                cssUrlPattern,homePattern,signPattern, imagesUrlPattern);
         AtomicBoolean whetherNeedToExitMethod = new AtomicBoolean(false);
         urlPatterns.forEach(x -> {
             if (x != null && !x.isEmpty()) {

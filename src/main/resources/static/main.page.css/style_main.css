@@ -281,7 +281,7 @@ ul{
   flex-wrap: wrap;
   justify-content: space-between;
   min-width: 35%;
-  min-height: 1800px;
+  min-height: 500px;
 }
 
 .product {
@@ -523,7 +523,9 @@ input::-webkit-inner-spin-button {
   padding: 5px 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
+  min-width: 160px;
   width: 200px;
+  height: 38px;
 }
 
 
@@ -544,62 +546,40 @@ input::-webkit-inner-spin-button {
   justify-content: center;
 }
 
-.new-pagination-more {
-  display: block;
-  display: flex;
-  justify-content: center;
-  font-size: 24px;
+
+
+
+
+.center {
   margin-top: 50px;
-  margin-bottom: 40px;
+  text-align: center;
 }
 
-.new-pagination-more {
-  font-size: 14px;
-  text-transform: uppercase;
-  color: black;
-  overflow: hidden;
-  -webkit-transition: all .25s linear 0s;
-  -o-transition: all .25s linear 0s;
-  transition: all .25s linear 0s;
-}
-
-.new-pagination-more i {
-  font-size: 40px;
-}
-
-.icon-circle-arrow {
-
+.pagination {
   display: inline-block;
-  vertical-align: middle;
-  width: 1em;
-  height: 1em;
-  background: url(../photo/arrow-down.png) no-repeat 50% 50%;
-  background-size: contain;
+  cursor:pointer;
 }
 
-
-.new-pagination-more b, .new-pagination-more strong {
-  font-weight: 400;
+.pagination span {
+  height: 20px;
+  min-width: 13px;
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+  margin-bottom: 8px;
 }
 
-.new-pagination-more strong {
-
-  margin: 0 7px;
+.pagination span.active {
+  background-color: black;
+  color: white;
+  border: 1px solid black;
 }
 
-.download-text-pagination{
-  font-size: 25px;
-}
-
-.new-pagination-more-count{
-
-  font-weight: bold;
-  font-size: 35px;
-}
-
-.pagination-div{
-  cursor: pointer;
-}
+.pagination span:hover:not(.active) {background-color: #ddd;}
 
 
 /*.sub-container{*/

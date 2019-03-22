@@ -518,14 +518,19 @@
 
                     </div>
                 </div>
-                <div class="new-pagination-more">
-                    <div class="pagination-div" id="download-more"><i
-                            class="icon-circle-arrow new-pagination-more-icon"></i>
-                        <strong class="download-text-pagination">Show </strong>
-                        <span class="new-pagination-more-count">12</span>
-                        <strong class="download-text-pagination">more</strong>
-                        <button id="button-to-download-more-products" style="display: none;" value="0"></button>
-                    </div>
+                <!--<div class="new-pagination-more">-->
+                <!--<div class="pagination-div" id="download-more"><i-->
+                <!--class="icon-circle-arrow new-pagination-more-icon"></i>-->
+                <!--<strong class="download-text-pagination">Show </strong>-->
+                <!--<span class="new-pagination-more-count">12</span>-->
+                <!--<strong class="download-text-pagination">more</strong>-->
+                <!--<button id="button-to-download-more-products" style="display: none;" value="0"></button>-->
+                <!--</div>-->
+                <!--</div>-->
+
+                <div class="center">
+
+
                 </div>
             </div>
 
@@ -534,14 +539,27 @@
 </div>
 
 <script>
+
+    if (!window.localStorage.getItem('token')) {
+        window.location.href = '/sign';
+    }
+    $("#page-1").addClass('active');
     separatingString();
-    $("#download-more").click(function gettingPage() {
-        var page = $("#button-to-download-more-products").val();
-        console.log(page);
-        page++;
-        $("#button-to-download-more-products").val(page);
-        separatingString(page);
-    });
+    // $("#download-more").click(function gettingPage() {
+    //     var page = $("#button-to-download-more-products").val();
+    //     console.log(page);
+    //     page++;
+    //     $("#button-to-download-more-products").val(page);
+    //     separatingString(page);
+    // });
+
+    function gettingValueFromSpan(value) {
+        $('.active').removeClass('active');
+        $('#page-1').addClass('active');
+
+        console.log(value-1);
+        separatingString(value-1);
+    }
 
     $('.soflow').change(function () {
         separatingString();
@@ -563,7 +581,7 @@
 
         let pageRequest = {
             page: page,
-            size: 12,
+            size: 3,
             sortRequest: {
                 direction: sortDirection,
                 fieldName: sortByField
@@ -574,12 +592,12 @@
 
     }
 
-    function checkingElements(totalElements) {
-
-        if (12 * page >totalElements ){
-            var value = totalElements-((page-1)*12);
-        }
-            }
+    // function checkingElements(totalElements) {
+    //
+    //     if (12 * page >totalElements ){
+    //         var value = totalElements-((page-1)*12);
+    //     }
+    //         }
 
     function gettingAllElementsInNewWay(pageRequest) {
         $.ajax({
@@ -587,10 +605,16 @@
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(pageRequest),
-            success: (page) => {
+            success: (pages) => {
                 $('.container').html('');
-                for (let laptop of page.content) {
+                for (let laptop of pages.content) {
                     appendProduct(laptop);
+
+                }
+                $('.center').html('');
+                for (let i = 1; i < pages.totalPages + 1; i++) {
+
+                    appendPageButton(i);
                 }
                 // location.reload;
             },
@@ -599,6 +623,15 @@
             }
         });
     }
+
+    function appendPageButton(count) {
+        let center = $('.center');
+
+        center.append(`
+<div class="pagination">
+
+                    <span id="page-${count}" onclick="gettingValueFromSpan($('#page-${count}').html())">${count}</span></div>`)
+    };
 
 
     function appendProduct(prod) {
@@ -616,7 +649,7 @@
 
             </div>
             <p class="product-name">
-            <a href="../product/productPage.html" onclick="return gettingIdentificationCode();" >
+            <a href="../product/productPage.html" >
             ${prod.makeName} ${prod.model}     <span class="identification-code" style="color:white;">${prod.id}</span>
             </a>
             </p>

@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
-import java.sql.Clob;
+
 
 @Getter
 @Setter

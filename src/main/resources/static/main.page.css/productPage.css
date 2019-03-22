@@ -219,18 +219,7 @@ li {
     text-align: right;
     font-weight: 500;
 }
-.characteristic-block{
-    max-width: 700px;
-    min-width: 500px;
-    /*
-    display: flex;
-    justify-content: center;
-  */
-    /*
-      height: 500px;
-      width: 500px;
-    */
-}
+
 
 @media screen and (max-width: 600px){
     .characteristic-block{
@@ -253,17 +242,7 @@ li {
     }
 }
 
-.photo{
-    position: relative;
-    height: 400px;
-    max-width: 580px;
 
-    /*  background-image: url(../img/macbook.jpg);*/
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    overflow: hidden;
-}
 .good-description{max-width: 700px;
     min-width: 500px;}
 
@@ -271,3 +250,185 @@ li {
     margin-left: 40px;
     border-bottom: 4px solid #E5E5E5;
 }
+
+
+#description-container{
+    margin-left: 40px;
+    }
+
+
+
+
+.panel{
+    max-width: 900px;
+    min-width: 500px;
+    margin-left: -40px;
+    display: flex;
+    justify-content: center;
+}
+
+.filter-buttons {
+     cursor: pointer;
+       background-color: white;
+       padding: .5em;
+       color: black;
+       font-weight: bold;
+       height: 30px;
+       width: 300px;
+       font-family: 'Raleway';
+       font-size: 25px;
+       text-decoration: none;
+       border: none;
+       padding-bottom: 34px;
+     }
+
+
+#for-line{
+       display: flex;
+     }
+
+#characteristics-button{
+       max-width: 450px;
+       min-width: 250px;
+       margin-left: 65px;
+       border-bottom: 4px solid grey;
+       margin-right: 16px;
+     }
+#description-button{
+       max-width: 450px;
+       min-width: 250px;
+       margin-left: 65px;
+       border-bottom: 4px solid grey;}
+
+#main-title{
+       font-size: 30px;
+      padding: 0;
+     margin-left: 16%
+
+
+     }
+
+.navigating-panel{
+       height: 300px;
+       width: 320px;
+     }
+
+.out-of-navigating-panel{
+       display: flex;
+       align-items: flex-end;
+     }
+
+
+#buy-button{
+       cursor: pointer;
+       background-color: black;
+       padding: .5em;
+
+     /*  -moz-border-radius: 5px;*/
+             -/*  -webkit-border-radius: 5px;*/ /*  border-radius: 6px;*/
+       color: white;
+       font-weight: bold;
+       height: 60px;
+       width: 250px;
+       font-family: 'Raleway';
+       font-size: 28px;
+       text-decoration: none;
+       border: 2px solid black;
+       border-radius:  30px;
+
+       padding-bottom: 34px;
+     }
+
+#buy-button span{
+    color: white;
+}
+
+.button-to-buy{
+      display: flex;
+      justify-content: center;}
+
+
+.styled-select {
+        background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+      height: 29px;
+        overflow: hidden;
+        width: 240px;
+     }
+
+.styled-select select {
+        background: transparent;
+        border: none;
+        font-size: 14px;
+       height: 29px;
+       padding: 5px; /* If you add too much padding here, the options won't show in IE */
+        width: 268px;
+     }
+
+.styled-select.slate {
+       background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
+       height: 34px;
+        width: 240px;
+     }
+
+
+.rounded {
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+     }
+
+.black   { background-color: black; }
+.black select   { color: #d8d8d8; }
+
+.selection{
+       display: flex;
+       justify-content: center;
+     }
+
+
+.selection-title, .price{padding: 0;
+       margin: 0;
+       padding-left:  16%;
+     }
+.price span{
+      font-size: 25px;
+       font-weight: bold;
+
+     }
+
+.price .downloaded-price{
+       font-size: 30px;
+     }
+
+.container{
+       display: flex;
+       justify-content: center;
+       margin-top: 2%;
+     }
+
+.description-span{
+       font-size: 18px;
+     }
+
+.title h3{
+       width: 320px;}
+
+.main-panel{
+       display: flex;
+     }
+
+#photo{
+      position: relative;
+       height: 400px;
+       max-width: 580px;
+     }
+#good-description{
+       max-width: 900px;
+       min-width: 500px;
+     }
+
+#characteristic-block{
+    max-width: 900px;
+      min-width: 500px;
+      display: flex;
+      justify-content: center;}
