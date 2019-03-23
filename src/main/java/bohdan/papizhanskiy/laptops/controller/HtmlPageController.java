@@ -7,21 +7,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HtmlPageController {
 
-    @RequestMapping("/home")
+    @RequestMapping("/")
     public String mainPage(){
         return "main.page/index.html";
     }
 
-    @RequestMapping("/")
-    public String productPage(){
-        return "main.page/productPage.html";
-    }
-
-    @RequestMapping("/sign")
-    public String singPage(){
-        return "main.page/sign.html";
-    }
 //    @RequestMapping("/")
+//    public String productPage(){
+//        return "main.page/productPage.html";
+//    }
+//
+//    @RequestMapping("/sign")
+//    public String singPage(){
+//        return "main.page/sign.html";
+//    }
+////    @RequestMapping("/")
 //    public String mainPage(){
 //        return "main.html";
 //    }

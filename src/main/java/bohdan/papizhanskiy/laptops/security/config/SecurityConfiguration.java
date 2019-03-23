@@ -13,7 +13,7 @@ import javax.servlet.Filter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
 
-    @Value("/*")
+    @Value("")
     private String securedUrlPattern;
 
     @Bean

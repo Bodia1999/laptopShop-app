@@ -4,12 +4,10 @@
   <meta charset="UTF-8">
   <title>Bear</title>
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!--  <link rel="stylesheet" href="css/style_apple.css">-->
-<!--  <link rel="stylesheet" href="css/style_main.css">-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="../main.page.css/productPage.css">
 </head>
-<body>
+
   <div>
       <header>
           <div class="logo">
@@ -30,10 +28,12 @@
 
   </div>
   <script>
+
       gettingAllElementsInNewWay();
       function gettingAllElementsInNewWay(){
+          var item = window.localStorage.getItem('id');
           $.ajax({
-              url: 'http://localhost:8000/laptop/findOne?id=2',
+              url: 'http://localhost:8000/laptop/findOne?id='+item,
               type: 'POST',
               contentType: 'application/json',
               success: (page) => {
@@ -48,11 +48,25 @@
               }
           });
       }
+      function revertingValue(value) {
+          if (value==true){
+              return "+";
+          }
+          if (value==false){
+              return "-";
+          }
+          if (value==null){
+              return "No data";
+          }
+
+
+      }
       function appendProduct(prod) {
           let container = $(".container");
           container.append(`<div>
       <!--       <div class="photo-panel" style="background-image: url(https://o.aolcdn.com/images/dims?quality=85&image_uri=https%3A%2F%2Fo.aolcdn.com%2Fimages%2Fdims%3Fcrop%3D1600%252C1055%252C0%252C0%26quality%3D85%26format%3Djpg%26resize%3D1600%252C1055%26image_uri%3Dhttp%253A%252F%252Fo.aolcdn.com%252Fhss%252Fstorage%252Fmidas%252Fe0fb2686cb35c31aa63009beb4d9a13b%252F206546644%252FMacBook%252BPro%252Bgallery%252B10.jpg%26client%3Da1acac3e1b3290917d92%26signature%3D4b7c6d9fec6ec988dc7ec49c9784a44159151922&client=amp-blogside-v2&signature=06f5074db4472d25216f41202b87f989cf4c3c9c)">-->
           <div class="main-panel">
+          <div class="inside_main_panel">
           <img id="photo" src="http://localhost:8000/img/${prod.imageDirection}" alt="">
           <div class="inside-panel">
 
@@ -88,16 +102,17 @@
           </div>
           </div>
 
-          </div> </div>
+          </div> </div></div>
       </div>
       <div class="panel">
+         <div class="sub-panel">
+          <button class="filter-buttons" id="characteristics-button" >Characteristics</button>
 
-          <button class="filter-buttons" id="characteristics-button">Characteristics</button>
 
+          <button class="filter-buttons" id="description-button" >Description</button>
 
-          <button class="filter-buttons" id="description-button">Description</button>
-
-          </div>
+         </div>
+      </div>
 
 
           <div id="characteristic-block">
@@ -203,51 +218,53 @@
           </li>
           <li class="point">
           <p class="point__left-text">Availability of WIFI</p>
-      <p class="point__right-text">${prod.availabilityOfWIFI}</p>
+      <p class="point__right-text">${revertingValue(prod.availabilityOfWIFI)}</p>
           </li>
           <li class="point">
           <p class="point__left-text">Availability of Bluetooth</p>
-      <p class="point__right-text">${prod.availabilityOfBluetooth}</p>
+      <p class="point__right-text">${revertingValue(prod.availabilityOfBluetooth)}</p>
           </li>
           <li class="point">
           <p class="point__left-text">Availability of USB Type-C</p>
-      <p class="point__right-text">${prod.availabilityOfUSBTypeC}</p>
+      <p class="point__right-text">${revertingValue(prod.availabilityOfUSBTypeC)}</p>
           </li>
           <li class="point">
           <p class="point__left-text">Availability of USB second generation</p>
-      <p class="point__right-text">${prod.availabilityOfUSBSecondGeneration}</p>
+      <p class="point__right-text">${revertingValue(prod.availabilityOfUSBSecondGeneration)}</p>
           </li>
           <li class="point">
           <p class="point__left-text">Availability of USB third generation</p>
-      <p class="point__right-text">${prod.availabilityOfUSBThirdGeneration}</p>
+      <p class="point__right-text">${revertingValue(prod.availabilityOfUSBThirdGeneration)}</p>
           </li>
           <li class="point">
           <p class="point__left-text">Availability of HDMI</p>
-      <p class="point__right-text">${prod.availabilityOfHDMI}</p>
+      <p class="point__right-text">${revertingValue(prod.availabilityOfHDMI)}</p>
           </li>
           <li class="point">
           <p class="point__left-text">Availability of LAN</p>
-      <p class="point__right-text">${prod.availabilityOfLAN}</p>
+      <p class="point__right-text">${revertingValue(prod.availabilityOfLAN)}</p>
           </li>
           <li class="point">
           <p class="point__left-text">Availability of LAN</p>
-      <p class="point__right-text">${prod.availabilityOfAUX}</p>
+      <p class="point__right-text">${revertingValue(prod.availabilityOfLAN)}</p>
           </li>
 
           </ul>
-          </div>
-          <div class="good-description"><div id="description-container">
-          <span class="description-span"></span>
-          </div>
-          </div>
+          </div></div>
 
 
+          <div id="good-description"  >
+          <div id="description-container">
+      <span class="description-span">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis recusandae veritatis itaque earum debitis accusantium. Beatae molestias, et odio placeat blanditiis nam. Vero, similique ipsa illum fugit rerum praesentium perspiciatis! Nihil, dolorem, quos molestiae ab dignissimos explicabo provident, fugiat earum eius nostrum, ullam esse in quasi placeat iusto consequuntur nemo dolor asperiores architecto perferendis natus magnam repellendus illo minima? Perferendis similique inventore hic maiores repudiandae tenetur, sapiente eligendi ab ipsa nihil aperiam sed facere magnam eum minus velit, est enim quaerat eveniet expedita quisquam porro unde cumque eos? Libero voluptatem, rerum doloribus ducimus, in atque at laborum enim tempora error!</span><br>
+       <div class="sub-description-photo"><div><img class="description-photo" src="https://www.bhphotovideo.com/images/images2500x2500/apple_mr9q2ll_a_13_3_macbook_pro_mid_1423729.jpg" alt=""></div></div><br>
+
+       <span class="description-span">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis recusandae veritatis itaque earum debitis accusantium. Beatae molestias, et odio placeat blanditiis nam. Vero, similique ipsa illum fugit rerum praesentium perspiciatis! Nihil, dolorem, quos molestiae ab dignissimos explicabo provident, fugiat earum eius nostrum, ullam esse in quasi placeat iusto consequuntur nemo dolor asperiores architecto perferendis natus magnam repellendus illo minima? Perferendis similique inventore hic maiores repudiandae tenetur, sapiente eligendi ab ipsa nihil aperiam sed facere magnam eum minus velit, est enim quaerat eveniet expedita quisquam porro unde cumque eos? Libero voluptatem, rerum doloribus ducimus, in atque at laborum enim tempora error!</span><br>
+       <div class="sub-description-photo"><div><img class="description-photo" src="https://www.bhphotovideo.com/images/images2500x2500/apple_mr9q2ll_a_13_3_macbook_pro_mid_1423729.jpg" alt=""></div></div><br>
 
 
-
-
-
-
+       <span class="description-span">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis recusandae veritatis itaque earum debitis accusantium. Beatae molestias, et odio placeat blanditiis nam. Vero, similique ipsa illum fugit rerum praesentium perspiciatis! Nihil, dolorem, quos molestiae ab dignissimos explicabo provident, fugiat earum eius nostrum, ullam esse in quasi placeat iusto consequuntur nemo dolor asperiores architecto perferendis natus magnam repellendus illo minima? Perferendis similique inventore hic maiores repudiandae tenetur, sapiente eligendi ab ipsa nihil aperiam sed facere magnam eum minus velit, est enim quaerat eveniet expedita quisquam porro unde cumque eos? Libero voluptatem, rerum doloribus ducimus, in atque at laborum enim tempora error!</span><br>
+       <div class="sub-description-photo"><div><img class="description-photo" src="https://www.bhphotovideo.com/images/images2500x2500/apple_mr9q2ll_a_13_3_macbook_pro_mid_1423729.jpg" alt=""></div></div><br>
+    </div>
 
           </div>`)
       };
@@ -256,27 +273,58 @@
 
 
 
+        // var goodDescription = document.getElementById('good-description');
+        // var characteristicsButton = document.getElementById('characteristics-button');
+        // var characteristicBlock = document.getElementById('characteristic-block');
+        // var descriptionButton = document.getElementById('description-button-block');
+        //
+        // w3.hide(goodDescription);
+
+      // function onClickOnDescription() {
+      //     $(document).ready(function() {
+      //     var goodDescripton = document.getElementById('good-description');
+      //     goodDescripton.hide();
+      //     document.getElementById('characteristic-block').hide();
+      // });}
+      //
+      // function onClickOnCharacteristic() {
+      //     document.getElementById('characteristic-block').show();
+      //     document.getElementById('good-description').hide();
+      // }
+
+        </script>
+
+<script>
+    $(document).ready(function() {
+    $("#good-description").hide();
+    $("#characteristics-button").click(function(){
+        $("#characteristic-block").show();
+        $("#good-description").hide();
+
+    });
+    $("#description-button").click(function(){
+        $("#characteristic-block").hide();
+        $("#good-description").show();
+    });
+    });
+</script>
 
 
 
-      </script>
-  <script >
-      $("#description-container").hide();
-      $("#characteristics-button").click(function(){
-          $("#characteristic-block").show();
-          $("#description-container").hide();
-
-      });
-      $("#description-button").click(function(){
-          $("#characteristic-block").hide();
-          $("#description-container").show();
-      });
-  </script>
 
 
 
 
-  <footer class="container-footer">
+
+
+
+
+
+
+
+
+
+        <footer class="container-footer">
       <div class="footer_main_column">
 
 
@@ -357,6 +405,7 @@
           <a class="footer-columns" href="#" target="_blank"><img src="../photo/viber1.png" alt=""></a>
       </div>
   </footer>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </body>
 </html>
                             
