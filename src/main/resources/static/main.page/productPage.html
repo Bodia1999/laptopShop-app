@@ -1,69 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Bear</title>
-  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Bear</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../main.page.css/productPage.css">
+    <link rel="stylesheet" href="../main.page.css/productPage.css">
 </head>
 
-  <div>
-      <header>
-          <div class="logo">
-              <div class="graphic-logo">
-                  <a href="../main.page/index.html"><img class="logotype" src="../photo/FINAL_VERSION.png" alt="logo"></a>
-              </div>
+<div>
+    <header>
+        <div class="logo">
+            <div class="graphic-logo">
+                <a href="../main.page/index.html"><img class="logotype" src="../photo/FINAL_VERSION.png" alt="logo"></a>
+            </div>
 
-              <div class="info">
-                  <!--<a href="#"><img src="img/log_in_final.png" alt=""></a>-->
-                  <a href="#"><img src="../photo/images_for_main_page/cart.png" alt=""></a>
-              </div>
-
-
-          </div>
-      </header>
-  </div>
-  <div class="container">
-
-  </div>
-  <script>
-
-      gettingAllElementsInNewWay();
-      function gettingAllElementsInNewWay(){
-          var item = window.localStorage.getItem('id');
-          $.ajax({
-              url: 'http://localhost:8000/laptop/findOne?id='+item,
-              type: 'POST',
-              contentType: 'application/json',
-              success: (page) => {
-                  $('.container').html('');
-            console.log(page);
-                      appendProduct(page);
-
-                  // location.reload;
-              },
-              error: (e) => {
-                  console.log(e)
-              }
-          });
-      }
-      function revertingValue(value) {
-          if (value==true){
-              return "+";
-          }
-          if (value==false){
-              return "-";
-          }
-          if (value==null){
-              return "No data";
-          }
+            <div class="info">
+                <!--<a href="#"><img src="img/log_in_final.png" alt=""></a>-->
+                <a href="#"><img src="../photo/images_for_main_page/cart.png" alt=""></a>
+            </div>
 
 
-      }
-      function appendProduct(prod) {
-          let container = $(".container");
-          container.append(`<div>
+        </div>
+    </header>
+</div>
+<div class="container">
+
+</div>
+<script>
+    var clickCount = 1;
+    gettingAllElementsInNewWay();
+    var idsToCart = new Array();
+    if (window.localStorage.getItem("idsToCart") == null) {
+        window.localStorage.setItem("idsToCart", JSON.stringify(idsToCart));
+    }
+
+    function gettingAllElementsInNewWay() {
+        let item = window.localStorage.getItem('id');
+        $.ajax({
+            url: 'http://localhost:8000/laptop/findOne?id=' + item,
+            type: 'POST',
+            contentType: 'application/json',
+            success: (page) => {
+
+                $('.container').html('');
+                console.log(page);
+                appendProduct(page);
+
+                // location.reload;
+            },
+            error: (e) => {
+                console.log(e)
+            }
+        });
+    }
+
+    function revertingValue(value) {
+        if (value == true) {
+            return "+";
+        }
+        if (value == false) {
+            return "-";
+        }
+        if (value == null) {
+            return "No data";
+        }
+
+
+    }
+
+    function addingToCart(id) {
+        var ids = JSON.parse(window.localStorage.getItem("idsToCart"));
+        if (!ids.length == 0 && clickCount == 1) {
+
+            for (let value of ids) {
+                idsToCart.push(value);
+            }
+        }
+        clickCount++;
+        idsToCart.push(id);
+        window.localStorage.setItem("idsToCart", JSON.stringify(idsToCart));
+    }
+
+    $(document).ready(function () {
+        $('#buy-button').click(function () {
+            let item = window.localStorage.getItem('id');
+            addingToCart(item);
+        })
+    });
+
+    function appendProduct(prod) {
+        let container = $(".container");
+        container.append(`<div>
       <!--       <div class="photo-panel" style="background-image: url(https://o.aolcdn.com/images/dims?quality=85&image_uri=https%3A%2F%2Fo.aolcdn.com%2Fimages%2Fdims%3Fcrop%3D1600%252C1055%252C0%252C0%26quality%3D85%26format%3Djpg%26resize%3D1600%252C1055%26image_uri%3Dhttp%253A%252F%252Fo.aolcdn.com%252Fhss%252Fstorage%252Fmidas%252Fe0fb2686cb35c31aa63009beb4d9a13b%252F206546644%252FMacBook%252BPro%252Bgallery%252B10.jpg%26client%3Da1acac3e1b3290917d92%26signature%3D4b7c6d9fec6ec988dc7ec49c9784a44159151922&client=amp-blogside-v2&signature=06f5074db4472d25216f41202b87f989cf4c3c9c)">-->
           <div class="main-panel">
           <div class="inside_main_panel">
@@ -82,7 +110,7 @@
       <div class="price"><span>Price:</span><span class="downloaded-price">${prod.price}$</span></div><br>
       <div class="button-to-buy">
 
-          <button id="buy-button" value="More"><span>Add to Cart</span></button><br>
+          <a href="cart.html"><button id="buy-button" value="${prod.id}"><span>Add to Cart</span></button></a><br>
       </div><br>
       <div>
       <h1 class="selection-title">Qty:</h1>
@@ -267,145 +295,140 @@
     </div>
 
           </div>`)
-      };
+    };
 
 
+    // var goodDescription = document.getElementById('good-description');
+    // var characteristicsButton = document.getElementById('characteristics-button');
+    // var characteristicBlock = document.getElementById('characteristic-block');
+    // var descriptionButton = document.getElementById('description-button-block');
+    //
+    // w3.hide(goodDescription);
 
+    // function onClickOnDescription() {
+    //     $(document).ready(function() {
+    //     var goodDescripton = document.getElementById('good-description');
+    //     goodDescripton.hide();
+    //     document.getElementById('characteristic-block').hide();
+    // });}
+    //
+    // function onClickOnCharacteristic() {
+    //     document.getElementById('characteristic-block').show();
+    //     document.getElementById('good-description').hide();
+    // }
 
-
-        // var goodDescription = document.getElementById('good-description');
-        // var characteristicsButton = document.getElementById('characteristics-button');
-        // var characteristicBlock = document.getElementById('characteristic-block');
-        // var descriptionButton = document.getElementById('description-button-block');
-        //
-        // w3.hide(goodDescription);
-
-      // function onClickOnDescription() {
-      //     $(document).ready(function() {
-      //     var goodDescripton = document.getElementById('good-description');
-      //     goodDescripton.hide();
-      //     document.getElementById('characteristic-block').hide();
-      // });}
-      //
-      // function onClickOnCharacteristic() {
-      //     document.getElementById('characteristic-block').show();
-      //     document.getElementById('good-description').hide();
-      // }
-
-        </script>
+</script>
 
 <script>
-    $(document).ready(function() {
-    $("#good-description").hide();
-    $("#characteristics-button").click(function(){
-        $("#characteristic-block").show();
+    $(document).ready(function () {
         $("#good-description").hide();
+        $("#characteristics-button").click(function () {
+            $("#characteristic-block").show();
+            $("#good-description").hide();
 
-    });
-    $("#description-button").click(function(){
-        $("#characteristic-block").hide();
-        $("#good-description").show();
-    });
+        });
+        $("#description-button").click(function () {
+            $("#characteristic-block").hide();
+            $("#good-description").show();
+        });
     });
 </script>
 
 
+<footer class="container-footer">
+    <div class="footer_main_column">
 
 
+        <a class="footer-columns" href="index.html"><img src="../photo/FINAL_VERSION.png" alt=""></a>
 
 
+        <ol class="footer-columns">
+            <li>
+                Our Contacts:
+            </li>
+            <br>
+            <li class="font_line">
+                <b class="footer-columns">0971234567</b>
+            </li>
+            <br>
+            <li>
+                bogdanpapizhasnkiy@gmail.com
+            </li>
+        </ol>
+    </div>
 
-
-
-
-
-
-
-
-
-
-        <footer class="container-footer">
-      <div class="footer_main_column">
-
-
-
-          <a class="footer-columns" href="index.html"><img src="../photo/FINAL_VERSION.png" alt=""></a>
-
-
-
-          <ol class="footer-columns" >
-              <li>
-                  Our Contacts:
-              </li>
-              <br>
-              <li class="font_line">
-                  <b class="footer-columns">0971234567</b>
-              </li><br>
-              <li>
-                  bogdanpapizhasnkiy@gmail.com
-              </li>
-          </ol>
-      </div>
-
-      <div class="footer_first_column">
-          <h1><b class="footer-columns">Bear</b></h1>
-          <ol>
-              <li>
-                  <a class="footer-columns" href="https://www.google.com/maps/place/%D0%9A%D1%83%D1%80%D1%81%D0%B8+%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F/@49.8317506,24.0308476,17.04z/data=!4m5!3m4!1s0x0:0xfcf194b486271721!8m2!3d49.8311359!4d24.0332063" target="_blank">Our location</a>
-              </li><br>
-              <li>
-                  <a class="footer-columns" href="#">About us</a>
-              </li>
-          </ol>
-      </div >
-      <div class="footer_second_column">
-          <h1 ><b class="footer-columns">Categories</b></h1>
-          <ol>
-              <li>
-                  <a class="footer-columns" href="#">All products</a>
-              </li><br>
-              <li>
-                  <a class="footer-columns" href="appleMacBook.html">Apple MacBook</a>
-              </li><br>
-              <li>
-                  <a class="footer-columns" href="acer.html">Acer</a>
-              </li><br>
-              <li>
-                  <a class="footer-columns" href="asus.html">Asus</a>
-              </li><br>
-              <li>
-                  <a class="footer-columns" href="lenovo.html">Lenovo</a>
-              </li><br>
-              <li>
-                  <a class="footer-columns" href="hp.html">HP</a>
-              </li>
-              <br><li>
-              <a class="footer-columns" class="footer-columns" href="xiaomi.html">Xiaomi</a>
-          </li><br>
-          </ol>
-      </div>
-      <div class="footer_third_column">
-          <h1 class="footer-columns">For Clients</h1>
-          <ol>
-              <li>
-                  <a class="footer-columns" href="#">Delivery</a>
-              </li><br>
-              <li>
-                  <a class="footer-columns" href="#">Payment</a>
-              </li><br>
-              <li>
-                  <a class="footer-columns" href="#">Guarantee, exchange<br> and return</a>
-              </li><br>
-          </ol>
-      </div>
-      <div class="social_networkings">
-          <a class="footer-columns" href="#" target="_blank"><img src="../photo/telegram1.png" alt=""></a>
-          <a class="footer-columns" href="#" target="_blank"><img src="../photo/facebook1.png" alt=""></a>
-          <a class="footer-columns" href="#" target="_blank"><img src="../photo/instagram1.png" alt=""></a>
-          <a class="footer-columns" href="#" target="_blank"><img src="../photo/viber1.png" alt=""></a>
-      </div>
-  </footer>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <div class="footer_first_column">
+        <h1><b class="footer-columns">Bear</b></h1>
+        <ol>
+            <li>
+                <a class="footer-columns"
+                   href="https://www.google.com/maps/place/%D0%9A%D1%83%D1%80%D1%81%D0%B8+%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F/@49.8317506,24.0308476,17.04z/data=!4m5!3m4!1s0x0:0xfcf194b486271721!8m2!3d49.8311359!4d24.0332063"
+                   target="_blank">Our location</a>
+            </li>
+            <br>
+            <li>
+                <a class="footer-columns" href="#">About us</a>
+            </li>
+        </ol>
+    </div>
+    <div class="footer_second_column">
+        <h1><b class="footer-columns">Categories</b></h1>
+        <ol>
+            <li>
+                <a class="footer-columns" href="#">All products</a>
+            </li>
+            <br>
+            <li>
+                <a class="footer-columns" href="appleMacBook.html">Apple MacBook</a>
+            </li>
+            <br>
+            <li>
+                <a class="footer-columns" href="acer.html">Acer</a>
+            </li>
+            <br>
+            <li>
+                <a class="footer-columns" href="asus.html">Asus</a>
+            </li>
+            <br>
+            <li>
+                <a class="footer-columns" href="lenovo.html">Lenovo</a>
+            </li>
+            <br>
+            <li>
+                <a class="footer-columns" href="hp.html">HP</a>
+            </li>
+            <br>
+            <li>
+                <a class="footer-columns" class="footer-columns" href="xiaomi.html">Xiaomi</a>
+            </li>
+            <br>
+        </ol>
+    </div>
+    <div class="footer_third_column">
+        <h1 class="footer-columns">For Clients</h1>
+        <ol>
+            <li>
+                <a class="footer-columns" href="#">Delivery</a>
+            </li>
+            <br>
+            <li>
+                <a class="footer-columns" href="#">Payment</a>
+            </li>
+            <br>
+            <li>
+                <a class="footer-columns" href="#">Guarantee, exchange<br> and return</a>
+            </li>
+            <br>
+        </ol>
+    </div>
+    <div class="social_networkings">
+        <a class="footer-columns" href="#" target="_blank"><img src="../photo/telegram1.png" alt=""></a>
+        <a class="footer-columns" href="#" target="_blank"><img src="../photo/facebook1.png" alt=""></a>
+        <a class="footer-columns" href="#" target="_blank"><img src="../photo/instagram1.png" alt=""></a>
+        <a class="footer-columns" href="#" target="_blank"><img src="../photo/viber1.png" alt=""></a>
+    </div>
+</footer>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </body>
 </html>
                             
