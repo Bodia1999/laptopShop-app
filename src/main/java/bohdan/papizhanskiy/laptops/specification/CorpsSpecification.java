@@ -57,11 +57,11 @@ public class CorpsSpecification implements Specification<Corps> {
     }
 
     private Predicate findByMaterialOfCorps(Root<Corps> root, CriteriaBuilder criteriaBuilder) {
-        String materialOfCorps = corpsFilterRequest.getMaterialOfCorps();
-        if (materialOfCorps == null || materialOfCorps.trim().isEmpty()) {
+        List<String> materialOfCorps = corpsFilterRequest.getMaterialOfCorps();
+        if (materialOfCorps == null || materialOfCorps.isEmpty()) {
             return null;
         }
 
-        return criteriaBuilder.like(root.get("materialOfCorps"), materialOfCorps);
+        return root.get("materialOfCorps").in( materialOfCorps.toArray());
     }
 }

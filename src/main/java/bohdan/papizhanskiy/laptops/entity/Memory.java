@@ -25,6 +25,8 @@ public class Memory {
 
     private Integer volumeOfMemory;
 
+    private String availabilityOfSsd;
+
     @OneToMany(mappedBy = "memory")
     private List<Laptop> laptop;
 

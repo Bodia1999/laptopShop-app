@@ -35,11 +35,11 @@ public class ProcessorSpecification implements Specification<Processor> {
     }
 
     private Predicate findByName(Root<Processor> root, CriteriaBuilder criteriaBuilder) {
-        String processor = processorFilterRequest.getName();
-        if (processor == null || processor.trim().isEmpty()) {
+        List<String> processor = processorFilterRequest.getName();
+        if (processor == null || processor.isEmpty()) {
             return null;
         }
-        return criteriaBuilder.like(root.get("name"), processor);
+        return root.get("name").in(processor.toArray());
     }
 
     private Predicate findByModel(Root<Processor> root, CriteriaBuilder criteriaBuilder) {

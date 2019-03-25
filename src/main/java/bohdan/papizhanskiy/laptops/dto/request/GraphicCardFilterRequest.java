@@ -4,13 +4,16 @@ import javafx.scene.control.Pagination;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 public class GraphicCardFilterRequest {
 
-    private String name;
+    private List<String> name = new ArrayList<>();
 
-    private String model;
+    private List<String> model = new ArrayList<>();
 
     private Integer volumeOfMemoryFrom;
     private Integer volumeOfMemoryTo;

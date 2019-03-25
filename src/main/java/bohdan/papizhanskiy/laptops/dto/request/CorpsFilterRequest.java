@@ -3,6 +3,9 @@ package bohdan.papizhanskiy.laptops.dto.request;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 public class CorpsFilterRequest {
@@ -12,7 +15,7 @@ public class CorpsFilterRequest {
 
     private String colorOfCorps;
 
-    private String materialOfCorps;
+    private List<String> materialOfCorps = new ArrayList<>();
 
     private PaginationRequest pagination;
 }

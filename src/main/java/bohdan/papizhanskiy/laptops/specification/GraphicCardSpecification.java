@@ -33,19 +33,19 @@ public class GraphicCardSpecification implements Specification<GraphicCard> {
     }
 
     private Predicate findByNameLike(Root<GraphicCard> root, CriteriaBuilder criteriaBuilder) {
-        String name = graphicCardFilterRequest.getName();
-        if (name == null || name.trim().isEmpty()) {
+        List<String> name = graphicCardFilterRequest.getName();
+        if (name == null || name.isEmpty()) {
             return null;
         }
-        return criteriaBuilder.like(root.get("name"), '%' + name + '%');
+        return root.get("name").in(name.toArray());
     }
 
     private Predicate findByModelLike(Root<GraphicCard> root, CriteriaBuilder criteriaBuilder) {
-        String model = graphicCardFilterRequest.getModel();
-        if (model == null || model.trim().isEmpty()) {
+        List<String> model= graphicCardFilterRequest.getModel();
+        if (model == null || model.isEmpty()) {
             return null;
         }
-        return criteriaBuilder.like(root.get("model"), '%' + model + '%');
+        return root.get("model").in( model .toArray());
     }
 
     private Predicate findByVolumeOfMemory(Root<GraphicCard> root, CriteriaBuilder criteriaBuilder) {

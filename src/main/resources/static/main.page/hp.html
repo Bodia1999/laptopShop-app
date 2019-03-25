@@ -18,6 +18,7 @@
      </div>
 
      <div class="info">
+         <a href="#"><img src="../photo/person1.png" alt=""></a>
        <!--<a href="#"><img src="img/log_in_final.png" alt=""></a>-->
        <a href="#"><img src="../photo/images_for_main_page/cart.png" alt=""></a>
      </div>
@@ -38,6 +39,131 @@
   </div>
   </div>
   </div>
+  <div class="page">
+      <div class="main-all-page">
+
+
+          <div class="main-container">
+              <div class="selector-sorting">
+                  <span>Sort by:</span><select class="soflow">
+                  <!--  <option>Select</option>-->
+                  <option value="model/ASC" checked>Name &#8593;</option>
+                  <option value="model/DESC">Name &#8595;</option>
+                  <option value="price/ASC">Price: low to high</option>
+                  <option value="price/DESC">Price: high to low</option>
+
+              </select>
+              </div>
+              <div class="prod-container">
+                  <div class="container">
+
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </div>
+  <script>
+      separatingString();
+      $('.soflow').change(function () {
+          separatingString();
+      });
+
+      function separatingString() {
+          var select = $('.soflow').val().toString();
+          var strings = select.split("/");
+          var sortByField = strings[0];
+          var sortDirection = strings[1];
+          changingSortingWay(sortDirection, sortByField);
+          console.log(sortByField + '     ' + sortDirection);
+      }
+
+      function changingSortingWay(sortDirection, sortByField) {
+          let pageRequest = {
+              makeFilterRequest: {
+                  name: 'HP'
+              },
+              pagination: {
+                  page: 0,
+                  size: 12,
+                  sortRequest: {
+                      direction: sortDirection,
+                      fieldName: sortByField
+                  }
+              }
+
+          };
+          gettingAllElementsInNewWay(pageRequest);
+
+      }
+
+      function gettingAllElementsInNewWay(pageRequest) {
+          $.ajax({
+              url: 'http://localhost:8000/laptop/filter',
+              type: 'POST',
+              contentType: 'application/json',
+              data: JSON.stringify(pageRequest),
+              success: (page) => {
+                  $('.container').html('');
+                  for (let laptop of page.content) {
+                      appendProduct(laptop);
+                  }
+                  // location.reload;
+              },
+              error: (e) => {
+                  console.log(e)
+              }
+          });
+      }
+
+
+      function appendProduct(prod) {
+
+          let container = $('.container');
+
+          container.append(`<div class="out-product">
+        <div class="product">
+           <!--<div class="product-image" style="background-image: url(https://s.4pda.to/FXOw91qnJGBZYbwuumPLtusBjioW.jpg)">-->
+           <a href="../product/productPage.html" ><div class="product-image" style="background-image: url(http://localhost:8000/img/${prod.imageDirection})"></a>
+
+                <!--<a href="#" class="listing-item__img-container">-->
+              <!--<img src="img/macbook.jpg"  class="item-image">-->
+              <!--</a>-->
+
+              </div>
+              <p class="product-name">
+              <a href="../product/productPage.html" " >
+              ${prod.makeName} ${prod.model}     <span class="identification-code" style="color:white;">${prod.id}</span>
+              </a>
+              </p>
+
+
+              <ul class="list-short-description">
+
+              <li>
+              <span class="processor-name">Processor</span>: <span class="">${prod.processor.name} ${prod.processor.model}</span>
+
+              </li>
+              <li>
+              <span class="processor-name">Ram</span>: <span class="">${prod.ram.volumeOfMemory}GB</span>
+
+              </li>
+              <li>
+              <span class="processor-name">Graphic Card</span>: <span>${prod.graphicCard.name} ${prod.graphicCard.model}</span>
+              </li>
+              <li>
+              <span class="numb">${prod.price}</span><span class="currency">$</span>
+              </li>
+              </ul>
+
+
+
+
+
+              </div></div>`)
+            };
+
+</script>
   <footer class="container-footer">
       <div class="footer_main_column">
 

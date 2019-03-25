@@ -57,11 +57,11 @@ public class MemorySpecification implements Specification<Memory> {
     }
 
     private Predicate findByTypeOfMemory(Root<Memory> root, CriteriaBuilder criteriaBuilder) {
-        String typeOfMemory = memoryFilterRequest.getTypeOfMemory();
-        if (typeOfMemory == null || typeOfMemory.trim().isEmpty()) {
+        List<String> typeOfMemory = memoryFilterRequest.getTypeOfMemory();
+        if (typeOfMemory == null || typeOfMemory.isEmpty()) {
             return null;
         }
-        return criteriaBuilder.like(root.get("typeOfMemory"), typeOfMemory);
+        return root.get("typeOfMemory").in(typeOfMemory.toArray());
     }
 
 

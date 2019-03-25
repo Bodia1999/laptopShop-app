@@ -22,7 +22,7 @@ public class LaptopSpecification implements Specification<Laptop> {
     public Predicate toPredicate(Root<Laptop> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
         List<Predicate> predicates = new ArrayList<>();
         Predicate byMake = findByMake(root, criteriaBuilder);
-        if (byMake!=null)predicates.add(byMake);
+        if (byMake != null) predicates.add(byMake);
         Predicate byModel = findByModel(root, criteriaBuilder);
         if (byModel != null) predicates.add(byModel);
         Predicate byPrice = findByPrice(root, criteriaBuilder);
@@ -73,12 +73,14 @@ public class LaptopSpecification implements Specification<Laptop> {
 
     private Predicate findByMake(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
         MakeFilterRequest filter = laptopFilterRequest.getMakeFilterRequest();
+//        MakeFilterRequest filter = laptopFilterRequest.getMakeFilterRequest();
         if (filter == null) return null;
         String makeName = filter.getName();
-        if (makeName == null || makeName.trim().isEmpty()) {
+        if (makeName == null || makeName.isEmpty()) {
             return null;
         }
         Join<Laptop, Make> makeJoin = root.join("make");
+//        return makeJoin.get("name").in(makeName.toArray());
         return criteriaBuilder.like(makeJoin.get("name"), '%' + makeName + '%');
     }
 
@@ -168,23 +170,23 @@ public class LaptopSpecification implements Specification<Laptop> {
     private Predicate findByGraphicCardNameLike(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
         GraphicCardFilterRequest filter = laptopFilterRequest.getGraphicCardFilterRequest();
         if (filter == null) return null;
-        String name = filter.getName();
-        if (name == null || name.trim().isEmpty()) {
+        List<String> name = filter.getName();
+        if (name == null || name.isEmpty()) {
             return null;
         }
         Join<Laptop, GraphicCard> graphicCardJoin = root.join("graphicCard");
-        return criteriaBuilder.like(graphicCardJoin.get("name"), '%' + name + '%');
+        return graphicCardJoin.get("name").in(name.toArray());
     }
 
     private Predicate findByGraphicCardModelLike(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
         GraphicCardFilterRequest filter = laptopFilterRequest.getGraphicCardFilterRequest();
         if (filter == null) return null;
-        String model = filter.getModel();
-        if (model == null || model.trim().isEmpty()) {
+        List<String> model = filter.getModel();
+        if (model == null || model.isEmpty()) {
             return null;
         }
         Join<Laptop, GraphicCard> graphicCardJoin = root.join("graphicCard");
-        return criteriaBuilder.like(graphicCardJoin.get("model"), '%' + model + '%');
+        return graphicCardJoin.get("model").in(model.toArray());
     }
 
     private Predicate findByGraphicCardVolumeOfMemory(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
@@ -243,13 +245,13 @@ public class LaptopSpecification implements Specification<Laptop> {
     private Predicate findByMaterialOfCorps(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
         CorpsFilterRequest filter = laptopFilterRequest.getCorpsFilterRequest();
         if (filter == null) return null;
-        String materialOfCorps = filter.getMaterialOfCorps();
-        if (materialOfCorps == null || materialOfCorps.trim().isEmpty()) {
+        List<String> materialOfCorps = filter.getMaterialOfCorps();
+        if (materialOfCorps == null || materialOfCorps.isEmpty()) {
             return null;
         }
 
         Join<Laptop, Corps> corpsJoin = root.join("corps");
-        return criteriaBuilder.like(corpsJoin.get("materialOfCorps"), materialOfCorps);
+        return corpsJoin.get("materialOfCorps").in(materialOfCorps.toArray());
     }
 
 
@@ -286,24 +288,24 @@ public class LaptopSpecification implements Specification<Laptop> {
     private Predicate findByMemoryTypeOfMemory(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
         MemoryFilterRequest filter = laptopFilterRequest.getMemoryFilterRequest();
         if (filter == null) return null;
-        String typeOfMemory = filter.getTypeOfMemory();
-        if (typeOfMemory == null || typeOfMemory.trim().isEmpty()) {
+        List<String> typeOfMemory = filter.getTypeOfMemory();
+        if (typeOfMemory == null || typeOfMemory.isEmpty()) {
             return null;
         }
         Join<Laptop, Memory> memoryJoin = root.join("memory");
-        return criteriaBuilder.like(memoryJoin.get("typeOfMemory"), '%' + typeOfMemory + '%');
+        return memoryJoin.get("typeOfMemory").in(typeOfMemory.toArray());
     }
 
 
     private Predicate findByProcessorName(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
         ProcessorFilterRequest filter = laptopFilterRequest.getProcessorFilterRequest();
         if (filter == null) return null;
-        String processor = filter.getName();
-        if (processor == null || processor.trim().isEmpty()) {
+        List<String> processor = filter.getName();
+        if (processor == null || processor.isEmpty()) {
             return null;
         }
         Join<Laptop, Processor> processorJoin = root.join("processor");
-        return criteriaBuilder.like(processorJoin.get("name"), processor);
+        return processorJoin.get("name").in(processor.toArray());
     }
 
     private Predicate findByProcessorModel(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
@@ -359,44 +361,37 @@ public class LaptopSpecification implements Specification<Laptop> {
     private Predicate findByTypeOfScreen(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
         ScreenFilterRequest filter = laptopFilterRequest.getScreenFilterRequest();
         if (filter == null) return null;
-        String type = filter.getType();
-        if (type == null || type.trim().isEmpty()) {
+        List<String> type = filter.getType();
+        if (type == null || type.isEmpty()) {
             return null;
         }
         Join<Laptop, Screen> screenJoin = root.join("screen");
-        return criteriaBuilder.like(screenJoin.get("type"), type);
+        return screenJoin.get("type").in( type.toArray());
     }
 
     private Predicate findByScreenSize(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
         ScreenFilterRequest filter = laptopFilterRequest.getScreenFilterRequest();
-        if (filter == null) return null;
-        Integer sizeFrom = filter.getSizeFrom();
-        Integer sizeTo = filter.getSizeTo();
-        if (sizeFrom == null && sizeTo == null) {
+        if (filter==null)return null;
+
+        List<String> size = filter.getSize();
+        if (size == null || size.isEmpty()) {
             return null;
         }
-        if (sizeFrom == null) {
-            laptopFilterRequest.getScreenFilterRequest().setSizeFrom(0);
-        }
-
-        if (sizeTo == null) {
-            laptopFilterRequest.getScreenFilterRequest().setSizeTo(Integer.MAX_VALUE);
-        }
         Join<Laptop, Screen> screenJoin = root.join("screen");
-        return criteriaBuilder.between(screenJoin.get("size"), sizeFrom, sizeTo);
+        return screenJoin.get("size").in(size.toArray());
     }
 
 
     private Predicate findByScreenResolution(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
         ScreenFilterRequest filter = laptopFilterRequest.getScreenFilterRequest();
         if (filter == null) return null;
-        String resolution = filter.getResolution();
+        List<String> resolution = filter.getResolution();
 
-        if (resolution == null || resolution.trim().isEmpty()) {
+        if (resolution == null || resolution.isEmpty()) {
             return null;
         }
         Join<Laptop, Screen> screenJoin = root.join("screen");
-        return criteriaBuilder.like(screenJoin.get("size"), resolution);
+        return screenJoin.get("size").in(resolution.toArray());
     }
 
 

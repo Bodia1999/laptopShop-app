@@ -35,8 +35,11 @@ public class Laptop {
     private String imageDirection;
 
     private String descriptionImagePath1;
+    private String descriptionFirstParagraph;
     private String descriptionImagePath2;
+    private String descriptionSecondParagraph;
     private String descriptionImagePath3;
+    private String descriptionThirdParagraph;
 
     @ManyToOne
     private Screen screen;

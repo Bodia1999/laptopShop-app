@@ -36,6 +36,14 @@ body {
   justify-content: flex-end;
 }
 
+.info{
+  width: 190px;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+
 nav{
   margin:auto;
   width: 800px;

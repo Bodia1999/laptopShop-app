@@ -3,16 +3,18 @@ package bohdan.papizhanskiy.laptops.dto.request;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 public class ScreenFilterRequest {
 
-    private String type;
+    private List<String> type = new ArrayList<>();;
 
-    private String resolution;
+    private List<String> resolution = new ArrayList<>();;
 
-    private Integer sizeFrom;
-    private Integer sizeTo;
+    private List<String> size = new ArrayList<>();
 
     private  PaginationRequest pagination;
 }

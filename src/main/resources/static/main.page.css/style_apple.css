@@ -19,6 +19,14 @@
   padding-bottom: 10px;
 }
 
+.info{
+  width: 190px;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+
 .main{
   
   display: flex;

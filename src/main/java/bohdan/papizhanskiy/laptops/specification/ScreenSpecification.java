@@ -31,40 +31,32 @@ public class ScreenSpecification implements Specification<Screen> {
     }
 
     private Predicate findByTypeOfScreen(Root<Screen> root, CriteriaBuilder criteriaBuilder) {
-        String type = screenFilterRequest.getType();
-        if (type == null || type.trim().isEmpty()) {
+        List<String> type = screenFilterRequest.getType();
+        if (type == null || type.isEmpty()) {
             return null;
         }
 
-        return criteriaBuilder.like(root.get("type"), type);
+        return root.get("type").in(type.toArray());
     }
 
     private Predicate findBySize(Root<Screen> root, CriteriaBuilder criteriaBuilder) {
-        Integer sizeFrom = screenFilterRequest.getSizeFrom();
-        Integer sizeTo = screenFilterRequest.getSizeTo();
-        if (sizeFrom == null && sizeTo == null) {
+        List<String> size = screenFilterRequest.getSize();
+        if (size == null || size.isEmpty()) {
             return null;
         }
-        if (sizeFrom == null) {
-            screenFilterRequest.setSizeFrom(0);
-        }
 
-        if (sizeTo == null) {
-            screenFilterRequest.setSizeTo(Integer.MAX_VALUE);
-        }
-
-        return criteriaBuilder.between(root.get("size"), sizeFrom, sizeTo);
+        return root.get("size").in(size.toArray());
     }
 
 
     private Predicate findByResolution(Root<Screen> root, CriteriaBuilder criteriaBuilder) {
-        String resolution = screenFilterRequest.getResolution();
+        List<String> resolution = screenFilterRequest.getResolution();
 
-        if (resolution == null || resolution.trim().isEmpty()) {
+        if (resolution == null || resolution.isEmpty()) {
             return null;
         }
 
-        return criteriaBuilder.like(root.get("size"), resolution);
+        return root.get("size").in(resolution.toArray());
     }
 
 }
