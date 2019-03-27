@@ -58,18 +58,18 @@ public class LaptopService {
         }
         laptop.setModel(laptopRequest.getModel());
         laptop.setMake(makeService.findOne(laptopRequest.getMakeId()));
-        laptop.setImageDirection(laptopRequest.getImageDirection());
-        laptop.setDescriptionImagePath1(laptopRequest.getDescriptionImagePath1());
-        laptop.setDescriptionImagePath2(laptopRequest.getDescriptionImagePath2());
-        laptop.setDescriptionImagePath3(laptopRequest.getDescriptionImagePath3());
-        laptop.setPrice(laptopRequest.getPrice());
-        laptop.setDescription(laptopRequest.getDescription());
         laptop.setGraphicCard(graphicCardService.findOne(laptopRequest.getGraphicCardId()));
         laptop.setRam(ramService.findOne(laptopRequest.getRamId()));
         laptop.setCorps(corpsService.findOne(laptopRequest.getCorpsId()));
         laptop.setMemory(memoryService.findOne(laptopRequest.getMemoryId()));
         laptop.setProcessor(processorService.findOne(laptopRequest.getProcessorId()));
         laptop.setScreen(screenService.findOne(laptopRequest.getScreenId()));
+        laptop.setImageDirection(laptopRequest.getImageDirection());
+        laptop.setDescriptionImagePath1(laptopRequest.getDescriptionImagePath1());
+        laptop.setDescriptionImagePath2(laptopRequest.getDescriptionImagePath2());
+        laptop.setDescriptionImagePath3(laptopRequest.getDescriptionImagePath3());
+        laptop.setPrice(laptopRequest.getPrice());
+        laptop.setDescription(laptopRequest.getDescription());
         laptop.setAvailabilityOfWIFI(laptopRequest.getAvailabilityOfWIFI());
         laptop.setAvailabilityOfAUX(laptopRequest.getAvailabilityOfAUX());
         laptop.setAvailabilityOfBluetooth(laptopRequest.getAvailabilityOfBluetooth());

@@ -24,4 +24,6 @@ public class MemoryRequest {
 //    @NotEmpty
 //    @Min(1)
     private Integer volumeOfMemory;
+
+    private String availabilityOfSsd;
 }

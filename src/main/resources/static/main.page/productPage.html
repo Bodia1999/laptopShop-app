@@ -69,6 +69,12 @@
 
     }
 
+    function checkingValueForSSD(value) {
+        if (value==null){
+            return "-";
+        }
+    }
+
     function addingToCart(id) {
         var ids = JSON.parse(window.localStorage.getItem("idsToCart"));
         if (!ids.length == 0 && clickCount == 1) {
@@ -203,6 +209,11 @@
           <li class="point">
           <p class="point__left-text">Producer of drive</p>
       <p class="point__right-text">${prod.memory.name}</p>
+          </li>
+
+          <li class="point">
+          <p class="point__left-text">SSD</p>
+      <p class="point__right-text">${checkingValueForSSD(prod.memory.availabilityOfSsd)}</p>
           </li>
 
           <li class="point">

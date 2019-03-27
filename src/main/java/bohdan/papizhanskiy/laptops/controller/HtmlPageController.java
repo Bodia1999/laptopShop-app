@@ -21,7 +21,7 @@ public class HtmlPageController {
 //    public String singPage(){
 //        return "main.page/sign.html";
 //    }
-////    @RequestMapping("/")
+//    @RequestMapping("/")
 //    public String mainPage(){
 //        return "main.html";
 //    }

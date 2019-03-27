@@ -15,12 +15,14 @@ public class MemoryResponse {
     private String name;
     private String typeOfMemory;
     private Integer volumeOfMemory;
+    private String availabilityOfSsd;
+
 
     public MemoryResponse (Memory memory){
         id = memory.getId();
         name = memory.getName();
         typeOfMemory = memory.getTypeOfMemory();
         volumeOfMemory = memory.getVolumeOfMemory();
-
+        availabilityOfSsd = memory.getAvailabilityOfSsd();
     }
 }

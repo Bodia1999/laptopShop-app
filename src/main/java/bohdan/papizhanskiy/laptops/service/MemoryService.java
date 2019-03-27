@@ -43,6 +43,7 @@ public class MemoryService {
         memory.setName(memoryRequest.getName());
         memory.setTypeOfMemory(memoryRequest.getTypeOfMemory());
         memory.setVolumeOfMemory(memoryRequest.getVolumeOfMemory());
+        memory.setAvailabilityOfSsd(memoryRequest.getAvailabilityOfSsd());
         return memoryRepository.save(memory);
     }
 
