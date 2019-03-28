@@ -41,6 +41,7 @@ function setLaptopToTable(laptop) {
         '<td>' + laptop.memoryId + '</td>' +
         '<td>' + laptop.processorId + '</td>' +
         '<td>' + laptop.screenId + '</td>' +
+        '<td>' + laptop.price + '</td>' +
         '<td>' + laptop.availabilityOfWIFI + '</td>' +
         '<td>' + laptop.availabilityOfBluetooth + '</td>' +
         '<td>' + laptop.availabilityOfUSBTypeC + '</td>' +
@@ -49,18 +50,53 @@ function setLaptopToTable(laptop) {
         '<td>' + laptop.availabilityOfHDMI + '</td>' +
         '<td>' + laptop.availabilityOfLAN + '</td>' +
         '<td>' + laptop.availabilityOfAUX + '</td>' +
-        '<td>' + '<span>/img/</span>'+laptop.imageDirection + '</td>' +
+        '<td>' + laptop.imageDirection + '</td>' +
         '<td><button class="button" value="' + laptop.id + '">Delete</button></td>' +
-        '<td><button class="buttonToUpdate" value="' + laptop.id +'">Update</button></td>' +
+        '<td><button class="buttonToUpdate" value="' + laptop.id + '">Update</button></td>' +
         '</tr>');
 }
+
+function uuidv4() {
+    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    ) + ".jpg"
+}
+
+$('#sendFile1').click(function () {
+    var imageDirecton = document.getElementById("mainImageDirection").files[0];
+    getBase64(imageDirecton).then(data => {
+        writeFileToStorage1(data);
+    });
+
+});
+
+$('#sendFile2').click(function () {
+    var descriptionImagePath1 = document.getElementById("firstImageDirection").files[0];
+    getBase64(descriptionImagePath1).then(data => {
+        writeFileToStorage2(data);
+    });
+});
+
+$('#sendFile3').click(function () {
+    var descriptionImagePath2 = document.getElementById("secondImageDirection").files[0];
+    getBase64(descriptionImagePath2).then(data => {
+        writeFileToStorage3(data);
+    });
+});
+
+$('#sendFile4').click(function () {
+    var descriptionImagePath3 = document.getElementById("thirdImageDirection").files[0];
+    getBase64(descriptionImagePath3).then(data => {
+        writeFileToStorage4(data);
+    });
+});
 
 function setActionOnCreateBtn() {
     $("#btnCreateLaptop").click(function () {
         //console.log("I am here");
 
 
-        var file = document.getElementById("imageDirection").files[0];
+
         var model = $("#model").val();
 
         var makeId = $("#makeId").val();
@@ -70,6 +106,12 @@ function setActionOnCreateBtn() {
         var memoryId = $("#memoryId").val();
         var processorId = $("#processorId").val();
         var screenId = $("#screenId").val();
+        var description1 = $('#description1').val();
+        var description2 = $('#description2').val();
+        var description3 = $('#description3').val();
+        var price= $('#price').val();
+
+
         var availabilityOfWIFI = $("input[name='availabilityOfWIFI']:checked").val();
         var availabilityOfBluetooth = $("input[name='availabilityOfBluetooth']:checked").val();
         var availabilityOfUSBTypeC = $("input[name='availabilityOfTypeC']:checked").val();
@@ -83,26 +125,32 @@ function setActionOnCreateBtn() {
 //            if (firstName != null && lastName != null && age != null) {
 
 
-
-
         var newLaptop = {
             "model": model,
-            "makeId":makeId,
-            "graphicCardId":graphicCardId,
-            "ramId":ramId,
-            "corpsId":corpsId,
-            "memoryId":memoryId,
-            "processorId":processorId,
-            "screenId":screenId,
-            "availabilityOfWIFI":availabilityOfWIFI,
-            "availabilityOfBluetooth":availabilityOfBluetooth,
-            "availabilityOfUSBTypeC":availabilityOfUSBTypeC,
-            "availabilityOfUSBSecondGeneration":availabilityOfUSBSecondGeneration,
-            "availabilityOfUSBThirdGeneration":availabilityOfUSBThirdGeneration,
-            "availabilityOfHDMI":availabilityOfHDMI,
-            "availabilityOfLAN":availabilityOfLAN,
-            "availabilityOfAUX":availabilityOfAUX,
-           "imageDirection":gettingFile(file)
+            "makeId": makeId,
+            "graphicCardId": graphicCardId,
+            "ramId": ramId,
+            "corpsId": corpsId,
+            "memoryId": memoryId,
+            "processorId": processorId,
+            "screenId": screenId,
+            "availabilityOfWIFI": availabilityOfWIFI,
+            "availabilityOfBluetooth": availabilityOfBluetooth,
+            "availabilityOfUSBTypeC": availabilityOfUSBTypeC,
+            "availabilityOfUSBSecondGeneration": availabilityOfUSBSecondGeneration,
+            "availabilityOfUSBThirdGeneration": availabilityOfUSBThirdGeneration,
+            "availabilityOfHDMI": availabilityOfHDMI,
+            "availabilityOfLAN": availabilityOfLAN,
+            "availabilityOfAUX": availabilityOfAUX,
+            "imageDirection": window.localStorage.getItem("url1"),
+            "descriptionImagePath1": window.localStorage.getItem("url2"),
+            "descriptionImagePath2": window.localStorage.getItem("url3"),
+            "descriptionImagePath3": window.localStorage.getItem("url4"),
+            "descriptionFirstParagraph": description1,
+            "descriptionSecondParagraph": description2,
+            "descriptionThirdParagraph": description3,
+            "price":price
+
 
         };
 
@@ -123,30 +171,31 @@ function setActionOnCreateBtn() {
 //            }
     });
 }
-function gettingFile(file) {
-    getBase64(file).then(data => {
 
-        //work with data as src of file
-        let request = {
-            //fileName: "someCustomFileName",
-            data: data
-        };
-
-        $.ajax({
-            url: "http://localhost:8000/photo/upload",
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(request),
-            success: function (dataResponse) {
-                return dataResponse;
-
-            },
-            error: function (error) {
-                alert(error.message);
-            }
-        });
-    });
-}
+// function gettingFile(file) {
+//     getBase64(file).then(data => {
+//
+//         //work with data as src of file
+//         let request = {
+//             //fileName: "someCustomFileName",
+//             data: data
+//         };
+//
+//         $.ajax({
+//             url: "http://localhost:8000/photo/upload",
+//             type: "POST",
+//             contentType: "application/json",
+//             data: JSON.stringify(request),
+//             success: function (dataResponse) {
+//                 return dataResponse;
+//
+//             },
+//             error: function (error) {
+//                 alert(error.message);
+//             }
+//         });
+//     });
+// }
 
 //delete process
 function setActionOnDeleteButtons() {
@@ -198,7 +247,7 @@ function setActionOnUpdateButton() {
                     // $("#availabilityOfLAN").val(dataResponse.availabilityOfLAN);
                     // $("#availabilityOfAUX").val(dataResponse.availabilityOfAUX);
                     var elementById = document.getElementById("myModal");
-                    elementById.style.display="block";
+                    elementById.style.display = "block";
                     $("#btnUpdateLaptop").click(function () {
 
                         var model = $("#model").val();
@@ -232,22 +281,22 @@ function setActionOnUpdateButton() {
 
                         var newLaptop = {
                             "model": model,
-                            "makeId":makeId,
-                            "graphicCardId":graphicCardId,
-                            "ramId":ramId,
-                            "corpsId":corpsId,
-                            "memoryId":memoryId,
-                            "processorId":processorId,
-                            "screenId":screenId,
-                            "availabilityOfWIFI":availabilityOfWIFI,
-                            "availabilityOfBluetooth":availabilityOfBluetooth,
-                            "availabilityOfUSBTypeC":availabilityOfUSBTypeC,
-                            "availabilityOfUSBSecondGeneration":availabilityOfUSBSecondGeneration,
-                            "availabilityOfUSBThirdGeneration":availabilityOfUSBThirdGeneration,
-                            "availabilityOfHDMI":availabilityOfHDMI,
-                            "availabilityOfLAN":availabilityOfLAN,
-                            "availabilityOfAUX":availabilityOfAUX,
-                            "imageDirection":createImagePath(file)
+                            "makeId": makeId,
+                            "graphicCardId": graphicCardId,
+                            "ramId": ramId,
+                            "corpsId": corpsId,
+                            "memoryId": memoryId,
+                            "processorId": processorId,
+                            "screenId": screenId,
+                            "availabilityOfWIFI": availabilityOfWIFI,
+                            "availabilityOfBluetooth": availabilityOfBluetooth,
+                            "availabilityOfUSBTypeC": availabilityOfUSBTypeC,
+                            "availabilityOfUSBSecondGeneration": availabilityOfUSBSecondGeneration,
+                            "availabilityOfUSBThirdGeneration": availabilityOfUSBThirdGeneration,
+                            "availabilityOfHDMI": availabilityOfHDMI,
+                            "availabilityOfLAN": availabilityOfLAN,
+                            "availabilityOfAUX": availabilityOfAUX,
+                            "imageDirection": createImagePath(file)
 
                         };
 
@@ -275,29 +324,233 @@ function setActionOnUpdateButton() {
 }
 
 
-
 // function createImagePath(fileName){
 //     return '/img/' + fileName;
 // }
 
+// function getBase64(file) {
+//     return new Promise((resolve, reject) => {
+//         const reader = new FileReader();
+//     reader.readAsDataURL(file);
+//     reader.onload = () => resolve(reader.result);
+//     reader.onerror = error => reject(error);
+// });
+// }
+
+
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyCPWbaKUux7y72ZURicKoWLpw_MZJlojWc",
+    authDomain: "bear-shop.firebaseapp.com",
+    databaseURL: "https://bear-shop.firebaseio.com",
+    projectId: "bear-shop",
+    storageBucket: "bear-shop.appspot.com",
+    messagingSenderId: "259030319558"
+};
+firebase.initializeApp(config);
+
+
+var storageRef = firebase.storage().ref();
+
+
+function writeFileToStorage1(file) {
+
+    var uploadTask = storageRef.child('images/' + uuidv4()).putString(file, 'data_url');
+
+
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        function (snapshot) {
+
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            // console.log('Upload is ' + progress + '% done');
+            // switch (snapshot.state) {
+            //     case firebase.storage.TaskState.PAUSED:
+            //         console.log('Upload is paused');
+            //         break;
+            //     case firebase.storage.TaskState.RUNNING:
+            //         console.log('Upload is running');
+            //         break;
+            // }
+            move1(progress);
+        }, function (error) {
+            console.log(error);
+        }, function () {
+            // Upload completed successfully, now we can get the download URL
+            uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                // console.log('File available at', downloadURL);
+                window.localStorage.setItem("url1", downloadURL);
+            });
+        });
+}function writeFileToStorage2(file) {
+
+    var uploadTask = storageRef.child('images/' + uuidv4()).putString(file, 'data_url');
+
+
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        function (snapshot) {
+
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            // console.log('Upload is ' + progress + '% done');
+            // switch (snapshot.state) {
+            //     case firebase.storage.TaskState.PAUSED:
+            //         console.log('Upload is paused');
+            //         break;
+            //     case firebase.storage.TaskState.RUNNING:
+            //         console.log('Upload is running');
+            //         break;
+            // }
+            move2(progress);
+        }, function (error) {
+            console.log(error);
+        }, function gettingUrl() {
+            // Upload completed successfully, now we can get the download URL
+            uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                // console.log('File available at', downloadURL);
+                window.localStorage.setItem("url2", downloadURL);
+            });
+        });
+}function writeFileToStorage3(file) {
+
+    var uploadTask = storageRef.child('images/' + uuidv4()).putString(file, 'data_url');
+
+
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        function (snapshot) {
+
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            // console.log('Upload is ' + progress + '% done');
+            // switch (snapshot.state) {
+            //     case firebase.storage.TaskState.PAUSED:
+            //         console.log('Upload is paused');
+            //         break;
+            //     case firebase.storage.TaskState.RUNNING:
+            //         console.log('Upload is running');
+            //         break;
+            // }
+            move3(progress);
+        }, function (error) {
+            console.log(error);
+        }, function () {
+            // Upload completed successfully, now we can get the download URL
+            uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                // console.log('File available at', downloadURL);
+                window.localStorage.setItem("url3", downloadURL);
+            });
+        });
+}function writeFileToStorage4(file) {
+
+    var uploadTask = storageRef.child('images/' + uuidv4()).putString(file, 'data_url');
+
+
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        function (snapshot) {
+
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            // console.log('Upload is ' + progress + '% done');
+            // switch (snapshot.state) {
+            //     case firebase.storage.TaskState.PAUSED:
+            //         console.log('Upload is paused');
+            //         break;
+            //     case firebase.storage.TaskState.RUNNING:
+            //         console.log('Upload is running');
+            //         break;
+            // }
+            move4(progress);
+        }, function (error) {
+            console.log(error);
+        }, function () {
+            // Upload completed successfully, now we can get the download URL
+            uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                // console.log('File available at', downloadURL);
+                window.localStorage.setItem("url4", downloadURL);
+            });
+        });
+}
+
+function move1(myWidth) {
+    var elem = document.getElementById("myBar1");
+    var width = Math.round(myWidth-1);
+    frame();
+//  var id = setInterval(frame, 10);
+    function frame() {
+//    if (width >= 100) {
+////      clearInterval(id);
+//        console.log(uploaded);
+//    } else {
+        width++;
+        elem.style.width = width + '%';
+//      elem.innerHTML = width * 1  + '%';
+        document.getElementById("demo1").innerHTML = width * 1  + '%';
+//    }
+    }
+}function move2(myWidth) {
+    var elem = document.getElementById("myBar2");
+    var width = Math.round(myWidth-1);
+    frame();
+//  var id = setInterval(frame, 10);
+    function frame() {
+//    if (width >= 100) {
+////      clearInterval(id);
+//        console.log(uploaded);
+//    } else {
+        width++;
+        elem.style.width = width + '%';
+//      elem.innerHTML = width * 1  + '%';
+        document.getElementById("demo2").innerHTML = width * 1  + '%';
+//    }
+    }
+}function move3(myWidth) {
+    var elem = document.getElementById("myBar3");
+    var width = Math.round(myWidth-1);
+    frame();
+//  var id = setInterval(frame, 10);
+    function frame() {
+//    if (width >= 100) {
+////      clearInterval(id);
+//        console.log(uploaded);
+//    } else {
+        width++;
+        elem.style.width = width + '%';
+//      elem.innerHTML = width * 1  + '%';
+        document.getElementById("demo3").innerHTML = width * 1  + '%';
+//    }
+    }
+}function move4(myWidth) {
+    var elem = document.getElementById("myBar4");
+    var width = Math.round(myWidth-1);
+    frame();
+//  var id = setInterval(frame, 10);
+    function frame() {
+//    if (width >= 100) {
+////      clearInterval(id);
+//        console.log(uploaded);
+//    } else {
+        width++;
+        elem.style.width = width + '%';
+//      elem.innerHTML = width * 1  + '%';
+        document.getElementById("demo4").innerHTML = width * 1  + '%';
+//    }
+    }
+}
+
+
 function getBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-});
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
 }
+
 
 function setModalConfiguration() {
     // Get the modal
     var modal = document.getElementById('myModal');
 
 
-
     // Get the button that opens the modal
     var btn = document.getElementById('openModal');
-
 
 
     // Get the <span> element that closes the modal
@@ -306,8 +559,7 @@ function setModalConfiguration() {
     // When the user clicks the button, open the modal
 
 
-
-    btn.onclick = function(){
+    btn.onclick = function () {
         modal.style.display = "block";
     };
 

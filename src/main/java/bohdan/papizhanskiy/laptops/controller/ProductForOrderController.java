@@ -1,5 +1,6 @@
 package bohdan.papizhanskiy.laptops.controller;
 
+import bohdan.papizhanskiy.laptops.dto.request.NewProductForOrderRequest;
 import bohdan.papizhanskiy.laptops.dto.request.ProductForOrderRequest;
 import bohdan.papizhanskiy.laptops.dto.response.ProductForOrderResponse;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
@@ -22,8 +23,8 @@ public class ProductForOrderController {
     }
 
     @PostMapping
-    public ProductForOrderResponse save(ProductForOrderRequest productForOrderRequest) throws Exception {
-        return productForOrderService.save(productForOrderRequest);
+    public ProductForOrderResponse save(NewProductForOrderRequest newProductForOrderRequest) throws Exception {
+        return productForOrderService.save(newProductForOrderRequest);
     }
 
     @DeleteMapping
@@ -32,8 +33,8 @@ public class ProductForOrderController {
     }
 
     @PutMapping("/{id}")
-    public ProductForOrderResponse update(@RequestBody ProductForOrderRequest productForOrderRequest,@PathVariable Long id) throws Exception {
-        return productForOrderService.update(productForOrderRequest, id);
+    public ProductForOrderResponse update(@RequestBody NewProductForOrderRequest newProductForOrderRequest,@PathVariable Long id) throws Exception {
+        return productForOrderService.update(newProductForOrderRequest, id);
     }
 
     @PostMapping("/findOne")

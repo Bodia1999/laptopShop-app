@@ -1,11 +1,10 @@
 package bohdan.papizhanskiy.laptops.service;
 
+import bohdan.papizhanskiy.laptops.dto.request.NewProductForOrderRequest;
 import bohdan.papizhanskiy.laptops.dto.request.PaginationRequest;
 import bohdan.papizhanskiy.laptops.dto.request.ProductForOrderRequest;
 import bohdan.papizhanskiy.laptops.dto.response.DataResponse;
-import bohdan.papizhanskiy.laptops.dto.response.MakeResponse;
 import bohdan.papizhanskiy.laptops.dto.response.ProductForOrderResponse;
-import bohdan.papizhanskiy.laptops.entity.Make;
 import bohdan.papizhanskiy.laptops.entity.ProductForOrder;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.repository.ProductForOrderRepository;
@@ -13,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,8 +22,12 @@ public class ProductForOrderService {
     @Autowired
     private ProductForOrderRepository productForOrderRepository;
 
-    public ProductForOrderResponse save(ProductForOrderRequest productForOrderRequest) throws Exception {
-        return new ProductForOrderResponse(productForOrderRequestToProductForOrder(productForOrderRequest, null));
+    @Autowired
+    private LaptopService laptopService;
+
+
+    public ProductForOrderResponse save(NewProductForOrderRequest newProductForOrderRequest) throws Exception {
+        return new ProductForOrderResponse(productForOrderRequestToProductForOrder(newProductForOrderRequest, null));
 
     }
 
@@ -31,23 +35,30 @@ public class ProductForOrderService {
         return productForOrderRepository.findAll().stream().map(ProductForOrderResponse::new).collect(Collectors.toList());
     }
 
-    public ProductForOrderResponse update(ProductForOrderRequest productForOrderRequest, Long id) throws Exception {
-        return new ProductForOrderResponse(productForOrderRequestToProductForOrder(productForOrderRequest, findOne(id)));
+    public ProductForOrderResponse update(NewProductForOrderRequest newProductForOrderRequest, Long id) throws Exception {
+        return new ProductForOrderResponse(productForOrderRequestToProductForOrder(newProductForOrderRequest, findOne(id)));
     }
 
     public void delete(Long id) throws WrongInputException {
         productForOrderRepository.delete(findOne(id));
     }
 
-    private ProductForOrder productForOrderRequestToProductForOrder(ProductForOrderRequest productForOrderRequest, ProductForOrder productForOrder) throws Exception {
+    private ProductForOrder productForOrderRequestToProductForOrder(NewProductForOrderRequest newProductForOrderRequest, ProductForOrder productForOrder) throws Exception {
         if (productForOrder == null) {
             productForOrder = new ProductForOrder();
         }
-        productForOrder.setCount(productForOrderRequest.getCount());
+        productForOrder.setCount(newProductForOrderRequest.getCount());
+        productForOrder.setLaptop(laptopService.findOne(newProductForOrderRequest.getLaptopId()));
+//        productForOrder = productForOrderRepository.save(productForOrder);
+//        for (Long order : productForOrderRequest.getOrderId() ){
+//            Order order1 = orderService.findOne(order);
+//            productForOrder.getOrders().add(order1);
+//        }
+//        productForOrder.setLaptop(laptopService.findOne(productForOrderRequest.getLaptopId()));
         return productForOrderRepository.save(productForOrder);
 
     }
-
+    @Transactional
     public ProductForOrder findOne(Long id) throws WrongInputException {
         return productForOrderRepository.findById(id)
                 .orElseThrow(() -> new WrongInputException("Product for order with id " + id + " not exists"));

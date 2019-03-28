@@ -28,7 +28,7 @@ public class OrderService {
         if (order == null) {
             order = new Order();
         }
-        order.setProductForOrder(orderRequest.getProductForOrder());
+
         order.setCustomer(customerService.findOne(orderRequest.getCustomerId()));
 
         return orderRepository.save(order);

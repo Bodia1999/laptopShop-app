@@ -7,7 +7,6 @@ import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,13 +19,19 @@ public class LaptopResponse {
     private String model;
 
     private String imageDirection;
+
     private String descriptionImagePath1;
+    @Type(type = "text")
+    private String descriptionFirstParagraph;
     private String descriptionImagePath2;
+    @Type(type = "text")
+    private String descriptionSecondParagraph;
     private String descriptionImagePath3;
+    @Type(type = "text")
+    private String descriptionThirdParagraph;
 
     private Double price;
-    @Type(type = "text")
-    private String description;
+
 
     private Long graphicCardId;
     public GraphicCardResponse graphicCard;
@@ -72,8 +77,14 @@ public class LaptopResponse {
         descriptionImagePath1 = laptop.getDescriptionImagePath1();
         descriptionImagePath1 = laptop.getDescriptionImagePath2();
         descriptionImagePath1 = laptop.getDescriptionImagePath3();
+
         price = laptop.getPrice();
-        description = laptop.getDescription();
+        descriptionImagePath1 = laptop.getDescriptionImagePath1();
+        descriptionImagePath2 = laptop.getDescriptionImagePath2();
+        descriptionImagePath3 = laptop.getDescriptionImagePath3();
+        descriptionFirstParagraph = laptop.getDescriptionFirstParagraph();
+        descriptionSecondParagraph = laptop.getDescriptionSecondParagraph();
+        descriptionThirdParagraph = laptop.getDescriptionThirdParagraph();
         graphicCardId = laptop.getGraphicCard().getId();
         graphicCard = new GraphicCardResponse(laptop.getGraphicCard());
         ramId = laptop.getRam().getId();

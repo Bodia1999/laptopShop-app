@@ -35,6 +35,7 @@ function setMemoryToTable(memory) {
         '<td>' + memory.name + '</td>' +
         '<td>' + memory.typeOfMemory + '</td>' +
         '<td>' + memory.volumeOfMemory + '</td>' +
+        '<td>' + memory.availabilityOfSsd + '</td>' +
         '<td><button class="button" value="' + memory.id + '">Delete</button></td>' +
         '<td><button class="buttonToUpdate" value="' + memory.id +'">Update</button></td>' +
         '</tr>');
@@ -47,12 +48,15 @@ function setActionOnCreateBtn() {
         var name = $("#name").val();
         var typeOfMemory = $("#typeOfMemory").val();
         var volumeOfMemory = $("#volumeOfMemory").val();
+        var availabilityOfSsd = $("#availabilityOfSsd").val();
 //            if (firstName != null && lastName != null && age != null) {
 
         var newMemory = {
             "name": name,
             "typeOfMemory": typeOfMemory,
-            "volumeOfMemory": volumeOfMemory
+            "volumeOfMemory": volumeOfMemory,
+            "availabilityOfSsd":availabilityOfSsd
+
         };
 
         $.ajax({
@@ -89,6 +93,7 @@ function setActionOnUpdateButton() {
                     $("#name").val(dataResponse.name);
                     $("#typeOfMemory").val(dataResponse.typeOfMemory);
                     $("#volumeOfMemory").val(dataResponse.volumeOfMemory);
+                    $("#availabilityOfSsd").val(dataResponse.availabilityOfSsd);
                     var elementById = document.getElementById("myModal");
                     elementById.style.display="block";
                     $("#btnUpdateMemory").click(function () {
@@ -96,12 +101,14 @@ function setActionOnUpdateButton() {
                         var name = $("#name").val();
                         var typeOfMemory = $("#typeOfMemory").val();
                         var volumeOfMemory = $("#volumeOfMemory").val();
+                        var availabilityOfSsd = $("#availabilityOfSsd").val();
 //            if (firstName != null && lastName != null && age != null) {
 
                         var newMemory = {
                             "name": name,
                             "typeOfMemory":typeOfMemory,
-                            "volumeOfMemory":volumeOfMemory
+                            "volumeOfMemory":volumeOfMemory,
+                            "availabilityOfSsd":availabilityOfSsd
                         };
 
                         $.ajax({

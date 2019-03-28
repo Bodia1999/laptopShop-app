@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -65,11 +66,16 @@ public class LaptopService {
         laptop.setProcessor(processorService.findOne(laptopRequest.getProcessorId()));
         laptop.setScreen(screenService.findOne(laptopRequest.getScreenId()));
         laptop.setImageDirection(laptopRequest.getImageDirection());
+//        laptop.setDescriptionImagePath1(laptopRequest.getDescriptionImagePath1());
+//        laptop.setDescriptionImagePath2(laptopRequest.getDescriptionImagePath2());
+//        laptop.setDescriptionImagePath3(laptopRequest.getDescriptionImagePath3());
+        laptop.setPrice(laptopRequest.getPrice());
         laptop.setDescriptionImagePath1(laptopRequest.getDescriptionImagePath1());
         laptop.setDescriptionImagePath2(laptopRequest.getDescriptionImagePath2());
         laptop.setDescriptionImagePath3(laptopRequest.getDescriptionImagePath3());
-        laptop.setPrice(laptopRequest.getPrice());
-        laptop.setDescription(laptopRequest.getDescription());
+        laptop.setDescriptionFirstParagraph(laptopRequest.getDescriptionFirstParagraph());
+        laptop.setDescriptionSecondParagraph(laptopRequest.getDescriptionSecondParagraph());
+        laptop.setDescriptionThirdParagraph(laptopRequest.getDescriptionThirdParagraph());
         laptop.setAvailabilityOfWIFI(laptopRequest.getAvailabilityOfWIFI());
         laptop.setAvailabilityOfAUX(laptopRequest.getAvailabilityOfAUX());
         laptop.setAvailabilityOfBluetooth(laptopRequest.getAvailabilityOfBluetooth());
@@ -89,6 +95,10 @@ public class LaptopService {
         return laptopRepository.findById(id)
                 .orElseThrow(() -> new WrongInputException("Laptop with id " + id + " not exists"));
     }
+
+//    public Laptop findById(Long id) throws WrongInputException{
+//        return laptopRepository.getOne(id);
+//    }
 
     public void delete(Long id) throws WrongInputException {
         laptopRepository.delete(findOne(id));

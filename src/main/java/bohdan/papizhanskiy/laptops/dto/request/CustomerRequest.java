@@ -18,17 +18,17 @@ import java.util.List;
 @NoArgsConstructor
 public class CustomerRequest {
 
-    @NotNull
-    @NotEmpty
+//    @NotNull
+//    @NotEmpty
     private String name;
 
-    @NotNull
-    @NotEmpty
+//    @NotNull
+//    @NotEmpty
     private String surname;
 
-    @NotNull
-    @NotEmpty
-    @Min(14)
+//    @NotNull
+//    @NotEmpty
+//    @Min(14)
     private Integer age;
 
 

@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface LaptopRepository extends JpaRepository<Laptop, Long>, JpaSpecificationExecutor {
+public interface LaptopRepository extends JpaRepository<Laptop, Long>, JpaSpecificationExecutor<Laptop> {
 
-    Page<Laptop> findById(Long id, Pageable pageable);
-    List<Laptop> findAllByMake(String make);
+//    Page<Laptop> findById(Long id, Pageable pageable);
+//    List<Laptop> findAllByMake(String make);
 }

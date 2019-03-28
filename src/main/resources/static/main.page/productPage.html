@@ -70,9 +70,11 @@
     }
 
     function checkingValueForSSD(value) {
-        if (value==null){
+        console.log(value);
+        if (value == null) {
             return "-";
         }
+        return value;
     }
 
     function addingToCart(id) {
@@ -101,7 +103,7 @@
       <!--       <div class="photo-panel" style="background-image: url(https://o.aolcdn.com/images/dims?quality=85&image_uri=https%3A%2F%2Fo.aolcdn.com%2Fimages%2Fdims%3Fcrop%3D1600%252C1055%252C0%252C0%26quality%3D85%26format%3Djpg%26resize%3D1600%252C1055%26image_uri%3Dhttp%253A%252F%252Fo.aolcdn.com%252Fhss%252Fstorage%252Fmidas%252Fe0fb2686cb35c31aa63009beb4d9a13b%252F206546644%252FMacBook%252BPro%252Bgallery%252B10.jpg%26client%3Da1acac3e1b3290917d92%26signature%3D4b7c6d9fec6ec988dc7ec49c9784a44159151922&client=amp-blogside-v2&signature=06f5074db4472d25216f41202b87f989cf4c3c9c)">-->
           <div class="main-panel">
           <div class="inside_main_panel">
-          <img id="photo" src="http://localhost:8000/img/${prod.imageDirection}" alt="">
+          <img id="photo" src="${prod.imageDirection}" alt="">
           <div class="inside-panel">
 
 
@@ -294,15 +296,18 @@
 
           <div id="good-description"  >
           <div id="description-container">
-      <span class="description-span">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis recusandae veritatis itaque earum debitis accusantium. Beatae molestias, et odio placeat blanditiis nam. Vero, similique ipsa illum fugit rerum praesentium perspiciatis! Nihil, dolorem, quos molestiae ab dignissimos explicabo provident, fugiat earum eius nostrum, ullam esse in quasi placeat iusto consequuntur nemo dolor asperiores architecto perferendis natus magnam repellendus illo minima? Perferendis similique inventore hic maiores repudiandae tenetur, sapiente eligendi ab ipsa nihil aperiam sed facere magnam eum minus velit, est enim quaerat eveniet expedita quisquam porro unde cumque eos? Libero voluptatem, rerum doloribus ducimus, in atque at laborum enim tempora error!</span><br>
-       <div class="sub-description-photo"><div><img class="description-photo" src="https://www.bhphotovideo.com/images/images2500x2500/apple_mr9q2ll_a_13_3_macbook_pro_mid_1423729.jpg" alt=""></div></div><br>
-
-       <span class="description-span">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis recusandae veritatis itaque earum debitis accusantium. Beatae molestias, et odio placeat blanditiis nam. Vero, similique ipsa illum fugit rerum praesentium perspiciatis! Nihil, dolorem, quos molestiae ab dignissimos explicabo provident, fugiat earum eius nostrum, ullam esse in quasi placeat iusto consequuntur nemo dolor asperiores architecto perferendis natus magnam repellendus illo minima? Perferendis similique inventore hic maiores repudiandae tenetur, sapiente eligendi ab ipsa nihil aperiam sed facere magnam eum minus velit, est enim quaerat eveniet expedita quisquam porro unde cumque eos? Libero voluptatem, rerum doloribus ducimus, in atque at laborum enim tempora error!</span><br>
-       <div class="sub-description-photo"><div><img class="description-photo" src="https://www.bhphotovideo.com/images/images2500x2500/apple_mr9q2ll_a_13_3_macbook_pro_mid_1423729.jpg" alt=""></div></div><br>
+      <span class="description-span">${prod.descriptionFirstParagraph}</span><br>
+       <div class="sub-description-photo"><div><img class="description-photo" src="${prod.descriptionImagePath1}" alt=""></div></div><br>
 
 
-       <span class="description-span">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis recusandae veritatis itaque earum debitis accusantium. Beatae molestias, et odio placeat blanditiis nam. Vero, similique ipsa illum fugit rerum praesentium perspiciatis! Nihil, dolorem, quos molestiae ab dignissimos explicabo provident, fugiat earum eius nostrum, ullam esse in quasi placeat iusto consequuntur nemo dolor asperiores architecto perferendis natus magnam repellendus illo minima? Perferendis similique inventore hic maiores repudiandae tenetur, sapiente eligendi ab ipsa nihil aperiam sed facere magnam eum minus velit, est enim quaerat eveniet expedita quisquam porro unde cumque eos? Libero voluptatem, rerum doloribus ducimus, in atque at laborum enim tempora error!</span><br>
-       <div class="sub-description-photo"><div><img class="description-photo" src="https://www.bhphotovideo.com/images/images2500x2500/apple_mr9q2ll_a_13_3_macbook_pro_mid_1423729.jpg" alt=""></div></div><br>
+<span class="description-span">${prod.descriptionSecondParagraph}</span><br>
+       <div class="sub-description-photo"><div><img class="description-photo" src="${prod.descriptionImagePath2}" alt=""></div></div><br>
+
+
+<span class="description-span">${prod.descriptionThirdParagraph}</span><br>
+       <div class="sub-description-photo"><div><img class="description-photo" src="${prod.descriptionImagePath1}" alt=""></div></div><br>
+
+
     </div>
 
           </div>`)

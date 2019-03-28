@@ -29,16 +29,24 @@ public class Laptop {
 
     private Double price;
 
-    @Type(type = "text")
-    private String description;
+//    @Type(type = "text")
+//    private String description;
 
     private String imageDirection;
 
     private String descriptionImagePath1;
+    @Type(type = "text")
     private String descriptionFirstParagraph;
+
+
     private String descriptionImagePath2;
+
+    @Type(type = "text")
     private String descriptionSecondParagraph;
+
     private String descriptionImagePath3;
+
+    @Type(type = "text")
     private String descriptionThirdParagraph;
 
     @ManyToOne

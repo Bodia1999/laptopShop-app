@@ -13,8 +13,12 @@ public class ProductForOrderResponse {
 
     private Integer count;
 
+    private LaptopResponse laptop;
+
+
     public ProductForOrderResponse(ProductForOrder productForOrder){
         id = productForOrder.getId();
         count = productForOrder.getCount();
+        laptop = new LaptopResponse(productForOrder.getLaptop());
     }
 }
