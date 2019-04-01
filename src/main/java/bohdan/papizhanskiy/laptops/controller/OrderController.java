@@ -41,6 +41,11 @@ public class OrderController {
     public OrderResponse findOne(@RequestParam Long id) throws WrongInputException{
         return new OrderResponse(orderService.findOne(id));
     }
+
+    @PostMapping("/findAllByCustomer")
+    public List<OrderResponse> findAllByCustomerId(@RequestParam Long id){
+        return orderService.findAllByCustomerId(id);
+    }
 }
 
 

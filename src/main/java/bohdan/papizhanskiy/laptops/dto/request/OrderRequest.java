@@ -23,4 +23,6 @@ public class OrderRequest {
 //    @Min(1)
     private Long customerId;
     private List<Long> productForOrderId = new ArrayList<>();
+    private Double subtotal;
+
 }

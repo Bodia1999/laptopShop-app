@@ -26,6 +26,8 @@ public class Order {
 
     private String orderTime;
 
+    private Double subtotal;
+
 
 
     @ManyToMany

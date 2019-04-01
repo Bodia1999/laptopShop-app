@@ -37,7 +37,7 @@ a {
     max-width: 210px;
     padding: 10px;
     min-height: 44px;
-    background: #2A2D33;
+    background: white;
     width: 100%;
     max-height: 44px;
 }
@@ -51,7 +51,7 @@ a {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    background: #2A2D33;
+    background: white;
 }
 
 .menu-button {
@@ -152,7 +152,7 @@ div.user-image {
 */
 
 .nav-profile {
-    background: #2A2D33;
+    background: white;
 }
 
 .nav-profile-image img {
@@ -179,10 +179,10 @@ div.user-image {
 #sidebar {
     overflow: hidden;
     width: 210px;
-    min-height:103.2%;
-    /*    height: auto;*/
+    min-height:200px;
+    height: auto;
     float: left;
-    background: #2A2D33;
+    background: white;
 }
 
 #sidebar-nav {
@@ -190,7 +190,8 @@ div.user-image {
     height: calc(100% - 95px);
     padding: 0;
     background: #2A2D33;
-    border-right: 1px solid #E0E0E0;
+    border-right: 2px solid black;
+    border-top: 2px solid black;
     overflow-y: scroll;
 }
 
@@ -215,7 +216,8 @@ div.user-image {
 }
 
 #sidebar-nav ul li a {
-    color: #C2C2C2;
+    background: white;
+    color: black;
     font-size: .95em;
     padding: 15px 20px;
     float: left;
@@ -230,21 +232,21 @@ div.user-image {
 #sidebar-nav ul li:hover a i,
 #sidebar-nav li.active a,
 #sidebar-nav li.active a i {
-    color: #333;
+    color: white;
 }
 
 #sidebar-nav ul li:hover a {
-    background: #fff;
-    color: #333;
+    background: #60636B;
+    color: white;
 }
 
 #sidebar-nav ul li.active a {
-    background: #fff;
-    color: #333;
+    background: black;
+    color: white;
 }
 
 #sidebar-nav ul li.active a i {
-    background: #fff;
+    background: black;
 }
 
 #sidebar-nav i {
@@ -281,12 +283,15 @@ div.user-image {
 .content {
     min-width: 580px;
     float: left;
-    background: #E9EEF4;
+    background: white;
     width: 100%;
     height: calc(100% - 64px);
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    border-top: 2px solid black;
+    border-right: 2px solid black;
+    border-left: 2px solid black;
 }
 
 .content-header {
@@ -298,7 +303,7 @@ div.user-image {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 2px solid black;
 }
 
 .content-header h1 {
@@ -318,7 +323,7 @@ div.user-image {
     /*    border: 1px solid #E0E0E0;*/
     float: left;
     width: 100%;
-    margin: 0 0 15px 15px;
+    margin: 0 0 15px 25px;
 }
 
 .widget-header {
@@ -589,6 +594,7 @@ user agent stylesheet div {
 }
 
 .form-group {
+    margin-left: 20px;
     float: left;
     width: 100%;
     margin-bottom: 18px;
@@ -991,6 +997,7 @@ footer {
 }
 
 h1 {
+    margin-bottom: 10px;
     font-size: 18px;
     font-weight: bold;
 }
@@ -1044,12 +1051,13 @@ a {
 }
 
 .footer-columns {
+    padding-bottom: 10px;
     color: white;
 }
 
 
-.main-content {
-    margin-bottom: 10px;
-    margin-top: 10px;
-}
+/*.main-content {*/
+    /*margin-bottom: 10px;*/
+    /*margin-top: 10px;*/
+/*}*/
 

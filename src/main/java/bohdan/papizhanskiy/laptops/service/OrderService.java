@@ -37,6 +37,7 @@ public class OrderService {
 
         order.setCustomer(customerService.findOne(orderRequest.getCustomerId()));
         order.setOrderTime(new Date().toString());
+        order.setSubtotal(orderRequest.getSubtotal());
         order = orderRepository.save(order);
         for (Long productForOrder : orderRequest.getProductForOrderId() ){
             ProductForOrder productForOrder1 = productForOrderService.findOne(productForOrder);
@@ -70,5 +71,9 @@ public class OrderService {
     public DataResponse<OrderResponse> findAll(PaginationRequest paginationRequest) {
         Page<Order> all = orderRepository.findAll(paginationRequest.mapToPageRequest());
         return new DataResponse<>(all.get().map(OrderResponse::new).collect(Collectors.toList()), all.getTotalPages(), all.getTotalElements());
+    }
+
+    public List<OrderResponse> findAllByCustomerId(Long id){
+        return orderRepository.findAllByCustomerId(id).stream().map(OrderResponse::new).collect(Collectors.toList());
     }
 }

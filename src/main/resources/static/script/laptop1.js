@@ -305,7 +305,7 @@ function setActionOnUpdateButton() {
                             type: "PUT",
                             contentType: "application/json",
                             data: JSON.stringify(newLaptop),
-                            success: function (data) {
+                            success: function () {
                                 location.reload();
                             },
                             error: function (error) {

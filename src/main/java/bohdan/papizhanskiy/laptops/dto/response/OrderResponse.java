@@ -20,12 +20,18 @@ public class OrderResponse {
 
     private Long id;
 
+    private Double subtotal;
+
+    private String orderTime;
+
 
 
     private List<ProductForOrderResponse> productForOrder = new ArrayList<>();
 
     public OrderResponse(Order order){
         id = order.getId();
+        subtotal = order.getSubtotal();
+        orderTime = order.getOrderTime();
         productForOrder = order.getProductForOrder().stream().map(ProductForOrderResponse::new).collect(Collectors.toList());
     }
 }
