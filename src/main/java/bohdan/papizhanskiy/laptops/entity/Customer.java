@@ -4,11 +4,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Type;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -24,19 +26,34 @@ public class Customer {
 
 
     private String name;
-    @Column(unique = true)
+//    @Column(unique = true)
     private String surname;
 
-    private Integer age;
+    private String dateBirth;
+
+    private String phoneNumber;
+
+    @Column(unique = true)
+    private String login;
+    private String password;
+
+    @Type(type = "text")
+    private String address;
+
+    @NotNull
+    private Role role;
+
+
 
 //    @ToString.Exclude
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
+
     private List<Order> orders = new ArrayList<>();
 //    @ToString.Exclude
-    @OneToMany(mappedBy = "customer")
-    private List<ShippingInfo> shippingInfos = new ArrayList<>();
+//    @OneToOne(mappedBy = "customer")
+//    private ShippingInfo shippingInfos;
 
-    @OneToOne(mappedBy = "customer")
-    private User user;
+//    @OneToOne(mappedBy = "customer")
+//    private User user;
 
 }

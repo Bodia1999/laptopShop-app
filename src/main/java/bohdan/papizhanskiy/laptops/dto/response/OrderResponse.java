@@ -20,13 +20,12 @@ public class OrderResponse {
 
     private Long id;
 
-    private Customer customer;
+
 
     private List<ProductForOrderResponse> productForOrder = new ArrayList<>();
 
     public OrderResponse(Order order){
         id = order.getId();
-        customer = order.getCustomer();
         productForOrder = order.getProductForOrder().stream().map(ProductForOrderResponse::new).collect(Collectors.toList());
     }
 }

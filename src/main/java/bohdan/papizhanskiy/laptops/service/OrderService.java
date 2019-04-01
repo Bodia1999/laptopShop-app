@@ -5,12 +5,15 @@ import bohdan.papizhanskiy.laptops.dto.request.PaginationRequest;
 import bohdan.papizhanskiy.laptops.dto.response.DataResponse;
 import bohdan.papizhanskiy.laptops.dto.response.OrderResponse;
 import bohdan.papizhanskiy.laptops.entity.Order;
+import bohdan.papizhanskiy.laptops.entity.ProductForOrder;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +26,9 @@ public class OrderService {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private ProductForOrderService productForOrderService;
+
 
     private Order orderRequestToOrder(Order order, OrderRequest orderRequest) throws WrongInputException {
         if (order == null) {
@@ -30,6 +36,13 @@ public class OrderService {
         }
 
         order.setCustomer(customerService.findOne(orderRequest.getCustomerId()));
+        order.setOrderTime(new Date().toString());
+        order = orderRepository.save(order);
+        for (Long productForOrder : orderRequest.getProductForOrderId() ){
+            ProductForOrder productForOrder1 = productForOrderService.findOne(productForOrder);
+            order.getProductForOrder().add(productForOrder1);
+        }
+
 
         return orderRepository.save(order);
     }

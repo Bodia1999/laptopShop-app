@@ -78,9 +78,9 @@
 </aside>
 
 <script>
-    // if (!window.localStorage.getItem('token')) {
-    //     window.location.href = '/sign';
-    // }
+    if (!window.localStorage.getItem('token')) {
+        window.location.href = '/main.page/sign.html';
+    }
 
     var promoCode;
     var promoPrice;
@@ -93,7 +93,7 @@
     function getIdsFromLocalStorage() {
         var items = JSON.parse(window.localStorage.getItem("idsToCart"));
         console.log(items);
-        if (items==null) {
+        if (items == null) {
             var $basket = $('.basket');
             $basket.append(`<div class="empty-cart"><div><h1>Your shopping cart is empty</h1></div>
 <div class="continue-shopping">
@@ -271,11 +271,11 @@
             productRow.remove();
             recalculateCart();
             updateSumItems();
-        });}
+        });
+    }
 
 
-
-    </script>
+</script>
 
 <footer class="container-footer">
     <div class="footer_main_column">

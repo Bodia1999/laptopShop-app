@@ -8,8 +8,10 @@
     <title>Sign</title>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../main.page.css/sign.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="/css/sign.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
 
@@ -35,8 +37,7 @@
     </form>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 <script>
     let $login = $('#login');
     let $password = $('#password');
@@ -45,7 +46,8 @@
 
     $singUp.click(function (e) {
        e.preventDefault();
-        sendTokenRequest('http://localhost:8000/public/register')
+       window.location.href="/main.page/registration.html"
+        // sendTokenRequest('http://localhost:8000/public/register')
     });
 
     $singIn.click(function (e) {
@@ -63,10 +65,11 @@
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(req),
-            success: function (token) {
-                window.localStorage.setItem('token', `Bearer ${token}`);
-                console.log(`Bearer ${token}`)
-                window.location.href = '/home';
+            success: function (answer) {
+                window.localStorage.setItem('token', `Bearer ${answer.password}`);
+                window.localStorage.setItem('customerId', answer.id);
+                console.log(`Bearer ${answer.password}`);
+                window.location.href = '/main.page/index.html';
             },
             error: function (e) {
                 console.log(e)

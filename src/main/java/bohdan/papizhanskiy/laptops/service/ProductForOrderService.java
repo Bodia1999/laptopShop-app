@@ -47,8 +47,8 @@ public class ProductForOrderService {
         if (productForOrder == null) {
             productForOrder = new ProductForOrder();
         }
-        productForOrder.setCount(newProductForOrderRequest.getCount());
-        productForOrder.setLaptop(laptopService.findOne(newProductForOrderRequest.getLaptopId()));
+        productForOrder.setCount(3);
+        productForOrder.setLaptop(laptopService.findOne(1L));
 //        productForOrder = productForOrderRepository.save(productForOrder);
 //        for (Long order : productForOrderRequest.getOrderId() ){
 //            Order order1 = orderService.findOne(order);

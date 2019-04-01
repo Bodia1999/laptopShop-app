@@ -22,5 +22,5 @@ public class OrderRequest {
 //    @NotEmpty
 //    @Min(1)
     private Long customerId;
-    private List<ProductForOrder> productForOrder = new ArrayList<>();
+    private List<Long> productForOrderId = new ArrayList<>();
 }

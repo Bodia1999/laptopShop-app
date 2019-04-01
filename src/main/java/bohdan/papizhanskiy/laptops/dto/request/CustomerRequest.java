@@ -6,11 +6,13 @@ import bohdan.papizhanskiy.laptops.entity.ShippingInfo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -29,7 +31,11 @@ public class CustomerRequest {
 //    @NotNull
 //    @NotEmpty
 //    @Min(14)
-    private Integer age;
+    private String dateBirth;
+    @Type(type = "text")
+    private String address;
+
+    private String phoneNumber;
 
 
 
@@ -38,5 +44,14 @@ public class CustomerRequest {
 //    @Min(1)
     private List<OrderResponse> orders = new ArrayList<>();
 
-    private List<ShippingInfo> shippingInfos = new ArrayList<>();
+//    private List<ShippingInfo> shippingInfos = new ArrayList<>();
+
+    @Email
+    private String login;
+
+    @NotNull
+    @NotEmpty
+    @Min(6)
+    @Max(16)
+    private String password;
 }

@@ -21,7 +21,7 @@ public class TokenTool {
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
-        cal.add(Calendar.HOUR,3);
+        cal.add(Calendar.MINUTE,1);
         Date validTo = cal.getTime();
 
         jwt = Jwts.builder().setIssuer("OurProject")

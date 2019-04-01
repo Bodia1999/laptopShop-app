@@ -31,7 +31,7 @@ public class ShippingInfo {
 
     private String postalCode;
 
-    @ManyToOne
+    @OneToOne
     private Customer customer;
 
 

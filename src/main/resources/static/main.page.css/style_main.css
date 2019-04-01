@@ -30,13 +30,8 @@ body {
   justify-content: center;
 }
 
-.info {
-  padding: 23px;
-  display: flex;
-  justify-content: flex-end;
-}
-
 .info{
+  padding: 23px;
   width: 190px;
   display: flex;
   justify-content: space-around;

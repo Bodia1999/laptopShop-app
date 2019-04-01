@@ -17,7 +17,8 @@
 
             <div class="info">
                 <!--<a href="#"><img src="img/log_in_final.png" alt=""></a>-->
-                <a href="cart.html"><img src="../photo/images_for_main_page/cart.png" alt=""></a>
+                <a href="#" onclick="checkingForToken()"><img src="../photo/person1.png" alt=""></a>
+                <a href="../main.page/cart.html"><img src="../photo/images_for_main_page/cart.png" alt=""></a>
             </div>
 
 
@@ -595,7 +596,13 @@
 
     $('#price-submit-button').click(function () {
         priceFrom = $('.priceFrom').val();
+        if (priceFrom == null || priceFrom == undefined){
+            priceFrom = 0;
+        }
         priceTo = $('.priceTo').val();
+        if (priceTo == null || priceTo == undefined){
+            priceTo = integerMaxValue;
+        }
         separatingString();
     });
 
@@ -971,6 +978,14 @@
 
             </div>`)
             };
+
+    function checkingForToken() {
+        if(!window.localStorage.getItem('token')){
+            window.location.href = 'http://localhost:8000/main.page/sign.html';
+        }else {
+            window.location.href = 'http://localhost:8000/main.page/profile.html';
+        }
+    }
 
 </script>
 
