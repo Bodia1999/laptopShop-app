@@ -22,23 +22,28 @@ public class ProductForOrderController {
         return productForOrderService.findAll();
     }
 
-    @PostMapping
-    public ProductForOrderResponse save(NewProductForOrderRequest newProductForOrderRequest) throws Exception {
-        return productForOrderService.save(newProductForOrderRequest);
+    @PostMapping("/save")
+    public ProductForOrderResponse save(@RequestBody ProductForOrderRequest productForOrderRequest) throws Exception {
+        return productForOrderService.save(productForOrderRequest);
     }
 
     @DeleteMapping
-    public void delete(Long id) throws WrongInputException {
+    public void delete( @RequestParam Long id) throws WrongInputException {
         productForOrderService.delete(id);
     }
 
     @PutMapping("/{id}")
-    public ProductForOrderResponse update(@RequestBody NewProductForOrderRequest newProductForOrderRequest,@PathVariable Long id) throws Exception {
-        return productForOrderService.update(newProductForOrderRequest, id);
+    public ProductForOrderResponse update(@RequestBody ProductForOrderRequest productForOrderRequest,@PathVariable Long id) throws Exception {
+        return productForOrderService.update(productForOrderRequest, id);
     }
 
     @PostMapping("/findOne")
     public ProductForOrderResponse findOne(@RequestParam Long id) throws WrongInputException{
         return new ProductForOrderResponse(productForOrderService.findOne(id));
+    }
+
+    @PostMapping("/findAllByCustomerId")
+    public List<ProductForOrderResponse> findAllByCustomerId(@RequestParam Long id){
+        return productForOrderService.findAllByCustomerId(id);
     }
 }

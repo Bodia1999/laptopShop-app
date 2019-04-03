@@ -25,9 +25,12 @@ public class ProductForOrderService {
     @Autowired
     private LaptopService laptopService;
 
+    @Autowired
+    private CustomerService customerService;
 
-    public ProductForOrderResponse save(NewProductForOrderRequest newProductForOrderRequest) throws Exception {
-        return new ProductForOrderResponse(productForOrderRequestToProductForOrder(newProductForOrderRequest, null));
+
+    public ProductForOrderResponse save(ProductForOrderRequest productForOrderRequest) throws Exception {
+        return new ProductForOrderResponse(productForOrderRequestToProductForOrder(productForOrderRequest, null));
 
     }
 
@@ -35,20 +38,23 @@ public class ProductForOrderService {
         return productForOrderRepository.findAll().stream().map(ProductForOrderResponse::new).collect(Collectors.toList());
     }
 
-    public ProductForOrderResponse update(NewProductForOrderRequest newProductForOrderRequest, Long id) throws Exception {
-        return new ProductForOrderResponse(productForOrderRequestToProductForOrder(newProductForOrderRequest, findOne(id)));
+    public ProductForOrderResponse update(ProductForOrderRequest productForOrderRequest , Long id) throws Exception {
+        return new ProductForOrderResponse(productForOrderRequestToProductForOrder(productForOrderRequest, findOne(id)));
     }
 
     public void delete(Long id) throws WrongInputException {
         productForOrderRepository.delete(findOne(id));
     }
 
-    private ProductForOrder productForOrderRequestToProductForOrder(NewProductForOrderRequest newProductForOrderRequest, ProductForOrder productForOrder) throws Exception {
+    private ProductForOrder productForOrderRequestToProductForOrder(ProductForOrderRequest productForOrderRequest, ProductForOrder productForOrder) throws WrongInputException {
         if (productForOrder == null) {
             productForOrder = new ProductForOrder();
         }
-        productForOrder.setCount(3);
-        productForOrder.setLaptop(laptopService.findOne(1L));
+
+        productForOrder.setCount(productForOrderRequest.getCount());
+        productForOrder.setCustomer(customerService.findOne(productForOrderRequest.getCustomerId()));
+        productForOrder.setLaptop(laptopService.findOne(productForOrderRequest.getLaptopId()));
+        productForOrder.setSubtotal(productForOrderRequest.getSubtotal());
 //        productForOrder = productForOrderRepository.save(productForOrder);
 //        for (Long order : productForOrderRequest.getOrderId() ){
 //            Order order1 = orderService.findOne(order);
@@ -58,7 +64,7 @@ public class ProductForOrderService {
         return productForOrderRepository.save(productForOrder);
 
     }
-    @Transactional
+//    @Transactional
     public ProductForOrder findOne(Long id) throws WrongInputException {
         return productForOrderRepository.findById(id)
                 .orElseThrow(() -> new WrongInputException("Product for order with id " + id + " not exists"));
@@ -68,4 +74,9 @@ public class ProductForOrderService {
         Page<ProductForOrder> all = productForOrderRepository.findAll(paginationRequest.mapToPageRequest());
         return new DataResponse<>(all.get().map(ProductForOrderResponse::new).collect(Collectors.toList()), all.getTotalPages(), all.getTotalElements());
     }
+
+    public List<ProductForOrderResponse> findAllByCustomerId(Long id){
+        return productForOrderRepository.findAllByCustomerId(id).stream().map(ProductForOrderResponse::new).collect(Collectors.toList());
+    }
+
 }

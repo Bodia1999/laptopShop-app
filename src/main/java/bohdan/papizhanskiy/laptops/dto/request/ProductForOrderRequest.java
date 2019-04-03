@@ -17,5 +17,8 @@ public class ProductForOrderRequest {
 //    @Min(1)
     private Long laptopId;
 
+    private Long customerId;
+
+    private Double subtotal;
 //    private Long[] orderId;
 }

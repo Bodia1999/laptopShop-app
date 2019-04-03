@@ -18,7 +18,7 @@
             <div class="info">
                 <a href="#"><img src="../photo/person1.png" alt=""></a>
                 <!--<a href="#"><img src="img/log_in_final.png" alt=""></a>-->
-                <a href="#"><img src="../photo/images_for_main_page/cart.png" alt=""></a>
+                <a href="../main.page/cart.html"><img src="../photo/images_for_main_page/cart.png" alt=""></a>
             </div>
 
 
@@ -29,17 +29,61 @@
 
 </div>
 <script>
-    var clickCount = 1;
-    gettingAllElementsInNewWay();
-    var idsToCart = new Array();
-    if (window.localStorage.getItem("idsToCart") == null) {
-        window.localStorage.setItem("idsToCart", JSON.stringify(idsToCart));
+
+
+    window.onload = function () {
+        gettingAllElementsInNewWay();
+        window.localStorage.setItem('qty','1');
+
+    };
+
+
+    var notebookId = window.localStorage.getItem('laptopId');
+
+    var userId = window.localStorage.getItem('customerId');
+
+
+    // $('#buy-button').click(function () {
+    //     checkingForToken();
+    // })
+
+
+    // $('#buy-button').click(function () {
+    //    checkingForToken();
+    // });
+    // $(document).ready(function () {
+    //
+    //     $("#getter-of-quantity").change(function () {
+    //          qty = $(this).children("option:selected").val();
+    //         alert('Quantity: ' + qty);
+    //
+    //     });
+    // });
+
+
+    function checkingForToken() {
+        if (!window.localStorage.getItem('token')) {
+            window.location.href = '/main.page/sign.html';
+        } else {
+            settingProdForOrder();
+            window.location.href = '/main.page/cart.html';
+        }
     }
 
+
+    // var clickCount = 1;
+    // gettingAllElementsInNewWay();
+    // var idsToCart = new Array();
+    // var productQuantity = new Array();
+    // if (window.localStorage.getItem("idsToCart") == null && window.localStorage.getItem('productQuantity') == null) {
+    //     window.localStorage.setItem("idsToCart", JSON.stringify(idsToCart));
+    //     window.localStorage.setItem('productQuantity', JSON.stringify(productQuantity));
+    // }
+
     function gettingAllElementsInNewWay() {
-        let item = window.localStorage.getItem('id');
+
         $.ajax({
-            url: 'http://localhost:8000/laptop/findOne?id=' + item,
+            url: 'http://localhost:8000/laptop/findOne?id=' + notebookId,
             type: 'POST',
             contentType: 'application/json',
             success: (page) => {
@@ -47,6 +91,7 @@
                 $('.container').html('');
                 console.log(page);
                 appendProduct(page);
+                window.localStorage.setItem('laptopPrice',page.price);
 
                 // location.reload;
             },
@@ -55,6 +100,61 @@
             }
         });
     }
+
+    function gettingQty(){
+
+        window.localStorage.setItem('qty',$('#choose-quantity option:selected').val());
+    }
+
+
+
+
+
+    function settingProdForOrder() {
+        let requestForProduct = {
+
+            count: window.localStorage.getItem('qty'),
+            laptopId: notebookId,
+            customerId: userId,
+            subtotal: window.localStorage.getItem('laptopPrice') * window.localStorage.getItem('qty')
+        };
+        window.localStorage.setItem('request', requestForProduct.toString());
+        $.ajax({
+            url: 'http://localhost:8000/productForOrder/save',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(requestForProduct),
+            success: (page) => {
+
+                console.log(page);
+                // location.reload;
+            },
+            error: (e) => {
+                console.log(e)
+            }
+        });
+    }
+
+    // function checkingArray(id, quantity) {
+    //     var arrayOfId = JSON.parse(window.localStorage.getItem("idsToCart"));
+    //     var arrayOfQuantity = JSON.parse(window.localStorage.getItem('productQuantity'));
+    //     if (typeof arrayOfQuantity == 'undefined' && arrayOfQuantity.length < 0) {
+    //         return false
+    //     }
+    //     ;
+    //     for (let i = 0; i < arrayOfId.length; i++) {
+    //         if (parseInt(arrayOfId[i]) == parseInt(id)) {
+    //             var oldQuantity = arrayOfQuantity[i];
+    //             var newQty = parseInt(oldQuantity) + parseInt(quantity);
+    //             window.localStorage.setItem('value', newQty);
+    //             arrayOfQuantity[i] = newQty;
+    //             return true;
+    //         }
+    //
+    //
+    //     }
+    //     return false;
+    // }
 
     function revertingValue(value) {
         if (value == true) {
@@ -78,25 +178,61 @@
         return value;
     }
 
-    function addingToCart(id) {
-        var ids = JSON.parse(window.localStorage.getItem("idsToCart"));
-        if (!ids.length == 0 && clickCount == 1) {
+    // function addingToCart(id) {
+    //     var ids = JSON.parse(window.localStorage.getItem("idsToCart"));
+    //     if (!ids.length == 0 && clickCount == 1) {
+    //
+    //         for (let value of ids) {
+    //             idsToCart.push(value);
+    //         }
+    //     }
+    //     clickCount++;
+    //     idsToCart.push(id);
+    //     window.localStorage.setItem("idsToCart", JSON.stringify(idsToCart));
+    // }
 
-            for (let value of ids) {
-                idsToCart.push(value);
-            }
-        }
-        clickCount++;
-        idsToCart.push(id);
-        window.localStorage.setItem("idsToCart", JSON.stringify(idsToCart));
-    }
+    // function addingProductQuantity(qty) {
+    //     var quantity = JSON.parse(window.localStorage.getItem("productQuantity"));
+    //     if (!quantity.length == 0 && clickCount == 1) {
+    //
+    //         for (let value of quantity) {
+    //             productQuantity.push(value);
+    //         }
+    //     }
+    //
+    //     productQuantity.push(qty);
+    //     window.localStorage.setItem("productQuantity", JSON.stringify(productQuantity));
+    //
+    // }
 
-    $(document).ready(function () {
-        $('#buy-button').click(function () {
-            let item = window.localStorage.getItem('id');
-            addingToCart(item);
-        })
-    });
+    // $(document).ready(function () {
+    //     $('#buy-button').click(function () {
+    //         let item = window.localStorage.getItem('id');
+    //         addingToCart(item);
+    //         let qty = $('select#select-qty').children("option:selected").val();
+    //         console.log(checkingArray(item, qty));
+    //         if (checkingArray(item, qty)) {
+    //             // checkingArray(item, qty)
+    //         } else {
+    //             addingProductQuantity(qty);
+    //         }
+    //
+    //
+    //     });
+    // });
+
+    // $(document).ready(function () {
+    //
+    //     let abc = $('#select-qty').val();
+    //     console.log(abc);
+    // var qty = 1;
+    //         $("select#select-qty").change(function () {
+    //             qty = $(this).children("option:selected").val();
+    //             alert('Quantity: ' + qty);
+    //
+    //         });
+    //     });
+
 
     function appendProduct(prod) {
         let container = $(".container");
@@ -119,16 +255,16 @@
       <div class="price"><span>Price:</span><span class="downloaded-price">${prod.price}$</span></div><br>
       <div class="button-to-buy">
 
-          <a href="cart.html"><button id="buy-button" value="${prod.id}"> <span>Add to Cart</span></button></a><br>
+         <a href="#" onclick="checkingForToken();"><button id="buy-button"  value="${prod.id}"> <span>Add to Cart</span></button></a><br>
       </div><br>
       <div>
       <h1 class="selection-title">Qty:</h1>
       <div class="selection">
           <div class="styled-select black rounded">
 
-          <select>
+          <select id="choose-quantity" onclick="gettingQty();">
           <!--                      <option value="" id="first-value" disabled selected>Qty:</option>-->
-      <option value="1" selected>1</option>
+      <option value="1">1</option>
       <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
@@ -311,8 +447,14 @@
 
     </div>
 
-          </div>`)
+          </div></div>`)
     };
+
+    $(document).ready(function () {
+        $('#choose-quantity').change(function () {
+            console.log($(this).val())
+        });
+    });
 
 
     // var goodDescription = document.getElementById('good-description');
@@ -337,6 +479,15 @@
 </script>
 
 <script>
+
+    // function checkingForToken() {
+    //     if (!window.localStorage.getItem('token')) {
+    //         window.location.href = '/main.page/sign.html';
+    //     } else {
+    //         window.location.href = '/main.page/cart.html';
+    //     }
+    // }
+
     $(document).ready(function () {
         $("#good-description").hide();
         $("#characteristics-button").click(function () {

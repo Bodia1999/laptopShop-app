@@ -55,7 +55,7 @@ public class CustomerResponse {
         phoneNumber = customer.getPhoneNumber();
         login = customer.getLogin();
 //        shippingInfoResponse = new ShippingInfoResponse(customer.getShippingInfos());
-        orderResponse = customer.getOrders().stream().map(OrderResponse::new).collect(Collectors.toList());
+//        orderResponse = customer.getOrders().stream().map(OrderResponse::new).collect(Collectors.toList());
         password = customer.getPassword();
 
 

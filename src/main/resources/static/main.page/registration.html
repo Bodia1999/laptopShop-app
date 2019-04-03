@@ -219,7 +219,7 @@ registerFunc(getElem());
             login: email,
             address:address,
             phoneNumber : phoneNumber,
-            birthDate : date
+            dateBirth : date
 
 
         };
@@ -238,7 +238,7 @@ registerFunc(getElem());
             success: (answer) => {
 
                 window.localStorage.setItem('token', `Bearer ${answer.password}`);
-                window.location.href = 'http://localhost:8000/main.page/index.html';
+                window.location.href = '/main.page/index.html';
                 // $('.container').html('');
                 // for (let laptop of pages.content) {
                 //     console.log(laptop);

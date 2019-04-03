@@ -276,17 +276,23 @@ li.subtotal:before {
 }
 
 .remove {
+    /*margin-top: 27%;*/
+    margin-bottom: 1%;
     bottom: 1.125rem;
     float: right;
-    position: absolute;
+    /*position: absolute;*/
+
     right: 0;
     text-align: right;
-    width: 45%;
+    width: 100%;
+    border-bottom: 2px solid #ccc;
 }
 
 .remove button {
+    margin-bottom: 1%;
     background-color: transparent;
-    color: #777;
+    color: black;
+    font-weight: bold;
     float: none;
     text-decoration: underline;
     text-transform: uppercase;
@@ -300,10 +306,12 @@ li.subtotal:before {
 }
 
 .basket-product {
-    border-bottom: 1px solid #ccc;
+    /*border-bottom: 1px solid #ccc;*/
     padding: 1rem 0;
     position: relative;
 }
+
+
 
 .product-image {
     width: 35%;

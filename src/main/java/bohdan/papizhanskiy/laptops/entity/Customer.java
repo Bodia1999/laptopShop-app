@@ -49,6 +49,10 @@ public class Customer {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
 
     private List<Order> orders = new ArrayList<>();
+
+
+    @OneToMany(mappedBy = "customer")
+    private List<ProductForOrder> productForOrders = new ArrayList<>();
 //    @ToString.Exclude
 //    @OneToOne(mappedBy = "customer")
 //    private ShippingInfo shippingInfos;

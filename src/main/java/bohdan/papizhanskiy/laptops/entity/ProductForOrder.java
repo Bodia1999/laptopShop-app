@@ -26,6 +26,11 @@ public class ProductForOrder {
         @ManyToMany(mappedBy = "productForOrder")
         private List<Order> orders = new ArrayList<>();
 //        private Order order;
+        @ManyToOne
+        private Customer customer;
+
+
+        private Double subtotal;
 
 }
 

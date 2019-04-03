@@ -16,9 +16,15 @@ public class ProductForOrderResponse {
     private LaptopResponse laptop;
 
 
+    private CustomerResponse customerResponse;
+
+    private Double subtotal;
+
     public ProductForOrderResponse(ProductForOrder productForOrder){
         id = productForOrder.getId();
         count = productForOrder.getCount();
         laptop = new LaptopResponse(productForOrder.getLaptop());
+        customerResponse = new CustomerResponse(productForOrder.getCustomer());
+        subtotal = productForOrder.getSubtotal();
     }
 }
