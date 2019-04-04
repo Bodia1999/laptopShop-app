@@ -163,47 +163,8 @@
                 <div class="rightside-title clear_after" style="display: flex;justify-content: center; background-color: black;
          height: 50px">
                     <h3 style="color: white; padding: 15px">My orders </h3></div>
-                <div class="container-dashboard-forms dashboard-myorders clear_after">
-                    <div id="orderList">
-                        <table class="container_table_el clear_after" id="order-content">
-                        </table>
-                        <div class="container_table_dash level2 clear_after" style="display: block;" id="product-content"></div>
-                    </div>
-                    <div class="order-details-infocols clearfix">
+                <div class="container-dashboard-forms dashboard-myorders clear_after" id="one-order">
 
-                        <div class="order-infocol">
-
-                            <div class="infocol-title bold">
-                                Delivery address
-                            </div>
-
-                            <div class="infocol-description" id="column-for-address">
-                            </div>
-
-                        </div>
-
-                        <div class="order-infocol">
-                            <div class="infocol-title bold">
-                                Mobile phone
-
-                            </div>
-
-                            <div class="infocol-description" id="column-for-phone">
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="order-footer">
-
-                        <div class="order-notification">
-
-                        </div>
-                        <span class="price_all">Order
-                                 subtotal: 25&nbsp;999 грн</span>
-                    </div>
 
                 </div>
 
@@ -307,6 +268,7 @@
         <a class="footer-columns" href="#" target="_blank"><img src="../photo/instagram1.png" alt=""></a>
         <a class="footer-columns" href="#" target="_blank"><img src="../photo/viber1.png" alt=""></a>
     </div>
+</footer>
     <script>
 
         $(document).ready(function () {
@@ -449,23 +411,63 @@
         };
 
         function appendOrders(orders) {
-            var $orderList = $('#order-content');
-            $orderList.append(`
-                                            <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="col_block drop_block active"
-                                                         style="display: flex;justify-content: center;">
-                                                        <span><h3>Order ID ${orders.id}</h3></span>
-                                                   </div>
-                                                </td>
-                                                <td>
-                                                    <div class="col_block " style="display: flex;justify-content: center;"><h3>
-                                                        ${orders.orderTime}</h3></div>
-                                                </td>
+            var oneOrder = $('#one-order');
+            oneOrder.append(`
+                                            <div id="orderList">
+                        <table class="container_table_el clear_after" id="order-content">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="col_block drop_block active"
+                                         style="display: flex;justify-content: center;">
+                                        <span><h3>Order ID: ${orders.id}</h3></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col_block " style="display: flex;justify-content: center;"><h3>
+                                        ${orders.orderTime}</h3></div>
+                                </td>
 
-                                            </tr>
-                                            </tbody>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="container_table_dash level2 clear_after" style="display: block;" id="product-content"></div>
+                    </div>
+                    <div class="order-details-infocols clearfix">
+
+                        <div class="order-infocol">
+
+                            <div class="infocol-title bold">
+                                Delivery address
+                            </div>
+
+                            <div class="infocol-description" id="column-for-address">
+                            </div>
+
+                        </div>
+
+                        <div class="order-infocol">
+                            <div class="infocol-title bold">
+                                Mobile phone
+
+                            </div>
+
+                            <div class="infocol-description" id="column-for-phone">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="order-footer">
+
+                        <div class="order-notification">
+
+                        </div>
+                        <span class="price_all">Order
+                                 subtotal: 25&nbsp;999 грн</span>
+                    </div>
 
                                            `);
         }
@@ -490,7 +492,7 @@
                                                     </td>
                                                     <td>Qty:<span>${product.count}</span></td>
                                                     <td>
-                                                        <div class="price">$ ${product.laptop.price}</div>
+                                                        <div class="price">$ ${product.subtotal}</div>
                                                     </td>
                                                 </tr>
                                              </tbody>
@@ -499,7 +501,7 @@
 
 
     </script>
-</footer>
+
 
 
 </body>

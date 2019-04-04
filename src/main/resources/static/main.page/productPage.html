@@ -31,14 +31,17 @@
 <script>
 
 
+
+
     window.onload = function () {
+
         gettingAllElementsInNewWay();
         window.localStorage.setItem('qty','1');
 
     };
 
-
     var notebookId = window.localStorage.getItem('laptopId');
+
 
     var userId = window.localStorage.getItem('customerId');
 
@@ -70,7 +73,6 @@
         }
     }
 
-
     // var clickCount = 1;
     // gettingAllElementsInNewWay();
     // var idsToCart = new Array();
@@ -101,14 +103,14 @@
         });
     }
 
+
+
+
+
     function gettingQty(){
 
         window.localStorage.setItem('qty',$('#choose-quantity option:selected').val());
     }
-
-
-
-
 
     function settingProdForOrder() {
         let requestForProduct = {
@@ -221,6 +223,7 @@
     //     });
     // });
 
+
     // $(document).ready(function () {
     //
     //     let abc = $('#select-qty').val();
@@ -232,8 +235,6 @@
     //
     //         });
     //     });
-
-
     function appendProduct(prod) {
         let container = $(".container");
         container.append(`<div>
@@ -279,10 +280,10 @@
       </div>
       <div class="panel">
          <div class="sub-panel">
-          <button class="filter-buttons" id="characteristics-button" >Characteristics</button>
+          <button class="filter-buttons" id="characteristics-button" onclick="showCharacter()">Characteristics</button>
 
 
-          <button class="filter-buttons" id="description-button" >Description</button>
+          <button class="filter-buttons" id="description-button" onclick="showDesc()">Description</button>
 
          </div>
       </div>
@@ -431,7 +432,7 @@
           </div></div>
 
 
-          <div id="good-description"  >
+          <div id="good-description"  style="display: none;" >
           <div id="description-container">
       <span class="description-span">${prod.descriptionFirstParagraph}</span><br>
        <div class="sub-description-photo"><div><img class="description-photo" src="${prod.descriptionImagePath1}" alt=""></div></div><br>
@@ -448,14 +449,33 @@
     </div>
 
           </div></div>`)
+
     };
 
-    $(document).ready(function () {
-        $('#choose-quantity').change(function () {
-            console.log($(this).val())
-        });
-    });
+    // $(document).ready(function () {
+function showCharacter(){
+        $("#characteristics-button").click(function () {
+            $("#characteristic-block").show();
+            $("#good-description").hide();
 
+
+        });}
+
+    function showDesc(){
+        $("#description-button").click(function () {
+            $("#characteristic-block").hide();
+            $("#good-description").show();
+        });}
+    // });
+
+
+
+    // $(document).ready(function () {
+    //     // $('#choose-quantity').change(function () {
+    //     //     console.log($(this).val())
+    //         $("#good-description").hide();
+    //     // });
+    // });
 
     // var goodDescription = document.getElementById('good-description');
     // var characteristicsButton = document.getElementById('characteristics-button');
@@ -476,10 +496,6 @@
     //     document.getElementById('good-description').hide();
     // }
 
-</script>
-
-<script>
-
     // function checkingForToken() {
     //     if (!window.localStorage.getItem('token')) {
     //         window.location.href = '/main.page/sign.html';
@@ -487,19 +503,6 @@
     //         window.location.href = '/main.page/cart.html';
     //     }
     // }
-
-    $(document).ready(function () {
-        $("#good-description").hide();
-        $("#characteristics-button").click(function () {
-            $("#characteristic-block").show();
-            $("#good-description").hide();
-
-        });
-        $("#description-button").click(function () {
-            $("#characteristic-block").hide();
-            $("#good-description").show();
-        });
-    });
 </script>
 
 

@@ -20,11 +20,14 @@ public class ProductForOrderResponse {
 
     private Double subtotal;
 
+    private boolean removedToCart;
+
     public ProductForOrderResponse(ProductForOrder productForOrder){
         id = productForOrder.getId();
         count = productForOrder.getCount();
         laptop = new LaptopResponse(productForOrder.getLaptop());
         customerResponse = new CustomerResponse(productForOrder.getCustomer());
         subtotal = productForOrder.getSubtotal();
+        removedToCart = productForOrder.isRemovedToCart();
     }
 }

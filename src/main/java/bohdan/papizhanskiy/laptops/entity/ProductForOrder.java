@@ -29,6 +29,8 @@ public class ProductForOrder {
         @ManyToOne
         private Customer customer;
 
+        private boolean removedToCart;
+
 
         private Double subtotal;
 

@@ -63,7 +63,7 @@
             <div class="total-value final-value" id="basket-total"></div>
         </div>
         <div class="summary-checkout">
-            <button class="checkout-cta" id="checkout">Go to Secure Checkout</button>
+            <button class="checkout-cta" id="checkout" onclick="productToOrder();">Go to Secure Checkout</button>
         </div>
 
         <div class="continue-shopping">
@@ -82,7 +82,7 @@
     window.onload = function () {
         gettingElements(customerId);
     };
-
+    var allSubtotals = 0;
     function gettingElements(customerId) {
         $.ajax({
             url: 'http://localhost:8000/productForOrder/findAllByCustomerId?id=' + customerId,
@@ -90,15 +90,22 @@
             contentType: 'application/json',
             // data: JSON.stringify(pageRequest),
             success: (products) => {
-                var allSubtotals = 0;
+                var counter = 0;
                 if (products.length < 1) {
                     checkCart();
                 }
                 // console.log(products);
                 // $('.basket-product').html("");
                 for (let product of products) {
+                    if (!product.removedToCart){
                     appendProducts(product);
-                    allSubtotals+=product.subtotal;
+                    idsOfProducts(product.id);
+                    allSubtotals += product.subtotal;
+                    counter++;
+                    }
+                }
+                if (counter == 0){
+                    checkCart();
                 }
                 location.reload;
                 appendSubtotal(allSubtotals);
@@ -109,8 +116,92 @@
             }
         });
     }
+    function findOneLaptopById(productForOrderId){
+        $.ajax({
+            url: 'http://localhost:8000/productForOrder/findOne?id=' + productForOrderId,
+            type: 'POST',
+            contentType: 'application/json',
+            // data: JSON.stringify(request),
+            success: (answer) => {
 
-    function appendSubtotal(subtotal){
+                removingToCart(productForOrderId,answer.laptop.id, answer.laptop.price, answer.count);
+                // console.log("Okay");
+                // gettingElements(customerId);
+                // location.reload();
+            },
+            error: (e) => {
+                console.log(e)
+            }
+        });
+
+    }
+    function removingToCart( id, laptop, price, count) {
+        let newCount = count * price;
+        let request = {
+            count: count,
+            customerId: customerId,
+            laptopId: laptop,
+            subtotal:newCount,
+            removedToCart:true
+
+        };
+        $.ajax({
+            url: 'http://localhost:8000/productForOrder?id=' + id,
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(request),
+            success: () => {
+                console.log("Okay");
+                // gettingElements(customerId);
+                // location.reload();
+            },
+            error: (e) => {
+                console.log(e)
+            }
+        });
+
+    }
+
+    var productsIds = new Array();
+
+    function idsOfProducts(id) {
+        productsIds.push(id);
+        window.localStorage.setItem('productsIds', productsIds);
+
+    }
+
+    function productToOrder(){
+        let productsIds = window.localStorage.getItem('productsIds').split(",");
+        let thisArray = new Array();
+
+        for (let i = 0; i <productsIds.length ; i++) {
+            var value = parseInt(productsIds[i]);
+            thisArray[i] = value;
+            findOneLaptopById(value);
+        }
+        console.log(thisArray)
+        let orderRequest = {
+            customerId: customerId,
+            productForOrderId: thisArray,
+            subtotal: allSubtotals
+
+
+        };
+        $.ajax({
+            url: 'http://localhost:8000/order',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(orderRequest),
+            success: () => {
+                window.location.href = '/main.page/profile.html';
+            },
+            error: (e) => {
+                console.log(e)
+            }
+        });
+    }
+
+    function appendSubtotal(subtotal) {
         var total = $('#basket-total');
         var basket = $('#basket-subtotal');
         total.append(subtotal);
@@ -131,13 +222,14 @@
             }
         });
     }
-function checkCart() {
-    var checkingCart = $('.basket-product');
-    checkingCart.append(`<div class="empty-cart"><div style="width: 70%; display: flex; justify-content: center;"><h1>Your shopping cart is empty</h1></div>
+
+    function checkCart() {
+        var checkingCart = $('.basket-product');
+        checkingCart.append(`<div class="empty-cart"><div style="width: 70%; display: flex; justify-content: center;"><h1>Your shopping cart is empty</h1></div>
     <div class="continue-shopping" style="width: 75%; display: flex; justify-content: center;">
               <a href="index.html"><button class="checkout-cta" id="continue" style="width: 200px">Continue Shopping</button></a>
             </div></div>`);
-};
+    };
 
 
     //     var promoCode;
@@ -179,6 +271,40 @@ function checkCart() {
     //             }
     //         });
     //     }
+
+    var quantity;
+
+    function updatingQuantity(id, laptop, price) {
+        quantity   = $('#this-input-' + id).val();
+        if (quantity <= 0 || quantity > 20) {
+            alert('Enter value between 1 and 20');
+            location.reload();
+            return;
+        }
+        let newSubtotal = quantity * price;
+        console.log(id);
+        let request = {
+            count: quantity,
+            customerId: customerId,
+            laptopId: laptop,
+            subtotal: newSubtotal
+        };
+        $.ajax({
+            url: 'http://localhost:8000/productForOrder?id=' + id,
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(request),
+            success: () => {
+                console.log("Okay");
+                // gettingElements(customerId);
+                location.reload();
+            },
+            error: (e) => {
+                console.log(e)
+            }
+        });
+    }
+
     //
     function appendProducts(prod) {
         var basketProduct = $('.basket-product');
@@ -195,7 +321,7 @@ function checkCart() {
         </div>
         <div class="price">${prod.laptop.price}</div>
         <div class="quantity">
-          <input type="number" value="${prod.count}" min="1" class="quantity-field">
+          <input id="this-input-${prod.id}" type="number" value="${prod.count}" min="1" onchange="updatingQuantity(${prod.id}, ${prod.laptop.id}, ${prod.laptop.price});" class="quantity-field">
         </div>
         <div class="subtotal">${prod.subtotal}</div>
         <div class="remove">

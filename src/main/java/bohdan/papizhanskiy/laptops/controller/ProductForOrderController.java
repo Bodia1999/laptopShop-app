@@ -32,8 +32,8 @@ public class ProductForOrderController {
         productForOrderService.delete(id);
     }
 
-    @PutMapping("/{id}")
-    public ProductForOrderResponse update(@RequestBody ProductForOrderRequest productForOrderRequest,@PathVariable Long id) throws Exception {
+    @PutMapping
+    public ProductForOrderResponse update(@RequestBody ProductForOrderRequest productForOrderRequest,@RequestParam Long id) throws Exception {
         return productForOrderService.update(productForOrderRequest, id);
     }
 

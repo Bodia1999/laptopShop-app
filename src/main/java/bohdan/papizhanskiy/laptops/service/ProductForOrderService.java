@@ -1,6 +1,5 @@
 package bohdan.papizhanskiy.laptops.service;
 
-import bohdan.papizhanskiy.laptops.dto.request.NewProductForOrderRequest;
 import bohdan.papizhanskiy.laptops.dto.request.PaginationRequest;
 import bohdan.papizhanskiy.laptops.dto.request.ProductForOrderRequest;
 import bohdan.papizhanskiy.laptops.dto.response.DataResponse;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,6 +53,7 @@ public class ProductForOrderService {
         productForOrder.setCustomer(customerService.findOne(productForOrderRequest.getCustomerId()));
         productForOrder.setLaptop(laptopService.findOne(productForOrderRequest.getLaptopId()));
         productForOrder.setSubtotal(productForOrderRequest.getSubtotal());
+        productForOrder.setRemovedToCart(productForOrderRequest.isRemovedToCart());
 //        productForOrder = productForOrderRepository.save(productForOrder);
 //        for (Long order : productForOrderRequest.getOrderId() ){
 //            Order order1 = orderService.findOne(order);

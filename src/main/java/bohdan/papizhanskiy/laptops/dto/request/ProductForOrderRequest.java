@@ -20,5 +20,7 @@ public class ProductForOrderRequest {
     private Long customerId;
 
     private Double subtotal;
+
+    private boolean removedToCart;
 //    private Long[] orderId;
 }
