@@ -17,51 +17,54 @@
  </header>
   
 </div>
-<div class="createCustomerButton">
-  
-<button id="openModal">Create customer</button>
+<!--<div class="createCustomerButton">-->
+  <!---->
+<!--<button id="openModal">Create customer</button>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; The Modal &ndash;&gt;-->
+<!--<div id="myModal" class="modal">-->
+
+    <!--&lt;!&ndash; Modal content &ndash;&gt;-->
+    <!--<div class="modal-content">-->
+        <!--<div class="modal-header">-->
+            <!--<span class="close">&times;</span>-->
+            <!--<h2>Create customer</h2>-->
+        <!--</div>-->
+        <!--<div class="modal-body">-->
+            <!--<div>-->
+                <!--<form>-->
+                    <!--<label for="name">First Name</label><br>-->
+                    <!--<input type="text" id="name" name="name" placeholder="Your name.."><br>-->
+                    <!--<label for="surname">Last Name</label><br>-->
+                    <!--<input type="text" id="surname" name="surname" placeholder="Your last name.."><br>-->
+                    <!--<label for="age">Age</label><br>-->
+                    <!--<input type="number" id="age" name="age" placeholder="Your age.."><br>-->
+                    <!--<label for="email">Email</label><br>-->
+                    <!--<input type="text" id="email" name="email" placeholder="Your email.."><br>-->
+                    <!--<input type="button" id="btnCreatePerson" value="Create">-->
+                <!--</form>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="modal-footer">-->
+            <!--<h3>Form for new customer</h3>-->
+        <!--</div>-->
+    <!--</div>-->
+
 </div>
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
 
-    <!-- Modal content -->
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close">&times;</span>
-            <h2>Create customer</h2>
-        </div>
-        <div class="modal-body">
-            <div>
-                <form>
-                    <label for="name">First Name</label><br>
-                    <input type="text" id="name" name="name" placeholder="Your name.."><br>
-                    <label for="surname">Last Name</label><br>
-                    <input type="text" id="surname" name="surname" placeholder="Your last name.."><br>
-                    <label for="age">Age</label><br>
-                    <input type="number" id="age" name="age" placeholder="Your age.."><br>
-                    <label for="email">Email</label><br>
-                    <input type="text" id="email" name="email" placeholder="Your email.."><br>
-                    <input type="button" id="btnCreatePerson" value="Create">
-                </form>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <h3>Form for new customer</h3>
-        </div>
-    </div>
-
-</div>
-
-
-<table id="customers">
+<table id="customers" style="margin-top: 20px;">
     <tr>
+        <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>Age</th>
-        <th>Email</th>
+        <th>Birthday</th>
+        <th>Login</th>
+        <th>Phone number</th>
+        <th>Address</th>
         <th>Delete Button</th>
-        <th>Update Button</th>
+        <!--<th>Update Button</th>-->
     </tr>
 </table>
 
@@ -69,8 +72,8 @@
     var mainUrl = "http://localhost:8000";
 
     getAllCustomers();
-    setModalConfiguration();
-    setActionOnCreateBtn();
+    // setModalConfiguration();
+    // setActionOnCreateBtn();
 
 
     //start when load page PS reload page for triggered http request
@@ -82,7 +85,7 @@
             success: function (dataResponse) {
                 setCustomersToTable(dataResponse);
                 setActionOnDeleteButtons();
-              setActionOnUpdateButton();
+              // setActionOnUpdateButton();
             },
             error: function (error) {
                 alert(error.message);
@@ -99,12 +102,15 @@
     function setCustomerToTable(customer) {
         var tableOfCustomers= $("#customers");
         tableOfCustomers.append('<tr>' +
+                '<td>' + customer.id + '</td>' +
                 '<td>' + customer.name + '</td>' +
                 '<td>' + customer.surname + '</td>' +
-                '<td>' + customer.age + '</td>' +
-                '<td>' + customer.email + '</td>' +
+                '<td>' + customer.dateBirth + '</td>' +
+                '<td>' + customer.login + '</td>' +
+                '<td>' + customer.phoneNumber + '</td>' +
+                '<td>' + customer.address + '</td>' +
                 '<td><button class="button" value="' + customer.id + '">Delete</button></td>' +
-                '<td><button class="buttonToUpdate" value="' + customer.id +'">Update</button></td>' +
+                // '<td><button class="buttonToUpdate" value="' + customer.id +'">Update</button></td>' +
                 '</tr>');
     }
 
@@ -127,118 +133,118 @@
 
     }
 
-    function setActionOnCreateBtn() {
-        $("#btnCreatePerson").click(function () {
-
-            var name = $("#name").val();
-            var surname = $("#surname").val();
-            var age = $("#age").val();
-          var email =$("#email").val();
-//            if (firstName != null && lastName != null && age != null) {
-
-                var newPerson = {
-                    "name": name,
-                    "surname": surname,
-                    "age": age,
-                  "email": email
-                };
-
-                $.ajax({
-                    url: mainUrl + "/customer",
-                    type: "POST",
-                    contentType: "application/json",
-                    data: JSON.stringify(newPerson),
-                    success: function (data) {
-                        location.reload();
-                    },
-                    error: function (error) {
-                        alert(error.message);
-                    }
-                });
-//            } else {
-//                alert("Всі поля повинні бути заповнені")
-//            }
-        });
-    }
-
-    function setActionOnUpdateButton() {
-        $(".buttonToUpdate").each(function (index) {
-            $(this).click(function () {
-                $.ajax({
-                    url: mainUrl + "/customer/findOne?id=" + $(this).val(),
-                    type: "POST",
-                    contentType: "application/json",
-                    success: function (dataResponse) {
-                        var parse = JSON.parse(dataResponse);
-                        $("#name").val(parse.name);
-                        document.getElementById("myModal").style.display= "block";
-                    }
-                })
-            })
-        })
-
-    }
-  
-  // function setActionOnUpdateButtons() {
-  //           $(".buttonUpdate").each(function(index){
-  //               $(this).click(function(){
-  //               var firstName = $("#fname").val();
-  //               var lastName = $("#lname").val();
-  //               var age = $("#age").val();
-  //               var email =$("#email").val();
-  //
-  //                   var newPerson = {
-  //                       "name": firstName,
-  //                       "surname": lastName,
-  //                       "age": age,
-  //                       "email": email
-  //                   };
-  //                   $.ajax({
-  //                       url: mainUrl +"/customer?id=" + $(this).val(),
-  //                       type: "PUT",
-  //                       contentType: "application/json",
-  //                       data: JSON.stringify(newPerson),
-  //                       success: function (data) {
-  //                           location.reload();
-  //                       },
-  //                       error: function (error) {
-  //                           alert(error.message);
-  //                       }
-  //
-  //                   });
-  //
-  //           })
-  //           })
-  //
-  //       }
-
-    function setModalConfiguration() {
-        // Get the modal
-        var modal = document.getElementById('myModal');
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("openModal");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal
-        btn.onclick = function () {
-            modal.style.display = "block";
-        };
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-            modal.style.display = "none";
-        };
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        };
-    }
+//     function setActionOnCreateBtn() {
+//         $("#btnCreatePerson").click(function () {
+//
+//             var name = $("#name").val();
+//             var surname = $("#surname").val();
+//             var age = $("#age").val();
+//           var email =$("#email").val();
+// //            if (firstName != null && lastName != null && age != null) {
+//
+//                 var newPerson = {
+//                     "name": name,
+//                     "surname": surname,
+//                     "age": age,
+//                   "email": email
+//                 };
+//
+//                 $.ajax({
+//                     url: mainUrl + "/customer",
+//                     type: "POST",
+//                     contentType: "application/json",
+//                     data: JSON.stringify(newPerson),
+//                     success: function (data) {
+//                         location.reload();
+//                     },
+//                     error: function (error) {
+//                         alert(error.message);
+//                     }
+//                 });
+// //            } else {
+// //                alert("Всі поля повинні бути заповнені")
+// //            }
+//         });
+//     }
+//
+//     function setActionOnUpdateButton() {
+//         $(".buttonToUpdate").each(function (index) {
+//             $(this).click(function () {
+//                 $.ajax({
+//                     url: mainUrl + "/customer/findOne?id=" + $(this).val(),
+//                     type: "POST",
+//                     contentType: "application/json",
+//                     success: function (dataResponse) {
+//                         var parse = JSON.parse(dataResponse);
+//                         $("#name").val(parse.name);
+//                         document.getElementById("myModal").style.display= "block";
+//                     }
+//                 })
+//             })
+//         })
+//
+//     }
+//
+//   // function setActionOnUpdateButtons() {
+//   //           $(".buttonUpdate").each(function(index){
+//   //               $(this).click(function(){
+//   //               var firstName = $("#fname").val();
+//   //               var lastName = $("#lname").val();
+//   //               var age = $("#age").val();
+//   //               var email =$("#email").val();
+//   //
+//   //                   var newPerson = {
+//   //                       "name": firstName,
+//   //                       "surname": lastName,
+//   //                       "age": age,
+//   //                       "email": email
+//   //                   };
+//   //                   $.ajax({
+//   //                       url: mainUrl +"/customer?id=" + $(this).val(),
+//   //                       type: "PUT",
+//   //                       contentType: "application/json",
+//   //                       data: JSON.stringify(newPerson),
+//   //                       success: function (data) {
+//   //                           location.reload();
+//   //                       },
+//   //                       error: function (error) {
+//   //                           alert(error.message);
+//   //                       }
+//   //
+//   //                   });
+//   //
+//   //           })
+//   //           })
+//   //
+//   //       }
+//
+//     function setModalConfiguration() {
+//         // Get the modal
+//         var modal = document.getElementById('myModal');
+//
+//         // Get the button that opens the modal
+//         var btn = document.getElementById("openModal");
+//
+//         // Get the <span> element that closes the modal
+//         var span = document.getElementsByClassName("close")[0];
+//
+//         // When the user clicks the button, open the modal
+//         btn.onclick = function () {
+//             modal.style.display = "block";
+//         };
+//
+//         // When the user clicks on <span> (x), close the modal
+//         span.onclick = function () {
+//             modal.style.display = "none";
+//         };
+//
+//         // When the user clicks anywhere outside of the modal, close it
+//         window.onclick = function (event) {
+//             if (event.target == modal) {
+//                 modal.style.display = "none";
+//             }
+//         };
+//     }
 
 
 </script>

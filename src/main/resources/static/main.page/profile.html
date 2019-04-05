@@ -54,7 +54,7 @@
                     <li class="nav-profile">
                         <div class="nav-profile-image">
                             <div class="nav-profile-name">
-                                <button class="logout">Log Out</button>
+                                <button class="logout" onclick="logOut();">Log Out</button>
                             </div>
                         </div>
                     </li>
@@ -269,151 +269,176 @@
         <a class="footer-columns" href="#" target="_blank"><img src="../photo/viber1.png" alt=""></a>
     </div>
 </footer>
-    <script>
+<script>
 
-        $(document).ready(function () {
-            gettingPersonalInformation();
-            gettingOrders();
-            $('#personal-data').show();
-            $('#orders').hide();
+    $(document).ready(function () {
+        gettingPersonalInformation();
+        gettingOrders();
+        $('#personal-data').show();
+        $('#orders').hide();
+    });
+
+    function closingOrders() {
+        $('#orders').hide();
+        $('#personal-data').show();
+        $('#my-orders').removeClass('active');
+        $('#my-profile').addClass('active');
+
+
+    };
+
+
+    function closingProfile() {
+        $('#orders').show();
+        $('#personal-data').hide();
+
+
+        $('#my-profile').removeClass('active');
+        $('#my-orders').addClass('active');
+
+    };
+
+    function logOut(){
+        window.localStorage.removeItem('token');
+        window.localStorage.removeItem('customerId');
+        window.location.href = 'http://localhost:8000/main.page/index.html';
+    }
+
+    function checkOrderList() {
+        let checkingCart = $('#one-order');
+        checkingCart.append(`<div class="empty-cart"><div style="width: 100%; display: flex; justify-content: center; margin-top:50px;"><h1>Your orders list cart is empty, you do not have any purchase yet</h1></div>
+    <!--<div class="continue-shopping" style="width: 75%; display: flex; justify-content: center;">-->
+              <!--<a href="index.html"><button class="checkout-cta" id="continue" style="width: 200px">Continue Shopping</button></a>-->
+            <!--</div>-->
+</div>`);
+    };
+
+
+    function gettingPersonalInformation() {
+        $.ajax({
+            url: 'http://localhost:8000/customer/findOne?id=' + window.localStorage.getItem('customerId'),
+            type: 'POST',
+            contentType: 'application/json',
+            // data: JSON.stringify(pageRequest),
+            success: (answer) => {
+                appendHeader(answer);
+                settingValueToInput(answer.surname, answer.name, answer.dateBirth, answer.login, answer.phoneNumber, answer.address);
+                // $('.container').html('');
+                // for (let laptop of page.content) {
+                //   appendProduct(laptop);
+                // }
+                // location.reload;
+            },
+            error: (e) => {
+                console.log(e)
+            }
         });
+    }
 
-        function closingOrders() {
-            $('#orders').hide();
-            $('#personal-data').show();
-            $('#my-orders').removeClass('active');
-            $('#my-profile').addClass('active');
+    function updateInfoMain() {
+
+        $.ajax({
+            url: 'http://localhost:8000/customer?id=' + window.localStorage.getItem('customerId'),
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(updatingPersonalInformation()),
+            success: (answer) => {
+                appendHeader(answer);
+                settingValueToInput(answer.surname, answer.name, answer.dateBirth, answer.login, answer.phoneNumber, answer.address);
+                // $('.container').html('');
+                // for (let laptop of page.content) {
+                //   appendProduct(laptop);
+                // }
+                // location.reload;
+            },
+            error: (e) => {
+                console.log(e)
+            }
+        });
+    };
 
 
+    // });
+    function settingValueToInput(lastName, firstName, birthDay, login, mobilePhone, address) {
+        $('#LastName').val(lastName);
+        $('#FirstName').val(firstName);
+        $('#birthDay').val(birthDay);
+        $('#Email').val(login);
+        $('#Phone').val(mobilePhone);
+        $('#address').val(address);
+
+
+    }
+
+    function appendHeader(answer) {
+        var content = $('.content-header');
+        var addressColumn = $('#column-for-address');
+        var phoneColumn = $('#column-for-phone');
+        content.append(`<h1 style=" padding-left: 30px;color: black; font-size: 23px;">${answer.name} ${answer.surname}</h1>`)
+        addressColumn.append(answer.address);
+        phoneColumn.append(answer.phoneNumber);
+    }
+
+    function updatingPersonalInformation() {
+        var surname = $('#LastName').val();
+        var name = $('#FirstName').val();
+        var birthday = $('#birthDay').val();
+        var email = $('#Email').val();
+        var phone = $('#Phone').val();
+        var address = $('#address').val();
+
+        let request = {
+            name: name,
+            surname: surname,
+            login: email,
+            dateBirth: birthday,
+            phoneNumber: phone,
+            address: address
         };
+        return request;
+    };
 
 
-        function closingProfile() {
-            $('#orders').show();
-            $('#personal-data').hide();
+    function gettingOrders() {
+        $.ajax({
+            url: 'http://localhost:8000/order/findAllByCustomer?id=' + window.localStorage.getItem('customerId'),
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(updatingPersonalInformation()),
+            success: (orders) => {
 
-
-            $('#my-profile').removeClass('active');
-            $('#my-orders').addClass('active');
-
-        };
-
-
-        function gettingPersonalInformation() {
-            $.ajax({
-                url: 'http://localhost:8000/customer/findOne?id=' + window.localStorage.getItem('customerId'),
-                type: 'POST',
-                contentType: 'application/json',
-                // data: JSON.stringify(pageRequest),
-                success: (answer) => {
-                    appendHeader(answer);
-                    settingValueToInput(answer.surname, answer.name, answer.dateBirth, answer.login, answer.phoneNumber, answer.address);
-                    // $('.container').html('');
-                    // for (let laptop of page.content) {
-                    //   appendProduct(laptop);
-                    // }
-                    // location.reload;
-                },
-                error: (e) => {
-                    console.log(e)
-                }
-            });
-        }
-
-        function updateInfoMain() {
-
-            $.ajax({
-                url: 'http://localhost:8000/customer?id=' + window.localStorage.getItem('customerId'),
-                type: 'PUT',
-                contentType: 'application/json',
-                data: JSON.stringify(updatingPersonalInformation()),
-                success: (answer) => {
-                    appendHeader(answer);
-                    settingValueToInput(answer.surname, answer.name, answer.dateBirth, answer.login, answer.phoneNumber, answer.address);
-                    // $('.container').html('');
-                    // for (let laptop of page.content) {
-                    //   appendProduct(laptop);
-                    // }
-                    // location.reload;
-                },
-                error: (e) => {
-                    console.log(e)
-                }
-            });
-        };
-
-
-        // });
-        function settingValueToInput(lastName, firstName, birthDay, login, mobilePhone, address) {
-            $('#LastName').val(lastName);
-            $('#FirstName').val(firstName);
-            $('#birthDay').val(birthDay);
-            $('#Email').val(login);
-            $('#Phone').val(mobilePhone);
-            $('#address').val(address);
-
-
-        }
-
-        function appendHeader(answer) {
-            var content = $('.content-header');
-            var addressColumn = $('#column-for-address');
-            var phoneColumn = $('#column-for-phone');
-            content.append(`<h1 style=" padding-left: 30px;color: black; font-size: 23px;">${answer.name} ${answer.surname}</h1>`)
-            addressColumn.append(answer.address);
-            phoneColumn.append(answer.phoneNumber);
-        }
-
-        function updatingPersonalInformation() {
-            var surname = $('#LastName').val();
-            var name = $('#FirstName').val();
-            var birthday = $('#birthDay').val();
-            var email = $('#Email').val();
-            var phone = $('#Phone').val();
-            var address = $('#address').val();
-
-            let request = {
-                name: name,
-                surname: surname,
-                login: email,
-                dateBirth: birthday,
-                phoneNumber: phone,
-                address: address
-            };
-            return request;
-        };
-
-
-        function gettingOrders() {
-            $.ajax({
-                url: 'http://localhost:8000/order/findAllByCustomer?id=' + window.localStorage.getItem('customerId'),
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(updatingPersonalInformation()),
-                success: (orders) => {
-
-                    $('#order-content').html('');
-                    $('#product-content').html('');
-
-                    for (let order of orders) {
-                        appendOrders(order);
-                        for (let product of order.productForOrder){
-                            appendProduct(product);
+                $('#order-content').html('');
+                $('#product-content').html('');
+                    if (orders.length<1){
+                        checkOrderList();
+                    }
+                for (let order of orders) {
+                    appendOrders(order);
+                    let counter1 = 0;
+                    for (let product of order.productForOrder) {
+                        appendProduct(product, order.id);
+                        if (counter1 == 0){
+                        appendCustomerInfo(product, order.id);
+                        counter1++;
                         }
                     }
 
-                    // location.reload;
-                },
-                error: (e) => {
-                    console.log(e)
-                }
-            });
-        };
+                    // for (let customer of order.customer)
 
-        function appendOrders(orders) {
-            var oneOrder = $('#one-order');
-            oneOrder.append(`
-                                            <div id="orderList">
+                }
+
+                // location.reload;
+            },
+            error: (e) => {
+                console.log(e)
+            }
+        });
+    };
+
+    function appendOrders(orders) {
+        var oneOrder = $('#one-order');
+        oneOrder.append(`<div style="margin-bottom: 60px;border-bottom: 4px solid black;">
+                                            <div id="orderList" >
                         <table class="container_table_el clear_after" id="order-content">
                             <tbody>
                             <tr>
@@ -431,32 +456,11 @@
                             </tr>
                             </tbody>
                         </table>
-                        <div class="container_table_dash level2 clear_after" style="display: block;" id="product-content"></div>
+                        <div class="container_table_dash level2 clear_after" style="display: block;" id="product-content-${orders.id}"></div>
                     </div>
-                    <div class="order-details-infocols clearfix">
+                    <div class="order-details-infocols clearfix" id="customer-info-${orders.id}">
 
-                        <div class="order-infocol">
 
-                            <div class="infocol-title bold">
-                                Delivery address
-                            </div>
-
-                            <div class="infocol-description" id="column-for-address">
-                            </div>
-
-                        </div>
-
-                        <div class="order-infocol">
-                            <div class="infocol-title bold">
-                                Mobile phone
-
-                            </div>
-
-                            <div class="infocol-description" id="column-for-phone">
-
-                            </div>
-
-                        </div>
 
                     </div>
 
@@ -465,16 +469,16 @@
                         <div class="order-notification">
 
                         </div>
-                        <span class="price_all">Order
-                                 subtotal: 25&nbsp;999 грн</span>
+                        <span class="price_all"><b style="font-size: 22px;">Order
+                                 subtotal: $ ${orders.subtotal}</b></span>
                     </div>
 
-                                           `);
-        }
+                                       </div>    `);
+    }
 
-        function appendProduct(product) {
-            var $product = $('#product-content');
-            $product.append(`<table style="width:100%">
+    function appendProduct(product, orderId) {
+        var $product = $('#product-content-' + orderId);
+        $product.append(`<table style="width:100%">
                                                 <tbody>
                                                 <tr>
                                                     <td>
@@ -497,11 +501,37 @@
                                                 </tr>
                                              </tbody>
                                             </table>`)
-        }
+    }
+
+    function appendCustomerInfo(customers, orderId) {
+        var customerInfo = $('#customer-info-' + orderId);
+        customerInfo.append(`<div class="order-infocol">
+
+                            <div class="infocol-title bold">
+                                Delivery address
+                            </div>
+
+                            <div class="infocol-description" id="column-for-address">
+                            ${customers.customerResponse.address}
+                            </div>
+
+                        </div>
+
+                        <div class="order-infocol">
+                            <div class="infocol-title bold">
+                                Mobile phone
+
+                            </div>
+
+                            <div class="infocol-description" id="column-for-phone">
+                                ${customers.customerResponse.phoneNumber}
+                            </div>
+
+                        </div>`)
+    }
 
 
-    </script>
-
+</script>
 
 
 </body>

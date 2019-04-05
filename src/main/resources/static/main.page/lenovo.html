@@ -6,25 +6,29 @@
 <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
   <link rel="stylesheet" href="../main.page.css/style_main.css">
   <link rel="stylesheet" href="../main.page.css/style_lenovo.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 
 <body>
-  <div>
- <header>
-   <div class="logo">
-    <div class="graphic-logo">
-     <a href="index.html"><img class="logotype" src="../photo/images_for_main_page/FINAL_VERSION.png" alt="logo"></a>
-     </div>
+<div>
+    <header>
+        <div class="logo">
+            <div class="graphic-logo">
+                <a href="../main.page/index.html"><img class="logotype" src="../photo/FINAL_VERSION.png" alt="logo"></a>
+            </div>
 
-     <div class="info">
-         <a href="#"><img src="../photo/person1.png" alt=""></a>
-       <!--<a href="#"><img src="img/log_in_final.png" alt=""></a>-->
-       <a href="#"><img src="../photo/images_for_main_page/cart.png" alt=""></a>
-     </div>
-     </div>
-  </header>
-  </div>
+            <div class="info">
+                <a href="#"><img src="../photo/person1.png" alt=""></a>
+                <!--<a href="#"><img src="img/log_in_final.png" alt=""></a>-->
+                <a href="../main.page/cart.html"><img src="../photo/images_for_main_page/cart.png" alt=""></a>
+            </div>
+
+
+        </div>
+    </header>
+</div>
+
   <div>
   <div class="main">
     <div class="under_photo">
@@ -69,6 +73,20 @@
           separatingString();
       });
 
+
+      function checkingForToken() {
+          if(!window.localStorage.getItem('token')){
+              window.location.href = 'http://localhost:8000/main.page/sign.html';
+          }else {
+              window.location.href = 'http://localhost:8000/main.page/profile.html';
+          }
+      }function checkingForTokenToCart() {
+          if(!window.localStorage.getItem('token')){
+              window.location.href = 'http://localhost:8000/main.page/sign.html';
+          }else {
+              window.location.href = 'http://localhost:8000/main.page/cart.html';
+          }
+      }
       function separatingString() {
           var select = $('.soflow').val().toString();
           var strings = select.split("/");
@@ -117,6 +135,16 @@
       }
 
 
+      function relocating(){
+          window.location.href = "http://localhost:8000/main.page/productPage.html";
+      }
+
+      function settingIdToLocalStorage(id) {
+
+          window.localStorage.setItem('laptopId', id);
+      }
+
+
       function appendProduct(prod) {
 
           let container = $('.container');
@@ -124,7 +152,7 @@
           container.append(`<div class="out-product">
         <div class="product">
            <!--<div class="product-image" style="background-image: url(https://s.4pda.to/FXOw91qnJGBZYbwuumPLtusBjioW.jpg)">-->
-           <a href="../product/productPage.html" ><div class="product-image" style="background-image: url(http://localhost:8000/img/${prod.imageDirection})"></a>
+           <a href="../main.page/productPage.html" onclick="settingIdToLocalStorage(${prod.id})" ><div class="product-image" onclick="relocating(); settingIdToLocalStorage(${prod.id})" style="background-image: url(${prod.imageDirection})"></a>
 
                 <!--<a href="#" class="listing-item__img-container">-->
               <!--<img src="img/macbook.jpg"  class="item-image">-->
@@ -132,7 +160,7 @@
 
               </div>
               <p class="product-name">
-              <a href="../product/productPage.html" " >
+              <a href="../main.page/productPage.html" " >
               ${prod.makeName} ${prod.model}     <span class="identification-code" style="color:white;">${prod.id}</span>
               </a>
               </p>

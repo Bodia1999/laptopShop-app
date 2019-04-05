@@ -18,7 +18,7 @@
             <div class="info">
                 <!--<a href="#"><img src="img/log_in_final.png" alt=""></a>-->
                 <a href="#" onclick="checkingForToken()"><img src="../photo/person1.png" alt=""></a>
-                <a href="../main.page/cart.html"><img src="../photo/images_for_main_page/cart.png" alt=""></a>
+                <a href="#" onclick="checkingForTokenToCart()"><img src="../photo/images_for_main_page/cart.png" alt=""></a>
             </div>
 
 
@@ -554,6 +554,9 @@
 </div>
 
 <script>
+    function relocating(){
+        window.location.href = "http://localhost:8000/main.page/productPage.html";
+    }
 
     // $('.checkBox-value').change(function () {
     //
@@ -861,7 +864,7 @@
             pagination: {
                 page: page,
                 size:
-                    3,
+                    12,
                 sortRequest:
                     {
                         direction: sortDirection,
@@ -940,7 +943,7 @@
         container.append(`
         <div class="product">
            <!--<div class="product-image" style="background-image: url(https://s.4pda.to/FXOw91qnJGBZYbwuumPLtusBjioW.jpg)">-->
-           <a href="../product/productPage.html" onclick="settingIdToLocalStorage(${prod.id})" ><div class="product-image" style="background-image: url(${prod.imageDirection})"></a>
+           <a href="../main.page/productPage.html" onclick="settingIdToLocalStorage(${prod.id})" ><div class="product-image" onclick="relocating(); settingIdToLocalStorage(${prod.id})" style="background-image: url(${prod.imageDirection})"></a>
 
                 <!--<a href="#" class="listing-item__img-container">-->
             <!--<img src="img/macbook.jpg"  class="item-image">-->
@@ -984,6 +987,12 @@
             window.location.href = 'http://localhost:8000/main.page/sign.html';
         }else {
             window.location.href = 'http://localhost:8000/main.page/profile.html';
+        }
+    }function checkingForTokenToCart() {
+        if(!window.localStorage.getItem('token')){
+            window.location.href = 'http://localhost:8000/main.page/sign.html';
+        }else {
+            window.location.href = 'http://localhost:8000/main.page/cart.html';
         }
     }
 

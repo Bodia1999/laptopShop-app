@@ -24,6 +24,8 @@ public class OrderResponse {
 
     private String orderTime;
 
+//    private List<String> laptopName = new ArrayList<>();
+
 
 
     private List<ProductForOrderResponse> productForOrder = new ArrayList<>();
@@ -33,5 +35,6 @@ public class OrderResponse {
         subtotal = order.getSubtotal();
         orderTime = order.getOrderTime();
         productForOrder = order.getProductForOrder().stream().map(ProductForOrderResponse::new).collect(Collectors.toList());
+
     }
 }

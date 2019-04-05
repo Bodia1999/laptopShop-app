@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
 }
 .main_photo img{
   width: auto;
@@ -19,7 +19,7 @@
   padding-bottom: 10px;
 }
 .main{
-  
+
   display: flex;
   justify-content: center;
 }

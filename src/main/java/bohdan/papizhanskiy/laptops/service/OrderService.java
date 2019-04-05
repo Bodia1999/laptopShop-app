@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,7 +39,7 @@ public class OrderService {
         }
 
         order.setCustomer(customerService.findOne(orderRequest.getCustomerId()));
-        order.setOrderTime(new Date().toString());
+        order.setOrderTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
         order.setSubtotal(orderRequest.getSubtotal());
         order = orderRepository.save(order);
         for (Long productForOrder : orderRequest.getProductForOrderId() ){

@@ -16,46 +16,49 @@
  </header>
   
 </div>
-<div class="createOrderButton">
-  
-<button id="openModal">Create order</button>
-</div>
+<!--<div class="createOrderButton">-->
+  <!---->
+<!--<button id="openModal">Create order</button>-->
+<!--</div>-->
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
+<!--&lt;!&ndash; The Modal &ndash;&gt;-->
+<!--<div id="myModal" class="modal">-->
 
-    <!-- Modal content -->
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close">&times;</span>
-            <h2>Create order</h2>
-        </div>
-        <div class="modal-body">
-            <div>
-                <form>
-                    <label for="customerId">Customer ID</label><br>
-                    <input min="0" type="number" id="customerId" name="customerId" placeholder="Your Customer ID.."><br>
-                    <input type="button" id="btnCreateOrder" value="Create">
-                    <input type="button" id="btnUpdateOrder" value="Update">
-                </form>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <h3>Form for new order</h3>
-        </div>
-    </div>
+    <!--&lt;!&ndash; Modal content &ndash;&gt;-->
+    <!--<div class="modal-content">-->
+        <!--<div class="modal-header">-->
+            <!--<span class="close">&times;</span>-->
+            <!--<h2>Create order</h2>-->
+        <!--</div>-->
+        <!--<div class="modal-body">-->
+            <!--<div>-->
+                <!--<form>-->
+                    <!--<label for="customerId">Customer ID</label><br>-->
+                    <!--<input min="0" type="number" id="customerId" name="customerId" placeholder="Your Customer ID.."><br>-->
+                    <!--<input type="button" id="btnCreateOrder" value="Create">-->
+                    <!--<input type="button" id="btnUpdateOrder" value="Update">-->
+                <!--</form>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="modal-footer">-->
+            <!--<h3>Form for new order</h3>-->
+        <!--</div>-->
+    <!--</div>-->
 
-</div>
+<!--</div>-->
     
 
 
 
-<table id="orders">
+<table id="orders" style="margin-top: 20px;">
     <tr>
         <th>ID</th>
         <th>Customer ID</th>
+        <th>Subtotal</th>
+        <th>Order time</th>
+        <th>Products</th>
         <th>Delete Button</th>
-        <th>Update Button</th>
+        <!--<th>Update Button</th>-->
     </tr>
 </table>
 

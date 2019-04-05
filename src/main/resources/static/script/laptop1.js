@@ -50,7 +50,10 @@ function setLaptopToTable(laptop) {
         '<td>' + laptop.availabilityOfHDMI + '</td>' +
         '<td>' + laptop.availabilityOfLAN + '</td>' +
         '<td>' + laptop.availabilityOfAUX + '</td>' +
-        '<td>' + laptop.imageDirection + '</td>' +
+        '<td>' + '<a href="'+laptop.imageDirection+'" target="_blank"><button class="photo-button" style="width:60px;">Photo</button></a>'+ '</td>' +
+        '<td>' + '<a href="'+laptop.descriptionImagePath1+'" target="_blank"><button class="photo-button" style="width:60px;">Photo</button></a>'+ '</td>' +
+        '<td>' + '<a href="'+laptop.descriptionImagePath2+'" target="_blank"><button class="photo-button" style="width:60px;">Photo</button></a>'+ '</td>' +
+        '<td>' + '<a href="'+laptop.descriptionImagePath3+'" target="_blank"><button class="photo-button" style="width:60px;">Photo</button></a>'+ '</td>' +
         '<td><button class="button" value="' + laptop.id + '">Delete</button></td>' +
         '<td><button class="buttonToUpdate" value="' + laptop.id + '">Update</button></td>' +
         '</tr>');
