@@ -17,9 +17,9 @@
             </div>
 
             <div class="info">
-                <a href="#"><img src="../photo/person1.png" alt=""></a>
                 <!--<a href="#"><img src="img/log_in_final.png" alt=""></a>-->
-                <a href="../main.page/cart.html"><img src="../photo/images_for_main_page/cart.png" alt=""></a>
+                <a href="#" onclick="checkingForToken()"><img src="../photo/person1.png" alt=""></a>
+                <a href="#" onclick="checkingForTokenToCart()"><img src="../photo/images_for_main_page/cart.png" alt=""></a>
             </div>
 
 
@@ -137,6 +137,10 @@
         window.localStorage.setItem('laptopId', id);
     }
 
+    function relocating(){
+        window.location.href = "http://localhost:8000/main.page/productPage.html";
+    }
+
     function appendProduct(prod) {
 
         let container = $('.container');
@@ -144,7 +148,7 @@
         container.append(`<div class="out-product">
         <div class="product">
            <!--<div class="product-image" style="background-image: url(https://s.4pda.to/FXOw91qnJGBZYbwuumPLtusBjioW.jpg)">-->
-           <a href="../main.page/productPage.html" onclick="settingIdToLocalStorage(${prod.id})" ><div class="product-image" onclick="relocating(); settingIdToLocalStorage(${prod.id})" style="background-image: url(${prod.imageDirection})"></a>
+           <a href="#" onclick="settingIdToLocalStorage(${prod.id}); relocating(); " ><div class="product-image" onclick=" settingIdToLocalStorage(${prod.id});relocating();" style="background-image: url(${prod.imageDirection})"></a>
 
                 <!--<a href="#" class="listing-item__img-container">-->
             <!--<img src="img/macbook.jpg"  class="item-image">-->
@@ -152,7 +156,7 @@
 
             </div>
             <p class="product-name">
-            <a href="../main.page/productPage.html" " >
+            <a href="#" onclick="settingIdToLocalStorage(${prod.id}); relocating(); " >
             ${prod.makeName} ${prod.model}     <span class="identification-code" style="color:white;">${prod.id}</span>
             </a>
             </p>

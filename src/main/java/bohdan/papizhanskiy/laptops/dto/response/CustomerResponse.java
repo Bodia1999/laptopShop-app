@@ -3,6 +3,7 @@ package bohdan.papizhanskiy.laptops.dto.response;
 import bohdan.papizhanskiy.laptops.entity.Customer;
 import bohdan.papizhanskiy.laptops.entity.Order;
 import bohdan.papizhanskiy.laptops.entity.ShippingInfo;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @NoArgsConstructor
+//@AllArgsConstructor
 public class CustomerResponse {
 
     private Long id;
@@ -61,5 +63,18 @@ public class CustomerResponse {
 
 //        orders = customer.getOrders().stream().map(OrderResponse::new).collect(Collectors.toList());
 //        shippingInfos = customer.getShippingInfos().stream().map(ShippingInfoResponse::new).collect(Collectors.toList());
+    }
+
+
+    public CustomerResponse(Long id, String name, String surname, String dateBirth, String password, String login, String address, String phoneNumber) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.dateBirth = dateBirth;
+//        this.orderResponse = orderResponse;
+        this.password = password;
+        this.login = login;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
     }
 }

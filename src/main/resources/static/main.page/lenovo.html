@@ -19,9 +19,9 @@
             </div>
 
             <div class="info">
-                <a href="#"><img src="../photo/person1.png" alt=""></a>
                 <!--<a href="#"><img src="img/log_in_final.png" alt=""></a>-->
-                <a href="../main.page/cart.html"><img src="../photo/images_for_main_page/cart.png" alt=""></a>
+                <a href="#" onclick="checkingForToken()"><img src="../photo/person1.png" alt=""></a>
+                <a href="#" onclick="checkingForTokenToCart()"><img src="../photo/images_for_main_page/cart.png" alt=""></a>
             </div>
 
 
@@ -160,7 +160,7 @@
 
               </div>
               <p class="product-name">
-              <a href="../main.page/productPage.html" " >
+              <a href="#" onclick="settingIdToLocalStorage(${prod.id}); relocating(); " >
               ${prod.makeName} ${prod.model}     <span class="identification-code" style="color:white;">${prod.id}</span>
               </a>
               </p>

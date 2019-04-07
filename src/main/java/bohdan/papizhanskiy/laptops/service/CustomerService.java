@@ -95,20 +95,39 @@ public class CustomerService {
         customer.setRole(Role.USER);
 
         customer = customerRepository.saveAndFlush(customer);
+        Customer saving = customerRepository.save(customer);
+        Long id = saving.getId();
+//        String login = saving.getLogin();
+//        String name = saving.getName();
+//        String surname = saving.getSurname();
+//        String dateBirth = saving.getDateBirth();
+//        String address = saving.getAddress();
+//        String phoneNumber = saving.getPhoneNumber();
+        String password = tokenTool.createToken(customer.getLogin(), customer.getRole().name());
 
-        return new CustomerResponse(customerRepository.save(customer));
+
+        return settingData(id,password);
 
 //        return tokenTool.createToken(customer.getLogin(), customer.getRole().name());
     }
 
-
+    private CustomerResponse settingData(Long id, String password){
+        CustomerResponse customerResponse = new CustomerResponse();
+        customerResponse.setId(id);
+        customerResponse.setPassword(password);
+        return customerResponse;
+    }
     public CustomerResponse findOneByRequest(CustomerRequest request) throws WrongInputDataException {
         Customer customer = customerRepository.findByLoginEquals(request.getLogin()).orElseThrow(() -> new WrongInputDataException("User with login " + request.getLogin() + " not exists"));
 
         if (passwordEncoder.matches(request.getPassword(), customer.getPassword())) {
-
-            return new CustomerResponse(customer);
-//            return tokenTool.createToken(customer.getLogin(), customer.getRole().name());
+            Long id = customer.getId();
+            String token = tokenTool.createToken(customer.getLogin(), customer.getRole().name());
+//            CustomerResponse customerResponse = new CustomerResponse();
+//            customerResponse.setId(id);
+//            customerResponse.setPassword(tokenTool.createToken(customer.getLogin(), customer.getRole().name()));
+//            return new CustomerResponse(customer);
+            return settingData(id,token);
         }
 
         throw new IllegalArgumentException("Wrong login or password");

@@ -16,9 +16,11 @@
                 <a href="../main.page/index.html"><img class="logotype" src="../photo/FINAL_VERSION.png" alt="logo"></a>
             </div>
 
-            <div class="info">
+            <div class="info" style="display: flex;
+    justify-content: flex-end;">
                 <!--<a href="#"><img src="img/log_in_final.png" alt=""></a>-->
-                <!--<a href="#"><img src="../photo/images_for_main_page/cart.png" alt=""></a>-->
+                <a href="#" onclick="checkingForToken()"><img src="../photo/person1.png" alt=""></a>
+                <!--<a href="#" onclick="checkingForTokenToCart()"><img src="../photo/images_for_main_page/cart.png" alt=""></a>-->
             </div>
 
 
@@ -63,7 +65,7 @@
             <div class="total-value final-value" id="basket-total"></div>
         </div>
         <div class="summary-checkout">
-            <button class="checkout-cta" id="checkout" onclick="productToOrder();">Go to Secure Checkout</button>
+            <button class="checkout-cta" id="checkout" onclick=" productToOrder();">Go to Secure Checkout</button>
         </div>
 
         <div class="continue-shopping">
@@ -75,6 +77,10 @@
 </aside>
 
 <script>
+     $(document).ready(function () {
+        $('#checkout').attr('disabled', true);
+        $('#checkout').hide();
+    });
     if (!window.localStorage.getItem('token')) {
         window.location.href = '/main.page/sign.html';
     }
@@ -82,7 +88,15 @@
     window.onload = function () {
         gettingElements(customerId);
     };
+    function checkingForToken() {
+        if(!window.localStorage.getItem('token')){
+            window.location.href = 'http://localhost:8000/main.page/sign.html';
+        }else {
+            window.location.href = 'http://localhost:8000/main.page/profile.html';
+        }
+    }
     var allSubtotals = 0;
+
     function gettingElements(customerId) {
         $.ajax({
             url: 'http://localhost:8000/productForOrder/findAllByCustomerId?id=' + customerId,
@@ -90,6 +104,7 @@
             contentType: 'application/json',
             // data: JSON.stringify(pageRequest),
             success: (products) => {
+
                 var counter = 0;
                 // if (products.length < 1) {
                 //     checkCart();
@@ -97,15 +112,21 @@
                 // console.log(products);
                 // $('.basket-product').html("");
                 for (let product of products) {
-                    if (!product.removedToCart){
-                    appendProducts(product);
-                    idsOfProducts(product.id);
-                    allSubtotals += product.subtotal;
-                    counter++;
+
+                    if (!product.removedToCart) {
+                        appendProducts(product);
+                        idsOfProducts(product.id);
+                        allSubtotals += product.subtotal;
+                        counter++;
+                        $('#checkout').attr('disabled', false);
+                        $('#checkout').show();
+
                     }
                 }
-                if (counter == 0){
+
+                if (counter == 0) {
                     checkCart();
+
                 }
                 location.reload;
                 appendSubtotal(allSubtotals);
@@ -116,7 +137,14 @@
             }
         });
     }
-    function findOneLaptopById(productForOrderId){
+
+    // function isDisabled(){
+    //     if ($('#checkout').is(':disabled')) {
+    //         alert('Add items to your cart first!');
+    //     }
+    // }
+
+    function findOneLaptopById(productForOrderId) {
         $.ajax({
             url: 'http://localhost:8000/productForOrder/findOne?id=' + productForOrderId,
             type: 'POST',
@@ -124,7 +152,7 @@
             // data: JSON.stringify(request),
             success: (answer) => {
 
-                removingToCart(productForOrderId,answer.laptop.id, answer.laptop.price, answer.count);
+                removingToCart(productForOrderId, answer.laptop.id, answer.laptop.price, answer.count);
                 // console.log("Okay");
                 // gettingElements(customerId);
                 // location.reload();
@@ -135,14 +163,15 @@
         });
 
     }
-    function removingToCart( id, laptop, price, count) {
+
+    function removingToCart(id, laptop, price, count) {
         let newCount = count * price;
         let request = {
             count: count,
             customerId: customerId,
             laptopId: laptop,
-            subtotal:newCount,
-            removedToCart:true
+            subtotal: newCount,
+            removedToCart: true
 
         };
         $.ajax({
@@ -170,11 +199,11 @@
 
     }
 
-    function productToOrder(){
+    function productToOrder() {
         let productsIds = window.localStorage.getItem('productsIds').split(",");
         let thisArray = new Array();
 
-        for (let i = 0; i <productsIds.length ; i++) {
+        for (let i = 0; i < productsIds.length; i++) {
             var value = parseInt(productsIds[i]);
             thisArray[i] = value;
             findOneLaptopById(value);
@@ -275,7 +304,7 @@
     var quantity;
 
     function updatingQuantity(id, laptop, price) {
-        quantity   = $('#this-input-' + id).val();
+        quantity = $('#this-input-' + id).val();
         if (quantity <= 0 || quantity > 20) {
             alert('Enter value between 1 and 20');
             location.reload();

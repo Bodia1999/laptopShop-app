@@ -988,14 +988,15 @@
         }else {
             window.location.href = 'http://localhost:8000/main.page/profile.html';
         }
-    }function checkingForTokenToCart() {
+    }
+    function checkingForTokenToCart() {
+
         if(!window.localStorage.getItem('token')){
             window.location.href = 'http://localhost:8000/main.page/sign.html';
         }else {
             window.location.href = 'http://localhost:8000/main.page/cart.html';
         }
     }
-
 </script>
 
 <!--<script src="../script/mainPageLoader.js"></script>-->
