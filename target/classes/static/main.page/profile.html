@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bear</title>
+
+    <link rel="stylesheet" href="../main.page.css/style_profile.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div>
+    <header>
+        <div class="logo">
+            <div class="graphic-logo">
+                <a href="../main.page/index.html"><img class="logotype" src="../photo/FINAL_VERSION.png" alt="logo"></a>
+            </div>
+
+            <div class="info" style="display: flex;justify-content: flex-end;">
+                <!--<a href="#"><img src="img/log_in_final.png" alt=""></a>-->
+                <!--<a href="#"><img src="../photo/person1.png" alt=""></a>-->
+                <a href="../main.page/cart.html"><img src="../photo/images_for_main_page/cart.png" alt=""></a>
+            </div>
+
+
+        </div>
+    </header>
+
+</div>
+<div class="main-content"></div>
+<section id="sidebar">
+    <div class="white-label">
+    </div>
+    <div id="sidebar-nav">
+        <ul>
+
+            <li class="active" id="my-profile"><a href="#" onclick="closingOrders()"><i class="fa fa-dashboard"></i> My
+                profile</a></li>
+            <li id="my-orders"><a href="#" onclick="closingProfile()"><i class="fa fa-desktop">
+                <button style="display: none"></button>
+            </i>My orders</a></li>
+
+        </ul>
+    </div>
+</section>
+<section id="content">
+    <div id="header">
+        <div class="header-nav">
+
+            <div class="nav">
+                <ul>
+                    <li class="nav-profile">
+                        <div class="nav-profile-image">
+                            <div class="nav-profile-name">
+                                <button class="logout" onclick="logOut();">Log Out</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-header" style="height: 54px;">
+
+
+        </div>
+        <div id="personal-data">
+            <!--          <div class="widget-box sample-widget" id="personal-data"style="margin: 0; padding: 0; min-width: 580px;">-->
+            <li class="personaldata" style="list-style: none;">
+                <div class="collapse-toggler active">
+                    <h3 style="color: black; margin: 12px;">Personal data:</h3>
+                </div>
+                <br>
+                <div class="collapse-body cabinet-personal active">
+                    <div class="tab-content contents responsive shadow">
+                        <div role="tabpanel" class="tab-pane active" id="personal">
+
+                            <form class="personal checkform" id="personaldata-form" method="post"
+                                  novalidate="novalidate">
+                                <div class="col">
+                                    <div class="form-group">
+
+                                        <label style="color: black" for="LastName">Surname</label>
+                                        <div class="input-wrapper">
+                                            <input class="text-box single-line" data-val="true"
+                                                   data-val-required="The Фамилия field is required." id="LastName"
+                                                   name="LastName" type="text" value="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+
+                                        <label style="color: black" for="FirstName">Name</label>
+                                        <div class="input-wrapper">
+                                            <input class="text-box single-line" data-val="true"
+                                                   data-val-required="The Имя field is required." id="FirstName"
+                                                   name="FirstName" type="text" value="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label style="color: black" for="birthDay">Birthday</label>
+
+                                        <div class="input-wrapper">
+                                            <input type="text" id="birthDay" class="form-control"
+                                                   placeholder="01.01.2019">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+
+                                    <div class="form-group">
+
+                                        <label style="color: black" for="Phone">Mobile phone</label>
+                                        <div class="input-wrapper">
+                                            <input data-val="true"
+                                                   data-val-required="The mobile phone field is required."
+                                                   id="Phone" name="Phone" type="text" value="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+
+                                        <label style="color: black" for="Email">Email</label>
+                                        <div class="input-wrapper">
+                                            <input class="text-box single-line" data-val="true"
+                                                   data-val-email="The Email field is not a valid e-mail address."
+                                                   data-val-required="The Email field is required." id="Email"
+                                                   name="Email" type="email" value="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label style="color: black" for="Email">Address</label>
+                                        <div class="input-wrapper">
+                                            <input class="text-box single-line" data-val="true"
+                                                   data-val-email="The Email field is not a valid e-mail address."
+                                                   data-val-required="The Email field is required." id="address"
+                                                   name="address" type="text" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="btn" style="width:100%;">
+                                    <button onclick="updateInfoMain()" style="margin-left: 25px;">
+                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Update</span>
+                                    </button>
+                                    <!--<button id="update-personal-information" style="margin-left: 25px;"> Update</button>-->
+                                </div>
+                                <!--<button class="update">Update</button>-->
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </li>
+        </div>
+        <div class="widget-box sample-widget">
+            <div id="orders">
+                <div class="rightside-title clear_after" style="display: flex;justify-content: center; background-color: black;
+         height: 50px">
+                    <h3 style="color: white; padding: 15px">My orders </h3></div>
+                <div class="container-dashboard-forms dashboard-myorders clear_after" id="one-order">
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</section>
+
+<footer class="container-footer">
+    <div class="footer_main_column">
+
+
+        <a class="footer-columns" href="index.html"><img src="../photo/FINAL_VERSION.png" alt=""></a>
+
+
+        <ol class="footer-columns">
+            <li>
+                Our Contacts:
+            </li>
+            <br>
+            <li class="font_line">
+                <b class="footer-columns">0971234567</b>
+            </li>
+            <br>
+            <li>
+                bogdanpapizhasnkiy@gmail.com
+            </li>
+        </ol>
+    </div>
+
+    <div class="footer_first_column">
+        <h1><b class="footer-columns">Bear</b></h1>
+        <ol>
+            <li>
+                <a class="footer-columns"
+                   href="https://www.google.com/maps/place/%D0%9A%D1%83%D1%80%D1%81%D0%B8+%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F/@49.8317506,24.0308476,17.04z/data=!4m5!3m4!1s0x0:0xfcf194b486271721!8m2!3d49.8311359!4d24.0332063"
+                   target="_blank">Our location</a>
+            </li>
+            <br>
+            <li>
+                <a class="footer-columns" href="#">About us</a>
+            </li>
+        </ol>
+    </div>
+    <div class="footer_second_column">
+        <h1><b class="footer-columns">Categories</b></h1>
+        <ol>
+            <li>
+                <a class="footer-columns" href="#">All products</a>
+            </li>
+            <br>
+            <li>
+                <a class="footer-columns" href="appleMacBook.html">Apple MacBook</a>
+            </li>
+            <br>
+            <li>
+                <a class="footer-columns" href="acer.html">Acer</a>
+            </li>
+            <br>
+            <li>
+                <a class="footer-columns" href="asus.html">Asus</a>
+            </li>
+            <br>
+            <li>
+                <a class="footer-columns" href="lenovo.html">Lenovo</a>
+            </li>
+            <br>
+            <li>
+                <a class="footer-columns" href="hp.html">HP</a>
+            </li>
+            <br>
+            <li>
+                <a class="footer-columns" class="footer-columns" href="xiaomi.html">Xiaomi</a>
+            </li>
+            <br>
+        </ol>
+    </div>
+    <div class="footer_third_column">
+        <h1 class="footer-columns">For Clients</h1>
+        <ol>
+            <li>
+                <a class="footer-columns" href="#">Delivery</a>
+            </li>
+            <br>
+            <li>
+                <a class="footer-columns" href="#">Payment</a>
+            </li>
+            <br>
+            <li>
+                <a class="footer-columns" href="#">Guarantee, exchange<br> and return</a>
+            </li>
+            <br>
+        </ol>
+    </div>
+    <div class="social_networkings">
+        <a class="footer-columns" href="#" target="_blank"><img src="../photo/telegram1.png" alt=""></a>
+        <a class="footer-columns" href="#" target="_blank"><img src="../photo/facebook1.png" alt=""></a>
+        <a class="footer-columns" href="#" target="_blank"><img src="../photo/instagram1.png" alt=""></a>
+        <a class="footer-columns" href="#" target="_blank"><img src="../photo/viber1.png" alt=""></a>
+    </div>
+</footer>
+<script>
+
+    $(document).ready(function () {
+        gettingPersonalInformation();
+        gettingOrders();
+        $('#personal-data').show();
+        $('#orders').hide();
+    });
+
+    function closingOrders() {
+        $('#orders').hide();
+        $('#personal-data').show();
+        $('#my-orders').removeClass('active');
+        $('#my-profile').addClass('active');
+
+
+    };
+
+
+    function closingProfile() {
+        $('#orders').show();
+        $('#personal-data').hide();
+
+
+        $('#my-profile').removeClass('active');
+        $('#my-orders').addClass('active');
+
+    };
+
+    function logOut(){
+        window.localStorage.removeItem('token');
+        window.localStorage.removeItem('customerId');
+        window.location.href = 'http://localhost:8000/main.page/index.html';
+    }
+
+    function checkOrderList() {
+        let checkingCart = $('#one-order');
+        checkingCart.append(`<div class="empty-cart"><div style="width: 100%; display: flex; justify-content: center; margin-top:50px;"><h1>Your orders list cart is empty, you do not have any purchase yet</h1></div>
+    <!--<div class="continue-shopping" style="width: 75%; display: flex; justify-content: center;">-->
+              <!--<a href="index.html"><button class="checkout-cta" id="continue" style="width: 200px">Continue Shopping</button></a>-->
+            <!--</div>-->
+</div>`);
+    };
+
+
+    function gettingPersonalInformation() {
+        $.ajax({
+            url: 'http://localhost:8000/customer/findOne?id=' + window.localStorage.getItem('customerId'),
+            type: 'POST',
+            contentType: 'application/json',
+            // data: JSON.stringify(pageRequest),
+            success: (answer) => {
+                appendHeader(answer);
+                settingValueToInput(answer.surname, answer.name, answer.dateBirth, answer.login, answer.phoneNumber, answer.address);
+                // $('.container').html('');
+                // for (let laptop of page.content) {
+                //   appendProduct(laptop);
+                // }
+                // location.reload;
+            },
+            error: (e) => {
+                console.log(e)
+            }
+        });
+    }
+
+    function updateInfoMain() {
+
+        $.ajax({
+            url: 'http://localhost:8000/customer?id=' + window.localStorage.getItem('customerId'),
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(updatingPersonalInformation()),
+            success: (answer) => {
+                appendHeader(answer);
+                settingValueToInput(answer.surname, answer.name, answer.dateBirth, answer.login, answer.phoneNumber, answer.address);
+                // $('.container').html('');
+                // for (let laptop of page.content) {
+                //   appendProduct(laptop);
+                // }
+                // location.reload;
+            },
+            error: (e) => {
+                console.log(e)
+            }
+        });
+    };
+
+
+    // });
+    function settingValueToInput(lastName, firstName, birthDay, login, mobilePhone, address) {
+        $('#LastName').val(lastName);
+        $('#FirstName').val(firstName);
+        $('#birthDay').val(birthDay);
+        $('#Email').val(login);
+        $('#Phone').val(mobilePhone);
+        $('#address').val(address);
+
+
+    }
+
+    function appendHeader(answer) {
+        var content = $('.content-header');
+        var addressColumn = $('#column-for-address');
+        var phoneColumn = $('#column-for-phone');
+        content.append(`<h1 style=" padding-left: 30px;color: black; font-size: 23px;">${answer.name} ${answer.surname}</h1>`)
+        addressColumn.append(answer.address);
+        phoneColumn.append(answer.phoneNumber);
+    }
+
+    function updatingPersonalInformation() {
+        var surname = $('#LastName').val();
+        var name = $('#FirstName').val();
+        var birthday = $('#birthDay').val();
+        var email = $('#Email').val();
+        var phone = $('#Phone').val();
+        var address = $('#address').val();
+
+        let request = {
+            name: name,
+            surname: surname,
+            login: email,
+            dateBirth: birthday,
+            phoneNumber: phone,
+            address: address
+        };
+        return request;
+    };
+
+
+    function gettingOrders() {
+        $.ajax({
+            url: 'http://localhost:8000/order/findAllByCustomer?id=' + window.localStorage.getItem('customerId'),
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(updatingPersonalInformation()),
+            success: (orders) => {
+
+                $('#order-content').html('');
+                $('#product-content').html('');
+                    if (orders.length<1){
+                        checkOrderList();
+                    }
+                for (let order of orders) {
+                    appendOrders(order);
+                    let counter1 = 0;
+                    for (let product of order.productForOrder) {
+                        appendProduct(product, order.id);
+                        if (counter1 == 0){
+                        appendCustomerInfo(product, order.id);
+                        counter1++;
+                        }
+                    }
+
+                    // for (let customer of order.customer)
+
+                }
+
+                // location.reload;
+            },
+            error: (e) => {
+                console.log(e)
+            }
+        });
+    };
+
+    function appendOrders(orders) {
+        var oneOrder = $('#one-order');
+        oneOrder.append(`<div style="margin-bottom: 60px;border-bottom: 4px solid black;">
+                                            <div id="orderList" >
+                        <table class="container_table_el clear_after" id="order-content">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="col_block drop_block active"
+                                         style="display: flex;justify-content: center;">
+                                        <span><h3>Order ID: ${orders.id}</h3></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col_block " style="display: flex;justify-content: center;"><h3>
+                                        ${orders.orderTime}</h3></div>
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="container_table_dash level2 clear_after" style="display: block;" id="product-content-${orders.id}"></div>
+                    </div>
+                    <div class="order-details-infocols clearfix" id="customer-info-${orders.id}">
+
+
+
+                    </div>
+
+                    <div class="order-footer">
+
+                        <div class="order-notification">
+
+                        </div>
+                        <span class="price_all"><b style="font-size: 22px;">Order
+                                 subtotal: $ ${orders.subtotal}</b></span>
+                    </div>
+
+                                       </div>    `);
+    }
+
+    function appendProduct(product, orderId) {
+        var $product = $('#product-content-' + orderId);
+        $product.append(`<table style="width:100%">
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="foto">
+                                                            <img class="fits"
+                                                                 src="${product.laptop.imageDirection}">
+
+                                                            <span class="vfix"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="title ddd" style="overflow-wrap: break-word;">Laptop ${product.laptop.makeName} ${product.laptop.model}
+                                                        </div>
+                                                        <div class="price">$ ${product.laptop.price}</div>
+                                                    </td>
+                                                    <td>Qty:<span>${product.count}</span></td>
+                                                    <td>
+                                                        <div class="price">$ ${product.subtotal}</div>
+                                                    </td>
+                                                </tr>
+                                             </tbody>
+                                            </table>`)
+    }
+
+    function appendCustomerInfo(customers, orderId) {
+        var customerInfo = $('#customer-info-' + orderId);
+        customerInfo.append(`<div class="order-infocol">
+
+                            <div class="infocol-title bold">
+                                Delivery address
+                            </div>
+
+                            <div class="infocol-description" id="column-for-address">
+                            ${customers.customerResponse.address}
+                            </div>
+
+                        </div>
+
+                        <div class="order-infocol">
+                            <div class="infocol-title bold">
+                                Mobile phone
+
+                            </div>
+
+                            <div class="infocol-description" id="column-for-phone">
+                                ${customers.customerResponse.phoneNumber}
+                            </div>
+
+                        </div>`)
+    }
+
+
+</script>
+
+
+</body>
+</html>

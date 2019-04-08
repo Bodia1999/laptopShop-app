@@ -1,0 +1,25 @@
+<component name="libraryTable">
+  <library name="Maven: org.apache.tomcat.embed:tomcat-embed-websocket:9.0.14">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-websocket/9.0.14/tomcat-embed-websocket-9.0.14.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-websocket/9.0.14/tomcat-embed-websocket-9.0.14-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-websocket/9.0.14/tomcat-embed-websocket-9.0.14-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
+
+        <!--<Connector port="8443"-->
+        <!--protocol="org.apache.coyote.http11.Http11Protocol"-->
+        <!--SSLEnabled="true"-->
+        <!--maxThreads="150"-->
+        <!--scheme="https"-->
+        <!--secure="true"-->
+        <!--clientAuth="false"-->
+        <!--sslProtocol="TLS"-->
+        <!--keystoreFile="C:\cert\myTomcatKeytool.jks"-->
+        <!--keystorePass="123456"-->
+        <!--/>-->

@@ -14,25 +14,25 @@ import java.util.List;
 @Entity
 public class ProductForOrder {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-        private Integer count;
+    private Integer count;
 
-        @ManyToOne
-        private Laptop laptop;
+    @ManyToOne
+    private Laptop laptop;
 
-        @ManyToMany(mappedBy = "productForOrder")
-        private List<Order> orders = new ArrayList<>();
-//        private Order order;
-        @ManyToOne
-        private Customer customer;
+    @ManyToMany(mappedBy = "productForOrder")
+    private List<Order> orders = new ArrayList<>();
+    //        private Order order;
+    @ManyToOne
+    private Customer customer;
 
-        private boolean removedToCart;
+    private boolean removedToCart;
 
 
-        private Double subtotal;
+    private Double subtotal;
 
 }
 

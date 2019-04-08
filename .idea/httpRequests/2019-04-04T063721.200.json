@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "name": "Hyper",
+    "typeOfMemory": "DDR4",
+    "volumeOfMemory": 16,
+    "workingFrequency": 2666
+  }
+]
