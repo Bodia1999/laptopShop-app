@@ -38,8 +38,8 @@
                 <a href="../main.page/asus.html">Asus</a>
                 <a href="../main.page/lenovo.html">Lenovo</a>
                 <a href="../main.page/hp.html">HP</a>
-                <a href="../main.page/xiaomi.html">Xiaomi</a>
-                <a href="../main.page/about.html">About</a>
+                <!--<a href="../main.page/xiaomi.html">Xiaomi</a>-->
+                <!--<a href="../main.page/about.html">About</a>-->
 
 
             </div>
@@ -53,9 +53,9 @@
                 <div class="price-filter">
       <span>
         <p><span class="price-title">Price $</span></p>
-       <input min="0" type="number" class="priceFrom">
+       <input min="0" type="number" class="priceFrom" value="0">
        <span>-</span>
-       <input type="number" class="priceTo">
+       <input type="number" class="priceTo" id="priceTo">
        <button class="submit-button" id="price-submit-button">OK</button>
       </span>
                 </div>
@@ -107,21 +107,21 @@
                     </label>
 
 
-                    <p><span class="make-title span">Quantity</span></p>
-                    <label class="checkbox-container">2 cores
-                        <input type="checkbox" name="type" class="checkBox-value-quantity" value="2">
-                        <span class="checkmark"></span>
-                    </label>
+                    <!--<p><span class="make-title span">Quantity</span></p>-->
+                    <!--<label class="checkbox-container">2 cores-->
+                        <!--<input type="checkbox" name="type" class="checkBox-value-quantity" value="2">-->
+                        <!--<span class="checkmark"></span>-->
+                    <!--</label>-->
 
-                    <label class="checkbox-container">4 cores
-                        <input type="checkbox" name="type" class="checkBox-value-quantity" value="4">
-                        <span class="checkmark"></span>
-                    </label>
+                    <!--<label class="checkbox-container">4 cores-->
+                        <!--<input type="checkbox" name="type" class="checkBox-value-quantity" value="4">-->
+                        <!--<span class="checkmark"></span>-->
+                    <!--</label>-->
 
-                    <label class="checkbox-container">6 cores
-                        <input type="checkbox" name="type" class="checkBox-value-quantity" value="6">
-                        <span class="checkmark"></span>
-                    </label>
+                    <!--<label class="checkbox-container">6 cores-->
+                        <!--<input type="checkbox" name="type" class="checkBox-value-quantity" value="6">-->
+                        <!--<span class="checkmark"></span>-->
+                    <!--</label>-->
 
 
                     <p><span class="make-title span">Ram volume</span></p>
@@ -428,64 +428,64 @@
                         });</script>
 
 
-                    <p><span class="make-title span">Resolution</span></p>
-                    <label class="checkbox-container">1366x768
-                        <input type="checkbox" name="type" class="checkBox-value-resolution" value="1366x768">
-                        <span class="checkmark"></span>
-                    </label>
+                    <!--<p><span class="make-title span">Resolution</span></p>-->
+                    <!--<label class="checkbox-container">1366x768-->
+                        <!--<input type="checkbox" name="type" class="checkBox-value-resolution" value="1366X768">-->
+                        <!--<span class="checkmark"></span>-->
+                    <!--</label>-->
 
-                    <label class="checkbox-container">1400x900
-                        <input type="checkbox" name="type" class="checkBox-value-resolution" value="1400x900">
-                        <span class="checkmark"></span>
-                    </label>
+                    <!--<label class="checkbox-container">1400x900-->
+                        <!--<input type="checkbox" name="type" class="checkBox-value-resolution" value="1400X900">-->
+                        <!--<span class="checkmark"></span>-->
+                    <!--</label>-->
 
-                    <div id="resolution-checkbox">
-                        <label class="checkbox-container">1920x1080
-                            <input type="checkbox" name="type" class="checkBox-value-resolution" value="1920x1080">
-                            <span class="checkmark"></span>
-                        </label>
+                    <!--<div id="resolution-checkbox">-->
+                        <!--<label class="checkbox-container">1920x1080-->
+                            <!--<input type="checkbox" name="type" class="checkBox-value-resolution" value="1920X1080">-->
+                            <!--<span class="checkmark"></span>-->
+                        <!--</label>-->
 
-                        <label class="checkbox-container">2304x1440
-                            <input type="checkbox" name="type" class="checkBox-value-resolution" value="2304x1440">
-                            <span class="checkmark"></span>
-                        </label>
+                        <!--<label class="checkbox-container">2304x1440-->
+                            <!--<input type="checkbox" name="type" class="checkBox-value-resolution" value="2304X1440">-->
+                            <!--<span class="checkmark"></span>-->
+                        <!--</label>-->
 
-                        <label class="checkbox-container">2560x1600
-                            <input type="checkbox" name="type" class="checkBox-value-resolution" value="2560x1600">
-                            <span class="checkmark"></span>
-                        </label>
+                        <!--<label class="checkbox-container">2560x1600-->
+                            <!--<input type="checkbox" name="type" class="checkBox-value-resolution" value="2560X1600">-->
+                            <!--<span class="checkmark"></span>-->
+                        <!--</label>-->
 
-                        <label class="checkbox-container">2560x1440
-                            <input type="checkbox" name="type" class="checkBox-value-resolution" value="2560x1440">
-                            <span class="checkmark"></span>
-                        </label>
+                        <!--<label class="checkbox-container">2560x1440-->
+                            <!--<input type="checkbox" name="type" class="checkBox-value-resolution" value="2560X1440">-->
+                            <!--<span class="checkmark"></span>-->
+                        <!--</label>-->
 
-                        <label class="checkbox-container">2880x1800
-                            <input type="checkbox" name="type" class="checkBox-value-resolution" value="2880x1800">
-                            <span class="checkmark"></span>
-                        </label>
-
-
-                    </div>
-
-                    <button class="filter-buttons" id="resolution-button" value="More">More</button>
-                    <br>
-                    <button class="filter-buttons" id="resolution-button-close" value="Close">Close</button>
-                    <script>
-                        $("#resolution-checkbox").hide();
-                        $("#resolution-button-close").hide();
-                        $("#resolution-button").click(function () {
-                            $("#resolution-checkbox").slideDown();
-                            $("#resolution-button").hide();
-                            $("#resolution-button-close").show();
-                            $("#resolution-button-close").click(function () {
-                                $("#resolution-checkbox").slideUp();
-                                $("#resolution-button-close").hide();
-                                $("#resolution-button").show();
-                            })
+                        <!--<label class="checkbox-container">2880x1800-->
+                            <!--<input type="checkbox" name="type" class="checkBox-value-resolution" value="2880X1800">-->
+                            <!--<span class="checkmark"></span>-->
+                        <!--</label>-->
 
 
-                        });</script>
+                    <!--</div>-->
+
+                    <!--<button class="filter-buttons" id="resolution-button" value="More">More</button>-->
+                    <!--<br>-->
+                    <!--<button class="filter-buttons" id="resolution-button-close" value="Close">Close</button>-->
+                    <!--<script>-->
+                        <!--$("#resolution-checkbox").hide();-->
+                        <!--$("#resolution-button-close").hide();-->
+                        <!--$("#resolution-button").click(function () {-->
+                            <!--$("#resolution-checkbox").slideDown();-->
+                            <!--$("#resolution-button").hide();-->
+                            <!--$("#resolution-button-close").show();-->
+                            <!--$("#resolution-button-close").click(function () {-->
+                                <!--$("#resolution-checkbox").slideUp();-->
+                                <!--$("#resolution-button-close").hide();-->
+                                <!--$("#resolution-button").show();-->
+                            <!--})-->
+
+
+                        <!--});</script>-->
 
 
                     <p><span class="make-title span">Corps Material</span></p>
@@ -496,6 +496,10 @@
 
                     <label class="checkbox-container">Metal
                         <input type="checkbox" name="type" class="checkBox-value-corps-material" value="Metal">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="checkbox-container">Aluminum
+                        <input type="checkbox" name="type" class="checkBox-value-corps-material" value="Aluminum">
                         <span class="checkmark"></span>
                     </label>
 
@@ -592,6 +596,7 @@
     var priceTo = integerMaxValue;
 
     window.onload = function () {
+        $('#priceTo').val(999999);
 
         separatingString();
     };
@@ -820,9 +825,9 @@
 
     function changingSortingWay(sortDirection, sortByField, page) {
         let quantityFrom = seekingForMinValue(quantity);
-        console.log(quantityFrom);
+        // console.log(quantityFrom);
         let quantityTo = seekingForMaxValue(quantity);
-        console.log(quantityTo);
+        // console.log(quantityTo);
         let ramVolumeFrom = seekingForMinValue(ramVolume);
         let ramVolumeTo = seekingForMaxValue(ramVolume);
         let volumeOfMemoryFrom = seekingForMinValue(volumeOfMemory);
@@ -864,7 +869,7 @@
             pagination: {
                 page: page,
                 size:
-                    12,
+                    9,
                 sortRequest:
                     {
                         direction: sortDirection,

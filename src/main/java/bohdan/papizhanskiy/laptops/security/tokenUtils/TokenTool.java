@@ -21,7 +21,7 @@ public class TokenTool {
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
-        cal.add(Calendar.MINUTE,1);
+        cal.add(Calendar.HOUR,3);
         Date validTo = cal.getTime();
 
         jwt = Jwts.builder().setIssuer("OurProject")
@@ -46,9 +46,9 @@ public class TokenTool {
 
     public UserDetails getUserByToken(String token){
         Claims claims = Jwts.parser().setSigningKey("ourKey").parseClaimsJws(token).getBody();
-        String role = (String) claims.get("role");
-        GrantedAuthority role1 = new SimpleGrantedAuthority(role);
+        String role = claims.get("role").toString();
         String login = (String) claims.get("login");
-        return new UserDetailsDto(login, Collections.singletonList(role1));
+        return new UserDetailsDto(login, Collections.singletonList(new SimpleGrantedAuthority(role)));
     }
 }
+

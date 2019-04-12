@@ -29,6 +29,22 @@ public class Laptop {
 
     private Double price;
 
+    private Boolean availabilityOfWIFI;
+
+    private Boolean availabilityOfBluetooth;
+
+    private Boolean availabilityOfUSBTypeC;
+
+    private Boolean availabilityOfUSBSecondGeneration;
+
+    private Boolean availabilityOfUSBThirdGeneration;
+
+    private Boolean availabilityOfHDMI;
+
+    private Boolean availabilityOfLAN;
+
+    private Boolean availabilityOfAUX;
+
 //    @Type(type = "text")
 //    private String description;
 
@@ -74,21 +90,7 @@ public class Laptop {
     @OneToMany(mappedBy = "laptop")
     private List<ProductForOrder> productForOrder = new ArrayList<>();
 
-    private Boolean availabilityOfWIFI;
 
-    private Boolean availabilityOfBluetooth;
-
-    private Boolean availabilityOfUSBTypeC;
-
-    private Boolean availabilityOfUSBSecondGeneration;
-
-    private Boolean availabilityOfUSBThirdGeneration;
-
-    private Boolean availabilityOfHDMI;
-
-    private Boolean availabilityOfLAN;
-
-    private Boolean availabilityOfAUX;
 
 
 }

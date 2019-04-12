@@ -3,13 +3,18 @@ var mainUrl = "http://localhost:8000";
 setModalConfiguration();
 getAllGraphicCard();
 setActionOnCreateBtn();
-
+$('#btnCreateGraphicCard').show();
+$('#btnUpdateGraphicCard').hide();
 
 //start when load page PS reload page for triggered http request
 function getAllGraphicCard() {
     $.ajax({
         url: mainUrl + "/graphiccard",
         type: "GET",
+        headers:{
+            'Authorize':window.localStorage.getItem('token')
+        },
+
         contentType: "application/json",
         success: function (dataResponse) {
             setGraphicCardsToTable(dataResponse);
@@ -64,6 +69,9 @@ function setActionOnCreateBtn() {
         $.ajax({
             url: mainUrl + "/graphiccard",
             type: "POST",
+            headers:{
+                'Authorize':window.localStorage.getItem('token')
+            },
             contentType: "application/json",
             data: JSON.stringify(newGraphicCard),
             success: function (data) {
@@ -86,6 +94,9 @@ function setActionOnDeleteButtons() {
             $.ajax({
                 url: mainUrl + "/graphiccard?id=" + $(this).val(),
                 type: "DELETE",
+                headers:{
+                    'Authorize':window.localStorage.getItem('token')
+                },
                 success: function (data) {
                     location.reload();
                 },
@@ -116,6 +127,9 @@ function setActionOnUpdateButton() {
                     $("#typeOfGraphicCard").val(dataResponse.typeOfGraphicCard);
                     $("#volumeOfMemory").val(dataResponse.volumeOfMemory);
                     $("#typeOfMemory").val(dataResponse.typeOfMemory);
+                    $('#btnCreateGraphicCard').hide();
+                    $('#btnUpdateGraphicCard').show();
+
                     var elementById = document.getElementById("myModal");
                     elementById.style.display="block";
                     $("#btnUpdateGraphicCard").click(function () {

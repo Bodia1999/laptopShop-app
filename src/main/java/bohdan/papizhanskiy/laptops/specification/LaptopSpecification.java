@@ -147,6 +147,25 @@ public class LaptopSpecification implements Specification<Laptop> {
     }
 
     //
+    private Predicate findByProcessorQuantityOfCores(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
+        ProcessorFilterRequest filter = laptopFilterRequest.getProcessorFilterRequest();
+        if (filter == null) return null;
+        Integer quantityOfCoresFrom = filter.getQuantityOfCoresFrom();
+        Integer quantityOfCoresTo = filter.getQuantityOfCoresTo();
+        if (quantityOfCoresFrom == null && quantityOfCoresTo == null) {
+            return null;
+        }
+
+        if (quantityOfCoresFrom == null) {
+            laptopFilterRequest.getProcessorFilterRequest().setWorkingFrequencyFrom(0);
+        }
+        if (quantityOfCoresTo == null) {
+            laptopFilterRequest.getProcessorFilterRequest().setWorkingFrequencyTo(Integer.MAX_VALUE);
+        }
+        Join<Laptop, Processor> processorJoin = root.join("processor");
+        return criteriaBuilder.between(processorJoin.get("quantityOfCores"), laptopFilterRequest.getProcessorFilterRequest().getQuantityOfCoresFrom(), laptopFilterRequest.getProcessorFilterRequest().getQuantityOfCoresTo());
+    }
+
     private Predicate findByRamWorkingFrequency(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
         RamFilterRequest filter = laptopFilterRequest.getRamFilterRequest();
         if (filter == null) return null;
@@ -164,9 +183,9 @@ public class LaptopSpecification implements Specification<Laptop> {
         Join<Laptop, Ram> ramJoin = root.join("ram");
         return criteriaBuilder.between(ramJoin.get("workingFrequency"), laptopFilterRequest.getRamFilterRequest().getVolumeOfMemoryFrom(), laptopFilterRequest.getRamFilterRequest().getWorkingFrequencyTo());
     }
-
     //
 //
+
     private Predicate findByGraphicCardNameLike(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
         GraphicCardFilterRequest filter = laptopFilterRequest.getGraphicCardFilterRequest();
         if (filter == null) return null;
@@ -336,25 +355,6 @@ public class LaptopSpecification implements Specification<Laptop> {
         }
         Join<Laptop, Processor> processorJoin = root.join("processor");
         return criteriaBuilder.between(processorJoin.get("workingFrequency"), workingFrequencyFrom, workingFrequencyTo);
-    }
-
-    private Predicate findByProcessorQuantityOfCores(Root<Laptop> root, CriteriaBuilder criteriaBuilder) {
-        ProcessorFilterRequest filter = laptopFilterRequest.getProcessorFilterRequest();
-        if (filter == null) return null;
-        Integer quantityOfCoresFrom = filter.getQuantityOfCoresFrom();
-        Integer quantityOfCoresTo = filter.getQuantityOfCoresTo();
-        if (quantityOfCoresFrom == null && quantityOfCoresTo == null) {
-            return null;
-        }
-
-        if (quantityOfCoresFrom == null) {
-            laptopFilterRequest.getProcessorFilterRequest().setWorkingFrequencyFrom(0);
-        }
-        if (quantityOfCoresTo == null) {
-            laptopFilterRequest.getProcessorFilterRequest().setWorkingFrequencyTo(Integer.MAX_VALUE);
-        }
-        Join<Laptop, Processor> processorJoin = root.join("processor");
-        return criteriaBuilder.between(processorJoin.get("quantityOfCores"), quantityOfCoresFrom, quantityOfCoresTo);
     }
 
 

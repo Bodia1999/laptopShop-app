@@ -8,6 +8,7 @@ import bohdan.papizhanskiy.laptops.dto.response.ScreenResponse;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.service.ScreenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @CrossOrigin
@@ -31,19 +32,21 @@ public class ScreenController {
     }
 
     @DeleteMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void delete(Long id) throws WrongInputException {
         screenService.delete(id);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ScreenResponse update(@RequestBody ScreenRequest screenRequest,@PathVariable Long id) throws Exception {
         return screenService.update(screenRequest, id);
     }
 
-    @PostMapping("/filter")
-    public DataResponse<ScreenResponse> findAllByFilter(@RequestBody ScreenFilterRequest screenFilterRequest){
-        return screenService.findByFilter(screenFilterRequest);
-    }
+//    @PostMapping("/filter")
+//    public DataResponse<ScreenResponse> findAllByFilter(@RequestBody ScreenFilterRequest screenFilterRequest){
+//        return screenService.findByFilter(screenFilterRequest);
+//    }
 
     @PostMapping("/findOne")
     public ScreenResponse findOne(@RequestParam Long id) throws WrongInputException{

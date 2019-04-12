@@ -4,6 +4,10 @@ getAllRams();
 setModalConfiguration();
 setActionOnCreateBtn();
 
+$('#btnCreateRam').show();
+$('#btnUpdateRam').hide();
+
+
 
 //start when load page PS reload page for triggered http request
 function getAllRams() {
@@ -92,6 +96,10 @@ function setActionOnUpdateButton() {
                     $("#typeOfMemory").val(dataResponse.typeOfMemory);
                     $("#volumeOfMemory").val(dataResponse.volumeOfMemory);
                     $("#workingFrequency").val(dataResponse.workingFrequency);
+
+                    $('#btnCreateRam').hide();
+                    $('#btnUpdateRam').show();
+
 
                     var elementById = document.getElementById("myModal");
                     elementById.style.display="block";

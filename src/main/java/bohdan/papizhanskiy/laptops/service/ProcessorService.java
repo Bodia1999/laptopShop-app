@@ -10,7 +10,6 @@ import bohdan.papizhanskiy.laptops.entity.Make;
 import bohdan.papizhanskiy.laptops.entity.Processor;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.repository.ProcessorRepository;
-import bohdan.papizhanskiy.laptops.specification.ProcessorSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -61,10 +60,10 @@ public class ProcessorService {
         return new DataResponse<>(all.get().map(ProcessorResponse::new).collect(Collectors.toList()), all.getTotalPages(), all.getTotalElements());
     }
 
-    public DataResponse<ProcessorResponse> findByFilter(ProcessorFilterRequest processorFilterRequest){
-        Page<Processor> page = processorRepository.findAll( new ProcessorSpecification(processorFilterRequest),processorFilterRequest.getPagination().mapToPageRequest());
-
-        return new DataResponse<>(page.get().map(ProcessorResponse::new ).collect(Collectors.toList()), page.getTotalPages(),page.getTotalElements());
-
-    }
+//    public DataResponse<ProcessorResponse> findByFilter(ProcessorFilterRequest processorFilterRequest){
+//        Page<Processor> page = processorRepository.findAll( new ProcessorSpecification(processorFilterRequest),processorFilterRequest.getPagination().mapToPageRequest());
+//
+//        return new DataResponse<>(page.get().map(ProcessorResponse::new ).collect(Collectors.toList()), page.getTotalPages(),page.getTotalElements());
+//
+//    }
 }

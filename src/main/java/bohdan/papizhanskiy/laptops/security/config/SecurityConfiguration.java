@@ -11,9 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.servlet.Filter;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfiguration {
+public class SecurityConfiguration  {
 
-    @Value("")
+    @Value("${secured.url.pattern}")
     private String securedUrlPattern;
 
     @Bean
@@ -40,3 +40,4 @@ public class SecurityConfiguration {
     }
 
 }
+

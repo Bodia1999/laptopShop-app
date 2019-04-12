@@ -36,12 +36,19 @@ public class ProductForOrderService {
         return productForOrderRepository.findAll().stream().map(ProductForOrderResponse::new).collect(Collectors.toList());
     }
 
-    public ProductForOrderResponse update(ProductForOrderRequest productForOrderRequest , Long id) throws Exception {
+    public ProductForOrderResponse update(ProductForOrderRequest productForOrderRequest, Long id) throws Exception {
         return new ProductForOrderResponse(productForOrderRequestToProductForOrder(productForOrderRequest, findOne(id)));
     }
 
     public void delete(Long id) throws WrongInputException {
         productForOrderRepository.delete(findOne(id));
+    }
+
+    public void deleteByLaptopId(Long id) {
+        List<ProductForOrder> allByLaptopId = productForOrderRepository.findAllByLaptopId(id);
+        for (ProductForOrder productOrder : allByLaptopId) {
+            productForOrderRepository.delete(productOrder);
+        }
     }
 
     private ProductForOrder productForOrderRequestToProductForOrder(ProductForOrderRequest productForOrderRequest, ProductForOrder productForOrder) throws WrongInputException {
@@ -63,7 +70,8 @@ public class ProductForOrderService {
         return productForOrderRepository.save(productForOrder);
 
     }
-//    @Transactional
+
+    //    @Transactional
     public ProductForOrder findOne(Long id) throws WrongInputException {
         return productForOrderRepository.findById(id)
                 .orElseThrow(() -> new WrongInputException("Product for order with id " + id + " not exists"));
@@ -74,7 +82,7 @@ public class ProductForOrderService {
         return new DataResponse<>(all.get().map(ProductForOrderResponse::new).collect(Collectors.toList()), all.getTotalPages(), all.getTotalElements());
     }
 
-    public List<ProductForOrderResponse> findAllByCustomerId(Long id){
+    public List<ProductForOrderResponse> findAllByCustomerId(Long id) {
         return productForOrderRepository.findAllByCustomerId(id).stream().map(ProductForOrderResponse::new).collect(Collectors.toList());
     }
 

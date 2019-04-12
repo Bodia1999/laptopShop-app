@@ -18,12 +18,12 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class LaptopRequest {
-//    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private String model;
 
-//    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private Double price;
 
 //    @Type(type = "text")
@@ -43,39 +43,39 @@ public class LaptopRequest {
     //@NotNull
     private Boolean availabilityOfWIFI;
 
-//    @NotNull
-//    @NotEmpty
-//    @Min(1)
+    @NotNull
+    @NotEmpty
+    @Min(1)
     private Long makeId;
 
-//    @NotNull
-//    @NotEmpty
-//    @Min(1)
+    @NotNull
+    @NotEmpty
+    @Min(1)
     private Long graphicCardId;
 
-//    @NotNull
-//    @NotEmpty
-//    @Min(1)
+    @NotNull
+    @NotEmpty
+    @Min(1)
     private Long ramId;
 
-//    @NotNull
-//    @NotEmpty
-//    @Min(1)
+    @NotNull
+    @NotEmpty
+    @Min(1)
     private Long corpsId;
 
-//    @NotNull
-//    @NotEmpty
-//    @Min(1)
+    @NotNull
+    @NotEmpty
+    @Min(1)
     private Long memoryId;
 
-//    @NotNull
-//    @NotEmpty
-//    @Min(1)
+    @NotNull
+    @NotEmpty
+    @Min(1)
     private Long processorId;
 
-//    @NotNull
-//    @NotEmpty
-//    @Min(1)
+    @NotNull
+    @NotEmpty
+    @Min(1)
     private Long screenId;
 
     //@NotNull
@@ -84,16 +84,16 @@ public class LaptopRequest {
     //@NotNull
     private Boolean availabilityOfUSBTypeC;
 
-   // @NotNull
+    // @NotNull
     private Boolean availabilityOfUSBSecondGeneration;
 
-   // @NotNull
+    // @NotNull
     private Boolean availabilityOfUSBThirdGeneration;
-//
-   // @NotNull
+    //
+    // @NotNull
     private Boolean availabilityOfHDMI;
 
-   // @NotNull
+    // @NotNull
     private Boolean availabilityOfLAN;
 
     //@NotNull

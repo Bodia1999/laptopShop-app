@@ -13,21 +13,21 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class ProcessorRequest {
 
-//    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private String name;
 
-//    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private String model;
 
-//    @NotNull
-//    @NotEmpty
-//    @Min(1)
+    @NotNull
+    @NotEmpty
+    @Min(1)
     private Integer workingFrequency;
 
-//    @NotNull
-//    @NotEmpty
-//    @Min(1)
+    @NotNull
+    @NotEmpty
+    @Min(1)
     private Integer quantityOfCores;
 }

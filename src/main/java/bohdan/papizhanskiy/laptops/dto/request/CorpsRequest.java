@@ -12,19 +12,19 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class CorpsRequest {
 
-//    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private Double weight;
 
-//    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private String dimensions;
 
-//    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private String colorOfCorps;
 
-//    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private String materialOfCorps;
 }

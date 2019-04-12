@@ -1,20 +1,14 @@
 package bohdan.papizhanskiy.laptops.dto.response;
 
 import bohdan.papizhanskiy.laptops.entity.Customer;
-import bohdan.papizhanskiy.laptops.entity.Order;
-import bohdan.papizhanskiy.laptops.entity.ShippingInfo;
-import lombok.AllArgsConstructor;
+import bohdan.papizhanskiy.laptops.entity.Role;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -30,8 +24,6 @@ public class CustomerResponse {
 
     private String dateBirth;
 
-//    private ShippingInfoResponse shippingInfoResponse;
-
     private List<OrderResponse> orderResponse = new ArrayList<>();
 
     private String password;
@@ -43,10 +35,9 @@ public class CustomerResponse {
 
     private String phoneNumber;
 
+    private Role role;
 
-//    private List<OrderResponse> orders = new ArrayList<>();
 
-//    private List<ShippingInfoResponse> shippingInfos = new ArrayList<>();
 
     public CustomerResponse(Customer customer) {
         id = customer.getId();
@@ -56,25 +47,9 @@ public class CustomerResponse {
         address = customer.getAddress();
         phoneNumber = customer.getPhoneNumber();
         login = customer.getLogin();
-//        shippingInfoResponse = new ShippingInfoResponse(customer.getShippingInfos());
-//        orderResponse = customer.getOrders().stream().map(OrderResponse::new).collect(Collectors.toList());
         password = customer.getPassword();
+        role = customer.getRole();
 
-
-//        orders = customer.getOrders().stream().map(OrderResponse::new).collect(Collectors.toList());
-//        shippingInfos = customer.getShippingInfos().stream().map(ShippingInfoResponse::new).collect(Collectors.toList());
     }
 
-
-    public CustomerResponse(Long id, String name, String surname, String dateBirth, String password, String login, String address, String phoneNumber) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.dateBirth = dateBirth;
-//        this.orderResponse = orderResponse;
-        this.password = password;
-        this.login = login;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-    }
 }

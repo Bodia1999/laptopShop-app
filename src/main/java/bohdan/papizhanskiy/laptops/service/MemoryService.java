@@ -1,20 +1,13 @@
 package bohdan.papizhanskiy.laptops.service;
 
-import bohdan.papizhanskiy.laptops.dto.request.GraphicCardFilterRequest;
 import bohdan.papizhanskiy.laptops.dto.request.MemoryFilterRequest;
 import bohdan.papizhanskiy.laptops.dto.request.MemoryRequest;
 import bohdan.papizhanskiy.laptops.dto.request.PaginationRequest;
 import bohdan.papizhanskiy.laptops.dto.response.DataResponse;
-import bohdan.papizhanskiy.laptops.dto.response.GraphicCardResponse;
-import bohdan.papizhanskiy.laptops.dto.response.MakeResponse;
 import bohdan.papizhanskiy.laptops.dto.response.MemoryResponse;
-import bohdan.papizhanskiy.laptops.entity.GraphicCard;
-import bohdan.papizhanskiy.laptops.entity.Make;
 import bohdan.papizhanskiy.laptops.entity.Memory;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.repository.MemoryRepository;
-import bohdan.papizhanskiy.laptops.specification.GraphicCardSpecification;
-import bohdan.papizhanskiy.laptops.specification.MemorySpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -65,10 +58,10 @@ public class MemoryService {
         return new DataResponse<>(all.get().map(MemoryResponse::new).collect(Collectors.toList()), all.getTotalPages(), all.getTotalElements());
     }
 
-    public DataResponse<MemoryResponse> findByFilter(MemoryFilterRequest memoryFilterRequest){
-        Page<Memory> page = memoryRepository.findAll( new MemorySpecification(memoryFilterRequest),memoryFilterRequest.getPagination().mapToPageRequest());
-
-        return new DataResponse<>(page.get().map(MemoryResponse::new ).collect(Collectors.toList()), page.getTotalPages(),page.getTotalElements());
-
-    }
+//    public DataResponse<MemoryResponse> findByFilter(MemoryFilterRequest memoryFilterRequest){
+//        Page<Memory> page = memoryRepository.findAll( new MemorySpecification(memoryFilterRequest),memoryFilterRequest.getPagination().mapToPageRequest());
+//
+//        return new DataResponse<>(page.get().map(MemoryResponse::new ).collect(Collectors.toList()), page.getTotalPages(),page.getTotalElements());
+//
+//    }
 }

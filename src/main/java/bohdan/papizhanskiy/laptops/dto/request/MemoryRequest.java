@@ -13,17 +13,19 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class MemoryRequest {
 
-//    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private String name;
-//    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private String typeOfMemory;
 
-//    @NotNull
-//    @NotEmpty
-//    @Min(1)
+    @NotNull
+    @NotEmpty
+    @Min(1)
     private Integer volumeOfMemory;
 
+    @NotNull
+    @NotEmpty
     private String availabilityOfSsd;
 }

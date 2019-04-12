@@ -27,10 +27,10 @@
             <label for="password">Password</label>
         </div>
         <div class="controllers">
-            <button class="btn waves-effect waves-light" type="submit" id="sing-up">Sing Up
+            <button class="btn waves-effect waves-light" type="submit" id="sing-up">Not user
                 <i class="material-icons right">create</i>
             </button>
-            <button class="btn waves-effect waves-light" type="submit" id="sing-in">Sing In
+            <button class="btn waves-effect waves-light" type="submit" id="sing-in">Sign In
                 <i class="material-icons right">done</i>
             </button>
         </div>
@@ -45,13 +45,13 @@
     let $singIn = $('#sing-in');
 
     $singUp.click(function (e) {
-       e.preventDefault();
-       window.location.href="/main.page/registration.html"
+        e.preventDefault();
+        window.location.href = "/main.page/registration.html"
         // sendTokenRequest('http://localhost:8000/public/register')
     });
 
     $singIn.click(function (e) {
-       e.preventDefault();
+        e.preventDefault();
         sendTokenRequest('http://localhost:8000/public/login')
     });
 
@@ -68,8 +68,15 @@
             success: function (answer) {
                 window.localStorage.setItem('token', `Bearer ${answer.password}`);
                 window.localStorage.setItem('customerId', answer.id);
-                console.log(`Bearer ${answer.password}`);
-                window.location.href = '/main.page/index.html';
+                // window.localStorage.setItem('role', answer.role);
+                if (answer.role === "ADMIN") {
+                    // window.localStorage.setItem('role', answer.role);
+                    window.location.href = "/admin"
+
+                } else {
+                    // console.log(`Bearer ${answer.password}`);
+                    window.location.href = '/main.page/index.html';
+                }
             },
             error: function (e) {
                 console.log(e)

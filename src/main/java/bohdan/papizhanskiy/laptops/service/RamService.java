@@ -4,13 +4,10 @@ import bohdan.papizhanskiy.laptops.dto.request.PaginationRequest;
 import bohdan.papizhanskiy.laptops.dto.request.RamFilterRequest;
 import bohdan.papizhanskiy.laptops.dto.request.RamRequest;
 import bohdan.papizhanskiy.laptops.dto.response.DataResponse;
-import bohdan.papizhanskiy.laptops.dto.response.MakeResponse;
 import bohdan.papizhanskiy.laptops.dto.response.RamResponse;
-import bohdan.papizhanskiy.laptops.entity.Make;
 import bohdan.papizhanskiy.laptops.entity.Ram;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.repository.RamRepository;
-import bohdan.papizhanskiy.laptops.specification.RamSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -63,10 +60,10 @@ public class RamService {
         return new DataResponse<>(all.get().map(RamResponse::new).collect(Collectors.toList()), all.getTotalPages(), all.getTotalElements());
     }
 
-    public DataResponse<RamResponse> findByFilter(RamFilterRequest ramFilterRequest){
-        Page<Ram> page = ramRepository.findAll( new RamSpecification(ramFilterRequest),ramFilterRequest.getPagination().mapToPageRequest());
-
-        return new DataResponse<>(page.get().map(RamResponse::new ).collect(Collectors.toList()), page.getTotalPages(),page.getTotalElements());
-
-    }
+//    public DataResponse<RamResponse> findByFilter(RamFilterRequest ramFilterRequest){
+//        Page<Ram> page = ramRepository.findAll( new RamSpecification(ramFilterRequest),ramFilterRequest.getPagination().mapToPageRequest());
+//
+//        return new DataResponse<>(page.get().map(RamResponse::new ).collect(Collectors.toList()), page.getTotalPages(),page.getTotalElements());
+//
+//    }
 }

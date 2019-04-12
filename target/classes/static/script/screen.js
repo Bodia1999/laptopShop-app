@@ -3,6 +3,8 @@ var mainUrl = "http://localhost:8000";
 getAllScreens();
 setModalConfiguration();
 setActionOnCreateBtn();
+$('#btnCreateScreen').show();
+$('#btnUpdateScreen').hide();
 
 
 //start when load page PS reload page for triggered http request
@@ -89,6 +91,10 @@ function setActionOnUpdateButton() {
                     $("#resolution").val(dataResponse.resolution);
                     $("#size").val(dataResponse.size);
 
+                    $('#btnCreateScreen').hide();
+                    $('#btnUpdateScreen').show();
+
+
                     var elementById = document.getElementById("myModal");
                     elementById.style.display="block";
                     $("#btnUpdateScreen").click(function () {
@@ -138,7 +144,8 @@ function setActionOnDeleteButtons() {
                     location.reload();
                 },
                 error: function (error) {
-                    alert(error.message);
+                    location.reload();
+                    // alert(error.message);
                 }
             });
 

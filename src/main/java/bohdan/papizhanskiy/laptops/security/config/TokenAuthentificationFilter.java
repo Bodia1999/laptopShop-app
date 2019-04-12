@@ -3,6 +3,7 @@ package bohdan.papizhanskiy.laptops.security.config;
 import bohdan.papizhanskiy.laptops.security.tokenUtils.TokenTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,6 +30,9 @@ public class TokenAuthentificationFilter extends GenericFilterBean {
     @Value("${external.url.pattern}")
     private String externalUrlPattern;
 
+    @Value("${external.url.pattern.profile}")
+    private String externalUrlPatternProfile;
+
     @Value("${external.static.images.pattern}")
     private String imagesUrlPattern;
 
@@ -47,6 +51,74 @@ public class TokenAuthentificationFilter extends GenericFilterBean {
     @Value("${external.url.pattern.home}")
     private String patternAdditional;
 
+    @Value("${external.url.pattern.main}")
+    private String patternAdditionalMain;
+
+
+    @Value("${external.url.pattern.laptop}")
+    private String patternAdditionalLaptop;
+
+    @Value("${external.url.pattern.product}")
+    private String patternAdditionalProduct;
+
+    @Value("${external.url.pattern.cart}")
+    private String patternAdditionalCart;
+
+    @Value("${external.url.pattern.productPage}")
+    private String patternAdditionalProductPage;
+
+
+    @Value("${external.url.pattern.sign}")
+    private String patternAdditionalSign;
+
+    @Value("${external.url.pattern.productForOrder}")
+    private String patternAdditionalProductForOrder;
+
+    @Value("${external.url.pattern.order}")
+    private String patternAdditionalOrder;
+
+    @Value("${external.url.pattern.admin}")
+    private String patternAdditionalAdmin;
+
+    @Value("${external.url.pattern.admin.customer}")
+    private String patternAdditionalAdminCustomer;
+
+    @Value("${external.static.css.pattern.admin}")
+    private String patternCssAdmin;
+
+    @Value("${external.url.pattern.registration}")
+    private String patternAdditionalRegistration;
+
+    @Value("${external.url.pattern.make}")
+    private String patternAdditionalMakeAdmin;
+
+    @Value("${external.url.pattern.corps}")
+    private String patternAdditionalCorpsAdmin;
+
+    @Value("${external.url.pattern.customer}")
+    private String patternAdditionalCustomerAdmin;
+
+    @Value("${external.url.pattern.graphiccard}")
+    private String patternAdditionalGraphicCardAdmin;
+
+    @Value("${external.url.pattern.memory}")
+    private String patternAdditionalMemoryAdmin;
+
+    @Value("${external.url.pattern.processor}")
+    private String patternAdditionalProcessorAdmin;
+
+    @Value("${external.url.pattern.ram}")
+    private String patternAdditionalRamAdmin;
+
+    @Value("${external.url.pattern.screen}")
+    private String patternAdditionalScreenAdmin;
+
+    @Value("${external.url.pattern.admin.graphic}")
+    private String patternAdditionalGraphicAdmin;
+
+    @Value("$(external.url.pattern.apple)")
+    private String patternAdditionalApple;
+
 
     @Autowired
     private TokenTool tokenTools;
@@ -59,7 +131,15 @@ public class TokenAuthentificationFilter extends GenericFilterBean {
         System.out.println("error in if where external - start of all");
 
         List<String> urlPatterns = Arrays.asList(externalUrlPattern, imagesUrlPattern,cssUrlPattern,
-                tokenHeader,accessToken,patternAdditional);
+                tokenHeader,accessToken,patternAdditional,externalUrlPatternProfile,
+                patternAdditionalMain,patternAdditionalRegistration,
+                patternAdditionalLaptop,patternAdditionalSign,patternAdditionalProductPage,patternAdditionalProduct,
+                patternAdditionalCart,patternAdditionalProductForOrder,
+                patternAdditionalOrder,patternAdditionalAdmin,patternAdditionalAdminCustomer,
+                patternCssAdmin,patternAdditionalMakeAdmin,patternAdditionalScreenAdmin,patternAdditionalRamAdmin,
+                patternAdditionalProcessorAdmin,patternAdditionalMemoryAdmin,patternAdditionalGraphicCardAdmin,
+                patternAdditionalCustomerAdmin,patternAdditionalCorpsAdmin,
+                patternAdditionalGraphicAdmin,patternAdditionalApple);
         AtomicBoolean whetherNeedToExitMethod = new AtomicBoolean(false);
         urlPatterns.forEach(x -> {
             if (x != null && !x.isEmpty()) {

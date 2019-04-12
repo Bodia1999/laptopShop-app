@@ -3,13 +3,17 @@ var mainUrl = "http://localhost:8000";
 getAllMakes();
 setModalConfiguration();
 setActionOnCreateBtn();
+$('#btnCreateMake').show();
+$('#btnUpdateMake').hide();
 
 
 //start when load page PS reload page for triggered http request
 function getAllMakes() {
     $.ajax({
-        url: mainUrl + "/make",
+        url: mainUrl + "/make/getAll",
         type: "GET",
+
+
         contentType: "application/json",
         success: function (dataResponse) {
             console.log(dataResponse);
@@ -59,13 +63,17 @@ function setActionOnCreateBtn() {
         $.ajax({
             url: mainUrl + "/make",
             type: "POST",
+            headers:{
+                'Authorize':window.localStorage.getItem('token')
+            },
             contentType: "application/json",
             data: JSON.stringify(newMake),
             success: function (data) {
                 location.reload();
             },
             error: function (error) {
-                alert("Something went wrong");
+                location.reload();
+                // alert("Something went wrong");
             }
         });
 //            } else {
@@ -81,11 +89,15 @@ function setActionOnDeleteButtons() {
             $.ajax({
                 url: mainUrl + "/make/" + $(this).val(),
                 type: "DELETE",
+                headers:{
+                    'Authorize':window.localStorage.getItem('token')
+                },
                 success: function (data) {
                     location.reload();
                 },
                 error: function (error) {
-                    alert(error.message);
+                    location.reload();
+                    // alert(error.message);
                 }
             });
 
@@ -103,10 +115,13 @@ function setActionOnUpdateButton() {
             $.ajax({
                 url: mainUrl + "/make/findOne?id=" + $(this).val(),
                 type: "POST",
+                
                 contentType: "application/json",
                 success: function (dataResponse) {
                     // var parse = JSON.parse(dataResponse);
                     $("#name").val(dataResponse.name);
+                    $('#btnCreateMake').hide();
+                    $('#btnUpdateMake').show();
                     var elementById = document.getElementById("myModal");
                     elementById.style.display="block";
                     $("#btnUpdateMake").click(function () {
@@ -127,7 +142,8 @@ function setActionOnUpdateButton() {
                                 location.reload();
                             },
                             error: function (error) {
-                                alert("Something went wrong");
+                                location.reload();
+                                // alert("Something went wrong");
                             }
                         });
 //            } else {

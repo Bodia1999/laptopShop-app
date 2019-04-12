@@ -10,7 +10,6 @@ import bohdan.papizhanskiy.laptops.entity.Corps;
 import bohdan.papizhanskiy.laptops.entity.Make;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.repository.CorpsRepository;
-import bohdan.papizhanskiy.laptops.specification.CorpsSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -61,10 +60,10 @@ public class CorpsService {
         return new DataResponse<>(all.get().map(CorpsResponse::new).collect(Collectors.toList()), all.getTotalPages(), all.getTotalElements());
     }
 
-    public DataResponse<CorpsResponse> findByFilter(CorpsFilterRequest corpsFilterRequest){
-        Page<Corps> page = corpsRepository.findAll( new CorpsSpecification(corpsFilterRequest),corpsFilterRequest.getPagination().mapToPageRequest());
-
-        return new DataResponse<>(page.get().map(CorpsResponse::new ).collect(Collectors.toList()), page.getTotalPages(),page.getTotalElements());
-
-    }
+//    public DataResponse<CorpsResponse> findByFilter(CorpsFilterRequest corpsFilterRequest){
+//        Page<Corps> page = corpsRepository.findAll( new CorpsSpecification(corpsFilterRequest),corpsFilterRequest.getPagination().mapToPageRequest());
+//
+//        return new DataResponse<>(page.get().map(CorpsResponse::new ).collect(Collectors.toList()), page.getTotalPages(),page.getTotalElements());
+//
+//    }
 }

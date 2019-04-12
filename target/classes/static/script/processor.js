@@ -3,6 +3,8 @@ var mainUrl = "http://localhost:8000";
 getAllProcessors();
 setModalConfiguration();
 setActionOnCreateBtn();
+$('#btnCreateProcessor').show();
+$('#btnUpdateProcessor').hide();
 
 
 //start when load page PS reload page for triggered http request
@@ -91,6 +93,10 @@ function setActionOnUpdateButton() {
                     $("#model").val(dataResponse.model);
                     $("#workingFrequency").val(dataResponse.workingFrequency);
                     $("#quantityOfCores").val(dataResponse.quantityOfCores);
+
+                    $('#btnCreateProcessor').hide();
+                    $('#btnUpdateProcessor').show();
+
 
                     var elementById = document.getElementById("myModal");
                     elementById.style.display="block";

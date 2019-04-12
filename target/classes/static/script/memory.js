@@ -5,6 +5,11 @@ setModalConfiguration();
 setActionOnCreateBtn();
 
 
+$('#btnCreateMemory').show();
+$('#btnUpdateMemory').hide();
+
+
+
 //start when load page PS reload page for triggered http request
 function getAllMemories() {
     $.ajax({
@@ -94,6 +99,10 @@ function setActionOnUpdateButton() {
                     $("#typeOfMemory").val(dataResponse.typeOfMemory);
                     $("#volumeOfMemory").val(dataResponse.volumeOfMemory);
                     $("#availabilityOfSsd").val(dataResponse.availabilityOfSsd);
+
+                    $('#btnCreateMemory').hide();
+                    $('#btnUpdateMemory').show();
+
                     var elementById = document.getElementById("myModal");
                     elementById.style.display="block";
                     $("#btnUpdateMemory").click(function () {
@@ -114,13 +123,17 @@ function setActionOnUpdateButton() {
                         $.ajax({
                             url: mainUrl + "/memory/" + identifier,
                             type: "PUT",
+                            headers:{
+                                'Authorize':window.localStorage.getItem('token')
+                            },
                             contentType: "application/json",
                             data: JSON.stringify(newMemory),
                             success: function (data) {
                                 location.reload();
                             },
                             error: function (error) {
-                                alert("Something went wrong");
+                                location.reload();
+                                // alert("Something went wrong");
                             }
                         });
 //            } else {
@@ -140,6 +153,9 @@ function setActionOnDeleteButtons() {
             $.ajax({
                 url: mainUrl + "/memory?id=" + $(this).val(),
                 type: "DELETE",
+                headers:{
+                    'Authorize':window.localStorage.getItem('token')
+                },
                 success: function (data) {
                     location.reload();
                 },

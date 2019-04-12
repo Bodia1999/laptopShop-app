@@ -3,6 +3,8 @@ var mainUrl = "http://localhost:8000";
 getAllLaptops();
 setModalConfiguration();
 setActionOnCreateBtn();
+$("#btnCreateLaptop").show();
+$("#btnUpdateLaptop").hide();
 
 
 //start when load page PS reload page for triggered http request
@@ -10,6 +12,7 @@ function getAllLaptops() {
     $.ajax({
         url: mainUrl + "/laptop",
         type: "GET",
+
         contentType: "application/json",
         success: function (dataResponse) {
             console.log(dataResponse);
@@ -95,6 +98,7 @@ $('#sendFile4').click(function () {
 });
 
 function setActionOnCreateBtn() {
+    $("#btnCreateLaptop").show();
     $("#btnCreateLaptop").click(function () {
         //console.log("I am here");
 
@@ -152,7 +156,7 @@ function setActionOnCreateBtn() {
             "descriptionFirstParagraph": description1,
             "descriptionSecondParagraph": description2,
             "descriptionThirdParagraph": description3,
-            "price":price
+            "price":parseFloat(price)
 
 
         };
@@ -160,12 +164,16 @@ function setActionOnCreateBtn() {
         $.ajax({
             url: mainUrl + "/laptop",
             type: "POST",
+            headers:{
+                'Authorize':window.localStorage.getItem('token')
+            },
             contentType: "application/json",
             data: JSON.stringify(newLaptop),
             success: function (data) {
                 location.reload();
             },
             error: function (error) {
+                // location.reload();
                 alert(error.message);
             }
         });
@@ -200,17 +208,39 @@ function setActionOnCreateBtn() {
 //     });
 // }
 
+function deletingProductForOrderWithLaptopId(id) {
+    $.ajax({
+        url: mainUrl + "/productForOrder/deleteByLaptopId?id=" + id,
+        type: "DELETE",
+        headers:{
+            'Authorize':window.localStorage.getItem('token')
+        },
+        success: function (data) {
+            // location.reload();
+        },
+        error: function (error) {
+            // location.reload();
+            // alert(error.message);
+        }
+    });
+}
+
 //delete process
 function setActionOnDeleteButtons() {
     $(".button").each(function (index) {
         $(this).click(function () {
+            deletingProductForOrderWithLaptopId($(this).val());
             $.ajax({
                 url: mainUrl + "/laptop?id=" + $(this).val(),
                 type: "DELETE",
+                headers:{
+                    'Authorize':window.localStorage.getItem('token')
+                },
                 success: function (data) {
                     location.reload();
                 },
                 error: function (error) {
+                    // location.reload();
                     alert(error.message);
                 }
             });
@@ -229,6 +259,7 @@ function setActionOnUpdateButton() {
             $.ajax({
                 url: mainUrl + "/laptop/findOne?id=" + $(this).val(),
                 type: "POST",
+
                 contentType: "application/json",
                 success: function (dataResponse) {
                     // var parse = JSON.parse(dataResponse);
@@ -241,6 +272,13 @@ function setActionOnUpdateButton() {
                     $("#memoryId").val(dataResponse.memoryId);
                     $("#processorId").val(dataResponse.processorId);
                     $("#screenId").val(dataResponse.screenId);
+                    $('#description1').val(dataResponse.descriptionFirstParagraph);
+                    $('#description2').val(dataResponse.descriptionSecondParagraph);
+                    $('#description3').val(dataResponse.descriptionThirdParagraph);
+                    // $('#description1').val(dataResponse.descriptio);
+                    // $('#description2').val();
+                    // $('#description3').val();
+                    $('#price').val(dataResponse.price);
                     // $("#availabilityOfWIFI").val(dataResponse.availabilityOfWIFI);
                     // $("#availabilityOfBluetooth").val(dataResponse.availabilityOfBluetooth);
                     // $("#availabilityOfUSBTypeC").val(dataResponse.availabilityOfUSBTypeC);
@@ -249,6 +287,8 @@ function setActionOnUpdateButton() {
                     // $("#availabilityOfHDMI").val(dataResponse.availabilityOfHDMI);
                     // $("#availabilityOfLAN").val(dataResponse.availabilityOfLAN);
                     // $("#availabilityOfAUX").val(dataResponse.availabilityOfAUX);
+                    $("#btnCreateLaptop").hide();
+                    $("#btnUpdateLaptop").show();
                     var elementById = document.getElementById("myModal");
                     elementById.style.display = "block";
                     $("#btnUpdateLaptop").click(function () {
@@ -261,6 +301,10 @@ function setActionOnUpdateButton() {
                         var memoryId = $("#memoryId").val();
                         var processorId = $("#processorId").val();
                         var screenId = $("#screenId").val();
+                        var description1 = $('#description1').val();
+                        var description2 = $('#description2').val();
+                        var description3 = $('#description3').val();
+                        var price= $('#price').val();
                         var availabilityOfWIFI = $("input[name='availabilityOfWIFI']:checked").val();
 
                         var availabilityOfBluetooth = $("input[name='availabilityOfBluetooth']:checked").val();
@@ -271,18 +315,10 @@ function setActionOnUpdateButton() {
                         var availabilityOfHDMI = $("input[name='availabilityOfHDMI']:checked").val();
                         var availabilityOfLAN = $("input[name='availabilityOfLAN']:checked").val();
                         var availabilityOfAUX = $("input[name='availabilityOfAUX']:checked").val();
-                        var file = document.getElementsByClassName("getFile").files[0];
-                        getBase64(file).then(data => {
 
-                            //work with data as src of file
-                            let request = {
-                                //fileName: "someCustomFileName",
-                                data: data
-                            }
-                        });
 //            if (firstName != null && lastName != null && age != null) {
 
-                        var newLaptop = {
+                        var updatedLaptop = {
                             "model": model,
                             "makeId": makeId,
                             "graphicCardId": graphicCardId,
@@ -299,15 +335,22 @@ function setActionOnUpdateButton() {
                             "availabilityOfHDMI": availabilityOfHDMI,
                             "availabilityOfLAN": availabilityOfLAN,
                             "availabilityOfAUX": availabilityOfAUX,
-                            "imageDirection": createImagePath(file)
+                            "imageDirection": window.localStorage.getItem("url1"),
+                            "descriptionImagePath1": window.localStorage.getItem("url2"),
+                            "descriptionImagePath2": window.localStorage.getItem("url3"),
+                            "descriptionImagePath3": window.localStorage.getItem("url4"),
+                            "descriptionFirstParagraph": description1,
+                            "descriptionSecondParagraph": description2,
+                            "descriptionThirdParagraph": description3,
+                            "price":parseFloat(price)
 
                         };
 
                         $.ajax({
-                            url: mainUrl + "/laptop/" + identifier,
+                            url: mainUrl + "/laptop?id=" + identifier,
                             type: "PUT",
                             contentType: "application/json",
-                            data: JSON.stringify(newLaptop),
+                            data: JSON.stringify(updatedLaptop),
                             success: function () {
                                 location.reload();
                             },

@@ -14,25 +14,25 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class GraphicCardRequest {
 
-//    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private String name;
 
-//    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private String model;
 
-//    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private String typeOfGraphicCard;
 
-//    @NotNull
-//    @NotEmpty
-//    @Min(1)
+    @NotNull
+    @NotEmpty
+    @Min(1)
     private Integer volumeOfMemory;
 
-//    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private String typeOfMemory;
 
 

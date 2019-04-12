@@ -18,11 +18,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderRequest {
-//    @NotNull
-//    @NotEmpty
-//    @Min(1)
+    @NotNull
+    @NotEmpty
+    @Min(1)
     private Long customerId;
     private List<Long> productForOrderId = new ArrayList<>();
+
+    @NotEmpty
+    @Min(1)
     private Double subtotal;
 
 }

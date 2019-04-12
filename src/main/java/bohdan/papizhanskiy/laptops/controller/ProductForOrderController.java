@@ -1,11 +1,11 @@
 package bohdan.papizhanskiy.laptops.controller;
 
-import bohdan.papizhanskiy.laptops.dto.request.NewProductForOrderRequest;
 import bohdan.papizhanskiy.laptops.dto.request.ProductForOrderRequest;
 import bohdan.papizhanskiy.laptops.dto.response.ProductForOrderResponse;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.service.ProductForOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +30,12 @@ public class ProductForOrderController {
     @DeleteMapping
     public void delete( @RequestParam Long id) throws WrongInputException {
         productForOrderService.delete(id);
+    }
+
+    @DeleteMapping("/deleteByLaptopId")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    public void deleteByLaptopId(@RequestParam Long id){
+        productForOrderService.deleteByLaptopId(id);
     }
 
     @PutMapping

@@ -79,6 +79,7 @@
             window.location.href = 'http://localhost:8000/main.page/cart.html';
         }
     }
+
     // var clickCount = 1;
     // gettingAllElementsInNewWay();
     // var idsToCart = new Array();
@@ -93,6 +94,7 @@
         $.ajax({
             url: 'http://localhost:8000/laptop/findOne?id=' + notebookId,
             type: 'POST',
+
             contentType: 'application/json',
             success: (page) => {
 
@@ -130,12 +132,13 @@
         $.ajax({
             url: 'http://localhost:8000/productForOrder/save',
             type: 'POST',
+
             contentType: 'application/json',
             data: JSON.stringify(requestForProduct),
             success: (page) => {
 
                 console.log(page);
-                // location.reload;
+                location.reload;
             },
             error: (e) => {
                 console.log(e)
@@ -262,7 +265,7 @@
       <div class="price"><span>Price:</span><span class="downloaded-price">${prod.price}$</span></div><br>
       <div class="button-to-buy">
 
-         <a href="#" onclick="checkingForToken();"><button id="buy-button"  value="${prod.id}"> <span>Add to Cart</span></button></a><br>
+         <a href="#" onclick="checkingForTokenToCart();settingProdForOrder() "><button id="buy-button"  value="${prod.id}"> <span>Add to Cart</span></button></a><br>
       </div><br>
       <div>
       <h1 class="selection-title">Qty:</h1>
@@ -440,16 +443,16 @@
 
           <div id="good-description"  style="display: none;" >
           <div id="description-container">
-      <span class="description-span">${prod.descriptionFirstParagraph}</span><br>
-       <div class="sub-description-photo"><div><img class="description-photo" src="${prod.descriptionImagePath1}" alt=""></div></div><br>
+      <span class="description-span" style="margin-top: 20px;">${prod.descriptionFirstParagraph}</span><br>
+       <div class="sub-description-photo" style="margin-top: 20px;"><div><img class="description-photo" src="${prod.descriptionImagePath1}" alt=""></div></div><br>
 
 
-<span class="description-span">${prod.descriptionSecondParagraph}</span><br>
-       <div class="sub-description-photo"><div><img class="description-photo" src="${prod.descriptionImagePath2}" alt=""></div></div><br>
+<span class="description-span" style="margin-top: 20px;">${prod.descriptionSecondParagraph}</span><br>
+       <div class="sub-description-photo" style="margin-top: 20px;"><div><img class="description-photo" src="${prod.descriptionImagePath2}" alt=""></div></div><br>
 
 
-<span class="description-span">${prod.descriptionThirdParagraph}</span><br>
-       <div class="sub-description-photo"><div><img class="description-photo" src="${prod.descriptionImagePath1}" alt=""></div></div><br>
+<span class="description-span" style="margin-top: 20px;">${prod.descriptionThirdParagraph}</span><br>
+       <div class="sub-description-photo" style="margin-top: 20px;"><div><img class="description-photo" src="${prod.descriptionImagePath3}" alt=""></div></div><br>
 
 
     </div>

@@ -10,7 +10,6 @@ import bohdan.papizhanskiy.laptops.entity.GraphicCard;
 import bohdan.papizhanskiy.laptops.entity.Make;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.repository.GraphicCardRepository;
-import bohdan.papizhanskiy.laptops.specification.GraphicCardSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -66,12 +65,12 @@ public class GraphicCardService {
         return new DataResponse<>(all.get().map(GraphicCardResponse::new).collect(Collectors.toList()), all.getTotalPages(), all.getTotalElements());
     }
 
-    public DataResponse<GraphicCardResponse> findByFilter(GraphicCardFilterRequest graphicCardFilterRequest){
-      Page<GraphicCard> page = graphicCardRepository.findAll( new GraphicCardSpecification(graphicCardFilterRequest),graphicCardFilterRequest.getPagination().mapToPageRequest());
-
-      return new DataResponse<>(page.get().map(GraphicCardResponse::new ).collect(Collectors.toList()), page.getTotalPages(),page.getTotalElements());
-
-    }
+//    public DataResponse<GraphicCardResponse> findByFilter(GraphicCardFilterRequest graphicCardFilterRequest){
+//      Page<GraphicCard> page = graphicCardRepository.findAll( new GraphicCardSpecification(graphicCardFilterRequest),graphicCardFilterRequest.getPagination().mapToPageRequest());
+//
+//      return new DataResponse<>(page.get().map(GraphicCardResponse::new ).collect(Collectors.toList()), page.getTotalPages(),page.getTotalElements());
+//
+//    }
 
 
 }

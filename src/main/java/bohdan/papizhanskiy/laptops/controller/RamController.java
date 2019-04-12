@@ -7,6 +7,7 @@ import bohdan.papizhanskiy.laptops.dto.response.RamResponse;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.service.RamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,19 +31,21 @@ public class RamController {
     }
 
     @DeleteMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void delete(Long id) throws WrongInputException {
         ramService.delete(id);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public RamResponse update(@RequestBody RamRequest ramRequest,@PathVariable Long id) throws Exception {
         return ramService.update(ramRequest, id);
     }
 
-    @PostMapping("/filter")
-    public DataResponse<RamResponse> findAllByFilter(@RequestBody RamFilterRequest ramFilterRequest){
-        return ramService.findByFilter(ramFilterRequest);
-    }
+//    @PostMapping("/filter")
+//    public DataResponse<RamResponse> findAllByFilter(@RequestBody RamFilterRequest ramFilterRequest){
+//        return ramService.findByFilter(ramFilterRequest);
+//    }
 
     @PostMapping("/findOne")
     public RamResponse findOne(@RequestParam Long id) throws WrongInputException{

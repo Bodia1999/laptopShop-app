@@ -9,6 +9,7 @@ import bohdan.papizhanskiy.laptops.dto.response.MemoryResponse;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.service.MemoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,10 +27,10 @@ public class MemoryController {
         return memoryService.findAll();
     }
 
-    @PostMapping("/filter")
-    public DataResponse<MemoryResponse> findAllByFilter(@RequestBody MemoryFilterRequest memoryFilterRequest){
-        return memoryService.findByFilter(memoryFilterRequest);
-    }
+//    @PostMapping("/filter")
+//    public DataResponse<MemoryResponse> findAllByFilter(@RequestBody MemoryFilterRequest memoryFilterRequest){
+//        return memoryService.findByFilter(memoryFilterRequest);
+//    }
 
     @PostMapping
     public MemoryResponse save(@RequestBody MemoryRequest memoryRequest) {
@@ -37,11 +38,13 @@ public class MemoryController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public MemoryResponse update(@RequestBody MemoryRequest memoryRequest, @PathVariable Long id) throws WrongInputException {
         return memoryService.update(memoryRequest, id);
     }
 
     @DeleteMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void delete(@RequestParam Long id) throws WrongInputException {
         memoryService.delete(id);
     }

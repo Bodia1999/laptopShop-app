@@ -7,6 +7,7 @@ import bohdan.papizhanskiy.laptops.dto.response.DataResponse;
 import bohdan.papizhanskiy.laptops.exception.WrongInputException;
 import bohdan.papizhanskiy.laptops.service.CorpsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,19 +30,21 @@ public class CorpsController {
     }
 
     @DeleteMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void delete(Long id) throws WrongInputException {
         corpsService.delete(id);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public CorpsResponse update(@RequestBody CorpsRequest corpsRequest,@PathVariable Long id) throws Exception {
         return corpsService.update(corpsRequest, id);
     }
 
-    @PostMapping("/filter")
-    public DataResponse<CorpsResponse> findAllByFilter(@RequestBody CorpsFilterRequest corpsFilterRequest){
-        return corpsService.findByFilter(corpsFilterRequest);
-    }
+//    @PostMapping("/filter")
+//    public DataResponse<CorpsResponse> findAllByFilter(@RequestBody CorpsFilterRequest corpsFilterRequest){
+//        return corpsService.findByFilter(corpsFilterRequest);
+//    }
 
     @PostMapping("/findOne")
     public CorpsResponse findOne (@RequestParam Long id) throws WrongInputException {

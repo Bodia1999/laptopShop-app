@@ -141,11 +141,15 @@ function setActionOnDeleteButtons() {
             $.ajax({
                 url: mainUrl + "/order?id=" + $(this).val(),
                 type: "DELETE",
+                headers:{
+                    'Authorize':window.localStorage.getItem('token')
+                },
                 success: function (data) {
                     location.reload();
                 },
                 error: function (error) {
-                    alert(error.message);
+                    location.reload();
+                    // alert(error.message);
                 }
             });
 

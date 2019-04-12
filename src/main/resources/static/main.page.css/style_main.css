@@ -290,7 +290,7 @@ ul{
 .product {
 
   width: 32%;
-  max-height: 400px;
+  max-height: 440px;
 }
 .product li{
   color: black;
@@ -303,7 +303,7 @@ ul{
 /*}*/
 
 .filter{
-  height: 2280px;
+  height: 2000px;
   padding: 0 20px 0 0;
   width: 28%;
 

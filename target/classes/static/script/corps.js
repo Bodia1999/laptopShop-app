@@ -4,6 +4,9 @@ getAllCorps();
 setModalConfiguration();
 setActionOnCreateBtn();
 
+$('#btnCreateCorps').show();
+$('#btnUpdateCorps').hide();
+
 
 //start when load page PS reload page for triggered http request
 function getAllCorps() {
@@ -92,6 +95,11 @@ function setActionOnUpdateButton() {
                     $("#materialOfCorps").val(dataResponse.materialOfCorps);
                     $("#dimensions").val(dataResponse.dimensions);
                     $("#weight").val(dataResponse.weight);
+
+
+                    $('#btnCreateCorps').hide();
+                    $('#btnUpdateCorps').show();
+
                     var elementById = document.getElementById("myModal");
                     elementById.style.display="block";
                     $("#btnUpdateCorps").click(function () {
@@ -143,7 +151,8 @@ function setActionOnDeleteButtons() {
                     location.reload();
                 },
                 error: function (error) {
-                    alert(error.message);
+                    location.reload();
+                    // alert(error.message);
                 }
             });
 

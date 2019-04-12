@@ -8,10 +8,17 @@
     <link rel="stylesheet" href="../main.page.css/style_profile.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 
 <body>
 <div>
+    <script> if((!window.localStorage.getItem('token'))) {
+        window.location.href = 'http://localhost:8000/main.page/sign.html';
+    }// } else {
+    //     window.location.href = 'http://localhost:8000/main.page/profile.html';
+    // }
+    </script>
     <header>
         <div class="logo">
             <div class="graphic-logo">
@@ -143,10 +150,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="btn" style="width:100%;">
-                                    <button onclick="updateInfoMain()" style="margin-left: 25px;">
-                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Update</span>
-                                    </button>
+                                <div class="btn" style="width:200px; height: 40px; background-color: black; display: flex; justify-content: center;
+                                margin-left: 50px;">
+                                    <!--<button style="margin-left: 25px;">-->
+                                    <a href="#" onclick="updateInfoMain()" >
+                                        <h3 style="color: white; margin-top: 4px;">Update</h3>
+                                    </a>
+                                    <!--</button>-->
                                     <!--<button id="update-personal-information" style="margin-left: 25px;"> Update</button>-->
                                 </div>
                                 <!--<button class="update">Update</button>-->
@@ -271,6 +281,7 @@
 </footer>
 <script>
 
+
     $(document).ready(function () {
         gettingPersonalInformation();
         gettingOrders();
@@ -298,7 +309,7 @@
 
     };
 
-    function logOut(){
+    function logOut() {
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('customerId');
         window.location.href = 'http://localhost:8000/main.page/index.html';
@@ -308,9 +319,9 @@
         let checkingCart = $('#one-order');
         checkingCart.append(`<div class="empty-cart"><div style="width: 100%; display: flex; justify-content: center; margin-top:50px;"><h1>Your orders list cart is empty, you do not have any purchase yet</h1></div>
     <!--<div class="continue-shopping" style="width: 75%; display: flex; justify-content: center;">-->
-              <!--<a href="index.html"><button class="checkout-cta" id="continue" style="width: 200px">Continue Shopping</button></a>-->
+            <!--<a href="index.html"><button class="checkout-cta" id="continue" style="width: 200px">Continue Shopping</button></a>-->
             <!--</div>-->
-</div>`);
+            </div>`);
     };
 
 
@@ -318,6 +329,7 @@
         $.ajax({
             url: 'http://localhost:8000/customer/findOne?id=' + window.localStorage.getItem('customerId'),
             type: 'POST',
+
             contentType: 'application/json',
             // data: JSON.stringify(pageRequest),
             success: (answer) => {
@@ -335,14 +347,18 @@
         });
     }
 
-    function updateInfoMain() {
-
+    function updateInfoMain(e) {
+        // e.preventDefault();
         $.ajax({
             url: 'http://localhost:8000/customer?id=' + window.localStorage.getItem('customerId'),
             type: 'PUT',
+            headers: {
+                'Authorize': window.localStorage.getItem('token')
+            },
             contentType: 'application/json',
             data: JSON.stringify(updatingPersonalInformation()),
             success: (answer) => {
+                location.reload();
                 appendHeader(answer);
                 settingValueToInput(answer.surname, answer.name, answer.dateBirth, answer.login, answer.phoneNumber, answer.address);
                 // $('.container').html('');
@@ -403,23 +419,24 @@
         $.ajax({
             url: 'http://localhost:8000/order/findAllByCustomer?id=' + window.localStorage.getItem('customerId'),
             type: 'POST',
+
             contentType: 'application/json',
             data: JSON.stringify(updatingPersonalInformation()),
             success: (orders) => {
 
                 $('#order-content').html('');
                 $('#product-content').html('');
-                    if (orders.length<1){
-                        checkOrderList();
-                    }
+                if (orders.length < 1) {
+                    checkOrderList();
+                }
                 for (let order of orders) {
                     appendOrders(order);
                     let counter1 = 0;
                     for (let product of order.productForOrder) {
                         appendProduct(product, order.id);
-                        if (counter1 == 0){
-                        appendCustomerInfo(product, order.id);
-                        counter1++;
+                        if (counter1 == 0) {
+                            appendCustomerInfo(product, order.id);
+                            counter1++;
                         }
                     }
 
